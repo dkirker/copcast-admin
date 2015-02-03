@@ -82,6 +82,8 @@ body {
   }
 }
 
+.angular-google-map-container { height: 400px; }
+
 /*change bar color-profile*/
 .navbar-default {
   background-color: #0B2A40;
