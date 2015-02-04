@@ -113,3 +113,11 @@ body {
 }
 
 /*end-of change bar color-profile*/
+
+
+/*real-time*/
+/*search box*/
+.input-group .form-control {
+  width: 30%;
+}
+/*fim-time*/
