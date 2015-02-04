@@ -23,7 +23,7 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
 
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -50,9 +50,7 @@
       </div>
     </div>
 
-    <div class="container">
     <div ng-view=""></div>
-    </div>
 
     <div class="footer">
       <div class="container">
@@ -74,6 +72,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -83,13 +82,25 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ui-map/ui-map.js"></script>
+
+
+    <script data-build="exclude" data-remove="exclude">
+      function onGoogleReady() {
+        angular.bootstrap(document.getElementById("map"), ['copcastAdminApp']);
+      }
+    </script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=onGoogleReady"></script>
+
+
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/realtime.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <!-- endbuild -->
