@@ -20,6 +20,6 @@ describe('Controller: RealtimeCtrl', function () {
   }));
 
   it('should present a map', function () {
-    expect(scope.map).not.toBeUndefined();
+    expect(scope.mapOptions).not.toBeUndefined();
   });
 });
