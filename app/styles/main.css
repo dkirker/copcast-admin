@@ -84,6 +84,7 @@ body {
 
 .angular-google-map-container { height: 400px; }
 
+
 /*change bar color-profile*/
 .navbar-default {
   background-color: #0B2A40;
@@ -100,3 +101,16 @@ body {
   background-color: #0B2A40;
 }
 
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #edf2f7;
+  background-color: transparent;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #0277B9;
+}
+
+/*end-of change bar color-profile*/
