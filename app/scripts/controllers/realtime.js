@@ -12,9 +12,15 @@
 angular.module('copcastAdminApp')
   .controller('RealtimeCtrl', function ($scope) {
 
+    var RiodeJaneiro = new google.maps.LatLng(-22.94, -43.22, true);
+
     $scope.mapOptions = {
-      center: new google.maps.LatLng(35.784, -78.670, true),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      center: RiodeJaneiro,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+      zindex: -1
     };
+
+
   });
