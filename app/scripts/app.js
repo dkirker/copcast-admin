@@ -57,4 +57,9 @@ angular
     };
   }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
+  }).directive("loginPage", function(){
+    return {
+      restrict: 'E',
+      templateUrl: "../views/login.html"
+    };
   });
