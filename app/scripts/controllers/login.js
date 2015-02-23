@@ -23,6 +23,7 @@ angular.module('copcastAdminApp')
           $window.sessionStorage.token = data.token;
           $scope.isLogged = true;
           $scope.message = 'Welcome';
+          $scope.userName = data.userName;
         })
         .error(function (data, status, headers, config) {
           // Erase the token if the user fails to log in
