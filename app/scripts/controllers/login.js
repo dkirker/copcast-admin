@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('LoginCtrl', ["$scope", "$window", "$http", function ($scope, $window, $http) {
+  .controller('LoginCtrl', ["$scope", "$window", "$http", "$location", function ($scope, $window, $http, $location) {
     $scope.user = {username: 'john.doe',
       password: 'foobar',
       scope: ''
@@ -33,5 +33,16 @@ angular.module('copcastAdminApp')
           $scope.message = 'Error: Invalid user or password';
         });
     };
+
+    $scope.logout = function(){
+      $window.sessionStorage.token = null;
+      $scope.isLogged = false;
+      $scope.message = '';
+      $scope.userName = null;
+    }
+
+    $scope.isActive = function(route) {
+      return route === $location.path();
+    }
 
   }]);
