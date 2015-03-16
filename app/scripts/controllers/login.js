@@ -55,8 +55,7 @@ angular.module('copcastAdminApp')
 
   .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl) {
 
-    $scope.username = '';
-    $scope.password = '';
+    $scope.user = {username: "", password: ""};
     $scope.email = '';
     $scope.selected = 'login';
 
@@ -89,11 +88,11 @@ angular.module('copcastAdminApp')
 
     $scope.login = function() {
       $http.post(ServerUrl + '/token', {
-        username : $scope.username,
-        password : $scope.password,
+        username : $scope.user.username,
+        password : $scope.user.password,
         scope : 'admin'
       }).success(function(token) {
-        loginService.setToken($scope.username, token.token);
+        loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
         $scope.errorMessage = 'Wrong login/pass combination';

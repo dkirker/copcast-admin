@@ -46,7 +46,7 @@ angular
       loginService.show();
     });
 
-    if ( !loginService.isAuthenticated() ) {
+    if (!loginService.isAuthenticated() ) {
       loginService.show();
     } else {
       socket.connect(loginService.getToken());
