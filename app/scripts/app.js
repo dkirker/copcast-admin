@@ -10,13 +10,13 @@
  */
 angular
   .module('copcastAdminApp', [
+    'ui.map',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.map',
     'ui.bootstrap',
     'http-auth-interceptor',
     'angular-jwplayer' ,

@@ -1,5 +1,5 @@
 /* global google */
-
+'use strict';
 /**
  * @ngdoc function
  * @name copcastAdminApp.controller:RealtimeCtrl
@@ -34,7 +34,8 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, Serv
   };
 });
 
-app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUrl, toaster, $window, $rootScope, $location, $timeout) {
+app.controller('RealtimeCtrl', ['$scope', '$modal', '$http', 'socket', 'ServerUrl', 'toaster', '$window', '$rootScope', '$location', '$timeout',
+  function ($scope, $modal, $http, socket, ServerUrl, toaster, $window, $rootScope, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
@@ -42,12 +43,11 @@ app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUr
   $scope.modalInstance = null;
   $scope.streamButtonText = 'Livestream';
 
-
-  var RiodeJaneiro = new google.maps.LatLng(-22.94, -43.22, true);
-  $scope.defaultPos = RiodeJaneiro;
+  console.log("1-Carregando mapa=" + $scope.myMap );
+  console.log("2-Carregando mapa=" + $scope.map );
+    console.log("3-Carregando mapa=" + google.maps.MapTypeId.ROADMAP );
 
   $scope.mapOptions = {
-    center: RiodeJaneiro,
     zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: true,
@@ -310,6 +310,7 @@ app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUr
   };
 
   function changeMapPos(lat, lng){
+    console.log("1-changeMap=" + $scope.myMap );
     var pos = new google.maps.LatLng(lat, lng);
     $scope.myMap.panTo(pos);
     $scope.defaultPos = pos;
@@ -351,6 +352,4 @@ app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUr
   $scope.refreshUsers();
 
 
-}); //end-RealTimeCtrl
-
-
+}]); //end-RealTimeCtrl
