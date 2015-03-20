@@ -42,5 +42,9 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "ng-file-upload":"2.2.2"
   }
 }

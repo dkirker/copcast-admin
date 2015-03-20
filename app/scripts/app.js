@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 angular
   .module('copcastAdminApp', [
     'ngAnimate',
@@ -16,7 +17,12 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.map'
+    'ui.map',
+    'ui.bootstrap',
+    'http-auth-interceptor',
+    'angular-jwplayer' ,
+    'toaster',
+    'angularFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -63,3 +69,7 @@ angular
       templateUrl: "../views/login.html"
     };
   });
+
+//insert the constant value ServerUrl
+//angular.module('mogi-admin').constant('ServerUrl', 'http://mogi-api.igarape.org');
+angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');

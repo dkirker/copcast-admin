@@ -21,17 +21,25 @@ module.exports = function(config) {
       'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',
       // bower:js
       'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
+      'bower_components/lodash/dist/lodash.compat.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-cookies/angular-cookies.js',
-      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/ng-file-upload/angular-file-upload.js',
+      'bower_components/angular-ui-utils/ui-utils.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
-      'bower_components/angular-ui-utils/ui-utils.js',
+      'bower_components/moment/moment.js',
+      'bower_components/less.js/dist/less-1.5.0.js',
+      'bower_components/angular-http-auth/src/http-auth-interceptor.js',
       'bower_components/angular-ui-map/ui-map.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-jwplayer/angular-jwplayer.js',
+      'bower_components/angular-toaster/toaster.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
@@ -71,7 +79,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {
