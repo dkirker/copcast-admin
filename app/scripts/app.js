@@ -8,7 +8,6 @@
  *
  * Main module of the application.
  */
-
 angular
   .module('copcastAdminApp', [
     'ngAnimate',
@@ -38,36 +37,20 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
-  }).factory('authInterceptor', function ($rootScope, $q, $window) {
-    return {
-      request: function (config) {
-        config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-        }
-        return config;
-      },
-      response: function (response) {
-        if (response.status === 401) {
-          // handle the case where the user is not authenticated
-        }
-        return response || $q.when(response);
-      }
-    };
-  }).config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptor');
-  }).directive("loginPage", function(){
-    return {
-      restrict: 'E',
-      templateUrl: "../views/login.html"
-    };
+  }).run(function($rootScope, loginService, socket) {
+
+    $rootScope.$on("event:auth-loginRequired", function(data) {
+      loginService.show();
+    });
+
+    if (!loginService.isAuthenticated() ) {
+      loginService.show();
+    } else {
+      socket.connect(loginService.getToken());
+    }
   });
 
 //insert the constant value ServerUrl

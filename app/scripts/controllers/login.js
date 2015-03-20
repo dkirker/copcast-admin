@@ -8,41 +8,115 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('LoginCtrl', ["$scope", "$window", "$http", "$location", function ($scope, $window, $http, $location) {
-    $scope.user = {username: 'john.doe',
-      password: 'foobar',
-      scope: ''
-    };
-    $scope.message = '';
-    $scope.isLogged = $window.sessionStorage.token != null;
-    $scope.user.scope = 'admin';
-    $scope.submit = function () {
-      $http
-        .post('http://localhost:3000/token', $scope.user)
-        .success(function (data, status, headers, config) {
-          $window.sessionStorage.token = data.token;
-          $scope.isLogged = true;
-          $scope.message = 'Welcome';
-          $scope.userName = data.userName;
-        })
-        .error(function (data, status, headers, config) {
-          // Erase the token if the user fails to log in
-          delete $window.sessionStorage.token;
-          $scope.isLogged = false;
-          // Handle login errors here
-          $scope.message = 'Error: Invalid user or password';
+
+  .factory('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
+
+    var loginService = {},
+      modal = null;
+
+    loginService.show = function() {
+      if ( !modal ) {
+        modal = $modal.open({
+          templateUrl : 'views/login.html',
+          controller : 'LoginCtrl',
+          backdrop : 'static'
         });
+      }
     };
 
-    $scope.logout = function(){
-      $window.sessionStorage.token = null;
-      $scope.isLogged = false;
-      $scope.message = '';
-      $scope.userName = null;
-    }
+    loginService.getToken = function() {
+      if ($rootScope.globals == null && !$cookieStore.get('globals')){
+        return null;
+      }
+      if ($rootScope.globals == null){
+        $rootScope.globals = $cookieStore.get('globals');
+      }
+      return $rootScope.globals.currentUser.token;
+    };
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    }
+    loginService.setToken = function(userName, accessToken) {
+      $rootScope.globals = {
+        currentUser: {
+          username: userName,
+          token: accessToken
+        }
+      };
+      $cookieStore.put('globals', $rootScope.globals);
+      authService.loginConfirmed();
+      socket.connect($rootScope.globals.currentUser.token);
+    };
 
-  }]);
+    loginService.isAuthenticated = function() {
+      return loginService.getToken() != null && loginService.getToken().length > 0;
+    };
+
+    return loginService;
+  })
+
+  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl) {
+
+    $scope.user = {username: "", password: ""};
+    $scope.email = '';
+    $scope.selected = 'login';
+
+    $scope.forgotPass = function(){
+      $scope.selected = 'forgotPass';
+      $scope.errorMessage = '';
+      $scope.emailMessage = '';
+    };
+
+    $scope.sendEmail = function(){
+      $scope.errorMessage = '';
+      $scope.emailMessage = '';
+      if(!$scope.email || $scope.email === ''){
+        $scope.errorMessage = 'Type an valid email address';
+        return;
+      }
+      $scope.emailMessage = 'Trying to send email...';
+      $http.post(ServerUrl + '/users/'+$scope.email+'/reset_password', {
+        email:$scope.email
+      }).success(function(data) {
+        $scope.emailMessage = 'Email sent successfully';
+        $scope.selected = 'login';
+        $scope.email='';
+      }).error(function (data){
+        $scope.emailMessage = '';
+        $scope.errorMessage = data;
+        $scope.email='';
+      });
+    };
+
+    $scope.login = function() {
+      $http.post(ServerUrl + '/token', {
+        username : $scope.user.username,
+        password : $scope.user.password,
+        scope : 'admin'
+      }).success(function(token) {
+        loginService.setToken($scope.user.username, token.token);
+        $modalInstance.close();
+      }).error(function (data, status, headers, config) {
+        $scope.errorMessage = 'Wrong login/pass combination';
+      });
+    };
+
+  }).config(function ($httpProvider) {
+    $httpProvider.interceptors.push(['$injector', function($injector) {
+      return {
+        request : function(config) {
+
+          var loginService = $injector.get('loginService');
+          var serverUrl = $injector.get('ServerUrl');
+          if ( config.url.indexOf(serverUrl) > -1  && loginService.getToken() ) {
+            config.headers.Authorization = 'Bearer ' + loginService.getToken();
+          }
+          return config;
+        }
+      };
+    }]);
+  }).run(['$rootScope', '$location', '$cookieStore', '$http',
+    function ($rootScope, $location, $cookieStore, $http) {
+      $rootScope.globals = $cookieStore.get('globals');
+      if ($rootScope.globals && $rootScope.globals.currentUser  ) {
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token;
+      }
+    }]);
