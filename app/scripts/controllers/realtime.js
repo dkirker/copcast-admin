@@ -1,7 +1,5 @@
 /* global google */
 
-'use strict';
-
 /**
  * @ngdoc function
  * @name copcastAdminApp.controller:RealtimeCtrl

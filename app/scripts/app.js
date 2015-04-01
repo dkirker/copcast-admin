@@ -46,10 +46,10 @@ angular
       loginService.show();
     });
 
-    //if (loginService.isAuthenticated() ) {
-    //  console.log("socket connected");
-    //  socket.connect(loginService.getToken());
-    //}
+    if (loginService.isAuthenticated() ) {
+      console.log("socket connected");
+      socket.connect(loginService.getToken());
+    }
   });
 
 //insert the constant value ServerUrl
