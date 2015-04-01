@@ -1,5 +1,7 @@
 /* global google */
 
+'use strict';
+
 /**
  * @ngdoc function
  * @name copcastAdminApp.controller:RealtimeCtrl
@@ -43,11 +45,7 @@ app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUr
   $scope.streamButtonText = 'Livestream';
 
 
-  var RiodeJaneiro = new google.maps.LatLng(-22.94, -43.22, true);
-  $scope.defaultPos = RiodeJaneiro;
-
   $scope.mapOptions = {
-    center: RiodeJaneiro,
     zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: true,

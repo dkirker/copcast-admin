@@ -9,7 +9,7 @@
  */
 angular.module('copcastAdminApp')
 
-  .factory('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
+  .service('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
 
     var loginService = {},
       modal = null;
@@ -44,6 +44,7 @@ angular.module('copcastAdminApp')
       $cookieStore.put('globals', $rootScope.globals);
       authService.loginConfirmed();
       socket.connect($rootScope.globals.currentUser.token);
+      console.log("socket connected");
     };
 
     loginService.isAuthenticated = function() {

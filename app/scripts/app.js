@@ -46,13 +46,12 @@ angular
       loginService.show();
     });
 
-    if (!loginService.isAuthenticated() ) {
-      loginService.show();
-    } else {
-      socket.connect(loginService.getToken());
-    }
+    //if (loginService.isAuthenticated() ) {
+    //  console.log("socket connected");
+    //  socket.connect(loginService.getToken());
+    //}
   });
 
 //insert the constant value ServerUrl
-//angular.module('mogi-admin').constant('ServerUrl', 'http://mogi-api.igarape.org');
+//angular.module('copcastAdminApp').constant('ServerUrl', 'http://mogi-api.igarape.org');
 angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
