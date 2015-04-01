@@ -47,7 +47,6 @@ angular
     });
 
     if (loginService.isAuthenticated() ) {
-      console.log("socket connected");
       socket.connect(loginService.getToken());
     }
   });
