@@ -34,7 +34,7 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, Serv
   };
 });
 
-app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUrl, toaster, $window, $rootScope, $location, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket, ServerUrl, toaster, $window, $rootScope, balloonTemplate, $location, $timeout,$templateCache) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
@@ -234,7 +234,10 @@ app.controller('RealtimeCtrl', function ($scope, $modal, $http, socket, ServerUr
     if ( $scope.currentUser ) {
       google.maps.event.trigger($scope.myMap, "resize");
       $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
-      $scope.userWindow.open($scope.myMap, $scope.currentUser.marker);
+
+
+      balloonTemplate.init($scope);
+      //$scope.userWindow.open($scope.myMap, $scope.currentUser.marker);
     }
   };
 
