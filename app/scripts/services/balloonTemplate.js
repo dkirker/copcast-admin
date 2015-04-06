@@ -10,20 +10,17 @@
  */
        angular.module('copcastAdminApp')
          .factory('balloonTemplate',function($compile, $templateCache) {
-           return {
-             init: function (scope) {
+           var balloon = {}, infoWindow =null;
 
-               var infowindow = new google.maps.InfoWindow({
+           balloon.init = function (scope) {
+              if (infoWindow){
+                infoWindow.close();
+              }
+             infoWindow = new google.maps.InfoWindow({
                  content: $compile($templateCache.get("balloon.html"))(scope)[0]
-               });
-               infowindow.open(scope.myMap,scope.currentUser.marker);
+             });
+             infoWindow.open(scope.myMap,scope.currentUser.marker);
 
-               //scope.$apply(function () {
-               //  var element = document.getElementById("balloonContent");
-               //  $compile(element)(scope);
-               //});
-
-
-             }//init
-           };
+            };
+           return balloon;
   });
