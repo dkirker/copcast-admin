@@ -4,10 +4,8 @@ node_js:
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
-'devDependencies': {
+'devDependencies':
   'karma': '~0.8'
-},
 // ...snip...
-'scripts': {
+'scripts':
    'test': './node_modules/.bin/karma start --single-run --browsers PhantomJS'
-}
