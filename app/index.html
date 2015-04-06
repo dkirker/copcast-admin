@@ -50,8 +50,8 @@
                   <li ng-class="{active:isActive('/users')}"><a ng-href="#/users">Users</a></li>
                 </ul>
 
-                <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">{{userName}}</a>
-                  &nbsp<a ng-click="logout">Logout</a>
+                <p class="navbar-text navbar-right">Signed in as <user-name></user-name>
+                  &nbsp<a ng-href="#/logout">Logout</a>
                 </p>
 
               </div>
@@ -119,9 +119,11 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/logout.js"></script>
     <script src="scripts/services/socket.js"></script>
     <script src="scripts/services/balloonTemplate.js"></script>
     <script src="scripts/services/login.js"></script>
+    <script src="scripts/services/userInfo.js"></script>
     <!-- endbuild -->
 </body>
 </html>

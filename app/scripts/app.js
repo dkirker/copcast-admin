@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/logout', {
+        controller: 'LogoutCtrl',
+        template: ""
+      })
       .otherwise({
         redirectTo: '/'
       });
