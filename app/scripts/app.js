@@ -50,8 +50,6 @@ angular
       loginService.show();
     });
 
-    console.log("is authenticated?: "+loginService.isAuthenticated());
-
   });
 
 //insert the constant value ServerUrl

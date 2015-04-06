@@ -266,7 +266,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   $scope.refreshUsers = function() {
     //if it is connected already
     if (loginService.isAuthenticated() && !socket.connected) {
-      console.log("Please try to connect!!!");
       socket.connect(loginService.getToken());
     }
     $http.get(ServerUrl + '/users/online')

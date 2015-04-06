@@ -26,7 +26,6 @@ angular.module('copcastAdminApp')
 
     socket.connect = function(token) {
       if ( typeof io === 'undefined' ) {
-        console.log("io is undefined!!!!");
         return;
       }
 

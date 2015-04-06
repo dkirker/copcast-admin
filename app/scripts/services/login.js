@@ -44,7 +44,6 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
     authService.loginConfirmed();
     socket.connect($rootScope.globals.currentUser.token);
     modal = null;
-    console.log("socket connected");
   };
 
   loginService.isAuthenticated = function() {
