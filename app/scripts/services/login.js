@@ -61,5 +61,6 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
     modal = null;
   };
 
+
   return loginService;
 });

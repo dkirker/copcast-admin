@@ -34,13 +34,14 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, Serv
   };
 });
 
-app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket, ServerUrl, toaster, $window, $rootScope, balloonTemplate, $location, $timeout,$templateCache) {
+app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
   $scope.modalInstance = null;
   $scope.streamButtonText = 'Livestream';
+
 
 
   $scope.mapOptions = {
@@ -68,7 +69,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   };
 
   $scope.isOnline = function (currentUser) {
-    return currentUser != null && currentUser.marker.icon !== markerIcons['grey'];
+    return currentUser != null && currentUser.marker.icon !== mapService.getGreyMarker(currentUser.userName);
   };
 
   $scope.myStyle = {
@@ -90,11 +91,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     },10);
   });
 
-  var markerIcons = {
-    'red': 'http://www.google.com/intl/en_ALL/mapfiles/marker.png',
-    'green': 'http://www.google.com/intl/en_ALL/mapfiles/marker_green.png',
-    'grey': 'http://www.google.com/intl/en_ALL/mapfiles/marker_grey.png'
-  };
 
   angular.element($window).bind('resize', function() {
     $scope.myStyle["height"] = window.innerHeight + "px";
@@ -103,7 +99,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   });
 
   var timeoutUser = function (user) {
-    user.marker.setIcon(markerIcons['grey']);
+    user.marker.setIcon(mapService.getGreyMarker(user.userName));
   };
 
   var loadUser = function (data) {
@@ -112,8 +108,8 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     if ( $scope.activeUsers[data.id] ) {
       pos = new google.maps.LatLng(data.lat, data.lng);
       $scope.activeUsers[data.id].marker.setPosition(pos);
-      if ($scope.activeUsers[data.id].marker.icon === markerIcons['grey']) {
-        $scope.activeUsers[data.id].marker.setIcon(markerIcons['red']);
+      if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
+        $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
       }
     } else {
       pos = new google.maps.LatLng(data.lat, data.lng);
@@ -121,7 +117,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       var marker = new google.maps.Marker({
         map: $scope.myMap,
         position: pos,
-        icon: markerIcons['red']
+        icon: mapService.getRedMarker(data.name)
       });
 
       google.maps.event.addListener(marker, 'click', function() {
@@ -179,14 +175,17 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     });
     socket.on('streaming:stop', function(data) {
       delete $scope.activeStreams[data.id];
-      $scope.activeUsers[data.id].marker.setIcon(markerIcons['red']);
+      $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
       toaster.clearToastByUserId(data.id);
       if ($scope.modalInstance != null && $scope.modalInstance !== undefined) {
         $scope.modalInstance.close();
       }
       $scope.$apply();
     });
-  });
+      socket.on('disconnect', function(socket) {
+        console.log('Got disconnect!');
+      });
+    });
 
 
   $rootScope.$on("event:filter-Users", function(data) {
@@ -236,7 +235,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
 
 
-      balloonTemplate.init($scope);
+      mapService.showBalloon($scope);
       //$scope.userWindow.open($scope.myMap, $scope.currentUser.marker);
     }
   };
@@ -265,6 +264,11 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   };
 
   $scope.refreshUsers = function() {
+    //if it is connected already
+    if (loginService.isAuthenticated() && !socket.connected) {
+      console.log("Please try to connect!!!");
+      socket.connect(loginService.getToken());
+    }
     $http.get(ServerUrl + '/users/online')
       .success(function(data) {
         if(data.length === 0){
@@ -340,7 +344,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
   function showStream(user) {
     setStreamingUser(user);
-    user.marker.setIcon(markerIcons['green']);
+    user.marker.setIcon(mapService.getGreenMarker(user.userName));
   }
 
   function showNotification(user){

@@ -22,8 +22,11 @@ angular.module('copcastAdminApp')
     tag.id = 'socket-io';
     body.appendChild(tag);
 
+
+
     socket.connect = function(token) {
       if ( typeof io === 'undefined' ) {
+        console.log("io is undefined!!!!");
         return;
       }
 
