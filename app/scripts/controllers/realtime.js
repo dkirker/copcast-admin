@@ -102,28 +102,20 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     user.marker.setIcon(mapService.getGreyMarker(user.userName));
   };
 
-  var loadUser = function (data) {
+  $scope.loadUser = function (data) {
     console.log("Socket: Location received!");
     var pos = null;
     if ( $scope.activeUsers[data.id] ) {
       pos = new google.maps.LatLng(data.lat, data.lng);
       $scope.activeUsers[data.id].marker.setPosition(pos);
+      $scope.activeUsers[data.id].accuracy = data.accuracy;
       if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
         $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
       }
     } else {
       pos = new google.maps.LatLng(data.lat, data.lng);
-      var bounds = new google.maps.LatLngBounds();
-      var marker = new google.maps.Marker({
-        map: $scope.myMap,
-        position: pos,
-        icon: mapService.getRedMarker(data.name)
-      });
 
-      google.maps.event.addListener(marker, 'click', function() {
-        $scope.showUser(data.id);
-        $scope.$digest();
-      });
+      var marker = mapService.createMarker($scope, pos, data);
 
       $scope.activeUsers[data.id] = {
         id : data.id,
@@ -132,16 +124,17 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
         deploymentGroup : data.group,
         marker : marker,
         groupId: data.groupId,
+        accuracy: data.accuracy,
         streamUrl: data.streamUrl,
         picture: data.profilePicture ? ServerUrl + data.profilePicture : null,
         timeoutPromisse: null
       };
 
-      for (var key in $scope.activeUsers){
-        bounds.extend($scope.activeUsers[key].marker.getPosition());
-      }
-      $scope.myMap.fitBounds(bounds);
+      mapService.fitBounds($scope, $scope.activeUsers);
     }
+
+    mapService.applyCircle($scope, $scope.activeUsers[data.id]);
+
     if ($scope.activeUsers[data.id].timeoutPromisse != null) {
       $timeout.cancel($scope.activeUsers[data.id].timeoutPromisse);
     }
@@ -151,7 +144,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   };
 
   socket.on('connect', function() {
-    socket.on('users:location', loadUser);
+    socket.on('users:location', $scope.loadUser);
 
     socket.on('streaming:start', function(data) {
       var user = $scope.activeUsers[data.id];
@@ -214,8 +207,10 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
         if( l_user_name.match( re_match ) || l_user_login.match( re_match) ){
           user.marker.setMap($scope.myMap);
+          if (user.circle) {user.circle.setMap($scope.myMap);}
         }else{
           user.marker.setMap(null);
+          if (user.circle) {user.circle.setMap(null);}
         }
       });
 
@@ -276,7 +271,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
         }
         var bounds = new google.maps.LatLngBounds();
         angular.forEach(data, function(user) {
-          loadUser(user);
+          $scope.loadUser(user);
           var coord = new google.maps.LatLng(user.lat, user.lng);
           bounds.extend(coord);
         });
