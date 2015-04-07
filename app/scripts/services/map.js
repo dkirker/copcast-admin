@@ -23,6 +23,11 @@
 
             };
 
+           service.closeBalloon = function () {
+             if (infoWindow){
+               infoWindow.close();
+             }
+           }
            service.getRedMarker = function(user){
              return "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld="+user[0]+"|db0909|000000"
            };

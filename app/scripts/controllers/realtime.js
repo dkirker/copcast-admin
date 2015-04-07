@@ -10,7 +10,7 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, ServerUrl, user, streamUrl) {
+app.controller('ModalInstanceCtrl',function ($scope, $http, ServerUrl, user, streamUrl) {
   console.log('controller created: ' + streamUrl);
   $scope.user = user;
   $scope.jwOptions = {
@@ -22,7 +22,7 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, Serv
   };
 
   $scope.ok = function () {
-    $modalInstance.close();
+
     $http.post(ServerUrl + '/streams/' + user.id + '/stop')
       .success(function (data) {
         if (data.success) {
@@ -34,12 +34,11 @@ app.controller('ModalInstanceCtrl',function ($scope, $modalInstance, $http, Serv
   };
 });
 
-app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, ngDialog, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
-  $scope.modalInstance = null;
   $scope.streamButtonText = 'Livestream';
 
 
@@ -170,8 +169,9 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       delete $scope.activeStreams[data.id];
       $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
       toaster.clearToastByUserId(data.id);
-      if ($scope.modalInstance != null && $scope.modalInstance !== undefined) {
-        $scope.modalInstance.close();
+      if ($scope.activeStreams[data.id].modal != null) {
+        $scope.activeStreams[data.id].modal.close();
+        $scope.activeStreams[data.id].modal = null;
       }
       $scope.$apply();
     });
@@ -231,7 +231,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
 
       mapService.showBalloon($scope);
-      //$scope.userWindow.open($scope.myMap, $scope.currentUser.marker);
     }
   };
 
@@ -301,7 +300,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
   $scope.popNotification = function(user){
     toaster.pop('note', '', user.userName + " is streaming",0, 'trustedHtml', function(user){
-      $scope.userWindow.close();
+      mapService.closeBalloon();
       showModal(user);
     }, user);
   };
@@ -314,11 +313,15 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
   function showModal(user){
     console.log('showModal with user=['+user+']');
-    $scope.modalInstance = $modal.open({
+    $scope.activeStreams[user.id].modal = ngDialog.open({
       templateUrl: 'views/player.html',
       controller: 'ModalInstanceCtrl',
       backdrop: false,
-      resolve: {
+      overlay: false,
+      closeByEscape: false,
+      closeByDocument: false,
+      name: user.username,
+      data: {
         user: function(){return user;},
         streamUrl: function(){return user.streamUrl;},
         ServerUrl: function(){return ServerUrl;}
