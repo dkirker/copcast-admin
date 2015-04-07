@@ -42,6 +42,7 @@ module.exports = function(config) {
       'bower_components/angular-toaster/toaster.js',
       // endbower
       'app/scripts/**/*.js',
+      'app/views/**/*.html',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
@@ -65,11 +66,27 @@ module.exports = function(config) {
       'PhantomJS'
     ],
 
-    // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
     ],
+
+    preprocessors: {
+      'app/views/*.html': ['ng-html2js']
+    },
+
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      stripPrefix: 'app/',
+      // prepend this to the
+
+
+
+      // setting this option will create only a single module that contains templates
+      // from all the files, so you can load them all with module('foo')
+      moduleName: 'templatesForTest'
+    },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
