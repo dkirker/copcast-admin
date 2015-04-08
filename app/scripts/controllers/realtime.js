@@ -10,37 +10,12 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('ModalInstanceCtrl',function ($scope, $http, ServerUrl, user, streamUrl) {
-  console.log('controller created: ' + streamUrl);
-  $scope.user = user;
-  $scope.jwOptions = {
-    file: streamUrl,
-    height: 300,
-    autostart: true,
-    width: "100%"
-
-  };
-
-  $scope.ok = function () {
-
-    $http.post(ServerUrl + '/streams/' + user.id + '/stop')
-      .success(function (data) {
-        if (data.success) {
-          delete $scope.activeStreams[user.id];
-        }
-      }).error(function (data) {
-
-      });
-  };
-});
-
-app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, ngDialog, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
   $scope.streamButtonText = 'Livestream';
-
 
 
   $scope.mapOptions = {
@@ -169,7 +144,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       delete $scope.activeStreams[data.id];
       $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
       toaster.clearToastByUserId(data.id);
-      if ($scope.activeStreams[data.id].modal != null) {
+      if ($scope.activeStreams[data.id] != null && $scope.activeStreams[data.id].modal != null) {
         $scope.activeStreams[data.id].modal.close();
         $scope.activeStreams[data.id].modal = null;
       }
@@ -313,15 +288,11 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
   function showModal(user){
     console.log('showModal with user=['+user+']');
-    $scope.activeStreams[user.id].modal = ngDialog.open({
+    $scope.activeStreams[user.id].modal =  $modal.open({
       templateUrl: 'views/player.html',
-      controller: 'ModalInstanceCtrl',
+      controller: 'ModalVideoCtrl',
       backdrop: false,
-      overlay: false,
-      closeByEscape: false,
-      closeByDocument: false,
-      name: user.username,
-      data: {
+      resolve: {
         user: function(){return user;},
         streamUrl: function(){return user.streamUrl;},
         ServerUrl: function(){return ServerUrl;}
@@ -335,7 +306,8 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       streamId: user.id,
       userName: user.userName,
       groupId: user.groupId,
-      streamUrl: user.streamUrl
+      streamUrl: user.streamUrl,
+      modal: null
     };
   }
 

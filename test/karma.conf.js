@@ -40,7 +40,6 @@ module.exports = function(config) {
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-jwplayer/angular-jwplayer.js',
       'bower_components/angular-toaster/toaster.js',
-      'bower_components/ngDialog/js/ngDialog.js',
       // endbower
       'app/scripts/**/*.js',
       'app/views/**/*.html',
