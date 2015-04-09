@@ -16,7 +16,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
   $scope.streamButtonText = 'Livestream';
-
+  $scope.searchString = "";
 
   $scope.mapOptions = {
     zoom: 12,
@@ -156,39 +156,33 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     });
 
 
-  $rootScope.$on("event:filter-Users", function(data) {
-    $scope.filterUsers(data);
-  });
 
-  $scope.filterUsers = function(data) {
-    var searchString = data.targetScope.usersFilter;
-    if(!searchString){
+  $scope.filterUsers = function() {
 
+    if(!$scope.searchString){
       //show all users
       angular.forEach($scope.activeUsers, function(user) {
         //TODO add group so we can search for specific groups
         user.marker.setMap($scope.myMap);
+        if (user.cityCircle) {user.cityCircle.setMap($scope.myMap);}
 
       });
-
     }else{
-
       //allows filter by regex
       angular.forEach($scope.activeUsers, function(user) {
         //TODO add group so we can search for specific groups
         var l_user_name = user.userName;
         var l_user_login = user.login;
-        var re_match = new RegExp("\\b" + searchString, "g");
+        var re_match = new RegExp( $scope.searchString, "gi");
 
         if( l_user_name.match( re_match ) || l_user_login.match( re_match) ){
           user.marker.setMap($scope.myMap);
-          if (user.circle) {user.circle.setMap($scope.myMap);}
+          if (user.cityCircle) {user.cityCircle.setMap($scope.myMap);}
         }else{
           user.marker.setMap(null);
-          if (user.circle) {user.circle.setMap(null);}
+          if (user.cityCircle) {user.cityCircle.setMap(null);}
         }
       });
-
     }
   };
 
