@@ -41,6 +41,10 @@ angular
         controller: 'LogoutCtrl',
         template: ""
       })
+      .when('/history', {
+        templateUrl: 'views/history.html',
+        controller: 'HistoryCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
