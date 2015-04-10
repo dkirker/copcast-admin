@@ -45,6 +45,18 @@ angular
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl'
       })
+      .when('/user-list', {
+        templateUrl: 'views/users/user-list.html',
+        controller: 'UserListCtrl'
+      })
+      .when('/user-detail/:id', {
+        templateUrl: 'views/users/user-detail.html',
+        controller: 'UserDetailCtrl'
+      })
+      .when('/user-creation', {
+        templateUrl: 'views/users/user-creation.html',
+        controller: 'UserCreationCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

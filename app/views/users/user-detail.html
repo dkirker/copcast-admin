@@ -1,0 +1,75 @@
+<div class="containerUser">
+    <h1>User details</h1>
+    <div class="col-md-4">
+        <form novalidate="novalidate" class="form-horizontal">
+            <alert ng-show="serverMessage">
+                <li ng-repeat="(key, value) in serverMessage">
+                    {{value[0]}}
+                </li>
+            </alert>
+            <div class="control-group">
+                <label class="control-label" for="inputName">Name:</label>
+                <div class="controls">
+                    <input type="text" id="inputName" ng-model="user.name"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputName">Group:</label>
+                <div class="controls">
+                    <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputUsername">Username:</label>
+                <div class="controls">
+                    <input type="text" id="inputUsername" ng-model="user.username"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email:</label>
+                <div class="controls">
+                    <input type="text" id="inputEmail" ng-model="user.email"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputIsAdmin">Is Admin?</label>
+                <div class="controls">
+                    <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <!-- user-detail.html: -->
+                    <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                    <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form novalidate="novalidate" class="form-horizontal">
+            <div class="control-group" ng-cloak>
+                <label class="control-label" for="currentpassword">Change password</label>
+                <div class="controlsPassword">
+                    <input type="password" id="currentpassword" ng-model="currentPassword" placeholder="Current password"/></br>
+                    <input type="password" id="newpassword" ng-model="newPassword" placeholder="New password"/></br>
+                    <input type="password" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="Repeat your password"/>
+                </div>
+                <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span></br>
+                <a ng-click="changePassword()" class="btn btn-small btn-primary">change password</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <label class="control-label" ng-show="hasProfilePicture">Profile picture</label>
+            <div ng-show="hasProfilePicture">
+                <img ng-src="{{pictureUrl}}" height="250">
+            </div>
+            <div class="control-group" ng-cloak>
+                <input type="file" ng-file-select="onFileSelect($files)" >
+            </div>
+        </form>
+    </div>
+</div>
