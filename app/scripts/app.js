@@ -57,6 +57,10 @@ angular
         templateUrl: 'views/users/user-creation.html',
         controller: 'UserCreationCtrl'
       })
+      .when('/user-destroy/:id', {
+        templateUrl: 'views/users/user-destroy.html',
+        controller: 'UserDestroyCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
