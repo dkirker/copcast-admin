@@ -25,8 +25,8 @@
     <!-- Add your site or application content here -->
     <div>
     <!--<div ng-show="isLogged">-->
-        <div class="header">
-          <div class="navbar navbar-default" role="navigation">
+        <header class="header">
+          <div class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
               <div class="navbar-header">
 
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </header>
         <div ng-view=""></div>
       <!--</div>-->
       <!--<div ng-hide="isLogged">-->
@@ -117,6 +117,7 @@
       });
     </script>
 
+    <!-- build:js(.) scripts/app.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/realtime.js"></script>
     <script src="scripts/controllers/main.js"></script>
@@ -125,12 +126,12 @@
     <script src="scripts/controllers/logout.js"></script>
     <script src="scripts/controllers/modalvideo.js"></script>
     <script src="scripts/controllers/users.js"></script>
+    <script src="scripts/controllers/history.js"></script>
 
     <script src="scripts/services/socket.js"></script>
     <script src="scripts/services/map.js"></script>
     <script src="scripts/services/login.js"></script>
     <script src="scripts/directives/username.js"></script>
-
     <!-- endbuild -->
 </body>
 </html>
