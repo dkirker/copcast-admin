@@ -27,7 +27,6 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/ng-file-upload/angular-file-upload.js',
       'bower_components/angular-ui-utils/ui-utils.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -40,6 +39,7 @@ module.exports = function(config) {
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-jwplayer/angular-jwplayer.js',
       'bower_components/angular-toaster/toaster.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
       'app/views/**/*.html',
