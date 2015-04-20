@@ -1,0 +1,171 @@
+.history {
+  margin-top: -62px;
+  padding-top: 62px;
+  height:100vh;
+  display:flex;
+  flex-direction: column;
+}
+
+.history .map.canvas{
+  flex:1;
+}
+
+/*************** Time line ***************/
+.history footer {
+  overflow-x: hidden;
+  width: 100%;
+}
+.nav.timeline {
+  height: 130px;
+  padding: 0 0;
+  max-width: 100%;
+  overflow-x: auto;
+
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap;
+}
+
+/* Time line segment */
+.nav.timeline > .segment {
+  flex-shrink: 0;
+  -ms-flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+
+  flex-basis: 200px;
+  -ms-flex-basis: 200px;
+  -webkit-flex-basis: 200px;
+
+  height: 100%;
+  box-sizing: border-box;
+}
+.nav.timeline > .start.segment,
+.nav.timeline > .finish.segment {
+  flex-basis: 30px;
+  -ms-flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+}
+
+/* Segment line*/
+.nav.timeline > .segment > .line {
+  position: relative;
+  padding: 14px 0 14px 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav.timeline > .segment hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
+  border-top: 2px solid #d7d7d7;
+}
+.nav.timeline > .segment > .day {
+  position: relative;
+  text-align: center;
+  color: #c2c2c2;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 29px;
+  top: 50%;
+  left: 0;
+  width: 28px;
+  margin: 0 0 0 0;
+  transform: translate(-47%, -50%);
+}
+.nav.timeline > .segment > .line {
+  border-left: 2px solid #d7d7d7;
+}
+.nav.timeline > .start.segment > .line {
+  border-left: none;
+}
+/* Event line */
+.nav.timeline > .segment > .event.line {
+  padding: 0 0 0 0;
+  margin: -30px 0 0 0;
+  border-left: none;
+  z-index: 100;
+  height: 30px;
+}
+.nav.timeline > .segment > .event.line.start:before,
+.nav.timeline > .segment > .event.line.finish:after {
+  position: relative;
+  content: ' \25CF';
+  font-size: 29px;
+  color: #11990A;
+  width: 15px;
+}
+.nav.timeline > .segment > .event.line.start:before {
+  top: -7px;
+  left: -8px;
+}
+.nav.timeline > .segment > .event.line.finish:after {
+  top: -9px;
+  right: -8px;
+  float: right;
+}
+.nav.timeline > .segment > .event.line > hr {
+  border-top: 2px solid #11990A;
+  transform: translateY(14px);
+}
+.nav.timeline > .segment > .event.line.start > hr {
+  transform: translateY(-27px);
+}
+
+
+
+
+
+
+
+
+
+/*************** Users / Groups Dropdown ***************/
+.history .users.dropdown-menu a:hover {
+  background-color: #0288d1;
+  color: white;
+}
+.history .users.dropdown-menu .user > .avatar {
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: 10px;
+}
+
+.history .users.dropdown-menu .user > .info {
+  padding: 4px 0 0 58px;
+  height: 48px;
+}
+
+/*************** navbar ***************/
+.history head {
+  height: 110px;
+}
+.history .navbar {
+  color: #777777;
+}
+.history .navbar .form-inline {
+  margin: 8px 20px 0 0;
+}
+.history .navbar .form-inline input,
+.history .navbar .form-inline select {
+  color: #777777;
+  width: auto;
+}
+.history .navbar .form-inline label {
+  font-weight: 300;
+}
+.history .navbar .form-inline .divider {
+  margin-left: 30px;
+}
+.history .navbar .glyphicon {
+  vertical-align: middle;
+}
+.history .navbar-center {
+  float: right;
+  position: relative;
+  left: -50%;
+  text-align: left;
+}
