@@ -9,7 +9,8 @@
 .history .map.canvas{
   flex:1;
 }
-/* Time line */
+
+/*************** Time line ***************/
 .history footer {
   overflow-x: hidden;
   width: 100%;
@@ -28,37 +29,32 @@
   -webkit-flex-flow: row nowrap;
 }
 
+/* Time line segment */
 .nav.timeline > .segment {
   flex-shrink: 0;
-  flex-basis: 30px;
   -ms-flex-shrink: 0;
-  -ms-flex-basis: 30px;
   -webkit-flex-shrink: 0;
-  -webkit-flex-basis: 30px;
+
+  flex-basis: 200px;
+  -ms-flex-basis: 200px;
+  -webkit-flex-basis: 200px;
+
   height: 100%;
   box-sizing: border-box;
 }
+.nav.timeline > .start.segment,
+.nav.timeline > .finish.segment {
+  flex-basis: 30px;
+  -ms-flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+}
+
+/* Segment line*/
 .nav.timeline > .segment > .line {
   position: relative;
   padding: 14px 0 14px 0;
   top: 50%;
   transform: translateY(-50%);
-}
-.nav.timeline > .segment > .event.line {
-  top: 28px;
-}
-.nav.timeline > .segment > .event.line.start:before {
-  content: ' \25CF';
-  font-size: 29px;
-  color: #11990A;
-  float: left;
-  top: -21px;
-  margin-left: -8px;
-  position: relative;
-  width: 15px;
-}
-.nav.timeline > .segment > .event.line > hr {
-  border-top: 2px solid #11990A;
 }
 .nav.timeline > .segment hr {
   margin-top: 0;
@@ -66,22 +62,67 @@
   border: 0;
   border-top: 2px solid #d7d7d7;
 }
-.nav.timeline > .time.segment > .line {
+.nav.timeline > .segment > .day {
+  position: relative;
+  text-align: center;
+  color: #c2c2c2;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 29px;
+  top: 50%;
+  left: 0;
+  width: 28px;
+  margin: 0 0 0 0;
+  transform: translate(-47%, -50%);
+}
+.nav.timeline > .segment > .line {
   border-left: 2px solid #d7d7d7;
 }
-.nav.timeline > .finish.segment > .line {
-  border-left: 2px solid #d7d7d7;
-}
-.nav.timeline > .time.segment > .event.line {
+.nav.timeline > .start.segment > .line {
   border-left: none;
 }
-.nav.timeline > .time.segment {
-  flex-basis: 150px;
-  -ms-flex-basis: 150px;
-  -webkit-flex-basis: 150px;
+/* Event line */
+.nav.timeline > .segment > .event.line {
+  padding: 0 0 0 0;
+  margin: -30px 0 0 0;
+  border-left: none;
+  z-index: 100;
+  height: 30px;
+}
+.nav.timeline > .segment > .event.line.start:before,
+.nav.timeline > .segment > .event.line.finish:after {
+  position: relative;
+  content: ' \25CF';
+  font-size: 29px;
+  color: #11990A;
+  width: 15px;
+}
+.nav.timeline > .segment > .event.line.start:before {
+  top: -7px;
+  left: -8px;
+}
+.nav.timeline > .segment > .event.line.finish:after {
+  top: -9px;
+  right: -8px;
+  float: right;
+}
+.nav.timeline > .segment > .event.line > hr {
+  border-top: 2px solid #11990A;
+  transform: translateY(14px);
+}
+.nav.timeline > .segment > .event.line.start > hr {
+  transform: translateY(-27px);
 }
 
-/* Users / Groups Dropdown */
+
+
+
+
+
+
+
+
+/*************** Users / Groups Dropdown ***************/
 .history .users.dropdown-menu a:hover {
   background-color: #0288d1;
   color: white;
@@ -98,7 +139,7 @@
   height: 48px;
 }
 
-/* navbar */
+/*************** navbar ***************/
 .history head {
   height: 110px;
 }
@@ -125,6 +166,6 @@
 .history .navbar-center {
   float: right;
   position: relative;
-  left: -50%; /* or right 50% */
+  left: -50%;
   text-align: left;
 }
