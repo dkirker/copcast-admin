@@ -10,16 +10,16 @@
   flex:1;
 }
 
-/*************** Time line ***************/
 .history footer {
-  overflow-x: hidden;
   width: 100%;
 }
-.nav.timeline {
+
+/*************** Time line ***************/
+.history .nav.timeline {
   height: 130px;
   padding: 0 0;
-  max-width: 100%;
   overflow-x: auto;
+  margin-right: 400px;
 
   display: flex;
   display: -ms-flexbox;
@@ -30,7 +30,7 @@
 }
 
 /* Time line segment */
-.nav.timeline > .segment {
+.history .nav.timeline > .segment {
   flex-shrink: 0;
   -ms-flex-shrink: 0;
   -webkit-flex-shrink: 0;
@@ -42,27 +42,27 @@
   height: 100%;
   box-sizing: border-box;
 }
-.nav.timeline > .start.segment,
-.nav.timeline > .finish.segment {
+.history .nav.timeline > .start.segment,
+.history .nav.timeline > .end.segment {
   flex-basis: 30px;
   -ms-flex-basis: 30px;
   -webkit-flex-basis: 30px;
 }
 
 /* Segment line*/
-.nav.timeline > .segment > .line {
+.history .nav.timeline > .segment > .line {
   position: relative;
   padding: 14px 0 14px 0;
   top: 50%;
   transform: translateY(-50%);
 }
-.nav.timeline > .segment hr {
+.history .nav.timeline > .segment hr {
   margin-top: 0;
   margin-bottom: 0;
   border: 0;
   border-top: 2px solid #d7d7d7;
 }
-.nav.timeline > .segment > .day {
+.history .nav.timeline > .segment > .day {
   position: relative;
   text-align: center;
   color: #c2c2c2;
@@ -75,52 +75,54 @@
   margin: 0 0 0 0;
   transform: translate(-47%, -50%);
 }
-.nav.timeline > .segment > .line {
+.history .nav.timeline > .segment > .line {
   border-left: 2px solid #d7d7d7;
 }
-.nav.timeline > .start.segment > .line {
+.history .nav.timeline > .start.segment > .line {
   border-left: none;
 }
 /* Event line */
-.nav.timeline > .segment > .event.line {
+.history .nav.timeline > .segment > .event.line {
   padding: 0 0 0 0;
   margin: -30px 0 0 0;
   border-left: none;
   z-index: 100;
   height: 30px;
 }
-.nav.timeline > .segment > .event.line.start:before,
-.nav.timeline > .segment > .event.line.finish:after {
+.history .nav.timeline > .segment > .event.line.start:before,
+.history .nav.timeline > .segment > .event.line.end:after {
   position: relative;
   content: ' \25CF';
   font-size: 29px;
   color: #11990A;
   width: 15px;
 }
-.nav.timeline > .segment > .event.line.start:before {
+.history .nav.timeline > .segment > .event.line.start:before {
   top: -7px;
   left: -8px;
 }
-.nav.timeline > .segment > .event.line.finish:after {
+.history .nav.timeline > .segment > .event.line.end:after {
   top: -9px;
   right: -8px;
   float: right;
 }
-.nav.timeline > .segment > .event.line > hr {
+.history .nav.timeline > .segment > .event.line > hr {
   border-top: 2px solid #11990A;
   transform: translateY(14px);
 }
-.nav.timeline > .segment > .event.line.start > hr {
+.history .nav.timeline > .segment > .event.line.start > hr {
   transform: translateY(-27px);
 }
 
-
-
-
-
-
-
-
+/***************** Player ****************/
+.history .player {
+  width: 400px;
+  height: 300px;
+  background-color: #182A40;
+  float: right;
+  z-index: 1001;
+  margin-top: -300px;
+}
 
 /*************** Users / Groups Dropdown ***************/
 .history .users.dropdown-menu a:hover {
@@ -169,3 +171,4 @@
   left: -50%;
   text-align: left;
 }
+
