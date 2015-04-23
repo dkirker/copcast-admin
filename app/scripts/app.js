@@ -29,10 +29,6 @@ angular
         templateUrl: 'views/realtime.html',
         controller: 'RealtimeCtrl',
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
@@ -44,6 +40,23 @@ angular
       .when('/history', {
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl'
+      })
+
+      .when('/group-list', {
+        templateUrl: 'views/groups/group-list.html',
+        controller: 'GroupsListCtrl'
+      })
+      .when('/group-detail/:id', {
+        templateUrl: 'views/groups/group-detail.html',
+        controller: 'GroupsDetailsCtrl'
+      })
+      .when('/group-creation', {
+        templateUrl: 'views/groups/group-creation.html',
+        controller: 'GroupsCreationCtrl'
+      })
+      .when('/group-destroy/:id', {
+        templateUrl: 'views/groups/group-destroy.html',
+        controller: 'GroupsDestroyCtrl'
       })
       .when('/user-list', {
         templateUrl: 'views/users/user-list.html',

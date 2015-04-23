@@ -1,0 +1,46 @@
+<div class="container-crud">
+  <h1>Group detail</h1>
+  <hr/>
+  <form novalidate="novalidate" class="form-horizontal">
+    <alert ng-show="serverMessage">
+      <li >
+        {{serverMessage}}
+      </li>
+    </alert>
+    <div class="control-group">
+      <label class="control-label" for="inputName">Name:</label>
+      <div class="controls">
+        <input type="text" id="inputName" ng-model="group.name"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputLatitude">Latitude:</label>
+      <div class="controls">
+        <input type="number" id="inputLatitude" ng-model="group.lat" ng-change="changeMapCenter()"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputLongitude">Longitude:</label>
+      <div class="controls">
+        <input type="number" id="inputLongitude" ng-model="group.lng" ng-change="changeMapCenter()"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputIsAdmin">Is Admin?</label>
+      <div class="controls">
+        <input type="checkbox" id="inputIsAdmin" ng-model="group.isAdmin"/>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <!-- group-detail.html: -->
+        <a ng-click="cancel()" class="btn btn-default">cancel</a>
+        <a ng-click="updateGroup()" class="btn btn-small btn-primary">update group</a>
+      </div>
+    </div>
+  </form>
+</div>
