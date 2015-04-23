@@ -193,3 +193,7 @@ body {
 .containerUser {
   padding: 100px 0px 0px 20px;
 }
+
+.container-crud{
+  padding: 20px 20px 0px 20px;
+}

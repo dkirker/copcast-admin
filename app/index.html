@@ -47,9 +47,16 @@
 
                 <ul class="nav navbar-nav ">
                   <li ng-class="{active:isActive('/')}"><a href="#/">Realtime</a></li>
-                  <li ng-class="{active:isActive('/about')}"><a ng-href="#/about">Analytics</a></li>
-                  <li ng-class="{active:isActive('/user-list')}"><a ng-href="#/user-list">Users</a></li>
                   <li ng-class="{active:isActive('/history')}"><a ng-href="#/history">History</a></li>
+                  <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li ng-class="{active:isActive('/user-list')}"><a ng-href="#/user-list">Users</a></li>
+                      <li ng-class="{active:isActive('/group-list')}"><a ng-href="#/group-list">Groups</a></li>
+                    </ul>
+                  </li>
+
+
                 </ul>
 
                 <p class="navbar-text navbar-right">Signed in as <user-name></user-name>
@@ -122,7 +129,6 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/realtime.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/logout.js"></script>
     <script src="scripts/controllers/modalvideo.js"></script>
@@ -133,6 +139,10 @@
     <script src="scripts/services/map.js"></script>
     <script src="scripts/services/login.js"></script>
     <script src="scripts/directives/username.js"></script>
+    <script src="scripts/controllers/groups/creation.js"></script>
+    <script src="scripts/controllers/groups/details.js"></script>
+    <script src="scripts/controllers/groups/destroy.js"></script>
+    <script src="scripts/controllers/groups/list.js"></script>
     <!-- endbuild -->
 </body>
 </html>
