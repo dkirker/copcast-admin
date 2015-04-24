@@ -19,6 +19,7 @@
   height: 130px;
   padding: 0 0;
   overflow-x: auto;
+  overflow-y: hidden;
   margin-right: 400px;
 
   display: flex;
@@ -86,7 +87,7 @@
   padding: 0 0 0 0;
   margin: -30px 0 0 0;
   border-left: none;
-  z-index: 100;
+  z-index: 1;
   height: 30px;
 }
 .history .nav.timeline > .segment > .event.line.start:before,
@@ -114,14 +115,27 @@
   transform: translateY(-27px);
 }
 
+.history .nav.timeline > .segment > .selected {
+  top: 0px;
+  transform: translateY(-50%);
+  height: 130px;
+  width: 2px;
+  position: relative;
+  float: left;
+  background-color: #3185CF;
+  z-index: 2;
+}
+
 /***************** Player ****************/
 .history .player.window {
   width: 400px;
   height: 403px;
-  background-color: #182A40;
+  margin-top: -403px;
   float: right;
   z-index: 1001;
-  margin-top: -403px;
+  color: #fff;
+  background-color: #182A40;
+  text-align: center;
 }
 
 .history .player.window .users.group {
@@ -134,7 +148,6 @@
 .history .player.window .avatar {
   display: inline-block;
 }
-
 .history .player.window .avatar > img {
   width: 54px;
   height: 54px;
@@ -145,12 +158,14 @@
   opacity: 1;
 }
 .history .player.window .user.selected {
-  text-align: center;
   margin: 8px;
-  color: #fff;
 }
-.history .player.window .user.selected > .name {
-  font-weight: 900;
+.history .player.window .scene {
+  overflow-x: hidden;
+}
+.history .player.window .hour {
+  font-size: 1.5em;
+  margin-top: 5px;
 }
 
 /*************** Users / Groups Dropdown ***************/
