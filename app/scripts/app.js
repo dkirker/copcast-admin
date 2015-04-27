@@ -60,19 +60,19 @@ angular
       })
       .when('/user-list', {
         templateUrl: 'views/users/user-list.html',
-        controller: 'UserListCtrl'
+        controller: 'UsersListCtrl'
       })
       .when('/user-detail/:id', {
         templateUrl: 'views/users/user-detail.html',
-        controller: 'UserDetailCtrl'
+        controller: 'UsersDetailsCtrl'
       })
       .when('/user-creation', {
         templateUrl: 'views/users/user-creation.html',
-        controller: 'UserCreationCtrl'
+        controller: 'UsersCreationCtrl'
       })
       .when('/user-destroy/:id', {
         templateUrl: 'views/users/user-destroy.html',
-        controller: 'UserDestroyCtrl'
+        controller: 'UsersDestroyCtrl'
       })
       .otherwise({
         redirectTo: '/'
