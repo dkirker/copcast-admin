@@ -48,4 +48,6 @@ describe('Controller: GroupsDetailCtrl', function () {
 
     expect(location.path).toHaveBeenCalledWith("/group-list");
   });
+
+
 });
