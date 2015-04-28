@@ -11,6 +11,7 @@ angular.module('copcastAdminApp')
   .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, $upload) {
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
+    $scope.blnShowTab = [true, false, false] ;
 
     //load the picture
     $scope.onFileSelect = function($files) {
@@ -68,6 +69,12 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'cancel':
     $scope.cancel = function () {
       $location.path('/user-list');
+    };
+
+    // callback for ng-click 'cancel':
+    $scope.clickTab = function (nTab) {
+      $scope.blnShowTab = [false, false, false];
+      $scope.blnShowTab[nTab-1] = true;
     };
 
     //get a user by id

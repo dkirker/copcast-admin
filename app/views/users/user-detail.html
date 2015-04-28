@@ -3,22 +3,31 @@
     <div class="row">
       <div class="col-md-2">
         <!--Sidebar content-->
+        <div class="center-block">
+          <div ng-show="hasProfilePicture" class="text-center">
+            <img ng-src="{{pictureUrl}}" height="100" class="img-circle">
+          </div>
+
+          <div class="controls">
+            <h4 class="text-center">{{user.name}}</h4>
+          </div>
+        </div>
         <div class = "menu-profile">
           <ul class="nav">
               <li class="active">
-                <a href="#">
+                <a ng-click="clickTab(1)" >
                   <i class="glyphicon glyphicon-user"></i>
                   Account Settings
                   </a>
               </li>
             <li>
-              <a href="#pass">
+              <a ng-click="clickTab(2)">
                 <i class="glyphicon glyphicon-log-in"></i>
                 Change Password
               </a>
             </li>
             <li>
-              <a href="#">
+              <a ng-click="clickTab(3)">
                 <i class="glyphicon glyphicon-camera"></i>
                 Change Picture
               </a>
@@ -30,7 +39,7 @@
       <div class="col-md-10">
         <!--Body content-->
 
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" ng-show="blnShowTab[0]">
           <div class="panel-heading">Account Settings</div>
           <div class="panel-body">
             <br>
@@ -71,6 +80,7 @@
                   <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
                 </div>
               </div>
+              <br><br>
               <div class="control-group">
                 <div class="controls">
                   <!-- user-detail.html: -->
@@ -83,27 +93,66 @@
           </div>
 
       <!-- Tab Password -->
-        <div class="panel panel-primary" id="pass" >
+        <div class="panel panel-primary animate-show" id="pass" ng-show="blnShowTab[1]">
           <div class="panel-heading">Change Password</div>
           <div class="panel-body">
             <br>
 
             <form novalidate="novalidate" class="form-horizontal">
               <div class="control-group" ng-cloak>
-                <label class="control-label" for="currentpassword">Change password</label>
+                <label class="control-label" for="currentpassword">Current password</label>
                 <div class="controlsPassword">
                   <input type="password" id="currentpassword" ng-model="currentPassword" placeholder="Current password"/></br>
+                </div>
+                <label class="control-label" for="currentpassword">New password</label>
+                <div class="controlsPassword">
                   <input type="password" id="newpassword" ng-model="newPassword" placeholder="New password"/></br>
                   <input type="password" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="Repeat your password"/>
                 </div>
                 <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span></br>
-                <a ng-click="changePassword()" class="btn btn-small btn-primary">change password</a>
+
+
+                <br><br>
+                <div class="control-group">
+                  <div class="controls">
+                    <!-- user-detail.html: -->
+                    <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                    <a ng-click="changePassword()" class="btn btn-small btn-primary">update user</a>
+                  </div>
+                </div>
+
               </div>
             </form>
 
           </div>
         </div>
 
+        <!-- Change Picture -->
+        <div class="panel panel-primary" id="pass" ng-show="blnShowTab[2]">
+          <div class="panel-heading">Change Picture</div>
+          <div class="panel-body">
+            <br>
+
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              <label class="control-label" ng-show="hasProfilePicture">Profile picture</label>
+              <div ng-show="hasProfilePicture">
+                <img ng-src="{{pictureUrl}}" height="250">
+              </div>
+              <div class="control-group" ng-cloak>
+                <input type="file" ng-file-select="onFileSelect($files)" >
+              </div>
+              <br><br>
+              <div class="control-group">
+                <div class="controls">
+                  <!-- user-detail.html: -->
+                  <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                  <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
 
       </div>
 
