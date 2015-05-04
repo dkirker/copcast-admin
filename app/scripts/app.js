@@ -77,12 +77,15 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  }).run(function($rootScope, loginService, socket) {
+  }).run(function($rootScope, $location, loginService, socket) {
 
     $rootScope.$on("event:auth-loginRequired", function(data) {
       loginService.show();
     });
 
+    $rootScope.isActive = function (viewLocation) {
+      return viewLocation === $location.path();
+    };
   });
 
 //insert the constant value ServerUrl
