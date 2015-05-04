@@ -128,9 +128,21 @@ body {
   background: #1d2730;
 }
 
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #EAEAEA;
+}
 
 /*end-of change bar color-profile*/
 
+/* Custom header navbar */
+header > .navbar ul.navbar-nav a {
+  text-transform: uppercase;
+}
+
+header > .navbar ul.navbar-nav > li > a {
+  font-size: 16px;
+  padding: 20px 20px;
+}
 
 /*realtime*/
 /*search box*/
