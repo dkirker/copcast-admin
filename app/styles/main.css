@@ -134,6 +134,9 @@ body {
   background: none;
 }
 
+.dropdown-menu {
+  z-index: 2000;
+}
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   background-color: #EAEAEA;
 }
