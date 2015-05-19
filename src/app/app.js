@@ -21,7 +21,7 @@ angular
     'http-auth-interceptor',
     'angular-jwplayer' ,
     'toaster',
-    'ngFileUpload'
+    'angularFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
