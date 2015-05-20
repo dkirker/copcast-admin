@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDestroyCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, $upload){
+  .controller('UsersDestroyCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
 
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';

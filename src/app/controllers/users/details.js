@@ -8,7 +8,8 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, $upload) {
+  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload) {
+    var $upload = Upload;
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
     $scope.blnShowTab = [true, false, false] ;
