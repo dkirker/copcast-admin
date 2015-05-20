@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('GroupsDestroyCtrl', function($scope, $routeParams, $http, $location, ServerUrl, $upload){
+  .controller('GroupsDestroyCtrl', function($scope, $routeParams, $http, $location, ServerUrl){
 
     // callback for ng-click 'updateGroup':
     $scope.deleteGroup = function () {
