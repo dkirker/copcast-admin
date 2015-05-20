@@ -16,7 +16,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   loginService.show = function() {
     if ( !modal ) {
       modal = $modal.open({
-        templateUrl : 'views/login.html',
+        templateUrl : 'app/views/login.html',
         controller : 'LoginCtrl',
         backdrop : 'static'
       });
