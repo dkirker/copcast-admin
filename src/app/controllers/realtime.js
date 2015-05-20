@@ -287,6 +287,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       templateUrl: 'views/player.html',
       controller: 'ModalVideoCtrl',
       backdrop: false,
+      scope: $scope,
       resolve: {
         user: function(){return user;},
         streamUrl: function(){return user.streamUrl;},
