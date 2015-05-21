@@ -4,8 +4,9 @@ node_js:
 install:
   - "npm install"
   - "npm install -g bower"
+  - "npm install -g karma"
   - "bower install"
 before_script:
   - "./node_modules/.bin/gulp build"
 script:
-  - "./node_modules/.bin/karma start karma.conf.js"
+  - "karma start karma.conf.js"
