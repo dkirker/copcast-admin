@@ -1,0 +1,109 @@
+.history {
+  margin-top: -62px;
+  padding-top: 62px;
+  height:100vh;
+  display:flex;
+  flex-direction: column;
+}
+
+.history .map.canvas{
+  flex:1;
+}
+
+.history footer {
+  width: 100%;
+}
+
+/***************** Player ****************/
+.history .player.window {
+  width: 400px;
+  height: 403px;
+  margin-top: -403px;
+  float: right;
+  z-index: 3;
+  color: #fff;
+  background-color: #182A40;
+  text-align: center;
+}
+
+.history .player.window .users.group {
+  background-color: #fff;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  padding-left: 5px;
+}
+.history .player.window .avatar {
+  display: inline-block;
+}
+.history .player.window .avatar > img {
+  width: 54px;
+  height: 54px;
+  margin: 8px 2px 6px 4px;
+  opacity: 0.5;
+}
+.history .player.window .avatar > img.active {
+  opacity: 1;
+}
+.history .player.window .user.selected {
+  margin: 8px;
+}
+.history .player.window .scene {
+  overflow-x: hidden;
+}
+.history .player.window .hour {
+  font-size: 1.5em;
+  margin-top: 5px;
+}
+
+/*************** Users / Groups Dropdown ***************/
+.history .users.dropdown-menu a:hover {
+  background-color: #0288d1;
+  color: white;
+}
+.history .users.dropdown-menu .user > .avatar {
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: 10px;
+}
+
+.history .users.dropdown-menu .user > .avatar > img {
+  width: 48px;
+  height: 48px;
+}
+.history .users.dropdown-menu .user > .info {
+  padding: 4px 0 0 58px;
+  height: 48px;
+}
+
+/*************** navbar ***************/
+.history head {
+  height: 110px;
+}
+.history .navbar {
+  color: #777777;
+}
+.history .navbar .form-inline {
+  margin: 8px 20px 0 0;
+}
+.history .navbar .form-inline input,
+.history .navbar .form-inline select {
+  color: #777777;
+  width: auto;
+}
+.history .navbar .form-inline label {
+  font-weight: 300;
+}
+.history .navbar .form-inline .divider {
+  margin-left: 30px;
+}
+.history .navbar .glyphicon {
+  vertical-align: middle;
+}
+.history .navbar-center {
+  float: right;
+  position: relative;
+  left: -50%;
+  text-align: left;
+}
