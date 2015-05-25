@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 0.10
+install:
+  - "npm install"
+  - "npm install -g bower"
+  - "npm install -g karma"
+  - "bower install"
+before_script:
+  - "./node_modules/.bin/gulp build"
+script:
+  - "karma start karma.conf.js"

@@ -52,6 +52,7 @@ angular.module('copcastAdminApp')
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
         $scope.errorMessage = 'Wrong login/pass combination';
+        $scope.emailMessage = '';
       });
     };
 
