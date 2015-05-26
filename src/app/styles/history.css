@@ -1,0 +1,209 @@
+.history {
+  margin-top: -62px;
+  padding-top: 62px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
+
+.history .map.canvas {
+  flex: 1; }
+
+.history footer {
+  width: 100%; }
+
+/*************** Time line ***************/
+.history .nav.timeline {
+  height: 130px;
+  padding: 0 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-right: 400px;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  -webkit-flex-flow: row nowrap; }
+
+/* Time line segment */
+.history .nav.timeline > .segment {
+  flex-shrink: 0;
+  -ms-flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  flex-basis: 200px;
+  -ms-flex-basis: 200px;
+  -webkit-flex-basis: 200px;
+  height: 100%;
+  box-sizing: border-box; }
+
+.history .nav.timeline > .start.segment,
+.history .nav.timeline > .end.segment {
+  flex-basis: 30px;
+  -ms-flex-basis: 30px;
+  -webkit-flex-basis: 30px; }
+
+/* Segment line*/
+.history .nav.timeline > .segment > .line {
+  position: relative;
+  padding: 14px 0 14px 0;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.history .nav.timeline > .segment hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
+  border-top: 2px solid #d7d7d7; }
+
+.history .nav.timeline > .segment > .hour {
+  position: relative;
+  text-align: center;
+  color: #c2c2c2;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 29px;
+  top: 50%;
+  left: 0;
+  width: 28px;
+  margin: 0 0 0 0;
+  transform: translate(-47%, -50%); }
+
+.history .nav.timeline > .segment > .line {
+  border-left: 2px solid #d7d7d7; }
+
+.history .nav.timeline > .start.segment > .line {
+  border-left: none; }
+
+/* Event line */
+.history .nav.timeline > .segment > .event.line {
+  padding: 0 0 0 0;
+  margin: -30px 0 0 0;
+  border-left: none;
+  z-index: 1;
+  height: 30px; }
+
+.history .nav.timeline > .segment > .event.line.start:before,
+.history .nav.timeline > .segment > .event.line.end:after {
+  position: relative;
+  content: ' \25CF';
+  font-size: 29px;
+  color: #11990A;
+  width: 15px; }
+
+.history .nav.timeline > .segment > .event.line.start:before {
+  top: -7px;
+  left: -8px; }
+
+.history .nav.timeline > .segment > .event.line.end:after {
+  top: -9px;
+  right: -8px;
+  float: right; }
+
+.history .nav.timeline > .segment > .event.line > hr {
+  border-top: 2px solid #11990A;
+  transform: translateY(14px); }
+
+.history .nav.timeline > .segment > .event.line.start > hr {
+  transform: translateY(-27px); }
+
+.history .nav.timeline > .segment > .selected {
+  top: 0px;
+  transform: translateY(-50%);
+  height: 130px;
+  width: 2px;
+  position: relative;
+  float: left;
+  background-color: #3185CF;
+  z-index: 2; }
+
+/***************** Player ****************/
+.history .player.window {
+  width: 400px;
+  height: 403px;
+  margin-top: -403px;
+  float: right;
+  z-index: 3;
+  color: #fff;
+  background-color: #182A40;
+  text-align: center; }
+
+.history .player.window .users.group {
+  background-color: #fff;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  padding-left: 5px; }
+
+.history .player.window .avatar {
+  display: inline-block; }
+
+.history .player.window .avatar > img {
+  width: 54px;
+  height: 54px;
+  margin: 8px 2px 6px 4px;
+  opacity: 0.5; }
+
+.history .player.window .avatar > img.active {
+  opacity: 1; }
+
+.history .player.window .user.selected {
+  margin: 8px; }
+
+.history .player.window .scene {
+  overflow-x: hidden; }
+
+.history .player.window .hour {
+  font-size: 1.5em;
+  margin-top: 5px; }
+
+/*************** Users / Groups Dropdown ***************/
+.history .users.dropdown-menu a:hover {
+  background-color: #0288d1;
+  color: white; }
+
+.history .users.dropdown-menu .user > .avatar {
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: 10px; }
+
+.history .users.dropdown-menu .user > .avatar > img {
+  width: 48px;
+  height: 48px; }
+
+.history .users.dropdown-menu .user > .info {
+  padding: 4px 0 0 58px;
+  height: 48px; }
+
+/*************** navbar ***************/
+.history head {
+  height: 110px; }
+
+.history .navbar {
+  color: #777777; }
+
+.history .navbar .form-inline {
+  margin: 8px 20px 0 0; }
+
+.history .navbar .form-inline input,
+.history .navbar .form-inline select {
+  color: #777777;
+  width: auto; }
+
+.history .navbar .form-inline label {
+  font-weight: 300; }
+
+.history .navbar .form-inline .divider {
+  margin-left: 30px; }
+
+.history .navbar .glyphicon {
+  vertical-align: middle; }
+
+.history .navbar-center {
+  float: right;
+  position: relative;
+  left: -50%;
+  text-align: left; }
+
+/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
