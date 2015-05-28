@@ -100,7 +100,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
         marker : marker,
         groupId: data.groupId,
         accuracy: data.accuracy,
-        streamUrl: data.streamUrl,
         picture: data.profilePicture ? ServerUrl + data.profilePicture : null,
         timeoutPromisse: null
       };
@@ -122,7 +121,9 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     socket.on('users:location', $scope.loadUser);
 
     socket.on('streaming:start', function(data) {
+
       var user = $scope.activeUsers[data.id];
+      user.callId = data.callId;
       if ( ! user ) {
         return console.log('Unable to find user for streaming');
       }
@@ -133,7 +134,8 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
         var foundAdminOnline = false;
         if(data.group.id === user.groupId){
           showStream(user);
-          showNotification(user);
+          //showNotification(user);
+          showModal(user);
           foundAdminOnline = true;
         }
         if(!foundAdminOnline){
@@ -208,7 +210,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
     $scope.streamButtonText = 'Sending...';
     $http.post(ServerUrl + '/streams/' + user.id + '/start')
       .success(function(data) {
-        user.streamUrl = data.streamUrl;
         setStreamingUser(user);
       })
       .error(function(data) {
@@ -269,7 +270,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   };
 
   $scope.popNotification = function(user){
-    toaster.pop('note', '', user.userName + " is streaming",0, 'trustedHtml', function(user){
+    toaster.pop('note', 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
       mapService.closeBalloon();
       showModal(user);
     }, user);
@@ -284,13 +285,12 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   function showModal(user){
     console.log('showModal with user=['+user+']');
     $scope.activeStreams[user.id].modal =  $modal.open({
-      templateUrl: 'views/player.html',
+      templateUrl: 'app/views/player.html',
       controller: 'ModalVideoCtrl',
       backdrop: false,
       scope: $scope,
       resolve: {
         user: function(){return user;},
-        streamUrl: function(){return user.streamUrl;},
         ServerUrl: function(){return ServerUrl;}
       }
     });
@@ -302,7 +302,6 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       streamId: user.id,
       userName: user.userName,
       groupId: user.groupId,
-      streamUrl: user.streamUrl,
       modal: null
     };
   }

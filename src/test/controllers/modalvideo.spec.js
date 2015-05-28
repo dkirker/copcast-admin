@@ -12,15 +12,14 @@ describe('Controller: ModalVideoCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    user = {};
+    user = {id: 1, callId: 2};
     ModalVideoCtrl = $controller('ModalVideoCtrl', {
       $scope: scope,
-      user: user,
-      streamUrl: ""
+      user: user
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.jwOptions).not.toBeUndefined();
+    expect($scope.user).not.toBeUndefined();
   });
 });

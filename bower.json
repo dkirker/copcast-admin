@@ -16,7 +16,7 @@
     "angular-ui-map": "~0.5.0",
     "angular-http-auth": "~1.2.2",
     "angular-jwplayer": "~1.1.5",
-    "angularjs-toaster": "~0.4.13",
+    "angularjs-toaster": "~0.4.14",
     "ng-file-upload": "~4.2.1",
     "ng-file-upload-shim": "~4.2.1",
     "bootstrap": "~3.3.4"
