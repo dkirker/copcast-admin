@@ -1,0 +1,61 @@
+.user.dropdown {
+  & > button {
+    min-height: 34px;
+    min-width: 200px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    .avatar {
+      float: left;
+      margin-right: 5px;
+      & > img {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #eee;
+      }
+    }
+
+    .name {
+      float: left;
+      line-height: 24px;
+    }
+
+    .caret {
+      float: right;
+      line-height: 32px;
+      margin-top: 11px;
+      margin-left: 6px;
+    }
+  }
+
+  .users.dropdown-menu {
+    max-height: 280px;
+    min-width: 300px;
+    overflow-y: auto;
+
+    a:hover {
+      background-color: #0288d1;
+      color: white;
+    }
+
+    .user {
+      & > .avatar {
+        width: 48px;
+        height: 48px;
+        float: left;
+        margin-right: 10px;
+
+        & > img {
+          width: 48px;
+          height: 48px;
+          border: 2px solid #eee;
+        }
+      }
+
+      & > .info {
+        padding: 4px 0 0 58px;
+        height: 48px;
+      }
+    }
+  }
+}
