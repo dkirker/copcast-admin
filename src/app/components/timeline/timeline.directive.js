@@ -6,7 +6,7 @@
   app.directive('timeline', function() {
     return {
       restrict: 'E',
-      templateUrl: 'app/timeline/timeline.html'
+      templateUrl: 'app/components/timeline/timeline.html'
     };
   });
 })(window.angular);
