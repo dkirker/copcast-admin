@@ -10,45 +10,8 @@
         </div>
         <div class="collapse navbar-collapse main-nav">
           <ul class="nav navbar-nav">
-            <li class="dropdown pull-left">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <em>Selecione pessoa/grupo</em> <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu users" role="menu">
-                <li>
-                  <a href="#">
-                    <div class="user">
-                      <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-                      <div class="info">
-                        <span>Leonardo Nogueira</span><br>
-                        <small>Santa Marta</small>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user">
-                      <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-                      <div class="info">
-                        <span>Bruno Siqueira</span><br>
-                        <small>Santa Marta</small>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user">
-                      <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-                      <div class="info">
-                        <span>Leonardo Nicolas Di Berardino</span><br>
-                        <small>Santa Marta</small>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
+            <li class="pull-left">
+              <user-dropdown users="users" selected-user="selectedUser" on-user-change="userChanged(user)"></user-dropdown>
             </li>
           </ul>
           <form class="form-inline navbar-right">
@@ -90,7 +53,7 @@
       <section class="scene">
         <img src="/assets/images/policia.png">
       </section>
-      <section class="hour">
+      <section class="time">
         <strong>21:07</strong>:04
       </section>
     </section>
