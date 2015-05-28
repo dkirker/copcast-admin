@@ -51,8 +51,8 @@ module.exports = function(config) {
       'bower_components/angular-jwplayer/angular-jwplayer.js',
       'bower_components/angularjs-toaster/toaster.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
-
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/moment/moment.js',
       // endbower
       'src/app/**/*.js',
       'src/app/views/**/*.html',

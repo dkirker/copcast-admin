@@ -1,4 +1,4 @@
-;(function() {
+;(function(angular) {
   'use strict';
 
   var app = angular.module('copcastAdminApp');
@@ -18,4 +18,4 @@
       }
     };
   });
-})();
+})(window.angular);
