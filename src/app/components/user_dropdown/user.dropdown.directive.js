@@ -15,7 +15,7 @@
       link: function(scope, element, attrs) {
         scope.selectUser = function selectUser(user) {
           scope.selectedUser = user;
-          scope.onUserChange(user);
+          scope.onChangeUser()(user);
         };
       }
     };
