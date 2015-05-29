@@ -9,8 +9,8 @@
       templateUrl: 'app/components/user_dropdown/user.dropdown.html',
       scope: {
         users: '=',
-        selectedUser: '=',
-        onUserChange: '&'
+        selectedUser: '=?',
+        onChangeUser: '&'
       },
       link: function(scope, element, attrs) {
         scope.selectUser = function selectUser(user) {
