@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse main-nav">
           <ul class="nav navbar-nav">
             <li class="pull-left">
-              <user-dropdown users="users" selected-user="selectedUser" on-user-change="userChanged(user)"></user-dropdown>
+              <user-dropdown users="users" on-change-user="userChanged"></user-dropdown>
             </li>
           </ul>
           <form class="form-inline navbar-right">
@@ -32,7 +32,7 @@
         </div>
     </nav>
   </header>
-  <main map class="map canvas"></main>
+  <main map class="map canvas" position="map.position"></main>
   <footer class="navbar navbar-default navbar-static-bottom">
     <timeline/>
     <section class="player window">
