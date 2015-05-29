@@ -33,9 +33,7 @@
           .get(ServerUrl + '/users')
           .success(function(data) {
             angular.forEach(data, function(user) {
-              if (user.profilePicture) {
-                  user.profilePicture = ServerUrl + '/pictures/' + user.id + '/original/show';
-              }
+              user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
             });
             defer.resolve(data);
           })
@@ -44,6 +42,20 @@
           });
         return defer.promise;
       };
+
+      service.getUser = function getUser(userId) {
+        var defer = $q.defer();
+        $http
+          .get(ServerUrl + '/users/' + userId)
+          .success(function(user) {
+            user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
+            defer.resolve(user);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      }
 
       service.getUserVideos = function getUserVideos(userId, date) {
         var defer = $q.defer();
@@ -64,4 +76,10 @@
 
       return service;
     });
+
+    function generateProfilePictureAddress(serverUrl, user) {
+      return user.profilePicture
+        ? serverUrl + '/pictures/' + user.id + '/original/show'
+        : null;
+    }
 })(window.angular, window.infoWindow, window.google);
