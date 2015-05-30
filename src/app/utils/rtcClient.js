@@ -1,4 +1,4 @@
-var PeerManager = function (socket, http, ServerUrl) {
+var PeerManager = (function (socket) {
 
   var localId,
       config = {
@@ -16,10 +16,10 @@ var PeerManager = function (socket, http, ServerUrl) {
       },
       peerDatabase = {},
       localStream,
-      remoteVideoContainer = document.getElementById('remoteVideosContainer');
+      socketIO = socket;
 
-  socket.on('message', handleMessage);
-  socket.on('id', function(id) {
+  socketIO.on('message', handleMessage);
+  socketIO.on('id', function(id) {
     localId = id;
   });
 
@@ -36,7 +36,8 @@ var PeerManager = function (socket, http, ServerUrl) {
     };
     peer.pc.onaddstream = function(event) {
       attachMediaStream(peer.remoteVideoEl, event.stream);
-      remoteVideosContainer.appendChild(peer.remoteVideoEl);
+      document.getElementById('remoteVideosContainer').appendChild(peer.remoteVideoEl);
+      //remoteVideosContainer.appendChild(peer.remoteVideoEl);
     };
     peer.pc.onremovestream = function(event) {
       peer.remoteVideoEl.src = '';
@@ -109,16 +110,11 @@ var PeerManager = function (socket, http, ServerUrl) {
   function send(type, to, payload) {
     console.log('sending ' + type + ' to ' + to);
 
-    //socket.emit('message', {
-    //  to: to,
-    //  type: type,
-    //  payload: payload
-    //});
-    http.post(ServerUrl+"/streams/message", {
-        to: to,
-        type: type,
-        payload: payload
-      });
+    socketIO.emit('message', {
+      to: to,
+      type: type,
+      payload: payload
+    });
   }
   function toggleLocalStream(pc) {
     if(localStream) {
@@ -134,52 +130,19 @@ var PeerManager = function (socket, http, ServerUrl) {
       return localId;
     },
 
-    setLocalStream: function(stream) {
-
-      // if local cam has been stopped, remove it from all outgoing streams.
-      if(!stream) {
-        for(id in peerDatabase) {
-          pc = peerDatabase[id].pc;
-          if(!!pc.getLocalStreams().length) {
-            pc.removeStream(localStream);
-            offer(id);
-          }
-        }
-      }
-
-      localStream = stream;
-    },
-
-    toggleLocalStream: function(remoteId) {
-      peer = peerDatabase[remoteId] || addPeer(remoteId);
-      toggleLocalStream(peer.pc);
-    },
-
     peerInit: function(remoteId) {
       peer = peerDatabase[remoteId] || addPeer(remoteId);
       send('init', remoteId, null);
-    },
-
-    peerRenegociate: function(remoteId) {
-      offer(remoteId);
     }
-    //,
-    //
-    //send: function(type, payload) {
-    //  socket.emit(type, payload);
-    //  //http.post(ServerUrl+"/streams/message", {
-    //  //  to: to,
-    //  //  type: type,
-    //  //  payload: payload
-    //  //});
-    //}
+
   };
 
-};
+});
 
 var Peer = function (pcConfig, pcConstraints) {
   this.pc = new RTCPeerConnection(pcConfig, pcConstraints);
   this.remoteVideoEl = document.createElement('video');
   this.remoteVideoEl.controls = true;
   this.remoteVideoEl.autoplay = true;
-};
+
+}

@@ -120,42 +120,42 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   socket.on('connect', function() {
     socket.on('users:location', $scope.loadUser);
 
-    socket.on('streaming:start', function(data) {
-
-      var user = $scope.activeUsers[data.id];
-      user.callId = data.callId;
-      if ( ! user ) {
-        return console.log('Unable to find user for streaming');
-      }
-      $http.get(ServerUrl + '/users/me').success(function(data) {
-        if(data.length === 0){
-          return;
-        }
-        var foundAdminOnline = false;
-        if(data.group.id === user.groupId){
-          showStream(user);
-          //showNotification(user);
-          showModal(user);
-          foundAdminOnline = true;
-        }
-        if(!foundAdminOnline){
-          $scope.stopStream(user);
-        }
-      });
-    });
-    socket.on('streaming:stop', function(data) {
-      delete $scope.activeStreams[data.id];
-      $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
-      toaster.clearToastByUserId(data.id);
-      if ($scope.activeStreams[data.id] != null && $scope.activeStreams[data.id].modal != null) {
-        $scope.activeStreams[data.id].modal.close();
-        $scope.activeStreams[data.id].modal = null;
-      }
-      $scope.$apply();
-    });
-      socket.on('disconnect', function(socket) {
-        console.log('Got disconnect!');
-      });
+    //socket.on('streaming:start', function(data) {
+    //
+    //  var user = $scope.activeUsers[data.id];
+    //  user.callId = data.callId;
+    //  if ( ! user ) {
+    //    return console.log('Unable to find user for streaming');
+    //  }
+    //  $http.get(ServerUrl + '/users/me').success(function(data) {
+    //    if(data.length === 0){
+    //      return;
+    //    }
+    //    var foundAdminOnline = false;
+    //    if(data.group.id === user.groupId){
+    //      showStream(user);
+    //      //showNotification(user);
+    //      showModal(user);
+    //      foundAdminOnline = true;
+    //    }
+    //    if(!foundAdminOnline){
+    //      $scope.stopStream(user);
+    //    }
+    //  });
+    //});
+    //socket.on('streaming:stop', function(data) {
+    //  delete $scope.activeStreams[data.id];
+    //  $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
+    //  toaster.clearToastByUserId(data.id);
+    //  if ($scope.activeStreams[data.id] != null && $scope.activeStreams[data.id].modal != null) {
+    //    $scope.activeStreams[data.id].modal.close();
+    //    $scope.activeStreams[data.id].modal = null;
+    //  }
+    //  $scope.$apply();
+    //});
+    //  socket.on('disconnect', function(socket) {
+    //    console.log('Got disconnect!');
+    //  });
     });
 
 
@@ -208,24 +208,20 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
 
   $scope.requestStream = function(user) {
     $scope.streamButtonText = 'Sending...';
-    $http.post(ServerUrl + '/streams/' + user.id + '/start')
-      .success(function(data) {
-        setStreamingUser(user);
-      })
-      .error(function(data) {
-        $scope.streamButtonText = data.message;
-      });
+    setStreamingUser(user);
+    mapService.closeBalloon();
+    showModal(user);
   };
 
   $scope.stopStream = function(user){
-    $http.post(ServerUrl + '/streams/' + user.id + '/stop')
-      .success(function(data) {
-        if ( data.success ) {
-          delete $scope.activeStreams[user.id];
-        }
-      }).error(function(data) {
-
-      });
+    //$http.post(ServerUrl + '/streams/' + user.id + '/stop')
+    //  .success(function(data) {
+    //    if ( data.success ) {
+    //      delete $scope.activeStreams[user.id];
+    //    }
+    //  }).error(function(data) {
+    //
+    //  });
   };
 
   $scope.refreshUsers = function() {
@@ -270,10 +266,10 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
   };
 
   $scope.popNotification = function(user){
-    toaster.pop('note', 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
+    to//aster.pop('note', 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
       mapService.closeBalloon();
       showModal(user);
-    }, user);
+    //}, user);
   };
 
   function changeMapPos(lat, lng){
@@ -289,6 +285,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       controller: 'ModalVideoCtrl',
       backdrop: false,
       scope: $scope,
+      socket: socket,
       resolve: {
         user: function(){return user;},
         ServerUrl: function(){return ServerUrl;}

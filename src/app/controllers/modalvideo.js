@@ -8,21 +8,14 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, $http, ServerUrl, user, socket) {
+  .controller('ModalVideoCtrl', function ($scope, user, socket) {
     $scope.user = user;
-    var client = new PeerManager(socket, $http, ServerUrl);
-    client.peerInit(user.callId);
+    var client = new PeerManager(socket);
+    client.peerInit(user.id);
 
     $scope.ok = function () {
       $scope.activeStreams[user.id].modal.close();
-      $http.post(ServerUrl + '/streams/' + user.id + '/stop')
-        .success(function (data) {
-          if (data.success) {
+      //TODO      delete $scope.activeStreams[user.id];
 
-            delete $scope.activeStreams[user.id];
-          }
-        }).error(function (data) {
-
-        });
     };
   });

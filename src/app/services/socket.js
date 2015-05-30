@@ -55,5 +55,9 @@ angular.module('copcastAdminApp')
       socketIo.on(ev,cb);
     };
 
+    socket.emit = function(action, data){
+      socketIo.emit(action, data);
+    }
+
     return socket;
   });
