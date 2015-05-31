@@ -129,6 +129,7 @@ angular.module('copcastAdminApp')
         socketIO.emit('message', {
           to: to,
           type: type,
+          client: 'admin',
           payload: payload
         });
       }
