@@ -1,0 +1,116 @@
+.nav {
+  &.timeline {
+    height: 130px;
+    padding: 0 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-right: 400px;
+
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    -webkit-flex-flow: row nowrap;
+
+    /* Time line segment */
+    & > .segment {
+      flex-shrink: 0;
+      -ms-flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+
+      flex-basis: 200px;
+      -ms-flex-basis: 200px;
+      -webkit-flex-basis: 200px;
+
+      height: 100%;
+      box-sizing: border-box;
+
+      &.start,
+      &.end {
+        flex-basis: 30px;
+        -ms-flex-basis: 30px;
+        -webkit-flex-basis: 30px;
+      }
+
+      &.start > .line {
+        border-left: none;
+      }
+
+      & hr {
+        margin-top: 0;
+        margin-bottom: 0;
+        border: 0;
+        border-top: 2px solid #d7d7d7;
+      }
+
+      /* Segment children */
+      & > {
+        .line {
+          position: relative;
+          padding: 14px 0 14px 0;
+          top: 50%;
+          transform: translateY(-50%);
+          border-left: 2px solid #d7d7d7;
+        }
+        .time {
+          position: relative;
+          text-align: center;
+          color: #c2c2c2;
+          font-size: 1.3em;
+          font-weight: 300;
+          line-height: 29px;
+          top: 50%;
+          left: 0;
+          width: 28px;
+          margin: 0 0 0 0;
+          transform: translate(-47%, -50%);
+        }
+        .selected {
+          top: 0px;
+          transform: translateY(-50%);
+          height: 130px;
+          width: 2px;
+          position: relative;
+          float: left;
+          background-color: #3185CF;
+          z-index: 2;
+        }
+        /* Event line */
+        .event.line {
+          padding: 0 0 0 0;
+          margin: -30px 0 0 0;
+          border-left: none;
+          z-index: 1;
+          height: 30px;
+
+          &.start > hr {
+            transform: translateY(-27px);
+          }
+
+          &.start:before,
+          &.end:after {
+            position: relative;
+            content: ' \25CF';
+            font-size: 29px;
+            color: #11990A;
+            width: 15px;
+          }
+          &.start:before {
+            top: -9px;
+            left: -8px;
+          }
+          &.end:after {
+            top: -11px;
+            right: -8px;
+            float: right;
+          }
+          & > hr {
+            border-top: 2px solid #11990A;
+            transform: translateY(14px);
+          }
+        } /* End Event line */
+      } /* End Segment children */
+    } /* End Segment */
+  } /* End Timeline */
+} /* End nav */

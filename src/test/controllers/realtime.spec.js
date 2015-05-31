@@ -4,7 +4,7 @@
  */
 'use strict';
 
-describe('Controller: RealtimeCtrl', function () {
+xdescribe('Controller: RealtimeCtrl', function () {
 
   // load the controller's module
   beforeEach(module('copcastAdminApp'));

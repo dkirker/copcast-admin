@@ -38,7 +38,7 @@ angular
         template: ''
       })
       .when('/history', {
-        templateUrl: 'app/views/history.html',
+        templateUrl: 'app/history/history.html',
         controller: 'HistoryCtrl'
       })
 
