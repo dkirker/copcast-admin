@@ -20,7 +20,7 @@ angular
     'ui.bootstrap',
     'http-auth-interceptor',
     'angular-jwplayer' ,
-    'toaster',
+    'cgNotify',
     'ngFileUpload'
   ])
   .config(function ($routeProvider) {

@@ -11,7 +11,7 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, $http, socket,loginService, ServerUrl, notify, $window, $rootScope, mapService, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
@@ -137,7 +137,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
     });
     socket.on('streaming:stop', function(data) {
       stopStream(data);
-      toaster.clearToastByUserId(data.id);
+      notify.closeAll();
       $scope.$apply();
     });
       socket.on('disconnect', function(socket) {
@@ -254,11 +254,14 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   $scope.popNotification = function(user){
-    toaster.pop('note' , 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
-      mapService.closeBalloon();
-      showModal(user);
-    }, user);
+    notify({messageTemplate: '<a ng-click="popModal(' + user.id + ')">' + user.userName + ' is streaming </a>',
+      position: "right", scope: $scope});
   };
+
+  $scope.popModal = function(id){
+    mapService.closeBalloon();
+    showModal($scope.activeUsers[id]);
+  }
 
   function changeMapPos(lat, lng){
     var pos = new google.maps.LatLng(lat, lng);
@@ -301,8 +304,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   }
 
   $scope.refreshUsers();
-  toaster.pop('success', "title", "text");
-  toaster.pop('success', "title", "text");
+
 
 }); //end-RealTimeCtrl
 

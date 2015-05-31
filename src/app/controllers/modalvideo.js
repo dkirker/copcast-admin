@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, user, peerManager) {
+  .controller('ModalVideoCtrl', function ($scope, $modalInstance, user, peerManager) {
     $scope.user = user;
 
     peerManager.start();
@@ -18,7 +18,8 @@ angular.module('copcastAdminApp')
 
     $scope.ok = function () {
       peerManager.clearPeers();
-      $scope.activeStreams[user.id].modal.close();
+      $modalInstance.close();
+
       $scope.activeStreams[user.id].modal = null;
     };
   });
