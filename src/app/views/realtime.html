@@ -1,4 +1,7 @@
   <div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
+  <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>
+
+
   <div>
     <span class="glyphicon ">
       <div class="input-group">
@@ -7,7 +10,6 @@
       </div>
     </span>
   </div>
-  <toaster-container></toaster-container>
 
   <script type="text/ng-template" id="balloon.html">
     <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">

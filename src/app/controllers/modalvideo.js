@@ -12,13 +12,13 @@ angular.module('copcastAdminApp')
     $scope.user = user;
 
     peerManager.start();
-    peerManager.peerInit(user.id);
-
+    peerManager.peerInit(user.id, function(){
+      $scope.stopStream(user.id);
+    });
 
     $scope.ok = function () {
       peerManager.clearPeers();
       $scope.activeStreams[user.id].modal.close();
-      //TODO      delete $scope.activeStreams[user.id];
-
+      $scope.activeStreams[user.id].modal = null;
     };
   });

@@ -120,42 +120,29 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   socket.on('connect', function() {
     socket.on('users:location', $scope.loadUser);
 
-    //socket.on('streaming:start', function(data) {
-    //
-    //  var user = $scope.activeUsers[data.id];
-    //  user.callId = data.callId;
-    //  if ( ! user ) {
-    //    return console.log('Unable to find user for streaming');
-    //  }
-    //  $http.get(ServerUrl + '/users/me').success(function(data) {
-    //    if(data.length === 0){
-    //      return;
-    //    }
-    //    var foundAdminOnline = false;
-    //    if(data.group.id === user.groupId){
-    //      showStream(user);
-    //      //showNotification(user);
-    //      showModal(user);
-    //      foundAdminOnline = true;
-    //    }
-    //    if(!foundAdminOnline){
-    //      $scope.stopStream(user);
-    //    }
-    //  });
-    //});
-    //socket.on('streaming:stop', function(data) {
-    //  delete $scope.activeStreams[data.id];
-    //  $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
-    //  toaster.clearToastByUserId(data.id);
-    //  if ($scope.activeStreams[data.id] != null && $scope.activeStreams[data.id].modal != null) {
-    //    $scope.activeStreams[data.id].modal.close();
-    //    $scope.activeStreams[data.id].modal = null;
-    //  }
-    //  $scope.$apply();
-    //});
-    //  socket.on('disconnect', function(socket) {
-    //    console.log('Got disconnect!');
-    //  });
+    socket.on('streaming:start', function(data) {
+
+      var user = $scope.activeUsers[data.id];
+      if ( ! user ) {
+        return console.log('Unable to find user for streaming');
+      }
+      $http.get(ServerUrl + '/users/me').success(function(data) {
+        if(data.length === 0){
+          return;
+        }
+        if(data.group.id === user.groupId){
+          showNotification(user);
+        }
+      });
+    });
+    socket.on('streaming:stop', function(data) {
+      stopStream(data);
+      toaster.clearToastByUserId(data.id);
+      $scope.$apply();
+    });
+      socket.on('disconnect', function(socket) {
+        console.log('Got disconnect!');
+      });
     });
 
 
@@ -208,20 +195,21 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
 
   $scope.requestStream = function(user) {
     $scope.streamButtonText = 'Sending...';
-    setStreamingUser(user);
-    mapService.closeBalloon();
-    showModal(user);
+    $http.post(ServerUrl + '/streams/' + user.id + '/start')
+      .success(function(data) {
+        showStream(user);
+      })
+      .error(function(data) {
+        $scope.streamButtonText = data.message;
+      });
   };
 
   $scope.stopStream = function(user){
-    //$http.post(ServerUrl + '/streams/' + user.id + '/stop')
-    //  .success(function(data) {
-    //    if ( data.success ) {
-    //      delete $scope.activeStreams[user.id];
-    //    }
-    //  }).error(function(data) {
-    //
-    //  });
+    if ($scope.activeStreams[user.id].modal != null){
+      $scope.activeStreams[user.id].modal.close();
+    }
+    delete $scope.activeStreams[user.id];
+    user.marker.setIcon(mapService.getRedMarker(user.userName));
   };
 
   $scope.refreshUsers = function() {
@@ -266,10 +254,10 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   $scope.popNotification = function(user){
-    to//aster.pop('note', 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
+    toaster.pop('note' , 'Streaming Request', user.userName + " is streaming",0, 'trustedHtml', function(user){
       mapService.closeBalloon();
       showModal(user);
-    //}, user);
+    }, user);
   };
 
   function changeMapPos(lat, lng){
@@ -313,7 +301,8 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   }
 
   $scope.refreshUsers();
-
+  toaster.pop('success', "title", "text");
+  toaster.pop('success', "title", "text");
 
 }); //end-RealTimeCtrl
 

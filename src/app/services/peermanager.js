@@ -39,7 +39,7 @@ angular.module('copcastAdminApp')
 
 
 
-      function addPeer(remoteId) {
+      function addPeer(remoteId, diconnectListener) {
         var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
         peer.pc.onicecandidate = function(event) {
           if (event.candidate) {
@@ -66,6 +66,7 @@ angular.module('copcastAdminApp')
               .iceConnectionState) {
             case 'disconnected':
               remoteVideosContainer.removeChild(peer.remoteVideoEl);
+              diconnectListener();
               break;
           }
         };
@@ -147,8 +148,8 @@ angular.module('copcastAdminApp')
           return localId;
         },
 
-        peerInit: function(remoteId) {
-          var peer = peerDatabase[remoteId] || addPeer(remoteId);
+        peerInit: function(remoteId, diconnectListener) {
+          var peer = peerDatabase[remoteId] || addPeer(remoteId, diconnectListener);
           send('init', remoteId, null);
         },
 
