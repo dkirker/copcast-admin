@@ -8,12 +8,15 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, user, socket) {
+  .controller('ModalVideoCtrl', function ($scope, user, peerManager) {
     $scope.user = user;
-    var client = new PeerManager(socket);
-    client.peerInit(user.id);
+
+    peerManager.start();
+    peerManager.peerInit(user.id);
+
 
     $scope.ok = function () {
+      peerManager.clearPeers();
       $scope.activeStreams[user.id].modal.close();
       //TODO      delete $scope.activeStreams[user.id];
 

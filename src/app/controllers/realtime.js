@@ -11,7 +11,7 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, $http, socket,loginService, ServerUrl, toaster, $window, $rootScope, mapService, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
@@ -285,7 +285,7 @@ app.controller('RealtimeCtrl', function ($scope, $compile, $modal, $http, socket
       controller: 'ModalVideoCtrl',
       backdrop: false,
       scope: $scope,
-      socket: socket,
+      peerManager: peerManager,
       resolve: {
         user: function(){return user;},
         ServerUrl: function(){return ServerUrl;}
