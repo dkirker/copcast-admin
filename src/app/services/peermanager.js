@@ -12,7 +12,6 @@ angular.module('copcastAdminApp')
     var Peer = function (pcConfig, pcConstraints) {
       this.pc = new RTCPeerConnection(pcConfig, pcConstraints);
       this.remoteVideoEl = document.createElement('video');
-      //this.remoteVideoEl.setAttribute('height', '240px');
       this.remoteVideoEl.controls = true;
       this.remoteVideoEl.autoplay = true;
     }
@@ -57,7 +56,7 @@ angular.module('copcastAdminApp')
         };
         peer.pc.onremovestream = function(event) {
           peer.remoteVideoEl.src = '';
-          remoteVideosContainer.removeChild(peer.remoteVideoEl);
+          //remoteVideosContainer.removeChild(peer.remoteVideoEl);
         };
         peer.pc.oniceconnectionstatechange = function(event) {
           switch(
@@ -65,7 +64,6 @@ angular.module('copcastAdminApp')
             || event.target   ) // Firefox
               .iceConnectionState) {
             case 'disconnected':
-              remoteVideosContainer.removeChild(peer.remoteVideoEl);
               diconnectListener();
               break;
           }

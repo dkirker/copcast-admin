@@ -194,5 +194,8 @@ header > .navbar ul.navbar-nav > li > a {
 .container-crud {
   padding: 20px 20px 0px 20px; }
 
+.video-stream{
+  max-height: 300px;
+}
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */

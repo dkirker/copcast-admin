@@ -55,16 +55,16 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   $scope.activeUsers = {};
   $scope.activeStreams = {};
   $scope.currentUser = null;
-
-  $scope.$watch('selected', function () {
-    window.setTimeout(function(){
-      google.maps.event.trigger($scope.myMap, 'resize');
-      if($scope.defaultPos){
-        $scope.myMap.setCenter($scope.defaultPos);
-      }
-      $scope.refreshUsers();
-    },10);
-  });
+  //
+  //$scope.$watch('selected', function () {
+  //  window.setTimeout(function(){
+  //    google.maps.event.trigger($scope.myMap, 'resize');
+  //    if($scope.defaultPos){
+  //      $scope.myMap.setCenter($scope.defaultPos);
+  //    }
+  //    $scope.refreshUsers();
+  //  },10);
+  //});
 
 
   angular.element($window).bind('resize', function() {
