@@ -131,12 +131,13 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
           return;
         }
         if(data.group.id === user.groupId){
+          showStream(user);
           showNotification(user);
         }
       });
     });
     socket.on('streaming:stop', function(data) {
-      stopStream(data);
+      stopStream($scope.activeUsers[data.id]);
       notify.closeAll();
       $scope.$apply();
     });
@@ -195,16 +196,20 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
 
   $scope.requestStream = function(user) {
     $scope.streamButtonText = 'Sending...';
-    $http.post(ServerUrl + '/streams/' + user.id + '/start')
-      .success(function(data) {
-        showStream(user);
-      })
-      .error(function(data) {
-        $scope.streamButtonText = data.message;
-      });
+    if ($scope.activeStreams[user.id]){
+      showModal($scope.activeUsers[user.id]);
+    } else {
+      $http.post(ServerUrl + '/streams/' + user.id + '/start',{})
+        .success(function (data) {
+          $scope.streamButtonText = 'Waiting for users response...'
+        })
+        .error(function (data) {
+          $scope.streamButtonText = data.message;
+        });
+    }
   };
 
-  $scope.stopStream = function(user){
+  var stopStream = function(user){
     if ($scope.activeStreams[user.id].modal != null){
       $scope.activeStreams[user.id].modal.close();
     }
@@ -230,6 +235,13 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
           bounds.extend(coord);
         });
         $scope.myMap.fitBounds(bounds);
+
+        $http.get(ServerUrl + '/users/streaming')
+          .success(function(data) {
+            angular.forEach(data, function(user) {
+              showStream($scope.activeUsers[user.id]);
+            });
+          });
       });
   };
 
@@ -284,7 +296,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
     });
   }
 
-  function setStreamingUser(user) {
+  function showStream(user) {
     $scope.activeStreams[user.id] = {
       status: 'streaming',
       streamId: user.id,
@@ -292,10 +304,6 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
       groupId: user.groupId,
       modal: null
     };
-  }
-
-  function showStream(user) {
-    setStreamingUser(user);
     user.marker.setIcon(mapService.getGreenMarker(user.userName));
   }
 
