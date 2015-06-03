@@ -52,7 +52,7 @@ angular.module('copcastAdminApp')
         }
       }
 
-      socketIo.once(ev,cb);
+      socketIo.on(ev,cb);
     };
 
     socket.emit = function(action, data){

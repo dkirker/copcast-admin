@@ -221,10 +221,6 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   $scope.refreshUsers = function() {
-    //if it is connected already
-    if (loginService.isAuthenticated() && !socket.connected) {
-      socket.connect(loginService.getToken());
-    }
     $http.get(ServerUrl + '/users/online')
       .success(function(data) {
         if(data.length === 0){
