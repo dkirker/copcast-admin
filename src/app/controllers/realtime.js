@@ -210,6 +210,9 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   var stopStream = function(user){
+    if (!$scope.activeStreams[user.id]){
+      return;
+    }
     if ($scope.activeStreams[user.id].modal != null){
       $scope.activeStreams[user.id].modal.close();
     }

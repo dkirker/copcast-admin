@@ -64,7 +64,9 @@ angular.module('copcastAdminApp')
             || event.target   ) // Firefox
               .iceConnectionState) {
             case 'disconnected':
-              diconnectListener();
+              if (diconnectListener) {
+                diconnectListener();
+              }
               break;
           }
         };
