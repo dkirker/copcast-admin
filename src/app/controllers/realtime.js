@@ -130,10 +130,8 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
         if(data.length === 0){
           return;
         }
-        if(data.group.id === user.groupId){
-          showStream(user);
-          showNotification(user);
-        }
+        showStream(user);
+        showNotification(user);
       });
     });
     socket.on('streaming:stop', function(data) {
