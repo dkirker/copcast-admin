@@ -18,6 +18,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   $rootScope.selected = 'realtime';
   $scope.streamButtonText = 'Livestream';
   $scope.searchString = "";
+  $scope.alerts = [];
 
   $scope.mapOptions = {
     zoom: 12,
@@ -45,6 +46,10 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
 
   $scope.isOnline = function (currentUser) {
     return currentUser != null && currentUser.marker.icon !== mapService.getGreyMarker(currentUser.userName);
+  };
+
+  $scope.canStream = function () {
+    return RTCPeerConnection != null;
   };
 
   $scope.myStyle = {
@@ -131,7 +136,9 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
           return;
         }
         showStream(user);
-        showNotification(user);
+        if ($scope.canStream()) {
+          $scope.popNotification(user);
+        }
       });
     });
     socket.on('streaming:stop', function(data) {
@@ -302,10 +309,6 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
       modal: null
     };
     user.marker.setIcon(mapService.getGreenMarker(user.userName));
-  }
-
-  function showNotification(user){
-    $scope.popNotification(user);
   }
 
   $scope.refreshUsers();
