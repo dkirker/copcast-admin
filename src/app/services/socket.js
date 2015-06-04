@@ -30,7 +30,7 @@ angular.module('copcastAdminApp')
       }
 
       socketIo = io.connect(ServerUrl, { query : 'token=' + token });
-      socketIo.on('connect', function() {
+      socketIo.once('connect', function() {
         connected = true;
         console.log("socket connected!");
         angular.forEach(onConnect, function(cb) {
@@ -38,7 +38,7 @@ angular.module('copcastAdminApp')
         });
       });
 
-      socketIo.on('error', function(err) {
+      socketIo.once('error', function(err) {
         console.log('Socket Error:', err);
       });
     };
@@ -54,6 +54,10 @@ angular.module('copcastAdminApp')
 
       socketIo.on(ev,cb);
     };
+
+    socket.emit = function(action, data){
+      socketIo.emit(action, data);
+    }
 
     return socket;
   });

@@ -22,7 +22,8 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-ng-html2js-preprocessor',
+      'karma-spec-reporter'
     ],
 
 
@@ -48,10 +49,10 @@ module.exports = function(config) {
       'bower_components/angular-ui-map/ui-map.js',
       'bower_components/angular-http-auth/src/http-auth-interceptor.js',
       'bower_components/angular-jwplayer/angular-jwplayer.js',
-      'bower_components/angularjs-toaster/toaster.js',
+      'bower_components/angular-notify/dist/angular-notify.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
-
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/moment/moment.js',
       // endbower
       'src/app/**/*.js',
       'src/app/views/**/*.html',
@@ -79,9 +80,9 @@ module.exports = function(config) {
     },
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
+    // possible values: 'dots', 'progress', 'spec'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['spec'],
 
 
     // web server port

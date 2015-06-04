@@ -7,7 +7,12 @@
       </div>
     </span>
   </div>
-  <toaster-container></toaster-container>
+
+<footer ng-hide="canStream()">
+  <span>
+    This browser does not support live streaming visualization. Use Chrome or Firefox instead.
+  </span>
+</footer>
 
   <script type="text/ng-template" id="balloon.html">
     <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
@@ -19,7 +24,7 @@
           <strong>{{currentUser.userName}}</strong><br>
           <a ng-click="goToUser(currentUser)">View history</a>
 
-          <div ng-show="isOnline(currentUser)">
+          <div ng-show="isOnline(currentUser) && canStream()">
             <div>
               <div class="btn-group">
                 <a class="btn btn-primary" ng-click="requestStream(currentUser)"

@@ -20,7 +20,7 @@ angular
     'ui.bootstrap',
     'http-auth-interceptor',
     'angular-jwplayer' ,
-    'toaster',
+    'cgNotify',
     'ngFileUpload'
   ])
   .config(function ($routeProvider) {
@@ -38,7 +38,7 @@ angular
         template: ''
       })
       .when('/history', {
-        templateUrl: 'app/views/history.html',
+        templateUrl: 'app/history/history.html',
         controller: 'HistoryCtrl'
       })
 
@@ -89,5 +89,5 @@ angular
   });
 
 //insert the constant value ServerUrl
-angular.module('copcastAdminApp').constant('ServerUrl', 'http://mogi-api.igarape.org');
-//angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
+//angular.module('copcastAdminApp').constant('ServerUrl', 'http://mogi-api.igarape.org');
+angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
