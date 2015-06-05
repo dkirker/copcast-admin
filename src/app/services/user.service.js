@@ -3,7 +3,7 @@
  * Updated by Leonardo Nicolas
  */
 /* google */
-;(function(angular, infoWindow, google) {
+;(function(angular, infoWindow, google, moment) {
   'use strict';
 
   /**
@@ -57,6 +57,25 @@
         return defer.promise;
       }
 
+      service.getUserLocations = function getUserLocations(userId, fromDate, toDate, accuracy) {
+        var defer = $q.defer();
+
+        fromDate = moment(fromDate).format('YYYY-MM-DD');
+        toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+        accuracy = accuracy ? '/' + accuracy : '';
+
+        var endPoint = ServerUrl + '/users/' + userId + '/locations/' + fromDate + toDate + accuracy;
+        $http
+          .get(endPoint)
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
       service.getUserVideos = function getUserVideos(userId, date) {
         var defer = $q.defer();
         var dateFmt = date.format('YYYY-MM-DD');
@@ -82,4 +101,4 @@
         ? serverUrl + '/pictures/' + user.id + '/original/show'
         : null;
     }
-})(window.angular, window.infoWindow, window.google);
+})(window.angular, window.infoWindow, window.google, window.moment);
