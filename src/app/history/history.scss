@@ -13,54 +13,6 @@
     width: 100%;
   }
 
-  /***************** Player ****************/
-  .player.window {
-    width: 400px;
-    height: 403px;
-    margin-top: -403px;
-    float: right;
-    z-index: 3;
-    color: #fff;
-    background-color: #182A40;
-    text-align: center;
-
-    .users.group {
-      background-color: #fff;
-      width: 100%;
-      white-space: nowrap;
-      overflow-x: hidden;
-      padding-left: 5px;
-    }
-
-    .avatar {
-      display: inline-block;
-
-      & > img {
-        width: 54px;
-        height: 54px;
-        margin: 8px 2px 6px 4px;
-        opacity: 0.5;
-      }
-
-      & > img.active {
-        opacity: 1;
-      }
-    }
-
-    .user.selected {
-      margin: 8px;
-    }
-
-    .scene {
-      overflow-x: hidden;
-    }
-
-    .time {
-      font-size: 1.5em;
-      margin-top: 5px;
-    }
-  }
-
   /*************** navbar ***************/
   head {
     height: 110px;

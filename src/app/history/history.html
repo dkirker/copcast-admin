@@ -14,48 +14,13 @@
               <user-dropdown users="users" on-change-user="userChanged"></user-dropdown>
             </li>
           </ul>
-          <form class="form-inline navbar-right">
-            <div class="form-group">
-              <label for="dataInicial" class="control-label">Dia</label>
-              <input type="date" class="form-control" placeholder="Data" id="dataInicial">
-              <i class="fa fa-calendar fa-lg"></i>
-            </div>
-            <div class="form-group divider">
-              <input type="checkbox">
-            </div>
-            <div class="form-group">
-              <label for="dataFinal" class="control-label">Perído</label>
-              <input type="date" class="form-control" placeholder="Data final" id="dataFinal">
-              <i class="fa fa-calendar fa-lg"></i>
-            </div>
-          </form>
+          <date-filter from-date="filter.fromDate" to-date="filter.toDate" period="filter.period" enabled-dates="filter.enabledDates"/>
         </div>
     </nav>
   </header>
-  <main map class="map canvas" position="map.position"></main>
+  <main map class="map canvas" location="map.location" heatmap-locations="user.locations" markers="map.markers"></main>
   <footer class="navbar navbar-default navbar-static-bottom">
-    <timeline/>
-    <section class="player window">
-      <section class="users group">
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle active"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-        <div class="avatar"><img src="//lh3.googleusercontent.com/-SU9pZqHJxwY/AAAAAAAAAAI/AAAAAAAAABU/t1TY6BPHKnU/s120-c/photo.jpg" class="img-circle"></div>
-      </section>
-      <section class="user selected">
-        Selecionado: <strong>Bruno Siqueira</strong>
-      </section>
-      <section class="scene">
-        <img src="/assets/images/policia.png">
-      </section>
-      <section class="time">
-        <strong>21:07</strong>:04
-      </section>
-    </section>
+    <timeline locations="user.locations"/>
+    <player user="user.active"/>
   </footer>
 </div>

@@ -1,0 +1,16 @@
+<form class="form-inline navbar-right">
+  <div class="form-group">
+    <label for="dataInicial" class="control-label">Date</label>
+    <input type="date" class="form-control" ng-model="fromDate">
+    <i class="fa fa-calendar fa-lg"></i>
+  </div>
+  <div class="form-group divider">
+    <input type="checkbox" ng-model="period">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Period
+      <input type="date" class="form-control to date" ng-model="toDate" ng-disabled="!period">
+    </label>
+    <i class="fa fa-calendar fa-lg"></i>
+  </div>
+</form>

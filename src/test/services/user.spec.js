@@ -68,6 +68,27 @@ describe('Service: UserService', function () {
     });
   });
 
+  describe('when get the user location from backend', function () {
+    // given
+    beforeEach(function () {
+      /*
+      httpBackend
+        .whenGET(ServerUrl + '/users/1/videos/from/2015-05-25')
+        .respond(angular.copy(user1Videos));
+      */
+    });
+
+    it('should return the user geo location', function () {
+      /*
+      userService
+        .getUserVideos('1', moment('2015-05-15'))
+        .then(function(data) {
+          console.log('>>>>>>>>>>>>', data);
+        });
+
+      httpBackend.flush();*/
+    });
+  });
 
   describe('when get the user videos from backend', function () {
     // given
