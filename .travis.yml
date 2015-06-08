@@ -8,6 +8,6 @@ install:
   - "npm install -g karma"
   - "bower install"
 before_script:
-  - "./node_modules/.bin/gulp build"
+  - "gulp build"
 script:
   - "karma start karma.conf.js"
