@@ -16,7 +16,7 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'updateUser':
     $scope.deleteUser = function () {
 
-      if (confirm("Are you sure to delete " + $scope.user.username) == true) {
+      if (confirm('Are you sure to delete ' + $scope.user.username) === true) {
         // confirmation to delete
 
         $http.delete(ServerUrl + '/user_destroy/' + $scope.user.id, $scope.user).success(function (data) {

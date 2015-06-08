@@ -52,7 +52,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   };
 
   loginService.getUserName = function(){
-    return $rootScope.globals ? $rootScope.globals.currentUser.username : "";
+    return $rootScope.globals ? $rootScope.globals.currentUser.username : '';
   };
 
   loginService.logout = function(){

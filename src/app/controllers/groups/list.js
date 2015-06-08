@@ -41,7 +41,7 @@ angular.module('copcastAdminApp')
     $scope.createNewGroup = function () {
       $location.path('/group-creation');
     };
-  }).controller("GroupCreationCtrl", function($scope, $http, $location, ServerUrl){
+  }).controller('GroupCreationCtrl', function($scope, $http, $location, ServerUrl){
 
 
     $scope.createGroup = function () {

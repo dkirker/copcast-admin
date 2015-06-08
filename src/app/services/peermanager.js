@@ -14,21 +14,21 @@ angular.module('copcastAdminApp')
       this.remoteVideoEl = document.createElement('video');
       this.remoteVideoEl.controls = true;
       this.remoteVideoEl.autoplay = true;
-    }
+    };
 
-    var PeerManager = (function (socket) {
+    var PeerManager = function (socket) {
 
       var localId,
         config = {
           peerConnectionConfig: {
             iceServers: [
-              {"url": "stun:23.21.150.121"},
-              {"url": "stun:stun.l.google.com:19302"}
+              {'url': 'stun:23.21.150.121'},
+              {'url': 'stun:stun.l.google.com:19302'}
             ]
           },
           peerConnectionConstraints: {
             optional: [
-              {"DtlsSrtpKeyAgreement": true}
+              {'DtlsSrtpKeyAgreement': true}
             ]
           }
         },
@@ -60,8 +60,7 @@ angular.module('copcastAdminApp')
         };
         peer.pc.oniceconnectionstatechange = function(event) {
           switch(
-            (  event.srcElement // Chrome
-            || event.target   ) // Firefox
+            (  event.srcElement || event.target   ) //Chrome or Firefox
               .iceConnectionState) {
             case 'disconnected':
               if (diconnectListener) {
@@ -136,7 +135,11 @@ angular.module('copcastAdminApp')
       }
       function toggleLocalStream(pc) {
         if(localStream) {
-          (!!pc.getLocalStreams().length) ? pc.removeStream(localStream) : pc.addStream(localStream);
+          if (!!pc.getLocalStreams().length) {
+            pc.removeStream(localStream);
+          } else {
+            pc.addStream(localStream);
+          }
         }
       }
       function error(err){
@@ -167,7 +170,7 @@ angular.module('copcastAdminApp')
         }
       };
 
-    });
+    };
 
     return new PeerManager(socket);
   });

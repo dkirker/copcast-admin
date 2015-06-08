@@ -17,7 +17,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
   $scope.streamButtonText = 'Livestream';
-  $scope.searchString = "";
+  $scope.searchString = '';
   $scope.alerts = [];
 
   $scope.mapOptions = {
@@ -53,8 +53,8 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   $scope.myStyle = {
-    "height": (window.innerHeight) + "px",
-    "width": "100%"
+    'height': (window.innerHeight) + 'px',
+    'width': '100%'
   };
 
   $scope.activeUsers = {};
@@ -73,7 +73,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
 
 
   angular.element($window).bind('resize', function() {
-    $scope.myStyle["height"] = window.innerHeight + "px";
+    $scope.myStyle.height = window.innerHeight + 'px';
     google.maps.event.trigger($scope.myMap, 'resize');
     $scope.refreshUsers();
   });
@@ -167,11 +167,11 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
       //allows filter by regex
       angular.forEach($scope.activeUsers, function(user) {
         //TODO add group so we can search for specific groups
-        var l_user_name = user.userName;
-        var l_user_login = user.login;
-        var re_match = new RegExp( $scope.searchString, "gi");
+        var lUserName = user.userName;
+        var lUserLogin = user.login;
+        var reMatch = new RegExp( $scope.searchString, 'gi');
 
-        if( l_user_name.match( re_match ) || l_user_login.match( re_match) ){
+        if( lUserName.match( reMatch ) || lUserLogin.match( reMatch) ){
           user.marker.setMap($scope.myMap);
           if (user.cityCircle) {user.cityCircle.setMap($scope.myMap);}
         }else{
@@ -206,7 +206,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
     } else {
       $http.post(ServerUrl + '/streams/' + user.id + '/start',{})
         .success(function (data) {
-          $scope.streamButtonText = 'Waiting for users response...'
+          $scope.streamButtonText = 'Waiting for users response...';
         })
         .error(function (data) {
           $scope.streamButtonText = data.message;

@@ -9,7 +9,7 @@
 angular.module('copcastAdminApp')
   .directive('userName', function () {
     return {
-      templateUrl: "app/views/userName.html",
+      templateUrl: 'app/views/userName.html',
       restrict: 'E'
 
     };
