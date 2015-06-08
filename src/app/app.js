@@ -19,7 +19,6 @@ angular
     'ui.map',
     'ui.bootstrap',
     'http-auth-interceptor',
-    'angular-jwplayer' ,
     'cgNotify',
     'ngFileUpload'
   ])
