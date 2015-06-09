@@ -49,7 +49,8 @@
 
     $scope.$watchCollection('filter', function() {
       var filter = $scope.filter;
-      if($scope.user && filter.fromDate) {
+      var hasAtiveUser = $scope.user && $scope.user.active;
+      if(hasAtiveUser && filter.fromDate) {
         loadLocations();
       } else {
         clearLocation();
@@ -81,10 +82,16 @@
 
     function updateMarkers() {
       var user = $scope.user;
-      $scope.map.markers = [{
-        location: user.locations[0],
-        icon: user.active.profilePicture
-      }];
+      var hasActiveUser = user && user.active;
+      var hasLocations = user && user.locations && user.locations.length > 0;
+      var markers = [];
+      if(hasActiveUser && hasLocations) {
+        markers.push({
+          location: user.locations[0],
+          icon: user.active.profilePicture
+        });
+      }
+      $scope.map.markers = markers;
     }
 
     function error(error) {

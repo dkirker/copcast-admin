@@ -11,37 +11,67 @@
   app.directive('timeline', function() {
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       templateUrl: 'app/history/timeline/timeline.html',
+
       scope: {
         locations: '='
       },
+
       link: function(scope, element, attrs, controllers) {
         scope.$watch('locations', function() {
           groupLocationsByHour();
         }, true);
 
+        scope.selectLocation = function selectLocation(location) {
+          console.log(location);
+        };
+
         function groupLocationsByHour() {
           var locationsByHour = {};
           var lastLabel;
-          angular.forEach(scope.locations, function(location, index) {
-            var userLocation = angular.copy(location);
+          var lastLocation;
+
+          angular.forEach(scope.locations, function(location) {
             var date = moment(location.date);
             var key = date.format('YYYY-MM-DDTHH');
             var label = date.format('MM/DD');
             if(!locationsByHour[key]) {
               locationsByHour[key] = {
-                label: (label === lastLabel ? '&nbsp;' : label),
+                label: (label === lastLabel ? undefined : label),
                 date: date,
-                locations: []
+                locations: [],
+                addLocation: addLocation
               };
             }
             lastLabel = label;
-            userLocation.date = date;
-            locationsByHour[key].locations.push(userLocation);
+            lastLocation = location;
+            locationsByHour[key].addLocation(location);
           });
           scope.locationsByHour = locationsByHour;
           console.log('locationsByHour', locationsByHour);
+        }
+
+        function addLocation(location) {
+          var locationCpy = angular.copy(location);
+          locationCpy.source = location;
+          locationCpy.date = moment(location.date);
+          if(!this.startLocation || locationCpy.date.isBefore(this.startLocation.date)) {
+            this.startLocation = locationCpy;
+            this.startLocationPosition = calculatePositionInPixels(locationCpy);
+          }
+          if(!this.endLocation || locationCpy.date.isAfter(this.endLocation.date)) {
+            this.endLocation = locationCpy;
+            this.endLocationPosition = calculatePositionInPixels(locationCpy);
+          }
+          this.locations.push(locationCpy);
+        }
+
+        function calculatePositionInPixels(location) {
+          var date = location.date;
+          var start = date.clone().startOf('hour');
+          var millis = date.clone().diff(start, 'milliseconds');
+          return 200 * millis / 3600000;
         }
       }
     };

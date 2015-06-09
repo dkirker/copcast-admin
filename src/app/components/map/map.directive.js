@@ -12,7 +12,7 @@
         markers: '=?'
       },
       link: function(scope, element, attrs) {
-        var DEFAULT_USER_ZOOM = 15;
+        var DEFAULT_USER_ZOOM = 18;
         var marker; // TODO: Add suport to multiple markers
         var heapmapLayer;
         var mapOptions = {
@@ -44,18 +44,27 @@
           marker && marker.setMap(null);
           if(scope.markers && scope.markers.length > 0) {
             var latLngPoints = transformToLatLngPoints([scope.markers[0].location]);
-            //createMarkers(latLngPoints);
+            createMarkers(latLngPoints);
           }
         }, true);
 
 
-        function createMarkers() {
+        function createMarkers(latLngPoints) {
           marker = new google.maps.Marker({
-            position: latLngPoints,
+            position: latLngPoints[0],
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: scope.markers[0].icon
+            icon: createMarkerImage()
           });
+          console.log('marker', marker);
+        }
+
+        function createMarkerImage() {
+          return {
+            url: scope.markers[0].icon,
+            size: new google.maps.Size(32, 32)
+
+          };
         }
 
         function isValidlocation(location) {
