@@ -21,7 +21,6 @@ angular.module('copcastAdminApp')
 
     $scope.upload = function (files) {
       $scope.hasProfilePicture = false;
-      $scope.pictureUrl = '';
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
@@ -36,7 +35,8 @@ angular.module('copcastAdminApp')
           }).success(function (data, status, headers, config) {
             console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
             $scope.hasProfilePicture = true;
-            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
+            $scope.pictureUrl = '';
+            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
           });
         }
       }
@@ -98,7 +98,7 @@ angular.module('copcastAdminApp')
         }
         if($scope.user.profilePicture){
           $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
+          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
         }
       });
     }).error(function(data) {

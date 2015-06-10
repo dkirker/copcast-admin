@@ -42,7 +42,7 @@ angular.module('copcastAdminApp')
         }
         if($scope.user.profilePicture){
           $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
+          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
         }
       });
     }).error(function(data) {

@@ -26,7 +26,7 @@
 
           <div ng-show="isOnline(currentUser) && canStream()">
             <div>
-              <div class="btn-group">
+              <div class="btn-group btn-group-sm">
                 <a class="btn btn-primary" ng-click="requestStream(currentUser)"
                    ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
               </div>

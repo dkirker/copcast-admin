@@ -98,7 +98,7 @@
 
     function generateProfilePictureAddress(serverUrl, user) {
       return user.profilePicture
-        ? serverUrl + '/pictures/' + user.id + '/original/show'
+        ? serverUrl + '/pictures/' + user.id + '/medium/show'
         : null;
     }
 })(window.angular, window.infoWindow, window.google, window.moment);
