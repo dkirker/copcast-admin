@@ -9,39 +9,39 @@
     flex:1;
   }
 
-  footer {
-    width: 100%;
-  }
-
   /*************** navbar ***************/
-  head {
-    height: 110px;
+  header {
+
+    &.navbar {
+      padding: 7px 20px 0 0;
+      color: #777777;
+
+      .form-inline {
+      }
+
+      .form-inline input,
+      .form-inline select {
+        color: #777777;
+        width: auto;
+      }
+
+      .form-inline label {
+        font-weight: 300;
+      }
+
+      .form-inline .divider {
+        margin-left: 30px;
+      }
+
+      .glyphicon {
+        vertical-align: middle;
+      }
+    }
   }
 
-  .navbar {
-    padding: 7px 20px 0 0;
-    color: #777777;
-
-    .form-inline {
-    }
-
-    .form-inline input,
-    .form-inline select {
-      color: #777777;
-      width: auto;
-    }
-
-    .form-inline label {
-      font-weight: 300;
-    }
-
-    .form-inline .divider {
-      margin-left: 30px;
-    }
-
-    .glyphicon {
-      vertical-align: middle;
-    }
+  footer {
+    height: 130px;
+    width: 100%;
   }
 
   .navbar-center {
@@ -51,7 +51,3 @@
     text-align: left;
   }
 }
-
-
-
-

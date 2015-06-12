@@ -12,7 +12,7 @@
         markers: '=?'
       },
       link: function(scope, element, attrs) {
-        var DEFAULT_USER_ZOOM = 15;
+        var DEFAULT_USER_ZOOM = 18;
         var marker; // TODO: Add suport to multiple markers
         var heapmapLayer;
         var mapOptions = {
@@ -31,31 +31,50 @@
         }, true);
 
 
-        scope.$watch('heatmapLocations', function() {
+        scope.$watchCollection('heatmapLocations', function() {
           var latLngPoints = transformToLatLngPoints(scope.heatmapLocations);
           disableHeatmap();
           if(latLngPoints.length > 0) {
             enableHeatmap(latLngPoints);
             setMapLocation(scope.heatmapLocations[0]);
           }
-        }, true);
+        });
 
-        scope.$watch('markers', function() {
+        scope.$watchCollection('markers', function() {
           marker && marker.setMap(null);
           if(scope.markers && scope.markers.length > 0) {
             var latLngPoints = transformToLatLngPoints([scope.markers[0].location]);
-            //createMarkers(latLngPoints);
+            createMarkers(latLngPoints);
+            fitBounds(latLngPoints);
           }
-        }, true);
+        });
 
-
-        function createMarkers() {
-          marker = new google.maps.Marker({
-            position: latLngPoints,
-            map: map,
-            animation: google.maps.Animation.DROP,
-            icon: scope.markers[0].icon
+        function fitBounds(latLngPoints) {
+          if(!latLngPoints || latLngPoints.length === 0) {
+            return;
+          }
+          var latLngBounds = new google.maps.LatLngBounds();
+          angular.forEach(latLngPoints, function(latLngPoint) {
+            latLngBounds.extend(latLngPoint);
           });
+          map.fitBounds(latLngBounds);
+        }
+
+        function createMarkers(latLngPoints) {
+          marker = new google.maps.Marker({
+            position: latLngPoints[0],
+            map: map,
+            shape: {coords: [15,15,16], type: "circle"},
+            icon: createMarkerImage()
+          });
+          console.log('marker', marker);
+        }
+
+        function createMarkerImage() {
+          return {
+            url: scope.markers[0].icon,
+            scaledSize: new google.maps.Size(32, 32)
+          };
         }
 
         function isValidlocation(location) {

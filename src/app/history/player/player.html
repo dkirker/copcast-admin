@@ -1,14 +1,14 @@
 <section class="history player window">
   <section class="users group">
-    <div class="avatar"><img src="{{user && user.profilePicture ? user.profilePicture : 'assets/images/anonuser.png'}}" class="img-circle active"></div>
+    <div class="avatar"><img src="{{user.profilePicture}}" class="img-circle active" title="{{user.name}}"></div>
   </section>
   <section class="user selected">
-    Selected user: <strong>{{user.name}}</strong>
+    <span ng-if="!user">Select an user or group</span>
+    <span ng-if="user">Selected user: <strong>{{user.name}}</strong></span>
   </section>
   <section class="scene">
-    <img src="/assets/images/policia.png">
+    <div class="no video" ng-if="!options">No video selected</div>
+    <div class="" ng-if="options"><jwplayer setup="options"></jwplayer></div>
   </section>
-  <section class="time">
-    <strong>21:07</strong>:04
-  </section>
+  <section class="time" ng-bind-html="time"></section>
 </section>
