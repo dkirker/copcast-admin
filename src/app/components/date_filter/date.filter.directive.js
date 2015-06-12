@@ -7,7 +7,7 @@
     var toDate;
     return {
       restrict: 'E',
-      templateUrl: 'app/history/data_filter/data.filter.html',
+      templateUrl: 'app/components/date_filter/date.filter.html',
       scope: {
         isPeriod: '=?',
         fromDate: '=',
@@ -15,6 +15,7 @@
       },
       link: function(scope, el, attrs, controllers) {
         var toDateEl = el.find('.to.date');
+
 
         scope.$watch('period', function() {
           if(scope.period && toDate) {

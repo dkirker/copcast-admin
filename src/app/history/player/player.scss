@@ -1,7 +1,6 @@
 .history.player.window {
   width: 400px;
   height: 403px;
-  margin: 0 0;
   margin-top: -403px;
   padding: 0 0;
   float: right;
@@ -39,6 +38,13 @@
 
   .scene {
     overflow-x: hidden;
+
+    .no.video {
+      height: 259px;
+      background-color: black;
+      color: white;
+      line-height: 259px;
+    }
   }
 
   .time {
