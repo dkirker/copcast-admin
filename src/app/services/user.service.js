@@ -68,6 +68,7 @@
         $http
           .get(endPoint)
           .success(function(data) {
+            console.log('service.getUserLocations', data);
             defer.resolve(data);
           })
           .error(function(data, status) {
