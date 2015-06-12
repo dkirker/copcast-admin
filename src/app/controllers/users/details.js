@@ -20,7 +20,6 @@ angular.module('copcastAdminApp')
     });
 
     $scope.upload = function (files) {
-      $scope.hasProfilePicture = false;
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
@@ -37,6 +36,7 @@ angular.module('copcastAdminApp')
             $scope.hasProfilePicture = true;
             $scope.pictureUrl = '';
             $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
+
           });
         }
       }
