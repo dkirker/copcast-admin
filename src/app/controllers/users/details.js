@@ -35,7 +35,7 @@ angular.module('copcastAdminApp')
             console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
             $scope.hasProfilePicture = true;
             $scope.pictureUrl = '';
-            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
+            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
 
           });
         }
