@@ -7,26 +7,12 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
-
-
-    // list of files / patterns to load in the browser
-    files: [
-      {pattern: 'src/app/**/*.js', included: false},
-      {pattern: 'src/test/**/*.js', included: false}
-    ],
-
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
       'karma-ng-html2js-preprocessor',
       'karma-spec-reporter'
     ],
-
-
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
@@ -48,8 +34,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-utils/ui-utils.js',
       'bower_components/angular-ui-map/ui-map.js',
       'bower_components/angular-http-auth/src/http-auth-interceptor.js',
-      'bower_components/angular-jwplayer/angular-jwplayer.js',
-      'bower_components/angularjs-toaster/toaster.js',
+      'bower_components/angular-notify/dist/angular-notify.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/moment/moment.js',

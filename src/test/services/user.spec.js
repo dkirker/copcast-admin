@@ -23,7 +23,7 @@ describe('Service: UserService', function () {
 
     it('should return the list of active users', function () {
       var expectedUsers = angular.copy(activeUsers);
-      expectedUsers[0].profilePicture = ServerUrl + '/pictures/' + expectedUsers[0].id + '/original/show';
+      expectedUsers[0].profilePicture = ServerUrl + '/pictures/' + expectedUsers[0].id + '/medium/show';
 
       userService
         .listUsers()
@@ -49,7 +49,7 @@ describe('Service: UserService', function () {
 
     it('should return the user info', function () {
       var expectedUser1 = angular.copy(usersBase[0]);
-      expectedUser1.profilePicture = ServerUrl + '/pictures/' + expectedUser1.id + '/original/show';
+      expectedUser1.profilePicture = ServerUrl + '/pictures/' + expectedUser1.id + '/medium/show';
       userService
         .getUser(1)
         .then(function(user) {

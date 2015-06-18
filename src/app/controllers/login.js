@@ -11,7 +11,7 @@ angular.module('copcastAdminApp')
 
   .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl) {
 
-    $scope.user = {username: "", password: ""};
+    $scope.user = {username: '', password: ''};
     $scope.email = '';
     $scope.selected = 'login';
 
@@ -74,6 +74,6 @@ angular.module('copcastAdminApp')
     function ($rootScope, $location, $cookieStore, $http) {
       $rootScope.globals = $cookieStore.get('globals');
       if ($rootScope.globals && $rootScope.globals.currentUser  ) {
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token;
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $rootScope.globals.currentUser.token;
       }
     }]);

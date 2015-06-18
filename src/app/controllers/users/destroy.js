@@ -16,7 +16,7 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'updateUser':
     $scope.deleteUser = function () {
 
-      if (confirm("Are you sure to delete " + $scope.user.username) == true) {
+      if (confirm('Are you sure to delete ' + $scope.user.username) === true) {
         // confirmation to delete
 
         $http.delete(ServerUrl + '/user_destroy/' + $scope.user.id, $scope.user).success(function (data) {
@@ -42,7 +42,7 @@ angular.module('copcastAdminApp')
         }
         if($scope.user.profilePicture){
           $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
+          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
         }
       });
     }).error(function(data) {

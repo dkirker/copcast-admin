@@ -133,21 +133,15 @@
           <div class="panel-body">
             <br>
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post">
-              <label class="control-label" ng-show="hasProfilePicture">Profile picture</label>
-              <div ng-show="hasProfilePicture">
-                <img ng-src="{{pictureUrl}}" height="250">
-              </div>
-              <div class="control-group" ng-cloak>
-                <input type="file" ng-file-select="onFileSelect($files)" >
-              </div>
-              <br><br>
-              <div class="control-group">
-                <div class="controls">
-                  <!-- user-detail.html: -->
-                  <a ng-click="cancel()" class="btn btn-default">cancel</a>
-                  <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
-                </div>
+            <div ngf-select ng-model="files" class="btn btn-primary"
+                 ngf-multiple="false" ngf-allow-dir="true"
+                 ngf-accept="'image/*'">Click here to send a new image</div>
+
+            <br/>
+
+            <div class="alert alert-info" role="alert">
+              Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!
+            </div>
               </div>
             </form>
 

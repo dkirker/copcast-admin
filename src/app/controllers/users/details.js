@@ -15,22 +15,33 @@ angular.module('copcastAdminApp')
     $scope.blnShowTab = [true, false, false] ;
 
     //load the picture
-    $scope.onFileSelect = function($files) {
-      $scope.hasProfilePicture = false;
-      $scope.pictureUrl = '';
-      $scope.upload = $upload.upload({
-        url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
-        method: 'POST',
-        data: {userPicture: $scope.userPicture},
-        file: $files[0]
-      }).success(function(data, status, headers, config) {
-        $scope.hasProfilePicture = true;
-        $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
-      }).error(function(data, status){
-        console.log('error with data=['+data+']');
-        $scope.hasProfilePicture = false;
-      });
+    $scope.$watch('files', function () {
+      $scope.upload($scope.files);
+    });
+
+    $scope.upload = function (files) {
+      if (files && files.length) {
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i];
+          Upload.upload({
+            url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
+            method: 'POST',
+            data: {userPicture: $scope.userPicture},
+            file: files[0]
+          }).progress(function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+          }).success(function (data, status, headers, config) {
+            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+            $scope.hasProfilePicture = true;
+            $scope.pictureUrl = '';
+            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
+
+          });
+        }
+      }
     };
+
 
     //callback to change password
     $scope.changePassword = function () {
@@ -87,7 +98,7 @@ angular.module('copcastAdminApp')
         }
         if($scope.user.profilePicture){
           $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/original/show';
+          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
         }
       });
     }).error(function(data) {
