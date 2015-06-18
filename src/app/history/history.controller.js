@@ -8,7 +8,6 @@
     initialize();
 
     $scope.userChanged = function userChanged(selectedUser) {
-      clearFilter();
       userService
         .getUser(selectedUser.id)
         .then(updateUser, error);
@@ -72,16 +71,10 @@
 
     function updateUser(user) {
       $scope.user.active = user;
-      $scope.filter = {};
       $scope.map.location = {
         lat: user.lastLat,
         lng: user.lastLng
       };
-    }
-
-
-    function clearFilter() {
-      $scope.filter = {};
     }
 
     function loadLocations() {
