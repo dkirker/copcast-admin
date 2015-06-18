@@ -151,8 +151,8 @@ angular.module('copcastAdminApp')
           return localId;
         },
 
-        peerInit: function(remoteId, diconnectListener) {
-          var peer = peerDatabase[remoteId] || addPeer(remoteId, diconnectListener);
+        peerInit: function(remoteId, disconnectListener) {
+          var peer = peerDatabase[remoteId] || addPeer(remoteId, disconnectListener);
           send('init', remoteId, null);
         },
 

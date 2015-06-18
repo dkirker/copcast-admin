@@ -1,0 +1,57 @@
+#modal-login{
+  text-align: center;
+
+  input{
+    background-color: #2e3e52;
+    color: #FFFFFF;
+    margin-bottom: 3px;
+    height: 35px;
+    border: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    width: 180px;
+    text-align: center;
+  }
+  .modal-content{
+    color: #ffffff;
+    width: 400px;
+    background-color: #182a40;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  }
+  button{
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    width: 180px;
+  }
+  a{
+    color: #FFFFFF;
+  }
+  img{
+    margin-top: 10px;
+  }
+  h2{
+    margin-top: 5px;
+  }
+  form{
+    width: 200px;
+    text-align: right;
+    position: relative;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+  }
+  .errorMessage {
+    color: #ec1c24;
+    font-weight: 300;
+    width: 200px;
+  }
+  .emailMessage{
+    color: green;
+    font-weight: 300;
+  }
+}
+
+

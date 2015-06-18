@@ -288,8 +288,9 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   function showModal(user){
     console.log('showModal with user=['+user+']');
     $scope.activeStreams[user.id].modal =  $modal.open({
-      templateUrl: 'app/views/player.html',
+      templateUrl: 'app/videoStream/player.html',
       controller: 'ModalVideoCtrl',
+      windowTemplateUrl: 'app/videoStream/template.html',
       backdrop: false,
       scope: $scope,
       peerManager: peerManager,
