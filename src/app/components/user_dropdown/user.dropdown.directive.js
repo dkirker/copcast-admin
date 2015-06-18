@@ -13,9 +13,10 @@
         onChangeUser: '&'
       },
       link: function(scope, element, attrs) {
-        scope.selectUser = function selectUser(user) {
-          scope.selectedUser = user;
-          scope.onChangeUser()(user);
+        scope.change = function change() {
+          var userObj = JSON.parse(scope.user);
+          scope.selectedUser = userObj;
+          scope.onChangeUser()(userObj);
         };
       }
     };
