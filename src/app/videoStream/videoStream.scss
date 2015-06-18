@@ -1,4 +1,4 @@
-#modal-stream {
+.modal-stream {
   text-align: center;
   .modal-content {
     color: #ffffff;
@@ -12,5 +12,8 @@
     -webkit-appearance: none;
     -webkit-border-radius: 0;
     width: 60px;
+  }
+  h3 {
+    margin-top: 5px !important;
   }
 }

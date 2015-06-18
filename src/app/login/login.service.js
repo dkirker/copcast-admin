@@ -19,7 +19,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
         templateUrl : 'app/login/login.html',
         controller : 'LoginCtrl',
         backdrop : 'static',
-        windowTemplateUrl: 'app/login/template.html'
+        windowClass: 'modal-login'
       });
     }
   };
