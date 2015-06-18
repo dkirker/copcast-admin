@@ -1,21 +1,9 @@
 <section class="nav timeline">
   <div class="container">
-    <div class="start segment">
-      <div class="line"><hr></div>
+    <div class="main line"></div>
+    <div class="selected line" style="left: {{selectedPosition}}px;">
+      <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
     </div>
-    <div class="segment" ng-repeat-start="hourLocations in locationsByHour">
-      <div class="date" ng-bind-html="hourLocations.label" ng-if="hourLocations.label"></div>
-      <div class="line"><hr></div>
-      <div class="active line" ng-if="hourLocations.locations">
-        <div style="left: {{hourLocations.startLocationPosition}}px; width: {{hourLocations.endLocationPosition - hourLocations.startLocationPosition | number:0}}px">
-          <span class="location" ng-repeat="location in hourLocations.locations" ng-click="selectLocation(location)"></span>
-        </div>
-      </div>
-      <div class="time">{{hourLocations.date.clone().add(2, 'h').hour()}}</div>
-    </div>
-    <div class="end segment" ng-repeat-end ng-if="$last">
-      <div class="line"><hr></div>
-      <div class="time">{{hourLocations.date.clone().add(3, 'h').hour()}}</div>
-    </div>
+    <timeline-segments/>
   </div>
 </section>

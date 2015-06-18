@@ -1,26 +1,64 @@
-$segment-width: 200px;
-$active-line-color: #11990A;
+$timeline-height: 130px;
+
+$segment-width: 180px;
+
 $date-color: #11990A;
+$active-line-color: #11990A;
+$line-color: #DDD;
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
 
 .nav {
   &.timeline {
     margin-right: 400px;
 
     & > .container {
-      height: 130px;
+      height: $timeline-height;
       width: 100%;
       position: relative;
-      padding: 50px 0 0 0;
+      padding: 0 0;
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
 
+      & > .main.line {
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        top: 58px;
+        background-color: $line-color;
+      }
 
-      & > .segment {
+      & > .selected.line {
+        position:absolute;
+        left: -10px;
+        height: 100%;
+        width: 2px;
+        background-color: #0288d1;
+        z-index: 1;
+        @include transition(all 0.5s ease-in-out);
+
+        & > span {
+          font-size: 18px;
+          color: #0288d1;
+          position: relative;
+          left: -8px;
+          top: -5px;
+        }
+      }
+
+
+      .segment {
         height: 50px;
         width: $segment-width;
         display: inline-block;
-        margin-left: -4px;
+        margin: 50px 0 0 -4px;
 
         &.start {
           border: none;
@@ -38,50 +76,62 @@ $date-color: #11990A;
           width: $segment-width;
           padding-top: 8px;
           position: absolute;
-          border-left: 2px solid #ddd;
+          border-left: 2px solid $line-color;
 
           hr {
             margin: 0 0;
-            border-top: 2px solid #ddd;
+            border-top: 2px solid $line-color;
           }
         }
 
-        & > .active.line {
+        & > .activities {
           width: initial;
           border: none;
           position: absolute;
-          z-index: 1;
+          padding-top: 8px;
 
-          & > div {
+          & > .line {
             border-top: 2px solid $active-line-color;
             position: relative;
+            padding-left: 3px;
+            z-index: 1;
+            @include transition(all 0.5s ease-in-out);
 
             &::before,
             &::after {
               position: absolute;
               content: ' \25CF';
-              font-size: 22px;
+              font-size: 18px;
               color: $active-line-color;
-              top: -19px;
+              top: -15px;
             }
 
             &::before {
-              left: -6px;
-              cursor: pointer;
+              left: -5px;
             }
 
             &::after {
-              right: -7px;
-              cursor: pointer;
+              right: -6px;
             }
+          }
 
-            .location {
+          & > .events {
+            position: relative;
+            z-index: 2;
+
+            & > .event {
               display: inline-block;
-              width: 1px;
-              height: 9px;
-              top: -12px;
+              width: 3px;
+              height: 14px;
+              top: -9px;
               position: relative;
               cursor: pointer;
+              padding-top: 6px;
+
+              & > div {
+                height: 2px;
+                background-color: green;
+              }
             }
           }
         }

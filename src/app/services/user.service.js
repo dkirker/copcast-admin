@@ -100,6 +100,6 @@
     function generateProfilePictureAddress(serverUrl, user) {
       return user.profilePicture
         ? serverUrl + '/pictures/' + user.id + '/small/show'
-        : null;
+        : '/assets/images/anonuser.png';
     }
 })(window.angular, window.infoWindow, window.google, window.moment);

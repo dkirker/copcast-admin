@@ -31,29 +31,40 @@
         }, true);
 
 
-        scope.$watch('heatmapLocations', function() {
+        scope.$watchCollection('heatmapLocations', function() {
           var latLngPoints = transformToLatLngPoints(scope.heatmapLocations);
           disableHeatmap();
           if(latLngPoints.length > 0) {
             enableHeatmap(latLngPoints);
             setMapLocation(scope.heatmapLocations[0]);
           }
-        }, true);
+        });
 
-        scope.$watch('markers', function() {
+        scope.$watchCollection('markers', function() {
           marker && marker.setMap(null);
           if(scope.markers && scope.markers.length > 0) {
             var latLngPoints = transformToLatLngPoints([scope.markers[0].location]);
             createMarkers(latLngPoints);
+            fitBounds(latLngPoints);
           }
-        }, true);
+        });
 
+        function fitBounds(latLngPoints) {
+          if(!latLngPoints || latLngPoints.length === 0) {
+            return;
+          }
+          var latLngBounds = new google.maps.LatLngBounds();
+          angular.forEach(latLngPoints, function(latLngPoint) {
+            latLngBounds.extend(latLngPoint);
+          });
+          map.fitBounds(latLngBounds);
+        }
 
         function createMarkers(latLngPoints) {
           marker = new google.maps.Marker({
             position: latLngPoints[0],
             map: map,
-            animation: google.maps.Animation.DROP,
+            shape: {coords: [15,15,16], type: "circle"},
             icon: createMarkerImage()
           });
           console.log('marker', marker);
@@ -62,8 +73,7 @@
         function createMarkerImage() {
           return {
             url: scope.markers[0].icon,
-            size: new google.maps.Size(32, 32)
-
+            scaledSize: new google.maps.Size(32, 32)
           };
         }
 
