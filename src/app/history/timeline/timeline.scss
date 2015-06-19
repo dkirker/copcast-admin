@@ -1,10 +1,10 @@
 $timeline-height: 130px;
-
 $segment-width: 180px;
 
+$background-color: #F2F2F2;
 $date-color: #11990A;
-$active-line-color: #11990A;
-$line-color: #DDD;
+$active-line-color: #109809;
+$line-color: #d7d7d7;
 
 @mixin transition($transition) {
   -webkit-transition: $transition;
@@ -16,6 +16,7 @@ $line-color: #DDD;
 
 .nav {
   &.timeline {
+    background-color: $background-color;
     margin-right: 400px;
 
     & > .container {
@@ -26,6 +27,7 @@ $line-color: #DDD;
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
+      text-align: left;
 
       & > .main.line {
         position: absolute;
@@ -88,10 +90,10 @@ $line-color: #DDD;
           width: initial;
           border: none;
           position: absolute;
-          padding-top: 8px;
+          padding-top: 7px;
 
           & > .line {
-            border-top: 2px solid $active-line-color;
+            border-top: 4px solid $active-line-color;
             position: relative;
             padding-left: 3px;
             z-index: 1;
@@ -101,9 +103,9 @@ $line-color: #DDD;
             &::after {
               position: absolute;
               content: ' \25CF';
-              font-size: 18px;
+              font-size: 25px;
               color: $active-line-color;
-              top: -15px;
+              top: -20px;
             }
 
             &::before {
@@ -118,19 +120,18 @@ $line-color: #DDD;
           & > .events {
             position: relative;
             z-index: 2;
+            height: 14px;
+            top: -8px;
 
             & > .event {
               display: inline-block;
               width: 3px;
               height: 14px;
-              top: -9px;
+              top: -6px;
               position: relative;
               cursor: pointer;
-              padding-top: 6px;
 
               & > div {
-                height: 2px;
-                background-color: green;
               }
             }
           }
@@ -144,7 +145,7 @@ $line-color: #DDD;
         }
 
         & > .date {
-          height: 16px;
+          line-height: 16px;
           margin-top: -15px;
           margin-left: -20px;
           color: $date-color;
@@ -152,7 +153,7 @@ $line-color: #DDD;
         }
 
         & > .time {
-          height: 20px;
+          line-height: 20px;
           margin-top: 16px;
           margin-left: -19px;
           font-size: 1.3em;
