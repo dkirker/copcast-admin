@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload) {
+  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload, gettext) {
     var $upload = Upload;
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
@@ -47,15 +47,15 @@ angular.module('copcastAdminApp')
     $scope.changePassword = function () {
       $scope.passwordMessage = '';
       if(!$scope.currentPassword){
-        $scope.passwordMessage = 'Current password filed is empty.';
+        $scope.passwordMessage = gettext('Current password filed is empty.');
         return;
       }
       if(!$scope.newPassword || !$scope.passwordConfirmation){
-        $scope.passwordMessage = 'Password or password confirmation are empty.';
+        $scope.passwordMessage = gettext('Password or password confirmation are empty.');
         return;
       }
       if($scope.newPassword !== $scope.passwordConfirmation){
-        $scope.passwordMessage = 'Wrong password combination';
+        $scope.passwordMessage = gettext('Wrong password combination');
         return;
       }
       $http.post(ServerUrl + '/users/' + $scope.user.id+'/change-password',

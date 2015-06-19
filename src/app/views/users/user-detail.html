@@ -17,19 +17,19 @@
               <li class="active">
                 <a ng-click="clickTab(1)" >
                   <i class="glyphicon glyphicon-user"></i>
-                  Account Settings
+                  <translate>Account Settings</translate>
                   </a>
               </li>
             <li>
               <a ng-click="clickTab(2)">
                 <i class="glyphicon glyphicon-log-in"></i>
-                Change Password
+                <translate>Change Password</translate>
               </a>
             </li>
             <li>
               <a ng-click="clickTab(3)">
                 <i class="glyphicon glyphicon-camera"></i>
-                Change Picture
+                <translate>Change Picture</translate>
               </a>
             </li>
           </ul>
@@ -40,7 +40,7 @@
         <!--Body content-->
 
         <div class="panel panel-primary" ng-show="blnShowTab[0]">
-          <div class="panel-heading">Account Settings</div>
+          <div class="panel-heading" translate>Account Settings</div>
           <div class="panel-body">
             <br>
             <form novalidate="novalidate" class="form-horizontal">
@@ -50,32 +50,32 @@
                 </li>
               </alert>
               <div class="control-group">
-                <label class="control-label" for="inputName">Name:</label>
+                <label class="control-label" for="inputName" translate>Name:</label>
                 <div class="controls">
                   <input type="text" id="inputName" ng-model="user.name"/>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputName">Group:</label>
+                <label class="control-label" for="inputName" translate>Group:</label>
                 <div class="controls">
                   <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
                   </select>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputUsername">Username:</label>
+                <label class="control-label" for="inputUsername" translate>Username:</label>
                 <div class="controls">
                   <input type="text" id="inputUsername" ng-model="user.username"/>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputEmail">Email:</label>
+                <label class="control-label" for="inputEmail" translate>Email:</label>
                 <div class="controls">
                   <input type="text" id="inputEmail" ng-model="user.email"/>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputIsAdmin">Is Admin?</label>
+                <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
                 <div class="controls">
                   <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
                 </div>
@@ -84,8 +84,8 @@
               <div class="control-group">
                 <div class="controls">
                   <!-- user-detail.html: -->
-                  <a ng-click="cancel()" class="btn btn-default">cancel</a>
-                  <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+                  <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+                  <a ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</a>
                 </div>
               </div>
             </form>
@@ -93,21 +93,21 @@
           </div>
 
       <!-- Tab Password -->
-        <div class="panel panel-primary animate-show" id="pass" ng-show="blnShowTab[1]">
-          <div class="panel-heading">Change Password</div>
+        <div class="panel panel-primary animate-show" id="pass1" ng-show="blnShowTab[1]">
+          <div class="panel-heading" translate>Change Password</div>
           <div class="panel-body">
             <br>
 
             <form novalidate="novalidate" class="form-horizontal">
               <div class="control-group" ng-cloak>
-                <label class="control-label" for="currentpassword">Current password</label>
+                <label class="control-label" for="currentpassword" translate>Current password</label>
                 <div class="controlsPassword">
-                  <input type="password" id="currentpassword" ng-model="currentPassword" placeholder="Current password"/></br>
+                  <input type="password" id="currentpassword" ng-model="currentPassword" placeholder="{{'Current password' | translate}}"/></br>
                 </div>
-                <label class="control-label" for="currentpassword">New password</label>
+                <label class="control-label" for="currentpassword" translate>New password</label>
                 <div class="controlsPassword">
-                  <input type="password" id="newpassword" ng-model="newPassword" placeholder="New password"/></br>
-                  <input type="password" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="Repeat your password"/>
+                  <input type="password" id="newpassword" ng-model="newPassword" placeholder="{{'New password'| translate}}"/></br>
+                  <input type="password" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="{{'Repeat your password'| translate}}"/>
                 </div>
                 <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span></br>
 
@@ -116,8 +116,8 @@
                 <div class="control-group">
                   <div class="controls">
                     <!-- user-detail.html: -->
-                    <a ng-click="cancel()" class="btn btn-default">cancel</a>
-                    <a ng-click="changePassword()" class="btn btn-small btn-primary">update user</a>
+                    <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+                    <a ng-click="changePassword()" class="btn btn-small btn-primary" translate>update user</a>
                   </div>
                 </div>
 
@@ -129,17 +129,17 @@
 
         <!-- Change Picture -->
         <div class="panel panel-primary" id="pass" ng-show="blnShowTab[2]">
-          <div class="panel-heading">Change Picture</div>
+          <div class="panel-heading" translate>Change Picture</div>
           <div class="panel-body">
             <br>
 
             <div ngf-select ng-model="files" class="btn btn-primary"
                  ngf-multiple="false" ngf-allow-dir="true"
-                 ngf-accept="'image/*'">Click here to send a new image</div>
+                 ngf-accept="'image/*'" translate>Click here to send a new image</div>
 
             <br/>
 
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-info" role="alert" translate>
               Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!
             </div>
               </div>

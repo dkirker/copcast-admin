@@ -1,5 +1,5 @@
 <div class="containerUser">
-    <h1>Are you sure to delete this user?</h1>
+    <h1 translate>Are you sure to delete this user?</h1>
     <div class="col-md-4">
         <form novalidate="novalidate" class="form-horizontal">
             <alert ng-show="serverMessage">
@@ -8,32 +8,32 @@
                 </li>
             </alert>
           <div class="control-group">
-            <label class="control-label" for="inputName">Name:</label>
+            <label class="control-label" for="inputName" translate>Name:</label>
             <div class="controls">
               {{user.name}}
             </div>
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="inputName">Group:</label>
+            <label class="control-label" for="inputName" translate>Group:</label>
             <div class="controls">
               {{user.groupId}}
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputUsername">Username:</label>
+            <label class="control-label" for="inputUsername" translate>Username:</label>
             <div class="controls">
               {{user.username}}
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputEmail">Email:</label>
+            <label class="control-label" for="inputEmail" translate>Email:</label>
             <div class="controls">
               {{user.email}}
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="inputIsAdmin">Is Admin?</label>
+            <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
             <div class="controls">
               {{user.isAdmin}}
             </div>
@@ -42,8 +42,8 @@
             <div class="control-group">
                 <div class="controls">
                     <!-- user-detail.html: -->
-                    <a ng-click="cancel()" class="btn btn-default">cancel</a>
-                    <a ng-click="deleteUser()" class="btn btn-small btn-danger">delete user</a>
+                    <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+                    <a ng-click="deleteUser()" class="btn btn-small btn-danger" translate>delete user</a>
                 </div>
             </div>
         </form>
@@ -51,7 +51,7 @@
 
     <div class="col-md-4">
 
-            <label class="control-label" ng-show="hasProfilePicture">Profile picture</label>
+            <label class="control-label" ng-show="hasProfilePicture" translate>Profile picture</label>
             <div ng-show="hasProfilePicture">
                 <img ng-src="{{pictureUrl}}" height="250">
             </div>
