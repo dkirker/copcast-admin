@@ -11,7 +11,7 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, $http, socket,loginService, ServerUrl, notify, $window, $rootScope, mapService, $location, $timeout) {
+app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService, userService, streamService, $location, $timeout) {
 
   $scope.windowHeight = window.innerHeight;
   $scope.windowWidth = window.innerWidth;
@@ -131,7 +131,8 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
       if ( ! user ) {
         return console.log('Unable to find user for streaming');
       }
-      $http.get(ServerUrl + '/users/me').success(function(data) {
+      userService.getMyData().
+      then(function(data){
         if(data.length === 0){
           return;
         }
@@ -141,6 +142,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
         }
       });
     });
+
     socket.on('streaming:stop', function(data) {
       stopStream($scope.activeUsers[data.id]);
       notify.closeAll();
@@ -204,11 +206,10 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
     if ($scope.activeStreams[user.id]){
       showModal($scope.activeUsers[user.id]);
     } else {
-      $http.post(ServerUrl + '/streams/' + user.id + '/start',{})
-        .success(function (data) {
+      streamService.startStreaming(user.id)
+        .then(function (data) {
           $scope.streamButtonText = 'Waiting for users response...';
-        })
-        .error(function (data) {
+        }, function (data) {
           $scope.streamButtonText = data.message;
         });
     }
@@ -226,8 +227,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   };
 
   $scope.refreshUsers = function() {
-    $http.get(ServerUrl + '/users/online')
-      .success(function(data) {
+    userService.getOnlineUsers().then(function(data){
         if(data.length === 0){
           $scope.refreshMap();
           return;
@@ -240,32 +240,32 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
         });
         $scope.myMap.fitBounds(bounds);
 
-        $http.get(ServerUrl + '/users/streaming')
-          .success(function(data) {
-            angular.forEach(data, function(user) {
-              showStream($scope.activeUsers[user.id]);
-            });
+        userService.getStreamingUsers().then(function(data){
+          angular.forEach(data, function(user) {
+            showStream($scope.activeUsers[user.id]);
           });
+        });
       });
   };
 
   $scope.refreshMap = function() {
-    $http.get(ServerUrl + '/users/me').success(function(data) {
-      if(data.length === 0){
-        return;
-      }
-      if(!data.lastPos || isNaN(data.lastPos.lat) || isNaN(data.lastPos.lng)){
-        return;
-      }else{
-        changeMapPos(data.lastPos.lat, data.lastPos.lng);
-        return;
-      }
-      if(!data.group.lat || !data.group.lng ||
-        isNaN(data.group.lat) || isNaN(data.group.lat)){
-        return;
-      }else{
-        changeMapPos(data.group.lat, data.group.lng);
-      }
+    userService.getMyData().
+      then(function(data){
+        if(data.length === 0){
+          return;
+        }
+        if(!data.lastPos || isNaN(data.lastPos.lat) || isNaN(data.lastPos.lng)){
+          return;
+        }else{
+          changeMapPos(data.lastPos.lat, data.lastPos.lng);
+          return;
+        }
+        if(!data.group.lat || !data.group.lng ||
+          isNaN(data.group.lat) || isNaN(data.group.lat)){
+          return;
+        }else{
+          changeMapPos(data.group.lat, data.group.lng);
+        }
     });
   };
 
@@ -288,8 +288,9 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $compile, $modal, 
   function showModal(user){
     console.log('showModal with user=['+user+']');
     $scope.activeStreams[user.id].modal =  $modal.open({
-      templateUrl: 'app/views/player.html',
+      templateUrl: 'app/videoStream/player.html',
       controller: 'ModalVideoCtrl',
+      windowClass: 'modal-stream',
       backdrop: false,
       scope: $scope,
       peerManager: peerManager,

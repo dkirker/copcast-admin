@@ -51,7 +51,7 @@ angular.module('copcastAdminApp')
         loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
-        $scope.errorMessage = 'Wrong login/pass combination';
+        $scope.errorMessage = 'The email and password you entered don\'t match.';
         $scope.emailMessage = '';
       });
     };

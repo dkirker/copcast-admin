@@ -94,6 +94,41 @@
         return defer.promise;
       };
 
+      service.getMyData = function getMyData(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/me').success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+        return defer.promise;
+      };
+
+      service.getOnlineUsers = function getOnlineUsers(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/online')
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
+      service.getStreamingUsers = function getStreamingUsers(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/streaming')
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
       return service;
     });
 

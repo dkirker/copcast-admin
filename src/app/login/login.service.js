@@ -16,9 +16,10 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   loginService.show = function() {
     if ( !modal ) {
       modal = $modal.open({
-        templateUrl : 'app/views/login.html',
+        templateUrl : 'app/login/login.html',
         controller : 'LoginCtrl',
-        backdrop : 'static'
+        backdrop : 'static',
+        windowClass: 'modal-login'
       });
     }
   };
