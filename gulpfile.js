@@ -40,19 +40,19 @@ gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
+
 gulp.task('pot', function () {
-  return gulp.src(['src/app/views/**/*.html', 'src/index*.html'])
-    .pipe(gettext.extract('template.pot', {
+  return gulp.src(['**/*.html'])
+    .pipe(gettext.extract('template.po', {
       // options to pass to angular-gettext-tools...
     }))
-    .pipe(gulp.dest('po/'));
+    .pipe(gulp.dest('src/po/'));
 });
 
 gulp.task('translations', function () {
-  return gulp.src('po/**/*.po')
+  return gulp.src('src/po/**/*.po')
     .pipe(gettext.compile({
       // options to pass to angular-gettext-tools...
-      format: 'json'
     }))
-    .pipe(gulp.dest('dist/translations/'));
+    .pipe(gulp.dest('src/translations/'));
 });
