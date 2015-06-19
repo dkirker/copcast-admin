@@ -52,7 +52,7 @@ gulp.task('pot', function () {
 gulp.task('translations', function () {
   return gulp.src('src/po/**/*.po')
     .pipe(gettext.compile({
-      // options to pass to angular-gettext-tools...
+      // options to pass to angular-gettext-tools..
     }))
     .pipe(gulp.dest('src/translations/'));
 });
