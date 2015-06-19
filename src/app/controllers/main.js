@@ -7,11 +7,11 @@
  * # MainCtrl
  * Controller of the copcastAdminApp
  */
-angular.module('copcastAdminApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+
+var app = angular.module('copcastAdminApp');
+
+app.controller('TranslateController', function($scope, gettextCatalog ) {
+
+  gettextCatalog.currentLanguage = 'pt_BR';
+
+});
