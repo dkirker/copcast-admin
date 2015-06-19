@@ -43,18 +43,18 @@
               </div>
               <div class="collapse navbar-collapse" id="js-navbar-collapse">
                 <ul class="nav navbar-nav ">
-                  <li ng-class="{active:isActive('/')}"><a href="#/">Realtime</a></li>
-                  <li ng-class="{active:isActive('/history')}"><a ng-href="#/history">History</a></li>
+                  <li ng-class="{active:isActive('/')}"><a href="#/" translate>Realtime</a></li>
+                  <li ng-class="{active:isActive('/history')}"><a ng-href="#/history" translate>History</a></li>
                   <li class="dropdown">
-                    <a href="javascript:" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                    <a href="javascript:" data-toggle="dropdown" class="dropdown-toggle" translate>Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li ng-class="{active:isActive('/user-list')}"><a ng-href="#/user-list">Users</a></li>
-                      <li ng-class="{active:isActive('/group-list')}"><a ng-href="#/group-list">Groups</a></li>
+                      <li ng-class="{active:isActive('/user-list')}"><a ng-href="#/user-list" translate>Users</a></li>
+                      <li ng-class="{active:isActive('/group-list')}"><a ng-href="#/group-list" translate>Groups</a></li>
                     </ul>
                   </li>
                 </ul>
-                <p class="navbar-text navbar-right">Signed in as <user-name></user-name>
-                  &nbsp<a ng-href="#/logout">Logout</a>
+                <p class="navbar-text navbar-right" translate>Signed in as <user-name></user-name>
+                  &nbsp<a ng-href="#/logout" translate>Logout</a>
                 </p>
               </div>
             </div>
