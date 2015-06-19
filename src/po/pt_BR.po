@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.8.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
+
+#: src/index.html:50
+msgid "Admin <b class=\"caret\"></b>"
+msgstr "Admin<b class=“caret”></b>"
+
+#: src/index.html:53
+msgid "Groups"
+msgstr "Grupos"
+
+#: src/index.html:48
+msgid "History"
+msgstr "Histórico"
+
+#: src/index.html:58
+msgid "Logout"
+msgstr "Sair"
+
+#: src/index.html:47
+msgid "Realtime"
+msgstr "Tempo real"
+
+#: src/index.html:57
+msgid ""
+"Signed in as <user-name></user-name>\n"
+"                  &nbsp<a ng-href=\"#/logout\" translate=\"\">Logout</a>"
+msgstr "Logado como <user-name></user-name> & nbsp<a ng-href=“#/logout” translate=“”>Sair</a>"
+
+#: src/index.html:52
+msgid "Users"
+msgstr "Usuários"

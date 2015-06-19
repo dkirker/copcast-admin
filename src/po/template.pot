@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: src/index.html:50
+msgid "Admin <b class=\"caret\"></b>"
+msgstr ""
+
+#: src/index.html:53
+msgid "Groups"
+msgstr ""
+
+#: src/index.html:48
+msgid "History"
+msgstr ""
+
+#: src/index.html:58
+msgid "Logout"
+msgstr ""
+
+#: src/index.html:47
+msgid "Realtime"
+msgstr ""
+
+#: src/index.html:57
+msgid ""
+"Signed in as <user-name></user-name>\n"
+"                  &nbsp<a ng-href=\"#/logout\" translate=\"\">Logout</a>"
+msgstr ""
+
+#: src/index.html:52
+msgid "Users"
+msgstr ""
