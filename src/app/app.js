@@ -29,10 +29,6 @@ angular
         templateUrl: 'app/views/realtime.html',
         controller: 'RealtimeCtrl'
       })
-      .when('/main', {
-        templateUrl: 'app/views/main.html',
-        controller: 'MainCtrl'
-      })
       .when('/logout', {
         controller: 'LogoutCtrl',
         template: ''
@@ -87,8 +83,9 @@ angular
       return viewLocation === $location.path();
     };
 
-    gettextCatalog.setCurrentLanguage('pt_BR');
-    gettextCatalog.debug = true;
+    //gettextCatalog.setCurrentLanguage('pt_BR');
+    //gettextCatalog.debug = true;
+
   });
 
 //insert the constant value ServerUrl
