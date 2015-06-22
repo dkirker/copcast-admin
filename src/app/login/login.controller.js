@@ -14,6 +14,9 @@ angular.module('copcastAdminApp')
     $scope.user = {username: '', password: ''};
     $scope.email = '';
     $scope.selected = 'login';
+    $scope.$on("401_error", function(event, mass) {
+      $scope.errorMessage = 'The email and password you entered don\'t match.';
+    });
 
     $scope.forgotPass = function(){
       $scope.selected = 'forgotPass';
