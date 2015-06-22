@@ -1,5 +1,5 @@
 <div class="container-crud">
-  <h1>Group detail</h1>
+  <h1 translate>Group detail</h1>
   <hr/>
   <form novalidate="novalidate" class="form-horizontal">
     <alert ng-show="serverMessage">
@@ -8,28 +8,28 @@
       </li>
     </alert>
     <div class="control-group">
-      <label class="control-label" for="inputName">Name:</label>
+      <label class="control-label" for="inputName" translate>Name:</label>
       <div class="controls">
         <input type="text" id="inputName" ng-model="group.name"/>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="inputLatitude">Latitude:</label>
+      <label class="control-label" for="inputLatitude" translate>Latitude:</label>
       <div class="controls">
         <input type="number" id="inputLatitude" ng-model="group.lat" ng-change="changeMapCenter()"/>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="inputLongitude">Longitude:</label>
+      <label class="control-label" for="inputLongitude" translate>Longitude:</label>
       <div class="controls">
         <input type="number" id="inputLongitude" ng-model="group.lng" ng-change="changeMapCenter()"/>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="inputIsAdmin">Is Admin?</label>
+      <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
       <div class="controls">
         <input type="checkbox" id="inputIsAdmin" ng-model="group.isAdmin"/>
       </div>
@@ -38,8 +38,8 @@
     <div class="control-group">
       <div class="controls">
         <!-- group-detail.html: -->
-        <a ng-click="cancel()" class="btn btn-default">cancel</a>
-        <a ng-click="updateGroup()" class="btn btn-small btn-primary">update group</a>
+        <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+        <a ng-click="updateGroup()" class="btn btn-small btn-primary" translate>update group</a>
       </div>
     </div>
   </form>

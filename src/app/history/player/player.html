@@ -3,11 +3,11 @@
     <div class="avatar"><img src="{{user.profilePicture}}" class="img-circle active" title="{{user.name}}"></div>
   </section>
   <section class="user selected">
-    <span ng-if="!user">Select an user or group</span>
-    <span ng-if="user">Selected user: <strong>{{user.name}}</strong></span>
+    <span ng-if="!user" translate>Select an user or group</span>
+    <span ng-if="user"><translate>Selected user: </translate><strong>{{user.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!options">No video selected</div>
+    <div class="no video" ng-if="!options" translate>No video selected</div>
     <div class="" ng-if="options"><jwplayer setup="options"></jwplayer></div>
   </section>
   <section class="time" ng-bind-html="time"></section>
