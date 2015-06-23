@@ -16,7 +16,7 @@
 
       scope: {
         locations: '=',
-        selectedLocations: '='
+        selectedEvent: '='
       },
 
       link: function(scope, element, attrs, controllers) {
@@ -24,17 +24,6 @@
           scope.selectedPosition = -10;
           groupLocationsByHour();
         }, true);
-
-        scope.moveSelectedLine = function moveSelectedLine($event) {
-          scope.selectedPosition = $event.target.getBoundingClientRect().left - 1;
-        }
-
-        scope.selectMinute = function selectMinute(minute) {
-          if(minute.locations && minute.locations.length > 0) {
-            scope.selectedLocations = [ minute.locations[0] ];
-          }
-          console.log('Minute selected', minute, scope.selectedLocations);
-        };
 
         function groupLocationsByHour() {
           var locationsByHour = {};

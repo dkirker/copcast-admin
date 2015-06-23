@@ -41,7 +41,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
       }
     };
     //TODO removed for it was breaking the socket load
-    // $cookieStore.put('globals', $rootScope.globals);
+    $cookieStore.put('globals', $rootScope.globals);
     authService.loginConfirmed();
     socket.connect(accessToken);
     modal = null;

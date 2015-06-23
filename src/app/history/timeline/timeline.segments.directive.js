@@ -12,6 +12,23 @@
         scope.$watch('locationsByHour', function() {
           console.log('element', element.find('.activities .line'));
         });
+
+        scope.moveSelectedLine = function moveSelectedLine($event) {
+          scope.selectedPosition = $event.target.getBoundingClientRect().left - 1;
+        }
+
+        scope.selectMinute = function selectMinute(hourLocations, minute) {
+          if(minute.locations && minute.locations.length > 0) {
+            var date = hourLocations.date.clone();
+            date.set({ 'minute': minute, 'second': 0, 'millisecond': '0' });
+            scope.selectedEvent = {
+              date: date,
+              locations: minute.locations
+            };
+          }
+          console.log('Minute selected', hourLocations, minute, scope.selectedLocations);
+        };
+
       }
     };
   });

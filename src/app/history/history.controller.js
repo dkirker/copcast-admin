@@ -23,23 +23,18 @@
       }
     });
 
-    $scope.$watchCollection('selectedLocations', function() {
-      if($scope.selectedLocations && $scope.selectedLocations.length > 0) {
-        $scope.user.selectedLocation = $scope.selectedLocations[0];
+    $scope.$watchCollection('selectedEvent', function() {
+      if($scope.selectedEvent) {
+        var event = $scope.selectedEvent;
+        $scope.user.selectedLocation = event.locations[0];
         updateMarkers();
-        loadVideos();
+        loadUserVideos(event.date);
       }
     });
 
-    function loadVideos() {
-      var selectedLocation = $scope.user.selectedLocation;
-      var options = {
-        width: 360,
-        height: 240
-      };
-      if(selectedLocation) {
+    function loadUserVideos(date) {
+      if($scope.user.active) {
         var userId = $scope.user.active.id;
-        var date = selectedLocation.date;
         userService
           .getUserVideos(userId, date)
           . then(function(videos) {
@@ -92,7 +87,6 @@
     }
 
     function updateLocations(locations) {
-      console.log('updateLocations', locations);
       $scope.user.locations = locations;
       var hasLocations = locations && locations.length > 0;
       $scope.user.selectedLocation = hasLocations ? locations[0] : undefined;
