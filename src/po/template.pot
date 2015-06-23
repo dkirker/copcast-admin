@@ -48,6 +48,10 @@ msgstr ""
 msgid "Current password filed is empty."
 msgstr ""
 
+#: app/components/date_filter/date.filter.html:3
+msgid "Date"
+msgstr ""
+
 #: app/login/login.controller.js:38
 msgid "Email sent successfully"
 msgstr ""
@@ -148,6 +152,10 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
+#: app/components/date_filter/date.filter.html:11
+msgid "Period"
+msgstr ""
+
 #: app/views/users/user-detail.html:142
 msgid "Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"
 msgstr ""
@@ -186,6 +194,11 @@ msgstr ""
 
 #: index.html:56
 msgid "Signed in as"
+msgstr ""
+
+#: app/login/login.controller.js:18
+#: app/login/login.controller.js:57
+msgid "The email and password you entered don't match."
 msgstr ""
 
 #: app/views/realtime.html:12

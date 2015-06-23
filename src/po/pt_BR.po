@@ -52,6 +52,10 @@ msgstr "Senha atual"
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
+#: app/components/date_filter/date.filter.html:3
+msgid "Date"
+msgstr "Data"
+
 #: app/login/login.controller.js:38
 msgid "Email sent successfully"
 msgstr "Email enviado com sucesso"
@@ -144,6 +148,10 @@ msgstr "Senha ou nova senha estão vazias."
 msgid "Password:"
 msgstr "Senha:"
 
+#: app/components/date_filter/date.filter.html:11
+msgid "Period"
+msgstr "Período"
+
 #: app/views/users/user-detail.html:142
 msgid ""
 "Please, give preference to PNG, GIF of TIF files, so we can make it more "
@@ -187,6 +195,10 @@ msgstr "Usuário selecionado:"
 #: index.html:56
 msgid "Signed in as"
 msgstr "Logado como"
+
+#: app/login/login.controller.js:18 app/login/login.controller.js:57
+msgid "The email and password you entered don't match."
+msgstr "Email ou senha inválidos."
 
 #: app/views/realtime.html:12
 msgid ""
@@ -284,6 +296,3 @@ msgstr "atualizar usuário"
 
 #~ msgid "Signed in as &nbsp;"
 #~ msgstr "Logado como &nbsp;"
-
-#~ msgid "The email and password you entered don't match."
-#~ msgstr "Email ou senha inválidos."
