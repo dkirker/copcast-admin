@@ -254,17 +254,13 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
         if(data.length === 0){
           return;
         }
-        if(!data.lastPos || isNaN(data.lastPos.lat) || isNaN(data.lastPos.lng)){
-          return;
-        }else{
+        if(data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)){
           changeMapPos(data.lastPos.lat, data.lastPos.lng);
-          return;
-        }
-        if(!data.group.lat || !data.group.lng ||
-          isNaN(data.group.lat) || isNaN(data.group.lat)){
-          return;
-        }else{
+        } else if(data.group.lat && data.group.lng &&
+          !isNaN(data.group.lat) && !isNaN(data.group.lat)){
           changeMapPos(data.group.lat, data.group.lng);
+        }else{
+          changeMapPos(0, 0);
         }
     });
   };
