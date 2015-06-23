@@ -21,6 +21,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
         controller : 'LoginCtrl',
         backdrop : 'static',
         windowClass: 'modal-login',
+        keyboard: false,
         scope: scope
       });
     } else {
