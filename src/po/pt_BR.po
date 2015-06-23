@@ -16,9 +16,9 @@ msgstr ""
 msgid "Account Settings"
 msgstr "Configurações de conta"
 
-#: index.html:50
-msgid "Admin <b class=\"caret\"></b>"
-msgstr "Admin<b class=“caret”></b>"
+#: index.html:49
+msgid "Admin"
+msgstr "Admin"
 
 #: app/views/users/user-destroy.html:2
 msgid "Are you sure to delete this user?"
@@ -52,7 +52,7 @@ msgstr "Senha atual"
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
-#: app/login/login.controller.js:35
+#: app/login/login.controller.js:38
 msgid "Email sent successfully"
 msgstr "Email enviado com sucesso"
 
@@ -74,11 +74,11 @@ msgstr "Detalhe do grupo"
 msgid "Group:"
 msgstr "Group:"
 
-#: index.html:53
+#: index.html:52
 msgid "Groups"
 msgstr "Grupos"
 
-#: index.html:48
+#: index.html:47
 msgid "History"
 msgstr "Histórico"
 
@@ -99,7 +99,7 @@ msgstr "É administrador?"
 msgid "Latitude:"
 msgstr "Latitude:"
 
-#: index.html:58
+#: index.html:57
 msgid "Logout"
 msgstr "Sair"
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Profile picture"
 msgstr "Foto do perfil"
 
-#: index.html:47
+#: index.html:46
 msgid "Realtime"
 msgstr "Tempo real"
 
@@ -180,13 +180,9 @@ msgstr "Selecione um usuário ou grupo"
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
 
-#: index.html:57
+#: index.html:56
 msgid "Signed in as"
 msgstr "Logado como"
-
-#: app/login/login.controller.js:54
-msgid "The email and password you entered don't match."
-msgstr "Email ou senha inválidos."
 
 #: app/views/realtime.html:12
 msgid ""
@@ -196,11 +192,11 @@ msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
 
-#: app/login/login.controller.js:31
+#: app/login/login.controller.js:34
 msgid "Trying to send email..."
 msgstr "Tentando enviar email…"
 
-#: app/login/login.controller.js:28
+#: app/login/login.controller.js:31
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
@@ -225,7 +221,7 @@ msgstr "Nome de usuário"
 msgid "Username:"
 msgstr "Nome de usuário:"
 
-#: index.html:52
+#: index.html:51
 msgid "Users"
 msgstr "Usuários"
 
@@ -279,10 +275,11 @@ msgstr "atualizar grupo"
 msgid "update user"
 msgstr "atualizar usuário"
 
-#: app/login/login.html:13
-msgid "{{emailMessage}}"
-msgstr ""
+#~ msgid "Admin <b class=\"caret\"></b>"
+#~ msgstr "Admin<b class=“caret”></b>"
 
-#: app/login/login.html:12
-msgid "{{errorMessage}}"
-msgstr ""
+#~ msgid "Signed in as &nbsp;"
+#~ msgstr "Logado como &nbsp;"
+
+#~ msgid "The email and password you entered don't match."
+#~ msgstr "Email ou senha inválidos."

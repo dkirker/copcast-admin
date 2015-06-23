@@ -9,8 +9,8 @@ msgstr ""
 msgid "Account Settings"
 msgstr ""
 
-#: index.html:50
-msgid "Admin <b class=\"caret\"></b>"
+#: index.html:49
+msgid "Admin"
 msgstr ""
 
 #: app/views/users/user-destroy.html:2
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Current password filed is empty."
 msgstr ""
 
-#: app/login/login.controller.js:35
+#: app/login/login.controller.js:38
 msgid "Email sent successfully"
 msgstr ""
 
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Group:"
 msgstr ""
 
-#: index.html:53
+#: index.html:52
 msgid "Groups"
 msgstr ""
 
-#: index.html:48
+#: index.html:47
 msgid "History"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Latitude:"
 msgstr ""
 
-#: index.html:58
+#: index.html:57
 msgid "Logout"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Profile picture"
 msgstr ""
 
-#: index.html:47
+#: index.html:46
 msgid "Realtime"
 msgstr ""
 
@@ -180,23 +180,19 @@ msgstr ""
 msgid "Selected user:"
 msgstr ""
 
-#: index.html:57
+#: index.html:56
 msgid "Signed in as"
-msgstr ""
-
-#: app/login/login.controller.js:54
-msgid "The email and password you entered don't match."
 msgstr ""
 
 #: app/views/realtime.html:12
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
-#: app/login/login.controller.js:31
+#: app/login/login.controller.js:34
 msgid "Trying to send email..."
 msgstr ""
 
-#: app/login/login.controller.js:28
+#: app/login/login.controller.js:31
 msgid "Type an valid email address"
 msgstr ""
 
@@ -222,7 +218,7 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
-#: index.html:52
+#: index.html:51
 msgid "Users"
 msgstr ""
 
@@ -281,12 +277,4 @@ msgstr ""
 #: app/views/users/user-detail.html:120
 #: app/views/users/user-detail.html:88
 msgid "update user"
-msgstr ""
-
-#: app/login/login.html:13
-msgid "{{emailMessage}}"
-msgstr ""
-
-#: app/login/login.html:12
-msgid "{{errorMessage}}"
 msgstr ""

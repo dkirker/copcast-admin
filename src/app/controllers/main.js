@@ -17,10 +17,13 @@ app.controller('TranslateController', function($scope, gettextCatalog ) {
     if(gettextCatalog.currentLanguage == 'pt_BR')
     {
       $scope.imgFlag = "assets/images/us-icon.png";
+      gettextCatalog.setCurrentLanguage('pt_BR');
     }
     else
     {
       $scope.imgFlag = "assets/images/br-icon.png";
+      gettextCatalog.setCurrentLanguage('en');
+
     }
 
   };
@@ -31,13 +34,13 @@ app.controller('TranslateController', function($scope, gettextCatalog ) {
     if ($scope.imgFlag == "assets/images/br-icon.png")
     {
       $scope.imgFlag = "assets/images/us-icon.png"
-      gettextCatalog.setCurrentLanguage('en');
+      gettextCatalog.setCurrentLanguage('pt_BR');
 
     }
     else
     {
       $scope.imgFlag = "assets/images/br-icon.png"
-      gettextCatalog.setCurrentLanguage('pt_BR');
+      gettextCatalog.setCurrentLanguage('en');
 
     }
 
