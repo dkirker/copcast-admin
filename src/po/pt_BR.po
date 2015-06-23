@@ -176,6 +176,10 @@ msgstr "LOGAR"
 msgid "Select an user or group"
 msgstr "Selecione um usuário ou grupo"
 
+#: app/components/user_dropdown/user.dropdown.html:3
+msgid "Select user or group"
+msgstr "Selecione um usuário ou grupo"
+
 #: app/history/player/player.html:7
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
