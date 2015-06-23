@@ -176,6 +176,10 @@ msgstr ""
 msgid "Select an user or group"
 msgstr ""
 
+#: app/components/user_dropdown/user.dropdown.html:3
+msgid "Select user or group"
+msgstr ""
+
 #: app/history/player/player.html:7
 msgid "Selected user:"
 msgstr ""
