@@ -1,10 +1,10 @@
 $timeline-height: 130px;
-
 $segment-width: 180px;
 
+$background-color: #F2F2F2;
 $date-color: #11990A;
-$active-line-color: #11990A;
-$line-color: #DDD;
+$active-line-color: #109809;
+$line-color: #d7d7d7;
 
 @mixin transition($transition) {
   -webkit-transition: $transition;
@@ -16,7 +16,9 @@ $line-color: #DDD;
 
 .nav {
   &.timeline {
+    background-color: $background-color;
     margin-right: 400px;
+    height: $timeline-height;
 
     & > .container {
       height: $timeline-height;
@@ -26,12 +28,14 @@ $line-color: #DDD;
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
+      text-align: left;
+      border-top: #C1C1C1 solid 2px;
 
       & > .main.line {
         position: absolute;
         height: 2px;
         width: 100%;
-        top: 58px;
+        top: 64px;
         background-color: $line-color;
       }
 
@@ -39,127 +43,126 @@ $line-color: #DDD;
         position:absolute;
         left: -10px;
         height: 100%;
-        width: 2px;
+        width: 3px;
         background-color: #0288d1;
         z-index: 1;
         @include transition(all 0.5s ease-in-out);
 
-        & > span {
-          font-size: 18px;
-          color: #0288d1;
-          position: relative;
-          left: -8px;
-          top: -5px;
+        & > img {
+          position: absolute;
+          left: -7px;
+          top: -1px;
         }
       }
 
+      .segments {
+        height: $timeline-height;
 
-      .segment {
-        height: 50px;
-        width: $segment-width;
-        display: inline-block;
-        margin: 50px 0 0 -4px;
-
-        &.start {
-          border: none;
-        }
-
-        &.start, &.end {
-          width: 30px;
-          & > .line {
-            width: 30px;
-          }
-        }
-
-        & > .line {
-          height: 17px;
+        .segment {
           width: $segment-width;
-          padding-top: 8px;
-          position: absolute;
+          display: inline-block;
+          margin-top: 50px;
+          margin-left: -4px;
           border-left: 2px solid $line-color;
+          height: 21px;
 
-          hr {
-            margin: 0 0;
-            border-top: 2px solid $line-color;
+          &.start {
+            border: none;
           }
-        }
 
-        & > .activities {
-          width: initial;
-          border: none;
-          position: absolute;
-          padding-top: 8px;
+          &.start, &.end {
+            width: 30px;
+            & > .line {
+              width: 30px;
+            }
+          }
 
           & > .line {
-            border-top: 2px solid $active-line-color;
             position: relative;
-            padding-left: 3px;
-            z-index: 1;
-            @include transition(all 0.5s ease-in-out);
-
-            &::before,
-            &::after {
-              position: absolute;
-              content: ' \25CF';
-              font-size: 18px;
-              color: $active-line-color;
-              top: -15px;
-            }
-
-            &::before {
-              left: -5px;
-            }
-
-            &::after {
-              right: -6px;
-            }
+            top: 11px;
+            left: -1px;
+            width: 180px;
+            height: 2px;
+            background-color: $line-color;
           }
 
-          & > .events {
-            position: relative;
-            z-index: 2;
+          & > .activities {
+            width: $segment-width;
+            border: none;
+            position: absolute;
+            height: 21px;
 
-            & > .event {
-              display: inline-block;
-              width: 3px;
-              height: 14px;
-              top: -9px;
+            & > .line {
               position: relative;
-              cursor: pointer;
-              padding-top: 6px;
+              top: 8px;
+              z-index: 1;
+              border-top: 4px solid $active-line-color;
+              @include transition(all 0.5s ease-in-out);
 
-              & > div {
-                height: 2px;
-                background-color: green;
+              &::before,
+              &::after {
+                position: absolute;
+                top: -19px;
+                content: ' \25CF';
+                font-size: 27px;
+                color: $active-line-color;
+              }
+
+              &::before {
+                left: -5px;
+              }
+
+              &::after {
+                right: -6px;
+              }
+            }
+
+            & > .events {
+              position: relative;
+              display: inline-block;
+              z-index: 2;
+              height: 13px;
+
+              & > .event {
+                display: inline-block;
+                width: 3px;
+                height: 14px;
+                top: -6px;
+                position: relative;
+                cursor: pointer;
+
+                & > div {
+                }
               }
             }
           }
-        }
 
-        & > .date, & > .time {
-          width: 40px;
-          position: absolute;
-          color: #c2c2c2;
-          text-align: center;
-        }
+          & > .date, & > .time {
+            width: 40px;
+            position: absolute;
+            color: #c2c2c2;
+            text-align: center;
+          }
 
-        & > .date {
-          height: 16px;
-          margin-top: -15px;
-          margin-left: -20px;
-          color: $date-color;
-          font-size: 0.8em;
-        }
+          & > .date {
+            line-height: 16px;
+            margin-top: -17px;
+            margin-left: -23px;
+            color: $date-color;
+            font-size: 0.8em;
+          }
 
-        & > .time {
-          height: 20px;
-          margin-top: 16px;
-          margin-left: -19px;
-          font-size: 1.3em;
-          font-weight: 300;
-        }
+          & > .time {
+            line-height: 20px;
+            top: 23px;
+            left: -21px;
+            font-size: 1.3em;
+            font-weight: 300;
+            position: relative;
+          }
 
-      } /* End Segment */
+        } /* End Segment */
+      } /* End Segments */
     } /* End Container */
   } /* End Timeline */
 } /* End nav */

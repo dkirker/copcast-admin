@@ -1,14 +1,22 @@
 <section class="history player window">
   <section class="users group">
-    <div class="avatar"><img src="{{user.profilePicture}}" class="img-circle active" title="{{user.name}}"></div>
+    <div class="avatar">
+      <img
+        src="{{user.profilePicture}}"
+        class="img-circle active"
+        title="{{user.name}}"
+        ng-if="user.profilePicture">
+    </div>
   </section>
-  <section class="user selected">
-    <span ng-if="!user" translate>Select an user or group</span>
-    <span ng-if="user"><translate>Selected user: </translate><strong>{{user.name}}</strong></span>
+  <section class="selected user">
+    <span ng-if="!user">Select an user or group</span>
+    <span ng-if="user">Selected user: <strong>{{user.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!options" translate>No video selected</div>
-    <div class="" ng-if="options"><jwplayer setup="options"></jwplayer></div>
+    <div class="no video" ng-if="!src">No video found</div>
+    <video width="400" height="260" controls>
+    Your browser does not support the video tag.
+    </video>
   </section>
   <section class="time" ng-bind-html="time"></section>
 </section>

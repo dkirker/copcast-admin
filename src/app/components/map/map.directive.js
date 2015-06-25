@@ -67,7 +67,6 @@
             shape: {coords: [15,15,16], type: "circle"},
             icon: createMarkerImage()
           });
-          console.log('marker', marker);
         }
 
         function createMarkerImage() {

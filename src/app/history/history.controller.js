@@ -8,43 +8,59 @@
     initialize();
 
     $scope.userChanged = function userChanged(selectedUser) {
-      clearFilter();
       userService
         .getUser(selectedUser.id)
         .then(updateUser, error);
     };
 
+    function updateUser(user) {
+      $scope.user.active = user;
+      $scope.map.location = {
+        lat: user.lastLat,
+        lng: user.lastLng
+      };
+      filterLocations();
+    }
+
     $scope.$watchCollection('filter', function() {
+      filterLocations();
+    });
+
+    function filterLocations() {
       var filter = $scope.filter;
       var hasAtiveUser = $scope.user && $scope.user.active;
+      clearUserData();
       if(hasAtiveUser && filter.fromDate) {
         loadLocations();
-      } else {
-        clearLocation();
       }
-    });
+    }
 
-    $scope.$watchCollection('selectedLocations', function() {
-      if($scope.selectedLocations && $scope.selectedLocations.length > 0) {
-        $scope.user.selectedLocation = $scope.selectedLocations[0];
+    function clearUserData() {
+      updateLocations([]);
+      $scope.user.video = {};
+    }
+
+    $scope.$watch('selectedEvent', function() {
+      if($scope.selectedEvent) {
+        var event = $scope.selectedEvent;
+        $scope.user.selectedLocation = event.locations[0];
         updateMarkers();
-        loadVideos();
+        loadUserVideos(event.date);
       }
-    });
+    }, true);
 
-    function loadVideos() {
-      var selectedLocation = $scope.user.selectedLocation;
-      var options = {
-        width: 360,
-        height: 240
-      };
-      if(selectedLocation) {
+    function loadUserVideos(date) {
+      if($scope.user.active) {
         var userId = $scope.user.active.id;
-        var date = selectedLocation.date;
         userService
           .getUserVideos(userId, date)
           . then(function(videos) {
-            console.log('videos', videos);
+            if(videos && videos.length > 0) {
+              $scope.user.video = videos[0];
+              console.log('user.video', $scope.user.video);
+            } else {
+              $scope.user.video = undefined;
+            }
           }, error);
 
       } else {
@@ -69,37 +85,17 @@
       $scope.users = users;
     }
 
-
-    function updateUser(user) {
-      $scope.user.active = user;
-      $scope.filter = {};
-      $scope.map.location = {
-        lat: user.lastLat,
-        lng: user.lastLng
-      };
-    }
-
-
-    function clearFilter() {
-      $scope.filter = {};
-    }
-
     function loadLocations() {
       var user = $scope.user.active;
       return userService
-        .getUserLocations(user.id, $scope.filter.fromDate, $scope.filter.toDate)
+        .getUserLocations(user.id, $scope.filter.fromDate, $scope.filter.toDate, 15)
         .then(function(locations) {
           updateLocations(locations);
           updateMarkers();
         }, error);
     }
 
-    function clearLocation() {
-      updateLocations([]);
-    }
-
     function updateLocations(locations) {
-      console.log('updateLocations', locations);
       $scope.user.locations = locations;
       var hasLocations = locations && locations.length > 0;
       $scope.user.selectedLocation = hasLocations ? locations[0] : undefined;
