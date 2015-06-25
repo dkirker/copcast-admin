@@ -1,0 +1,168 @@
+$timeline-height: 130px;
+$segment-width: 180px;
+
+$background-color: #F2F2F2;
+$date-color: #11990A;
+$active-line-color: #109809;
+$line-color: #d7d7d7;
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+.nav {
+  &.timeline {
+    background-color: $background-color;
+    margin-right: 400px;
+    height: $timeline-height;
+
+    & > .container {
+      height: $timeline-height;
+      width: 100%;
+      position: relative;
+      padding: 0 0;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      text-align: left;
+      border-top: #C1C1C1 solid 2px;
+
+      & > .main.line {
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        top: 64px;
+        background-color: $line-color;
+      }
+
+      & > .selected.line {
+        position:absolute;
+        left: -10px;
+        height: 100%;
+        width: 3px;
+        background-color: #0288d1;
+        z-index: 1;
+        @include transition(all 0.5s ease-in-out);
+
+        & > img {
+          position: absolute;
+          left: -7px;
+          top: -1px;
+        }
+      }
+
+      .segments {
+        height: $timeline-height;
+
+        .segment {
+          width: $segment-width;
+          display: inline-block;
+          margin-top: 50px;
+          margin-left: -4px;
+          border-left: 2px solid $line-color;
+          height: 21px;
+
+          &.start {
+            border: none;
+          }
+
+          &.start, &.end {
+            width: 30px;
+            & > .line {
+              width: 30px;
+            }
+          }
+
+          & > .line {
+            position: relative;
+            top: 11px;
+            left: -1px;
+            width: 180px;
+            height: 2px;
+            background-color: $line-color;
+          }
+
+          & > .activities {
+            width: $segment-width;
+            border: none;
+            position: absolute;
+            height: 21px;
+
+            & > .line {
+              position: relative;
+              top: 8px;
+              z-index: 1;
+              border-top: 4px solid $active-line-color;
+              @include transition(all 0.5s ease-in-out);
+
+              &::before,
+              &::after {
+                position: absolute;
+                top: -19px;
+                content: ' \25CF';
+                font-size: 27px;
+                color: $active-line-color;
+              }
+
+              &::before {
+                left: -5px;
+              }
+
+              &::after {
+                right: -6px;
+              }
+            }
+
+            & > .events {
+              position: relative;
+              display: inline-block;
+              z-index: 2;
+              height: 13px;
+
+              & > .event {
+                display: inline-block;
+                width: 3px;
+                height: 14px;
+                top: -6px;
+                position: relative;
+                cursor: pointer;
+
+                & > div {
+                }
+              }
+            }
+          }
+
+          & > .date, & > .time {
+            width: 40px;
+            position: absolute;
+            color: #c2c2c2;
+            text-align: center;
+          }
+
+          & > .date {
+            line-height: 16px;
+            margin-top: -17px;
+            margin-left: -23px;
+            color: $date-color;
+            font-size: 0.8em;
+          }
+
+          & > .time {
+            line-height: 20px;
+            top: 23px;
+            left: -21px;
+            font-size: 1.3em;
+            font-weight: 300;
+            position: relative;
+          }
+
+        } /* End Segment */
+      } /* End Segments */
+    } /* End Container */
+  } /* End Timeline */
+} /* End nav */

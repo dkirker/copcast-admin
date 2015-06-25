@@ -9,7 +9,7 @@ html {
   height: 100%;
 }
 body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto','Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 0;
   height: 100%;
 }
@@ -164,43 +164,41 @@ header > .navbar ul.navbar-nav > li > a {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  .checkbox {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .form-control:focus {
+    z-index: 2;
+  }
+  input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  button{
+    margin-top: 10px;
+  }
+  a {
+    float: right;
+    font-size: 0.9em;
+  }
 }
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="text"] {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.form-signin button{
-  margin-top: 10px;
-}
-.form-signin a {
-  float: right;
-  font-size: 0.9em;
-}
+
 .errorMessage {
   color: red;
   font-weight: 300;
@@ -219,6 +217,9 @@ header > .navbar ul.navbar-nav > li > a {
   padding: 20px 20px 0px 20px;
 }
 
+.btn, .form-control {
+  border-radius: 0px;
+}
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector

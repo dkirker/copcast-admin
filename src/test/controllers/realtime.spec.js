@@ -4,7 +4,7 @@
  */
 'use strict';
 
-xdescribe('Controller: RealtimeCtrl', function () {
+describe('Controller: RealtimeCtrl', function () {
 
   // load the controller's module
   beforeEach(module('copcastAdminApp'));
@@ -50,8 +50,7 @@ xdescribe('Controller: RealtimeCtrl', function () {
     beforeEach(function () {
       user = {
         id: 0, name: "Test Name",
-        lat: 23, lng: 23, groupId: 1, accuracy: 10,
-        streamUrl: ""
+        lat: 23, lng: 23, groupId: 1, accuracy: 10
       }
       marker = {
         getPosition: function () {
@@ -67,7 +66,6 @@ xdescribe('Controller: RealtimeCtrl', function () {
         marker: marker,
         groupId: user.groupId,
         accuracy: user.accuracy,
-        streamUrl: user.streamUrl,
         timeoutPromisse: null
       };
 
@@ -99,8 +97,7 @@ xdescribe('Controller: RealtimeCtrl', function () {
 
       scope.loadUser({
         id: 1, name: "Test Name 2",
-        lat: 23, lng: 23, groupId: 1, accuracy: 10,
-        streamUrl: ""
+        lat: 23, lng: 23, groupId: 1, accuracy: 10
       });
 
       expect(scope.activeUsers.length).toBe(2);

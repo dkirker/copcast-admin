@@ -16,9 +16,8 @@
               if (infoWindow){
                 infoWindow.close();
               }
-             infoWindow = new google.maps.InfoWindow({
-                 content: $compile($templateCache.get("balloon.html"))(scope)[0]
-             });
+             infoWindow = new google.maps.InfoWindow({maxWidth: 350});
+             infoWindow.setContent($compile($templateCache.get('balloon.html'))(scope)[0]);
              infoWindow.open(scope.myMap,scope.currentUser.marker);
 
             };
@@ -27,19 +26,19 @@
              if (infoWindow){
                infoWindow.close();
              }
-           }
+           };
            service.getRedMarker = function(user){
-             return "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld="+user[0]+"|db0909|000000"
+             return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
            };
 
 
            service.getGreenMarker = function(user){
-             return "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld="+user[0]+"|009c00|000000"
+             return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|009c00|000000';
            };
 
 
            service.getGreyMarker = function(user){
-             return "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld="+user[0]+"|9a9a9a|000000"
+             return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
            };
 
            service.applyCircle = function(scope, user){
@@ -88,7 +87,7 @@
                bounds.extend(activeUsers[key].marker.getPosition());
              }
              scope.myMap.fitBounds(bounds);
-           }
+           };
 
            return service;
   });

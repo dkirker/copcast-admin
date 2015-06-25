@@ -40,9 +40,10 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
         token: accessToken
       }
     };
+    //TODO removed for it was breaking the socket load
     $cookieStore.put('globals', $rootScope.globals);
     authService.loginConfirmed();
-    socket.connect($rootScope.globals.currentUser.token);
+    socket.connect(accessToken);
     modal = null;
   };
 
@@ -51,7 +52,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   };
 
   loginService.getUserName = function(){
-    return $rootScope.globals ? $rootScope.globals.currentUser.username : "";
+    return $rootScope.globals ? $rootScope.globals.currentUser.username : '';
   };
 
   loginService.logout = function(){

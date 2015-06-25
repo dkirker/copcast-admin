@@ -1,0 +1,26 @@
+form.date.filter {
+  .form-control, .control-label {
+    font-size: 12pt;
+    font-weight: 500;
+    color: #4C4C4C;
+  }
+
+  input[type="date"] {
+    margin-left: 10px;
+  }
+  input[type="checkbox"] {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .icon {
+    &.calendar {
+      top: 5px;
+      left: 8px;
+      width: 18px;
+      height: 20px;
+      position: relative;
+      display: inline-block;
+      background: url('/assets/images/copcast_history_icon.png') no-repeat;
+    }
+  }
+}

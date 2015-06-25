@@ -5,6 +5,7 @@
     <title>Igarapé :: Copcast</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,400italic,500,700,100' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -27,7 +28,6 @@
     <![endif]-->
 
     <div>
-      <!--<div ng-show="isLogged">-->
         <header class="header">
           <div class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -62,10 +62,7 @@
           </div>
         </header>
         <div ng-view=""></div>
-      <!--</div>-->
-      <!--<div ng-hide="isLogged">-->
-        <!--<login-page></login-page>-->
-      <!--</div>-->
+
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -81,7 +78,6 @@
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
-    <script src="assets/jwplayer/jwplayer.js" data-build="exclude" data-remove="exclude"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
@@ -100,7 +96,7 @@
         angular.bootstrap(document.body, ['copcastAdminApp']);
       };
     </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=onGoogleReady"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization&sensor=false&callback=onGoogleReady"></script>
 
     <!-- navbar collapse -->
     <script type="text/javascript">

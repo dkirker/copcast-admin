@@ -3,7 +3,7 @@
  * Updated by Leonardo Nicolas
  */
 /* google */
-;(function(angular, infoWindow, google) {
+;(function(angular, infoWindow, google, moment) {
   'use strict';
 
   /**
@@ -33,10 +33,42 @@
           .get(ServerUrl + '/users')
           .success(function(data) {
             angular.forEach(data, function(user) {
-              if (user.profilePicture) {
-                  user.profilePicture = ServerUrl + '/pictures/' + user.id + '/original/show';
-              }
+              user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
             });
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
+      service.getUser = function getUser(userId) {
+        var defer = $q.defer();
+        $http
+          .get(ServerUrl + '/users/' + userId)
+          .success(function(user) {
+            user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
+            defer.resolve(user);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      }
+
+      service.getUserLocations = function getUserLocations(userId, fromDate, toDate, accuracy) {
+        var defer = $q.defer();
+
+        fromDate = moment(fromDate).format('YYYY-MM-DD');
+        toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+        accuracy = accuracy ? '/' + accuracy : '';
+
+        var endPoint = ServerUrl + '/users/' + userId + '/locations/' + fromDate + toDate + accuracy;
+        $http
+          .get(endPoint)
+          .success(function(data) {
+            console.log('service.getUserLocations', data);
             defer.resolve(data);
           })
           .error(function(data, status) {
@@ -47,7 +79,7 @@
 
       service.getUserVideos = function getUserVideos(userId, date) {
         var defer = $q.defer();
-        var dateFmt = date.format('YYYY-MM-DD');
+        var dateFmt = moment(date).format('YYYY-MM-DD');
         $http
           .get(ServerUrl + '/users/' + userId + '/videos/from/' + dateFmt )
           .success(function(data) {
@@ -62,6 +94,47 @@
         return defer.promise;
       };
 
+      service.getMyData = function getMyData(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/me').success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+        return defer.promise;
+      };
+
+      service.getOnlineUsers = function getOnlineUsers(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/online')
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
+      service.getStreamingUsers = function getStreamingUsers(){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/users/streaming')
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
       return service;
     });
-})(window.angular, window.infoWindow, window.google);
+
+    function generateProfilePictureAddress(serverUrl, user) {
+      return user.profilePicture
+        ? serverUrl + '/pictures/' + user.id + '/small/show'
+        : '/assets/images/anonuser.png';
+    }
+})(window.angular, window.infoWindow, window.google, window.moment);

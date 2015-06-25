@@ -13,7 +13,7 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'updateGroup':
     $scope.deleteGroup = function () {
 
-      if (confirm("Are you sure to delete " + $scope.group.name) == true) {
+      if (confirm('Are you sure to delete ' + $scope.group.name) === true) {
         // confirmation to delete
 
         $http.delete(ServerUrl + '/groups/' + $scope.group.id).success(function (data) {
