@@ -1,0 +1,297 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: app/views/users/user-detail.html:20
+#: app/views/users/user-detail.html:43
+msgid "Account Settings"
+msgstr ""
+
+#: index.html:49
+msgid "Admin"
+msgstr ""
+
+#: app/views/users/user-destroy.html:2
+msgid "Are you sure to delete this user?"
+msgstr ""
+
+#: app/views/groups/group-destroy.html:2
+msgid "Are you sure you want to delete this group?"
+msgstr ""
+
+#: app/login/login.html:1
+msgid "Brand"
+msgstr ""
+
+#: app/views/users/user-detail.html:26
+#: app/views/users/user-detail.html:97
+msgid "Change Password"
+msgstr ""
+
+#: app/views/users/user-detail.html:132
+#: app/views/users/user-detail.html:32
+msgid "Change Picture"
+msgstr ""
+
+#: app/views/users/user-detail.html:136
+msgid "Click here to send a new image"
+msgstr ""
+
+#: app/views/users/user-detail.html:103
+#: app/views/users/user-detail.html:105
+msgid "Current password"
+msgstr ""
+
+#: app/controllers/users/details.js:50
+msgid "Current password filed is empty."
+msgstr ""
+
+#: app/components/date_filter/date.filter.html:3
+msgid "Date"
+msgstr ""
+
+#: app/login/login.controller.js:38
+msgid "Email sent successfully"
+msgstr ""
+
+#: app/views/users/user-creation.html:30
+#: app/views/users/user-destroy.html:30
+#: app/views/users/user-detail.html:72
+msgid "Email:"
+msgstr ""
+
+#: app/views/users/user-list.html:7
+msgid "Group"
+msgstr ""
+
+#: app/views/groups/group-detail.html:2
+msgid "Group detail"
+msgstr ""
+
+#: app/views/users/user-creation.html:17
+#: app/views/users/user-destroy.html:18
+#: app/views/users/user-detail.html:59
+msgid "Group:"
+msgstr ""
+
+#: index.html:52
+msgid "Groups"
+msgstr ""
+
+#: index.html:47
+msgid "History"
+msgstr ""
+
+#: app/views/groups/group-creation.html:32
+#: app/views/groups/group-destroy.html:31
+#: app/views/groups/group-detail.html:32
+#: app/views/users/user-creation.html:36
+#: app/views/users/user-destroy.html:36
+#: app/views/users/user-detail.html:78
+msgid "Is Admin?"
+msgstr ""
+
+#: app/views/groups/group-list.html:7
+msgid "Is Administrative?"
+msgstr ""
+
+#: app/views/groups/group-creation.html:18
+#: app/views/groups/group-destroy.html:17
+#: app/views/groups/group-detail.html:18
+msgid "Latitude:"
+msgstr ""
+
+#: index.html:57
+msgid "Logout"
+msgstr ""
+
+#: app/views/groups/group-creation.html:25
+#: app/views/groups/group-destroy.html:24
+#: app/views/groups/group-detail.html:25
+msgid "Longitude:"
+msgstr ""
+
+#: app/views/groups/group-list.html:6
+#: app/views/users/user-list.html:6
+msgid "Name"
+msgstr ""
+
+#: app/views/groups/group-creation.html:11
+#: app/views/groups/group-destroy.html:10
+#: app/views/groups/group-detail.html:11
+#: app/views/users/user-creation.html:11
+#: app/views/users/user-destroy.html:11
+#: app/views/users/user-detail.html:53
+msgid "Name:"
+msgstr ""
+
+#: app/views/groups/group-creation.html:2
+msgid "New group"
+msgstr ""
+
+#: app/views/users/user-detail.html:107
+#: app/views/users/user-detail.html:109
+msgid "New password"
+msgstr ""
+
+#: app/history/player/player.html:10
+msgid "No video selected"
+msgstr ""
+
+#: app/login/login.html:7
+msgid "Password"
+msgstr ""
+
+#: app/controllers/users/details.js:54
+msgid "Password or password confirmation are empty."
+msgstr ""
+
+#: app/views/users/user-creation.html:42
+msgid "Password:"
+msgstr ""
+
+#: app/components/date_filter/date.filter.html:11
+msgid "Period"
+msgstr ""
+
+#: app/views/users/user-detail.html:142
+msgid "Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"
+msgstr ""
+
+#: app/views/users/user-destroy.html:54
+msgid "Profile picture"
+msgstr ""
+
+#: index.html:46
+msgid "Realtime"
+msgstr ""
+
+#: app/views/users/user-detail.html:110
+msgid "Repeat your password"
+msgstr ""
+
+#: app/login/login.html:15
+msgid "Reset Password"
+msgstr ""
+
+#: app/login/login.html:9
+msgid "SIGN IN"
+msgstr ""
+
+#: app/history/player/player.html:6
+msgid "Select an user or group"
+msgstr ""
+
+#: app/components/user_dropdown/user.dropdown.html:3
+msgid "Select user or group"
+msgstr ""
+
+#: app/history/player/player.html:7
+msgid "Selected user:"
+msgstr ""
+
+#: index.html:56
+msgid "Signed in as"
+msgstr ""
+
+#: app/login/login.controller.js:18
+#: app/login/login.controller.js:57
+msgid "The email and password you entered don't match."
+msgstr ""
+
+#: app/views/realtime.html:12
+msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
+msgstr ""
+
+#: app/login/login.controller.js:34
+msgid "Trying to send email..."
+msgstr ""
+
+#: app/login/login.controller.js:31
+msgid "Type an valid email address"
+msgstr ""
+
+#: app/views/realtime.html:6
+msgid "Type to filter the map"
+msgstr ""
+
+#: app/login/login.html:14
+msgid "Type your email"
+msgstr ""
+
+#: app/views/users/user-creation.html:2
+msgid "User detail"
+msgstr ""
+
+#: app/login/login.html:6
+msgid "Username"
+msgstr ""
+
+#: app/views/users/user-creation.html:24
+#: app/views/users/user-destroy.html:24
+#: app/views/users/user-detail.html:66
+msgid "Username:"
+msgstr ""
+
+#: index.html:51
+msgid "Users"
+msgstr ""
+
+#: app/views/realtime.html:25
+msgid "View history"
+msgstr ""
+
+#: app/controllers/users/details.js:58
+msgid "Wrong password combination"
+msgstr ""
+
+#: app/views/groups/group-destroy.html:41
+#: app/views/groups/group-detail.html:41
+#: app/views/users/user-destroy.html:45
+#: app/views/users/user-detail.html:119
+#: app/views/users/user-detail.html:87
+msgid "cancel"
+msgstr ""
+
+#: app/views/groups/group-creation.html:41
+#: app/views/groups/group-list.html:2
+msgid "create new group"
+msgstr ""
+
+#: app/views/users/user-creation.html:50
+#: app/views/users/user-list.html:2
+msgid "create new user"
+msgstr ""
+
+#: app/views/groups/group-list.html:17
+#: app/views/users/user-list.html:17
+msgid "delete"
+msgstr ""
+
+#: app/views/groups/group-destroy.html:42
+msgid "delete group"
+msgstr ""
+
+#: app/views/users/user-destroy.html:46
+msgid "delete user"
+msgstr ""
+
+#: app/views/groups/group-list.html:16
+#: app/views/users/user-list.html:16
+msgid "edit"
+msgstr ""
+
+#: app/login/login.html:8
+msgid "forgot password"
+msgstr ""
+
+#: app/views/groups/group-detail.html:42
+msgid "update group"
+msgstr ""
+
+#: app/views/users/user-detail.html:120
+#: app/views/users/user-detail.html:88
+msgid "update user"
+msgstr ""

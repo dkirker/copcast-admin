@@ -1,0 +1,16 @@
+<img alt="{{'Brand'| translate}}" src="assets/images/logo-big.png" >
+<h2>copcast</h2>
+<form  ng-show="selected != 'forgotPass'" form-auto-fill-fix>
+  <span ng-if="errorMessage" class="errorMessage" >{{errorMessage | translate }}</span>
+  <span ng-if="emailMessage" class="emailMessage" >{{emailMessage | translate }}</span>
+  <input type="text" placeholder="{{'Username'| translate }}" ng-model="user.username" autofocus>
+  <input type="password"  placeholder="{{'Password' | translate}}" ng-model="user.password">
+  <a ng-click="forgotPass()"><small translate>forgot password</small></a>
+  <button class="btn btn-block btn-primary" type="submit" ng-click="login()" translate>SIGN IN</button>
+</form>
+<form ng-show="selected == 'forgotPass'">
+  <span ng-if="errorMessage" class="errorMessage">{{errorMessage | translate }}</span>
+  <span ng-if="emailMessage" class="emailMessage">{{emailMessage | translate }}</span>
+  <input type="email" name="email"  placeholder="{{'Type your email'| translate}}" ng-model="$parent.email">
+  <button class="btn btn-block btn-primary" type="submit" ng-click="sendEmail()" translate>Reset Password</button>
+</form>

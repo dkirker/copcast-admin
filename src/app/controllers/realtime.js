@@ -254,17 +254,13 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
         if(data.length === 0){
           return;
         }
-        if(!data.lastPos || isNaN(data.lastPos.lat) || isNaN(data.lastPos.lng)){
-          return;
-        }else{
+        if(data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)){
           changeMapPos(data.lastPos.lat, data.lastPos.lng);
-          return;
-        }
-        if(!data.group.lat || !data.group.lng ||
-          isNaN(data.group.lat) || isNaN(data.group.lat)){
-          return;
-        }else{
+        } else if(data.group.lat && data.group.lng &&
+          !isNaN(data.group.lat) && !isNaN(data.group.lat)){
           changeMapPos(data.group.lat, data.group.lng);
+        }else{
+          changeMapPos(0, 0);
         }
     });
   };
@@ -288,8 +284,9 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   function showModal(user){
     console.log('showModal with user=['+user+']');
     $scope.activeStreams[user.id].modal =  $modal.open({
-      templateUrl: 'app/views/player.html',
+      templateUrl: 'app/videoStream/player.html',
       controller: 'ModalVideoCtrl',
+      windowClass: 'modal-stream',
       backdrop: false,
       scope: $scope,
       peerManager: peerManager,
@@ -312,6 +309,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   }
 
   $scope.refreshUsers();
+
 
 
 }); //end-RealTimeCtrl

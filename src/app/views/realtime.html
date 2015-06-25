@@ -3,13 +3,13 @@
     <span class="glyphicon ">
       <div class="input-group">
         <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
-        <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control" placeholder="Type to filter the map..." aria-describedby="basic-addon1">
+        <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control" placeholder="{{'Type to filter the map' | translate }}..." aria-describedby="basic-addon1">
       </div>
     </span>
   </div>
 
 <footer ng-hide="canStream()">
-  <span>
+  <span translate>
     This browser does not support live streaming visualization. Use Chrome or Firefox instead.
   </span>
 </footer>
@@ -22,7 +22,7 @@
         </div>
         <div style="padding-top: 20px;overflow: hidden;">
           <strong>{{currentUser.userName}}</strong><br>
-          <a ng-click="goToUser(currentUser)">View history</a>
+          <a ng-click="goToUser(currentUser)" translate>View history</a>
 
           <div ng-show="isOnline(currentUser) && canStream()">
             <div>

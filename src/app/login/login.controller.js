@@ -9,11 +9,14 @@
  */
 angular.module('copcastAdminApp')
 
-  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl) {
+  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext) {
 
     $scope.user = {username: '', password: ''};
     $scope.email = '';
     $scope.selected = 'login';
+    $scope.$on("401_error", function(event, mass) {
+      $scope.errorMessage = gettext('The email and password you entered don\'t match.');
+    });
 
     $scope.forgotPass = function(){
       $scope.selected = 'forgotPass';
@@ -25,14 +28,14 @@ angular.module('copcastAdminApp')
       $scope.errorMessage = '';
       $scope.emailMessage = '';
       if(!$scope.email || $scope.email === ''){
-        $scope.errorMessage = 'Type an valid email address';
+        $scope.errorMessage = gettext('Type an valid email address');
         return;
       }
-      $scope.emailMessage = 'Trying to send email...';
+      $scope.emailMessage = gettext('Trying to send email...');
       $http.post(ServerUrl + '/users/'+$scope.email+'/reset_password', {
         email:$scope.email
       }).success(function(data) {
-        $scope.emailMessage = 'Email sent successfully';
+        $scope.emailMessage = gettext('Email sent successfully');
         $scope.selected = 'login';
         $scope.email='';
       }).error(function (data){
@@ -51,7 +54,7 @@ angular.module('copcastAdminApp')
         loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
-        $scope.errorMessage = 'Wrong login/pass combination';
+        $scope.errorMessage = gettext('The email and password you entered don\'t match.');
         $scope.emailMessage = '';
       });
     };

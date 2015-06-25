@@ -20,7 +20,8 @@ angular
     'ui.bootstrap',
     'http-auth-interceptor',
     'cgNotify',
-    'ngFileUpload'
+    'ngFileUpload',
+    'gettext'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -76,7 +77,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  }).run(function($rootScope, $location, loginService) {
+  }).run(function($rootScope, $location, loginService, gettextCatalog ) {
 
     $rootScope.$on('event:auth-loginRequired', function() {
       loginService.show();
@@ -85,8 +86,14 @@ angular
     $rootScope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
+
+    //gettextCatalog.setCurrentLanguage('pt_BR');
+    //gettextCatalog.debug = true;
+
   });
 
 //insert the constant value ServerUrl
-angular.module('copcastAdminApp').constant('ServerUrl', 'http://mogi-api.igarape.org');
-//angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
+//angular.module('copcastAdminApp').constant('ServerUrl', 'http://mogi-api.igarape.org');
+angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
+
+

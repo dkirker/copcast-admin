@@ -11,15 +11,21 @@ var app = angular.module('copcastAdminApp');
 app.service('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
 
   var loginService = {},
-    modal = null;
+    modal = null, scope;
 
   loginService.show = function() {
     if ( !modal ) {
+      scope = $rootScope.$new();
       modal = $modal.open({
-        templateUrl : 'app/views/login.html',
+        templateUrl : 'app/login/login.html',
         controller : 'LoginCtrl',
-        backdrop : 'static'
+        backdrop : 'static',
+        windowClass: 'modal-login',
+        keyboard: false,
+        scope: scope
       });
+    } else {
+      scope.$broadcast("401_error");
     }
   };
 

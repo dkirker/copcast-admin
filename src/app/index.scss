@@ -152,62 +152,6 @@ header > .navbar ul.navbar-nav > li > a {
   padding: 20px 20px;
 }
 
-/*realtime*/
-/*search box*/
-.input-group .form-control {
-  width: 30%;
-  margin-top: 1px;
-}
-/*end-of realtime*/
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-  .checkbox {
-    font-weight: normal;
-    margin-bottom: 10px;
-  }
-  .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  input[type="text"] {
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .form-control:focus {
-    z-index: 2;
-  }
-  input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  button{
-    margin-top: 10px;
-  }
-  a {
-    float: right;
-    font-size: 0.9em;
-  }
-}
-
-.errorMessage {
-  color: red;
-  font-weight: 300;
-}
-.emailMessage{
-  color: green;
-  font-weight: 300;
-}
-
 /*@import "users.css";*/
 .containerUser {
   padding: 10px 0px 0px 20px;

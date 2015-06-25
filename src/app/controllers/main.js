@@ -7,11 +7,45 @@
  * # MainCtrl
  * Controller of the copcastAdminApp
  */
-angular.module('copcastAdminApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+
+var app = angular.module('copcastAdminApp');
+
+app.controller('TranslateController', function($scope, gettextCatalog ) {
+
+  $scope.init = function(){
+
+    if(gettextCatalog.currentLanguage == 'pt_BR')
+    {
+      $scope.imgFlag = "assets/images/us-icon.png";
+      gettextCatalog.setCurrentLanguage('pt_BR');
+    }
+    else
+    {
+      $scope.imgFlag = "assets/images/br-icon.png";
+      gettextCatalog.setCurrentLanguage('en');
+
+    }
+
+  };
+
+  $scope.clickLang = function () {
+
+
+    if ($scope.imgFlag == "assets/images/br-icon.png")
+    {
+      $scope.imgFlag = "assets/images/us-icon.png"
+      gettextCatalog.setCurrentLanguage('pt_BR');
+
+    }
+    else
+    {
+      $scope.imgFlag = "assets/images/br-icon.png"
+      gettextCatalog.setCurrentLanguage('en');
+
+    }
+
+  };
+
+  $scope.init();
+
+});
