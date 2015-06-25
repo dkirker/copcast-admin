@@ -16,7 +16,7 @@ msgstr ""
 msgid "Account Settings"
 msgstr "Configurações de conta"
 
-#: index.html:49
+#: index.html:50
 msgid "Admin"
 msgstr "Admin"
 
@@ -52,7 +52,7 @@ msgstr "Senha atual"
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
-#: app/components/date_filter/date.filter.html:3
+#: app/history/date_filter/date.filter.html:4
 msgid "Date"
 msgstr "Data"
 
@@ -78,11 +78,11 @@ msgstr "Detalhe do grupo"
 msgid "Group:"
 msgstr "Group:"
 
-#: index.html:52
+#: index.html:53
 msgid "Groups"
 msgstr "Grupos"
 
-#: index.html:47
+#: index.html:48
 msgid "History"
 msgstr "Histórico"
 
@@ -103,7 +103,7 @@ msgstr "É administrador?"
 msgid "Latitude:"
 msgstr "Latitude:"
 
-#: index.html:57
+#: index.html:58
 msgid "Logout"
 msgstr "Sair"
 
@@ -132,9 +132,9 @@ msgstr "Novo grupo"
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/history/player/player.html:10
-msgid "No video selected"
-msgstr "Nenhum vídeo selecionado"
+#: app/history/player/player.html:16
+msgid "No video found"
+msgstr "Nenhum vídeo encontrado"
 
 #: app/login/login.html:7
 msgid "Password"
@@ -148,7 +148,7 @@ msgstr "Senha ou nova senha estão vazias."
 msgid "Password:"
 msgstr "Senha:"
 
-#: app/components/date_filter/date.filter.html:11
+#: app/history/date_filter/date.filter.html:11
 msgid "Period"
 msgstr "Período"
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Profile picture"
 msgstr "Foto do perfil"
 
-#: index.html:46
+#: index.html:47
 msgid "Realtime"
 msgstr "Tempo real"
 
@@ -180,19 +180,16 @@ msgstr "Redefinir senha"
 msgid "SIGN IN"
 msgstr "LOGAR"
 
-#: app/history/player/player.html:6
+#: app/components/user_dropdown/user.dropdown.html:2
+#: app/history/player/player.html:12
 msgid "Select an user or group"
 msgstr "Selecione um usuário ou grupo"
 
-#: app/components/user_dropdown/user.dropdown.html:3
-msgid "Select user or group"
-msgstr "Selecione um usuário ou grupo"
-
-#: app/history/player/player.html:7
+#: app/history/player/player.html:13
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
 
-#: index.html:56
+#: index.html:57
 msgid "Signed in as"
 msgstr "Logado como"
 
@@ -237,7 +234,7 @@ msgstr "Nome de usuário"
 msgid "Username:"
 msgstr "Nome de usuário:"
 
-#: index.html:51
+#: index.html:52
 msgid "Users"
 msgstr "Usuários"
 
@@ -248,6 +245,10 @@ msgstr "Ver histórico"
 #: app/controllers/users/details.js:58
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
+
+#: app/history/player/player.html:18
+msgid "Your browser does not support the video tag."
+msgstr "Seu browser não suporta a tag de vídeo."
 
 #: app/views/groups/group-destroy.html:41
 #: app/views/groups/group-detail.html:41 app/views/users/user-destroy.html:45
@@ -290,6 +291,12 @@ msgstr "atualizar grupo"
 #: app/views/users/user-detail.html:120 app/views/users/user-detail.html:88
 msgid "update user"
 msgstr "atualizar usuário"
+
+#~ msgid "No video selected"
+#~ msgstr "Nenhum vídeo selecionado"
+
+#~ msgid "Select user or group"
+#~ msgstr "Selecione um usuário ou grupo"
 
 #~ msgid "Admin <b class=\"caret\"></b>"
 #~ msgstr "Admin<b class=“caret”></b>"

@@ -9,13 +9,13 @@
     </div>
   </section>
   <section class="selected user">
-    <span ng-if="!user">Select an user or group</span>
-    <span ng-if="user">Selected user: <strong>{{user.name}}</strong></span>
+    <span ng-if="!user" translate>Select an user or group</span>
+    <span ng-if="user"><translate>Selected user:</translate> <strong>{{user.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!src">No video found</div>
+    <div class="no video" ng-if="!src" translate>No video found</div>
     <video width="400" height="260" controls>
-    Your browser does not support the video tag.
+    <translate>Your browser does not support the video tag.</translate>
     </video>
   </section>
   <section class="time" ng-bind-html="time"></section>

@@ -9,7 +9,7 @@ msgstr ""
 msgid "Account Settings"
 msgstr ""
 
-#: index.html:49
+#: index.html:50
 msgid "Admin"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Current password filed is empty."
 msgstr ""
 
-#: app/components/date_filter/date.filter.html:3
+#: app/history/date_filter/date.filter.html:4
 msgid "Date"
 msgstr ""
 
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Group:"
 msgstr ""
 
-#: index.html:52
+#: index.html:53
 msgid "Groups"
 msgstr ""
 
-#: index.html:47
+#: index.html:48
 msgid "History"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Latitude:"
 msgstr ""
 
-#: index.html:57
+#: index.html:58
 msgid "Logout"
 msgstr ""
 
@@ -136,8 +136,8 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/history/player/player.html:10
-msgid "No video selected"
+#: app/history/player/player.html:16
+msgid "No video found"
 msgstr ""
 
 #: app/login/login.html:7
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
-#: app/components/date_filter/date.filter.html:11
+#: app/history/date_filter/date.filter.html:11
 msgid "Period"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Profile picture"
 msgstr ""
 
-#: index.html:46
+#: index.html:47
 msgid "Realtime"
 msgstr ""
 
@@ -180,19 +180,16 @@ msgstr ""
 msgid "SIGN IN"
 msgstr ""
 
-#: app/history/player/player.html:6
+#: app/components/user_dropdown/user.dropdown.html:2
+#: app/history/player/player.html:12
 msgid "Select an user or group"
 msgstr ""
 
-#: app/components/user_dropdown/user.dropdown.html:3
-msgid "Select user or group"
-msgstr ""
-
-#: app/history/player/player.html:7
+#: app/history/player/player.html:13
 msgid "Selected user:"
 msgstr ""
 
-#: index.html:56
+#: index.html:57
 msgid "Signed in as"
 msgstr ""
 
@@ -235,7 +232,7 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
-#: index.html:51
+#: index.html:52
 msgid "Users"
 msgstr ""
 
@@ -245,6 +242,10 @@ msgstr ""
 
 #: app/controllers/users/details.js:58
 msgid "Wrong password combination"
+msgstr ""
+
+#: app/history/player/player.html:18
+msgid "Your browser does not support the video tag."
 msgstr ""
 
 #: app/views/groups/group-destroy.html:41
