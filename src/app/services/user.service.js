@@ -79,7 +79,7 @@
 
       service.getUserVideos = function getUserVideos(userId, date) {
         var defer = $q.defer();
-        var dateFmt = date.format('YYYY-MM-DD');
+        var dateFmt = moment(date).format('YYYY-MM-DD');
         $http
           .get(ServerUrl + '/users/' + userId + '/videos/from/' + dateFmt )
           .success(function(data) {

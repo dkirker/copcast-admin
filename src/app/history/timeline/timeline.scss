@@ -43,17 +43,15 @@ $line-color: #d7d7d7;
         position:absolute;
         left: -10px;
         height: 100%;
-        width: 2px;
+        width: 3px;
         background-color: #0288d1;
         z-index: 1;
         @include transition(all 0.5s ease-in-out);
 
-        & > span {
-          font-size: 18px;
-          color: #0288d1;
-          position: relative;
-          left: -8px;
-          top: -5px;
+        & > img {
+          position: absolute;
+          left: -7px;
+          top: -1px;
         }
       }
 
@@ -77,6 +75,15 @@ $line-color: #d7d7d7;
             & > .line {
               width: 30px;
             }
+          }
+
+          & > .line {
+            position: relative;
+            top: 11px;
+            left: -1px;
+            width: 180px;
+            height: 2px;
+            background-color: $line-color;
           }
 
           & > .activities {
@@ -112,6 +119,7 @@ $line-color: #d7d7d7;
 
             & > .events {
               position: relative;
+              display: inline-block;
               z-index: 2;
               height: 13px;
 

@@ -1,7 +1,11 @@
 <section class="history player window">
   <section class="users group">
     <div class="avatar">
-      <img src="{{user.profilePicture}}" class="img-circle active" title="{{user.name}}" ng-if="user.profilePicture">
+      <img
+        src="{{user.profilePicture}}"
+        class="img-circle active"
+        title="{{user.name}}"
+        ng-if="user.profilePicture">
     </div>
   </section>
   <section class="selected user">
@@ -9,13 +13,10 @@
     <span ng-if="user">Selected user: <strong>{{user.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!options">No video selected</div>
-    <div class="" ng-if="options">
-      <video width="320" height="240" controls>
-        <source src="{{user.video}}" type="video/mp4">
-      Your browser does not support the video tag.
-      </video>
-    </div>
+    <div class="no video" ng-if="!src">No video found</div>
+    <video width="400" height="260" controls>
+    Your browser does not support the video tag.
+    </video>
   </section>
   <section class="time" ng-bind-html="time"></section>
 </section>

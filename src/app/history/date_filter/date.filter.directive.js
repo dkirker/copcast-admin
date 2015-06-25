@@ -9,7 +9,7 @@
     var toDate;
     return {
       restrict: 'E',
-      templateUrl: 'app/components/date_filter/date.filter.html',
+      templateUrl: 'app/history/date_filter/date.filter.html',
       scope: {
         maxPeriodOfDays: '=?',
         isPeriod: '=?',
@@ -23,22 +23,26 @@
 
         scope.$watch('period', function() {
           if(scope.period && toDate) {
-            toDateEl.val(toDate);
+            scope.toDate = toDate;
           } else {
-            toDate = toDateEl.val();
-            toDateEl.val(null);
+            toDate = scope.toDate;
+            scope.toDate = null;
           }
+        }, true);
 
-          scope.$watch('fromDate', function() {
-            var maxDate = moment(scope.fromDate).add(30, 'd');
-            toDateEl.attr('min', moment(scope.fromDate).format('YYYY-MM-DD'));
-            toDateEl.attr('max', maxDate.format('YYYY-MM-DD'));
-          });
+        scope.$watch('fromDate', function() {
+          var maxDate = moment(scope.fromDate).add(scope.maxPeriodDays, 'd');
+          toDateEl.attr('min', moment(scope.fromDate).format('YYYY-MM-DD'));
+          toDateEl.attr('max', maxDate.format('YYYY-MM-DD'));
 
-          scope.$watch('toDate', function() {
+          if(scope.toDate && moment(scope.toDate).isAfter(maxDate)) {
+            scope.toDate = maxDate.toDate();
+          }
+        }, true);
 
-          });
-        }, true)
+        scope.$watch('toDate', function() {
+
+        });
       }
     };
   });

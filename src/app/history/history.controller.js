@@ -13,24 +13,41 @@
         .then(updateUser, error);
     };
 
+    function updateUser(user) {
+      $scope.user.active = user;
+      $scope.map.location = {
+        lat: user.lastLat,
+        lng: user.lastLng
+      };
+      filterLocations();
+    }
+
     $scope.$watchCollection('filter', function() {
-      var filter = $scope.filter;
-      var hasAtiveUser = $scope.user && $scope.user.active;
-      if(hasAtiveUser && filter.fromDate) {
-        loadLocations();
-      } else {
-        clearLocation();
-      }
+      filterLocations();
     });
 
-    $scope.$watchCollection('selectedEvent', function() {
+    function filterLocations() {
+      var filter = $scope.filter;
+      var hasAtiveUser = $scope.user && $scope.user.active;
+      clearUserData();
+      if(hasAtiveUser && filter.fromDate) {
+        loadLocations();
+      }
+    }
+
+    function clearUserData() {
+      updateLocations([]);
+      $scope.user.video = {};
+    }
+
+    $scope.$watch('selectedEvent', function() {
       if($scope.selectedEvent) {
         var event = $scope.selectedEvent;
         $scope.user.selectedLocation = event.locations[0];
         updateMarkers();
         loadUserVideos(event.date);
       }
-    });
+    }, true);
 
     function loadUserVideos(date) {
       if($scope.user.active) {
@@ -38,7 +55,12 @@
         userService
           .getUserVideos(userId, date)
           . then(function(videos) {
-            console.log('videos', videos);
+            if(videos && videos.length > 0) {
+              $scope.user.video = videos[0];
+              console.log('user.video', $scope.user.video);
+            } else {
+              $scope.user.video = undefined;
+            }
           }, error);
 
       } else {
@@ -63,27 +85,14 @@
       $scope.users = users;
     }
 
-
-    function updateUser(user) {
-      $scope.user.active = user;
-      $scope.map.location = {
-        lat: user.lastLat,
-        lng: user.lastLng
-      };
-    }
-
     function loadLocations() {
       var user = $scope.user.active;
       return userService
-        .getUserLocations(user.id, $scope.filter.fromDate, $scope.filter.toDate)
+        .getUserLocations(user.id, $scope.filter.fromDate, $scope.filter.toDate, 15)
         .then(function(locations) {
           updateLocations(locations);
           updateMarkers();
         }, error);
-    }
-
-    function clearLocation() {
-      updateLocations([]);
     }
 
     function updateLocations(locations) {

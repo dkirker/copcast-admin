@@ -3,6 +3,7 @@
   </div>
   <div class="segment" ng-repeat-start="hourLocations in locationsByHour">
     <div class="date" ng-bind-html="hourLocations.label" ng-if="hourLocations.label"></div>
+    <div class="line"></div>
     <div class="activities" ng-if="hourLocations.locationsByMinute | orderBy: 'minute'">
       <div class="line"
         style="left: {{hourLocations.startLocationPosition}}px; width: {{hourLocations.endLocationPosition - hourLocations.startLocationPosition}}px;">
@@ -18,6 +19,7 @@
     <div class="time">{{hourLocations.date.hour()}}</div>
   </div>
   <div class="end segment" ng-repeat-end ng-if="$last">
+    <div class="line"></div>
     <div class="time">{{hourLocations.date.clone().add(1, 'h').hour()}}</div>
   </div>
 </div>

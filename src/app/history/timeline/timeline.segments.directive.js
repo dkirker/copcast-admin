@@ -20,7 +20,7 @@
         scope.selectMinute = function selectMinute(hourLocations, minute) {
           if(minute.locations && minute.locations.length > 0) {
             var date = hourLocations.date.clone();
-            date.set({ 'minute': minute, 'second': 0, 'millisecond': '0' });
+            date.set({"minutes": 0, "seconds": 0, "milliseconds": 0});
             scope.selectedEvent = {
               date: date,
               locations: minute.locations
