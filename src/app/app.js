@@ -59,19 +59,19 @@ angular
         controller: 'GroupsDestroyCtrl'
       })
       .when('/user-list', {
-        templateUrl: 'app/views/users/user-list.html',
+        templateUrl: 'app/users/user-list.html',
         controller: 'UsersListCtrl'
       })
       .when('/user-detail/:id', {
-        templateUrl: 'app/views/users/user-detail.html',
+        templateUrl: 'app/users/user-detail.html',
         controller: 'UsersDetailsCtrl'
       })
       .when('/user-creation', {
-        templateUrl: 'app/views/users/user-creation.html',
+        templateUrl: 'app/users/user-creation.html',
         controller: 'UsersCreationCtrl'
       })
       .when('/user-destroy/:id', {
-        templateUrl: 'app/views/users/user-destroy.html',
+        templateUrl: 'app/users/user-destroy.html',
         controller: 'UsersDestroyCtrl'
       })
       .otherwise({
@@ -86,9 +86,6 @@ angular
     $rootScope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
-
-    //gettextCatalog.setCurrentLanguage('pt_BR');
-    //gettextCatalog.debug = true;
 
   });
 

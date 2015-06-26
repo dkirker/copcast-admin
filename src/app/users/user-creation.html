@@ -44,10 +44,26 @@
                 <input type="password" id="inputPassword" ng-model="user.password"/>
             </div>
         </div>
+
         <div class="control-group">
+          <label class="control-label" for="language" translate>Preferred language:</label>
+          <div class="controls">
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+            </label>
+
+          </div>
+        </div>
+
+      <div class="control-group">
             <div class="controls">
+              <br><br>
                 <!-- user-creation.html: -->
                 <a ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</a>
+              <br><br>
             </div>
         </div>
     </form>
