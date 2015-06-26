@@ -1,25 +1,13 @@
 <div class="user dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    <em ng-if="!selectedUser" translate>Select user or group</em>
-    <em ng-if="selectedUser">
-      <div class="avatar">
-        <img src="{{selectedUser.profilePicture}}" class="img-circle">
-      </div>
-      <span class="name">{{selectedUser.name}}</span>
-    </em>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu users" role="menu">
-    <li ng-repeat="user in users">
-      <a ng-click="selectUser(user)">
-        <div class="user">
-          <div class="avatar"><img src="{{user.profilePicture}}" class="img-circle"></div>
-          <div class="info">
-            <span>{{user.name}}</span><br>
-            <small>{{user.group}}</small>
-          </div>
+  <select class="selectpicker" data-live-search="true" title='{{"Select an user or group" | translate}}'>
+    <option ng-repeat="user in users" value="{{user}}" data-content="
+      <div class='user'>
+        <div class='avatar'><img src='{{user.profilePicture}}' class='img-circle'></div>
+        <div class='info'>
+          <span>{{user.name}}</span>
+          <small><br>{{user.group}}</small>
         </div>
-      </a>
-    </li>
-  </ul>
+      </div>">
+    </option>
+  </select>
 </div>

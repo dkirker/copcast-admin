@@ -14,19 +14,21 @@
 
     &.navbar {
       padding: 7px 20px 0 0;
-      color: #777777;
+      background-color: #FFF;
+      border-bottom: #C1C1C1 solid 2px;
 
       .form-inline {
       }
 
       .form-inline input,
       .form-inline select {
-        color: #777777;
         width: auto;
       }
 
-      .form-inline label {
-        font-weight: 300;
+      .form-inline label, .bootstrap-select > button {
+        font-size: 12pt;
+        font-weight: 500;
+        color: #4C4C4C;
       }
 
       .form-inline .divider {

@@ -1,0 +1,21 @@
+<form class="form-inline navbar-right date filter">
+  <div class="form-group">
+    <label for="fromDate" class="control-label">
+      <span translate>Date</span>
+      <input type="date" class="form-control" ng-model="fromDate">
+    </label>
+    <i class="icon calendar"></i>
+  </div>
+  <div class="form-group divider">
+    <label class="control-label" for="period">
+      <span translate>Period</span>
+      <input type="checkbox" ng-model="period" id="period">
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="toDate">
+      <input type="date" class="form-control to date" ng-model="toDate" ng-disabled="!period">
+    </label>
+    <i class="icon calendar"></i>
+  </div>
+</form>

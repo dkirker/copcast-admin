@@ -1,19 +1,17 @@
 <div class="segments">
   <div class="start segment">
-    <div class="line"><hr></div>
   </div>
   <div class="segment" ng-repeat-start="hourLocations in locationsByHour">
     <div class="date" ng-bind-html="hourLocations.label" ng-if="hourLocations.label"></div>
-    <div class="line"><hr></div>
+    <div class="line"></div>
     <div class="activities" ng-if="hourLocations.locationsByMinute | orderBy: 'minute'">
       <div class="line"
-        style="left: {{hourLocations.startLocationPosition}}px;"
-        data-width="{{hourLocations.endLocationPosition - hourLocations.startLocationPosition | number:0}}">
+        style="left: {{hourLocations.startLocationPosition}}px; width: {{hourLocations.endLocationPosition - hourLocations.startLocationPosition}}px;">
       </div>
       <div class="events" style="left: {{hourLocations.startLocationPosition}}px;">
         <span class="event"
           ng-repeat="minute in hourLocations.locationsByMinute"
-          ng-click="moveSelectedLine($event); selectMinute(minute);">
+          ng-click="moveSelectedLine($event); selectMinute(hourLocations, minute);">
           <div></div>
         </span>
       </div>
@@ -21,7 +19,7 @@
     <div class="time">{{hourLocations.date.hour()}}</div>
   </div>
   <div class="end segment" ng-repeat-end ng-if="$last">
-    <div class="line"><hr></div>
+    <div class="line"></div>
     <div class="time">{{hourLocations.date.clone().add(1, 'h').hour()}}</div>
   </div>
 </div>
