@@ -3,9 +3,9 @@
 
     <form novalidate="novalidate" class="form-horizontal">
         <alert ng-show="serverMessage">
-            <li ng-repeat="(key, value) in serverMessage">
-                {{value[0]}}
-            </li>
+          <p>
+            {{serverMessage["detail"]}}
+          </p>
         </alert>
         <div class="control-group">
             <label class="control-label" for="inputName" translate>Name:</label>
