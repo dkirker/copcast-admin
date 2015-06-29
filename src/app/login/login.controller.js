@@ -14,9 +14,6 @@ angular.module('copcastAdminApp')
     $scope.user = {username: '', password: ''};
     $scope.email = '';
     $scope.selected = 'login';
-    $scope.$on("401_error", function(event, mass) {
-      $scope.errorMessage = gettext('The email and password you entered don\'t match.');
-    });
 
     $scope.forgotPass = function(){
       $scope.selected = 'forgotPass';
@@ -46,15 +43,21 @@ angular.module('copcastAdminApp')
     };
 
     $scope.login = function() {
+
       $http.post(ServerUrl + '/token', {
         username : $scope.user.username,
         password : $scope.user.password,
         scope : 'admin'
-      }).success(function(token) {
+      },{ignoreAuthModule: true}).success(function(token) {
         loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
-        $scope.errorMessage = gettext('The email and password you entered don\'t match.');
+        console.log('status=['+status+']');
+        $scope.errorMessage = 'yooo The email and password you entered don\'t match.';
+        $scope.emailMessage = '';
+      }).then(function (response) {
+        console.log('response=['+response+']');
+        $scope.errorMessage = 'yooo The email and password you entered don\'t match.';
         $scope.emailMessage = '';
       });
     };
