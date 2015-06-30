@@ -52,12 +52,7 @@ angular.module('copcastAdminApp')
         loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
       }).error(function (data, status, headers, config) {
-        console.log('status=['+status+']');
-        $scope.errorMessage = 'yooo The email and password you entered don\'t match.';
-        $scope.emailMessage = '';
-      }).then(function (response) {
-        console.log('response=['+response+']');
-        $scope.errorMessage = 'yooo The email and password you entered don\'t match.';
+        $scope.errorMessage = 'The email and password you entered don\'t match.';
         $scope.emailMessage = '';
       });
     };
