@@ -9,7 +9,7 @@
  */
 angular.module('copcastAdminApp')
 
-  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext) {
+  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
 
     $scope.user = {username: '', password: ''};
     $scope.email = '';
@@ -53,6 +53,18 @@ angular.module('copcastAdminApp')
       }).success(function(token) {
         loginService.setToken($scope.user.username, token.token);
         $modalInstance.close();
+
+        //get user information
+        userService.getMyData().then(
+          function(data)
+        {
+          gettextCatalog.setCurrentLanguage(data.language);
+          //change the flag
+          TranslateService.setLanguage();
+
+
+        });
+
       }).error(function (data, status, headers, config) {
         $scope.errorMessage = gettext('The email and password you entered don\'t match.');
         $scope.emailMessage = '';
