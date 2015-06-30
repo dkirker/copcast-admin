@@ -45,9 +45,9 @@
             <br>
             <form novalidate="novalidate" class="form-horizontal">
               <alert ng-show="serverMessage">
-                <li ng-repeat="(key, value) in serverMessage">
-                  {{value[0]}}
-                </li>
+                <p>
+                  {{serverMessage["detail"]}}
+                </p>
               </alert>
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Name:</label>
@@ -80,7 +80,23 @@
                   <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
                 </div>
               </div>
+
+
+              <div class="control-group">
+                <label class="control-label" for="language" translate>Preferred language:</label>
+                <div class="controls">
+                  <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" id="language" value="pt_BR" ng-model="user.language"><img src="../assets/images/br-icon.png">
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+                  </label>
+
+                </div>
+              </div>
+
               <br><br>
+
               <div class="control-group">
                 <div class="controls">
                   <!-- user-detail.html: -->

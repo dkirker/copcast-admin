@@ -2,29 +2,19 @@
 
 /**
  * @ngdoc function
- * @name copcastAdminApp.controller:MainCtrl
+ * @name copcastAdminApp.controller:TranslateController
  * @description
- * # MainCtrl
+ * # TranslateController
  * Controller of the copcastAdminApp
  */
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('TranslateController', function($scope, gettextCatalog ) {
+app.controller('TranslateController', function($scope, gettextCatalog, TranslateService ) {
 
   $scope.init = function(){
 
-    if(gettextCatalog.currentLanguage == 'pt_BR')
-    {
-      $scope.imgFlag = "assets/images/us-icon.png";
-      gettextCatalog.setCurrentLanguage('pt_BR');
-    }
-    else
-    {
-      $scope.imgFlag = "assets/images/br-icon.png";
-      gettextCatalog.setCurrentLanguage('en');
-
-    }
+    TranslateService.setLanguage();
 
   };
 

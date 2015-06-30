@@ -2,9 +2,9 @@
   <h2 translate>Are you sure you want to delete this group?</h2>
   <hr/>
   <alert ng-show="serverMessage">
-    <li >
-      {{serverMessage}}
-    </li>
+    <p>
+      {{serverMessage["detail"]}}
+    </p>
   </alert>
     <div class="control-group">
       <label class="control-label"  translate>Name:</label>
