@@ -57,6 +57,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   loginService.logout = function(){
     $rootScope.globals = null;
     $cookieStore.remove('globals');
+    loginService.show();
   };
 
 
