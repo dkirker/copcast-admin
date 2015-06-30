@@ -10,22 +10,17 @@
 var app = angular.module('copcastAdminApp');
 app.service('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
 
-  var loginService = {},
-    modal = null;
+  var loginService = {};
 
 
   loginService.show = function() {
-    if ( !modal ) {
-      modal = $modal.open({
+      $modal.open({
         templateUrl : 'app/login/login.html',
         controller : 'LoginCtrl',
         backdrop : 'static',
         windowClass: 'modal-login',
         keyboard: false
       });
-    } else {
-      console.log('modal');
-    }
   };
 
   loginService.getToken = function() {
@@ -62,7 +57,6 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   loginService.logout = function(){
     $rootScope.globals = null;
     $cookieStore.remove('globals');
-    modal = null;
   };
 
 
