@@ -11,6 +11,6 @@
 <form ng-show="selected == 'forgotPass'">
   <span ng-if="errorMessage" class="errorMessage">{{errorMessage | translate }}</span>
   <span ng-if="emailMessage" class="emailMessage">{{emailMessage | translate }}</span>
-  <input type="email" name="email"  placeholder="{{'Type your email'| translate}}" ng-model="$parent.email">
+  <input type="email" name="email"  placeholder="{{'Type your email'| translate}}" ng-model="email">
   <button class="btn btn-block btn-primary" type="submit" ng-click="sendEmail()" translate>Reset Password</button>
 </form>
