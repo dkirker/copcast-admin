@@ -83,10 +83,11 @@ angular.module('copcastAdminApp')
         }
       };
     }]);
-  }).run(['$rootScope', '$location', '$cookieStore', '$http',
-    function ($rootScope, $location, $cookieStore, $http) {
+  }).run(['$rootScope', '$location', '$cookieStore', '$http', 'socket',
+    function ($rootScope, $location, $cookieStore, $http, socket) {
       $rootScope.globals = $cookieStore.get('globals');
       if ($rootScope.globals && $rootScope.globals.currentUser  ) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + $rootScope.globals.currentUser.token;
+        socket.connect($rootScope.globals.currentUser.token);
       }
     }]);

@@ -22,10 +22,28 @@ angular.module('copcastAdminApp')
     tag.id = 'socket-io';
     body.appendChild(tag);
 
+    var loadTimes = 0;
+    var maxRetry = 3;
+    var timeBetweenRetries = 500;
 
+    var getRandomInt = function(min, max) {
+      return Math.random() * (max - min) + min;
+    };
 
     socket.connect = function(token) {
+      if(!token){
+        console.log('socket.connect without token. returning.');
+        return;
+      }
       if ( typeof io === 'undefined' ) {
+        if(loadTimes < maxRetry){
+          loadTimes++;
+          var timeUsed = timeBetweenRetries * getRandomInt(1, 3);
+          setTimeout(function() {
+            socket.connect(token);
+          }, timeUsed)
+        }
+        console.log('socket.connect without io. retry.number=['+loadTimes+'], timeUsed=['+timeUsed+']');
         return;
       }
 
