@@ -44,6 +44,7 @@ angular.module('copcastAdminApp')
           }, timeUsed)
         }
         console.log('socket.connect without io. retry.number=['+loadTimes+'], timeUsed=['+timeUsed+']');
+        //TODO maybe raise a 401 error to show modal
         return;
       }
 
