@@ -10,6 +10,7 @@
       scope: {
         users: '=',
         selectedUser: '=?',
+        openOnLoad: '=?',
         onChangeUser: '&'
       },
       link: function(scope, el, attrs) {
@@ -23,6 +24,12 @@
             scope.onChangeUser()(userObj);
           });
         });
+
+        if(scope.openOnLoad) {
+          $timeout(function () {
+            $selectpicker.next().find('button').click();
+          }, 500);
+        }
 
         scope.$watchCollection('users', function() {
           $timeout(function () {
