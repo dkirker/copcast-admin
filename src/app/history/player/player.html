@@ -1,16 +1,18 @@
-<section class="history player window">
+<section class="history player window" ng-class="{'nousers': !selectedUser, 'novideo': !selectedUser || !src}">
   <section class="users group">
-    <div class="avatar">
+    <div class="avatar" ng-repeat="user in group.users">
       <img
         src="{{user.profilePicture}}"
-        class="img-circle active"
+        class="img-circle"
+        ng-class="{'active': selectedUser.id === user.id}"
         title="{{user.name}}"
-        ng-if="user.profilePicture">
+        ng-if="user.profilePicture"
+        ng-click="setUser(user)">
     </div>
   </section>
   <section class="selected user">
-    <span ng-if="!user"><translate>Select an user or group</translate></span>
-    <span ng-if="user"><translate>Selected user:</translate> <strong>{{user.name}}</strong></span>
+    <span ng-if="!selectedUser"><translate>Select an user or group</translate></span>
+    <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
   </section>
   <section class="scene">
     <div class="no video" ng-if="!src" translate>No video found</div>
@@ -19,4 +21,11 @@
     </video>
   </section>
   <section class="time" ng-bind-html="time"></section>
+  <section class="controls">
+    <div>
+      <div class="previous"></div>
+      <div class="play"></div>
+      <div class="next"></div>
+    </div>
+  </section>
 </section>

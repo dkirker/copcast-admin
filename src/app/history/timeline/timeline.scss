@@ -1,5 +1,8 @@
 $timeline-height: 130px;
+$start-end-width: 30px;
 $segment-width: 180px;
+$gap-width: 180px;
+$gap-box-width: 30px;
 
 $background-color: #F2F2F2;
 $date-color: #11990A;
@@ -12,6 +15,14 @@ $line-color: #d7d7d7;
       -ms-transition: $transition;
        -o-transition: $transition;
           transition: $transition;
+}
+
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+     -moz-transform: $transform;
+      -ms-transform: $transform;
+       -o-transform: $transform;
+          transform: $transform;
 }
 
 .nav {
@@ -35,62 +46,102 @@ $line-color: #d7d7d7;
         position: absolute;
         height: 2px;
         width: 100%;
-        top: 64px;
+        top: 63px;
         background-color: $line-color;
-      }
-
-      & > .selected.line {
-        position:absolute;
-        left: -10px;
-        height: 100%;
-        width: 3px;
-        background-color: #0288d1;
-        z-index: 1;
-        @include transition(all 0.5s ease-in-out);
-
-        & > img {
-          position: absolute;
-          left: -7px;
-          top: -1px;
-        }
       }
 
       .segments {
         height: $timeline-height;
+        padding-top: 25px;
+        position: relative;
+
+        & > .selected.line {
+          position:absolute;
+          top: 0;
+          left: -20px;
+          height: 100%;
+          width: 3px;
+          background-color: #0288d1;
+          z-index: 2;
+          @include transition(all 0.5s ease-in-out);
+
+          & > img {
+            position: absolute;
+            left: -7px;
+            top: -1px;
+          }
+        }
+
+        &.date {
+          display: table-cell;
+          vertical-align: top;
+          position: relative;
+        }
 
         .segment {
           width: $segment-width;
-          display: inline-block;
-          margin-top: 50px;
-          margin-left: -4px;
+          min-width: $segment-width;
+          height: 29px;
+          display: table-cell;
           border-left: 2px solid $line-color;
-          height: 21px;
+          position: relative;
+          vertical-align: middle;
+
+          &.borderless {
+            border: none;
+          }
+
+          &.gap {
+            width: $gap-width;
+            min-width: $gap-width;
+            border: none;
+            border-left: 2px solid $line-color;
+
+            & > .date {
+              &.first {
+                left: $gap-width / 2 - 45px;
+              }
+              &.last {
+                left: $gap-width / 2 + 5px;
+              }
+            }
+
+            & > .box {
+              position: absolute;
+              top: 7px;
+              left: $gap-width / 2 - $gap-box-width / 2;
+              width: $gap-box-width;
+              height: 15px;
+              border-right: 2px solid #d7d7d7;
+              border-left: 2px solid #d7d7d7;
+              margin: 0 -1px;
+              background-color: $background-color;
+              @include transform(skewX(-45deg));
+            }
+          }
 
           &.start {
             border: none;
           }
 
           &.start, &.end {
-            width: 30px;
-            & > .line {
-              width: 30px;
-            }
+            width: $start-end-width;
+            min-width: $start-end-width;
           }
 
           & > .line {
             position: relative;
-            top: 11px;
-            left: -1px;
-            width: 180px;
             height: 2px;
             background-color: $line-color;
           }
 
           & > .activities {
+            top: 4px;
             width: $segment-width;
             border: none;
             position: absolute;
             height: 21px;
+            cursor: pointer;
 
             & > .line {
               position: relative;
@@ -109,11 +160,11 @@ $line-color: #d7d7d7;
               }
 
               &::before {
-                left: -5px;
+                left: -9px;
               }
 
               &::after {
-                right: -6px;
+                right: -9px;
               }
             }
 
@@ -138,29 +189,30 @@ $line-color: #d7d7d7;
           }
 
           & > .date, & > .time {
-            width: 40px;
             position: absolute;
+            width: 40px;
             color: #c2c2c2;
             text-align: center;
           }
 
           & > .date {
             line-height: 16px;
-            margin-top: -17px;
-            margin-left: -23px;
+            top: -12px;
             color: $date-color;
             font-size: 0.8em;
           }
 
           & > .time {
             line-height: 20px;
-            top: 23px;
+            top: -24px;
             left: -21px;
             font-size: 1.3em;
             font-weight: 300;
-            position: relative;
-          }
 
+            &.last {
+              left: 158px;
+            }
+          }
         } /* End Segment */
       } /* End Segments */
     } /* End Container */

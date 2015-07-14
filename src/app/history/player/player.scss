@@ -1,31 +1,47 @@
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
 .history.player.window {
   position: fixed;
   right: 0px;
   bottom: 0px;
-  height: 408px;
+  height: 498px;
   width: 400px;
   padding: 0 0;
   z-index: 3;
   color: #fff;
   background-color: #182A40;
   text-align: center;
+  @include transition(height 0.8s);
 
   .users.group {
-    background-color: #fff;
+    display: inline-block;
+    background-color: #284766;
     width: 100%;
     white-space: nowrap;
     overflow-x: hidden;
+    overflow-y: hidden;
     height: 62px;
     padding-top: 4px;
+    @include transition(height 0.8s);
   }
 
   .avatar {
     display: inline-block;
+    margin: 0 3px;
 
     & > img {
       width: 54px;
       height: 54px;
-      opacity: 0.5;
+      opacity: 0.3;
+      border: 1px solid #eee;
+      cursor: pointer;
     }
 
     & > img.active {
@@ -34,19 +50,22 @@
   }
 
   .selected.user {
+    display: inline-block;
     margin: 8px;
     height: 30px;
   }
 
   .scene {
+    display: inline-block;
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: black;
     height: 260px;
+    @include transition(height 0.8s);
 
     .no.video {
       text-align: center;
-      position: absolute;
+      position: relative;
       width: 400px;
       height: 260px;
       color: white;
@@ -55,7 +74,64 @@
   }
 
   .time {
+    display: inline-block;
+    line-height: 40px;
     font-size: 1.5em;
-    margin: 5px 0 5px 0;
+    background-color: #284766;
+    z-index: 1;
   }
-}
+
+  .controls {
+    display: inline-block;
+    height: 90px;
+    vertical-align: bottom;
+    z-index: 1;
+
+    & > div {
+      padding-top: 4px;
+
+      .previous {
+        background: url('/assets/images/videoprevious.png') no-repeat center center;
+        height: 80px;
+        width: 20px;
+        display: inline-block;
+      }
+
+      .next {
+        background: url('/assets/images/videonext.png') no-repeat center center;
+        height: 80px;
+        width: 20px;
+        display: inline-block;
+      }
+
+      .play {
+        background: url('/assets/images/videoplay.png') no-repeat center center;
+        height: 80px;
+        width: 81px;
+        display: inline-block;
+        margin: 0 12px;
+      }
+    }
+  } /* End controls */
+
+  &.novideo {
+    height: 238px;
+
+    .scene {
+      height: 0;
+
+      .no.video {
+        display: none;
+      }
+    }
+  }
+
+  &.nousers {
+    height: 176px;
+
+    .users.group {
+      padding-top: 0px;
+      height: 0px;
+    }
+  }
+} /* End history.player.window */
