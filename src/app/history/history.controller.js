@@ -44,9 +44,6 @@
     initialize();
     function initialize() {
       $scope.filter = {};
-      $scope.filter.fromDate = moment('2014-08-01').toDate();
-      $scope.filter.toDate = moment('2014-10-30').toDate();
-      $scope.filter.period = true;
       loadUsersAndGroups();
     }
 
