@@ -28,13 +28,18 @@ body {
 */
 
 /* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
+.header {
+  &.navbar {
+    z-index: 4;
+  }
 
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -98,6 +103,7 @@ body {
 .navbar-inverse {
   background-color: #0B2A40;
   border-color: #e7e7e7;
+  z-index: 3
 }
 .navbar-inverse .navbar-nav > li > a {
   color: #a3b7cc;

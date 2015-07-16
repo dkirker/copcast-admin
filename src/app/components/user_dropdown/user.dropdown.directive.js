@@ -8,21 +8,26 @@
       restrict: 'E',
       templateUrl: 'app/components/user_dropdown/user.dropdown.html',
       scope: {
-        users: '=',
-        selectedUser: '=?',
+        users: '=ngModel',
+        openOnLoad: '=?',
         onChangeUser: '&'
       },
       link: function(scope, el, attrs) {
         var $selectpicker = el.find('.selectpicker');
+        var onChangeUser = scope.onChangeUser(); // Unwrap
 
         $selectpicker.on('change', function() {
           $timeout(function () {
-            console.log('selecionado', $selectpicker.val());
             var userObj = JSON.parse($selectpicker.val());
-            scope.selectedUser = userObj;
-            scope.onChangeUser()(userObj);
+            onChangeUser(userObj);
           });
         });
+
+        if(scope.openOnLoad) {
+          $timeout(function () {
+            $selectpicker.next().find('button').click();
+          }, 500);
+        }
 
         scope.$watchCollection('users', function() {
           $timeout(function () {

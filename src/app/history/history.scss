@@ -7,10 +7,11 @@
 
   .map.canvas {
     flex:1;
+    padding-bottom: 130px;
   }
 
   /*************** navbar ***************/
-  header {
+  div {
 
     &.navbar {
       padding: 7px 20px 0 0;
@@ -44,6 +45,7 @@
   footer {
     height: 130px;
     width: 100%;
+    position: fixed;
   }
 
   .navbar-center {

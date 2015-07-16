@@ -1,0 +1,12 @@
+<div class="segment">
+  <div class="time" ng-bind-html="timeLabel"></div>
+  <div class="time last" ng-bind-html="nextTimeLabel()" ng-if="last"></div>
+  <div class="line"></div>
+
+  <div class="activities"
+    style="left: {{firstLocationPosition()}}px; width: {{lastLocationPosition() - firstLocationPosition()}}px;"
+    ng-click="selectMinuteByPosition($event);">
+    <div class="line">
+    </div>
+  </div>
+</div>

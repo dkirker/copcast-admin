@@ -1,0 +1,30 @@
+<div class="segments">
+  <div class="selected line" style="left: {{selectedPosition}}px;">
+    <img src="assets/images/scrubber.png">
+  </div>
+  <div class="date segments" ng-repeat="(key, locationsByHour) in locationsByDay.getMap() track by locationsByHour.date">
+    <!--
+    <div class="start segment" ng-if="$first">
+      <div class="line"></div>
+    </div>
+    -->
+
+    <div class="gap segment">
+      <div class="first date" ng-bind-html="locationsByHour.getPreviousDate('DD/MM')"></div>
+      <div class="last date" ng-bind-html="locationsByHour.getDate('DD/MM')"></div>
+      <div class="line"></div>
+      <div class="box"></div>
+    </div>
+
+    <timeline-segment
+      ng-model="locations"
+      time-label="hour"
+      last="$last"
+      ng-repeat="(hour, locations) in locationsByHour.getMap()">
+    </timeline-segment>
+
+    <div class="end segment" ng-if="$last">
+      <div class="line"></div>
+    </div>
+  </div>
+</div>
