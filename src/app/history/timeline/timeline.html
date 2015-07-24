@@ -1,6 +1,9 @@
 <section class="nav timeline">
   <div class="container">
     <div class="main line"></div>
-    <timeline-segments ng-model="locationsByDay"></timeline-segments>
+    <timeline-segments
+      ng-model="locationsByDay"
+      selected-location="selectedLocation">
+    </timeline-segments>
   </div>
 </section>

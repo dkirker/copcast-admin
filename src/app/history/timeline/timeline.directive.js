@@ -15,29 +15,21 @@
       templateUrl: 'app/history/timeline/timeline.html',
 
       controller: function($scope) {
-        this.selectLocation = function selectLocation(location) {
+        this.setLocation = function setLocation(location) {
           $scope.selectedLocation = location;
-        };
+        }
       },
 
       scope: {
-        locations: '=ngModel',
-        onSelectLocation: '&'
+        locations: '=',
+        selectedLocation: '='
       },
 
       link: function(scope, element, attrs, controllers) {
-        var onSelectLocation = scope.onSelectLocation(); //unwrap
-
         scope.$watch('locations', function() {
-          scope.selectedPosition = -10;
+          //scope.selectedPosition = -40;
           scope.locationsByDay = new LocationsByDay(scope.locations);
           console.log('locationsByDay', scope.locationsByDay);
-        }, true);
-
-        scope.$watch('selectedLocation', function() {
-          var selectedLocation = scope.selectedLocation;
-          var location = selectedLocation && selectedLocation.unwrap();
-          onSelectLocation(location);
         }, true);
       }
     };
@@ -64,6 +56,13 @@
 
     getMap: function getMap() {
       return this.map;
+    },
+
+    first: function first() {
+      var objs = Object.keys(this.map);
+      if(objs.length > 0) {
+        return this.get(objs[0]);
+      }
     }
   };
 
@@ -96,6 +95,11 @@
 
     getMap: function getMap() {
       return this.locationsByDay.getMap();
+    },
+
+    getFirstLocation: function getFirstLocation() {
+      var dayLocations = this.locationsByDay.first();
+      return dayLocations && dayLocations.locationsByHour.first()[0];
     }
   };
 

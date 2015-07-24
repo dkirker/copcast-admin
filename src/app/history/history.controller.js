@@ -3,9 +3,9 @@
 
   var app = angular.module('copcastAdminApp');
 
-  var DEFAULT_ACCURACY = 10;
+  var DEFAULT_ACCURACY = 20;
 
-  app.controller('HistoryCtrl', function ($scope, $q, userService, groupService) {
+  app.controller('HistoryCtrl', function ($scope, $q, $timeout, userService, groupService) {
 
     var indexedUsers = {};
 
@@ -25,6 +25,7 @@
     }, true);
 
     $scope.$watch('currentLocation', function() {
+      console.log('CurrentLocation', $scope.currentLocation);
       updateUserMapMarkers();
       updateCurrentVideo();
     }, true);
@@ -44,9 +45,24 @@
     initialize();
     function initialize() {
       $scope.filter = {};
+      $scope.filter.fromDate = moment().add(-7, 'days').toDate();
+      $scope.filter.period = true;
+      $scope.filter.toDate = moment().toDate();
+      initializeHttpLoadingHandler();
       loadUsersAndGroups();
     }
 
+    function initializeHttpLoadingHandler() {
+      var $doc = $(document);
+      $doc.on('http-get-started', function httpGetStarted() {
+        console.log('start-loading');
+        $doc.trigger('start-loading');
+      })
+      .on('http-get-finished', function httpGetFinished() {
+        console.log('stop-loading');
+        $doc.trigger('stop-loading');
+      });
+    }
 
     /*
      * Scope functions called by view
@@ -82,22 +98,24 @@
     }
 
     function updateUserMapMarkers() {
-      var date = $scope.currentLocation && $scope.currentLocation.date;
-      var userMapMarkers = [];
-      var groupLocations = $scope.groupLocations;
+      $timeout(function() {
+        var date = $scope.currentLocation && $scope.currentLocation.date;
+        var userMapMarkers = [];
+        var groupLocations = $scope.groupLocations;
 
-      angular.forEach(groupLocations, function(locations, key) {
-        var user = indexedUsers[key];
-        var location = date
-          ? getNearestLocation(locations, date)
-          : locations.length > 0 && locations[0];
+        angular.forEach(groupLocations, function(locations, key) {
+          var user = indexedUsers[key];
+          var location = date
+            ? getNearestLocation(locations, date)
+            : locations.length > 0 && locations[0];
 
-        if(user && Map.isValidlocation(location)) {
-          this.push(Map.createMarker(user, location));
-        }
-      }, userMapMarkers);
-      $scope.userMapMarkers = userMapMarkers;
-      console.log('UserMapMarkers', $scope.userMapMarkers);
+          if(user && Map.isValidlocation(location)) {
+            this.push(Map.createMarker(user, location));
+          }
+        }, userMapMarkers);
+        $scope.userMapMarkers = userMapMarkers;
+        console.log('UserMapMarkers', $scope.userMapMarkers);
+      }, 600);
     }
 
     function updateCurrentVideo() {
@@ -184,7 +202,7 @@
         if(isPreparedToLoadLocations()) {
           var group = $scope.currentGroup;
           group.isUser
-            ? loadUserLocationsAndVideos($scope.currentUser)
+            ? loadUserLocationsAndVideos(group)
             : loadGroupLocationsAndVideos(group);
         } else {
           setGroupLocations();
@@ -291,7 +309,8 @@
       position: latLngPoints[0],
       icon: {
         url: user.profilePicture,
-        scaledSize: new google.maps.Size(32, 32)
+        //url: 'assets/images/head_icon_black.png',
+        scaledSize: new google.maps.Size(24, 24)
       }
     });
   };

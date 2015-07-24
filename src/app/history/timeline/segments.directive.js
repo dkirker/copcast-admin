@@ -14,31 +14,34 @@
         var self = this;
 
         $scope.$watch('locationsByDay', function() {
-          self.resetSelectedActivity();
+          self.resetSelectedPosition();
         });
 
-        this.selectActivity = function selectActivity(data) {
-          $scope.selectedPosition = data.selectedPosition - 1;
-          $scope.selectedLocation = data.location;
+        this.setPosition = function setPosition(position) {
+          $scope.selectedPosition = position - 1;
+          console.log('position', position);
         };
 
-        this.resetSelectedActivity = function resetSelectedActivity() {
-          self.selectActivity({
-            selectedPosition: -40,
-            location: undefined
-          });
+        this.setLocation = function setLocation(location) {
+          $scope.selectedLocation = location;
+        }
+
+        this.resetSelectedPosition = function resetSelectedPosition() {
+          self.setPosition(-40);
         }
       },
 
       scope: {
         locationsByDay: '=ngModel',
-        onSelectLocation: '&'
+        selectedLocation: '='
       },
 
       link: function(scope, element, attrs, timelineCtrl) {
-        scope.$watch('selectedLocation', function() {
-          timelineCtrl.selectLocation(scope.selectedLocation);
-        });
+        scope.$watch('locationsByDay', function() {
+          if(!scope.selectedLocation && scope.locationsByDay) {
+            scope.selectedLocation = scope.locationsByDay.getFirstLocation();
+          }
+        }, true);
       }
 
     };
