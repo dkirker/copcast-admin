@@ -1,0 +1,23 @@
+.loading {
+    position: absolute;
+    z-index: 3;
+    width: 200px;
+    left: 50%;
+    background-color: white;
+    border: solid 1px #ccc;
+    border-top: none;
+    transform: translateX(-50%);
+    line-height: 41px;
+    opacity: 0.8;
+    display: none;
+
+    & > div {
+      text-align: center;
+      color: #4C4C4C;
+      font-size: 16px;
+
+      & > img {
+        margin-right: 10px;
+      }
+    }
+}
