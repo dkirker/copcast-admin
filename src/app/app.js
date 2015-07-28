@@ -27,7 +27,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'app/views/realtime.html',
-        controller: 'RealtimeCtrl',
+        controller: 'RealtimeCtrl'
       })
       .when('/main', {
         templateUrl: 'app/views/main.html',
