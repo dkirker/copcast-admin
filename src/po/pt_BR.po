@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/views/users/user-detail.html:20 app/views/users/user-detail.html:43
+#: app/users/user-detail.html:20 app/users/user-detail.html:43
 msgid "Account Settings"
 msgstr "Configurações de conta"
 
@@ -20,7 +20,7 @@ msgstr "Configurações de conta"
 msgid "Admin"
 msgstr "Admin"
 
-#: app/views/users/user-destroy.html:2
+#: app/users/user-destroy.html:2
 msgid "Are you sure to delete this user?"
 msgstr "Você tem certeza que deseja excluir este usuário?"
 
@@ -32,23 +32,23 @@ msgstr "Você tem certeza que deseja excluir este grupo?"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/views/users/user-detail.html:26 app/views/users/user-detail.html:97
+#: app/users/user-detail.html:113 app/users/user-detail.html:26
 msgid "Change Password"
 msgstr "Alterar Senha"
 
-#: app/views/users/user-detail.html:132 app/views/users/user-detail.html:32
+#: app/users/user-detail.html:148 app/users/user-detail.html:32
 msgid "Change Picture"
 msgstr "Alterar Foto"
 
-#: app/views/users/user-detail.html:136
+#: app/users/user-detail.html:152
 msgid "Click here to send a new image"
 msgstr "Clique aqui para enviar uma nova imagem"
 
-#: app/views/users/user-detail.html:103 app/views/users/user-detail.html:105
+#: app/users/user-detail.html:119 app/users/user-detail.html:121
 msgid "Current password"
 msgstr "Senha atual"
 
-#: app/controllers/users/details.js:50
+#: app/users/details.js:50
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
@@ -56,16 +56,16 @@ msgstr "Senha atual está vazia"
 msgid "Date"
 msgstr "Data"
 
-#: app/login/login.controller.js:38
+#: app/login/login.controller.js:35
 msgid "Email sent successfully"
 msgstr "Email enviado com sucesso"
 
-#: app/views/users/user-creation.html:30 app/views/users/user-destroy.html:30
-#: app/views/users/user-detail.html:72
+#: app/users/user-creation.html:30 app/users/user-destroy.html:30
+#: app/users/user-detail.html:72
 msgid "Email:"
 msgstr "Email:"
 
-#: app/views/users/user-list.html:7
+#: app/users/user-list.html:7
 msgid "Group"
 msgstr "Grupo"
 
@@ -73,10 +73,10 @@ msgstr "Grupo"
 msgid "Group detail"
 msgstr "Detalhe do grupo"
 
-#: app/views/users/user-creation.html:17 app/views/users/user-destroy.html:18
-#: app/views/users/user-detail.html:59
+#: app/users/user-creation.html:17 app/users/user-destroy.html:18
+#: app/users/user-detail.html:59
 msgid "Group:"
-msgstr "Group:"
+msgstr "Grupo:"
 
 #: index.html:53
 msgid "Groups"
@@ -86,10 +86,10 @@ msgstr "Grupos"
 msgid "History"
 msgstr "Histórico"
 
-#: app/views/groups/group-creation.html:32
+#: app/users/user-creation.html:36 app/users/user-destroy.html:36
+#: app/users/user-detail.html:78 app/views/groups/group-creation.html:32
 #: app/views/groups/group-destroy.html:31
-#: app/views/groups/group-detail.html:32 app/views/users/user-creation.html:36
-#: app/views/users/user-destroy.html:36 app/views/users/user-detail.html:78
+#: app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr "É Admin?"
 
@@ -113,14 +113,14 @@ msgstr "Sair"
 msgid "Longitude:"
 msgstr "Longitude:"
 
-#: app/views/groups/group-list.html:6 app/views/users/user-list.html:6
+#: app/users/user-list.html:6 app/views/groups/group-list.html:6
 msgid "Name"
 msgstr "Nome"
 
-#: app/views/groups/group-creation.html:11
+#: app/users/user-creation.html:11 app/users/user-destroy.html:11
+#: app/users/user-detail.html:53 app/views/groups/group-creation.html:11
 #: app/views/groups/group-destroy.html:10
-#: app/views/groups/group-detail.html:11 app/views/users/user-creation.html:11
-#: app/views/users/user-destroy.html:11 app/views/users/user-detail.html:53
+#: app/views/groups/group-detail.html:11
 msgid "Name:"
 msgstr "Nome:"
 
@@ -128,11 +128,11 @@ msgstr "Nome:"
 msgid "New group"
 msgstr "Novo grupo"
 
-#: app/views/users/user-detail.html:107 app/views/users/user-detail.html:109
+#: app/users/user-detail.html:123 app/users/user-detail.html:125
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/history/player/player.html:16
+#: app/history/player/player.html:18
 msgid "No video found"
 msgstr "Nenhum vídeo encontrado"
 
@@ -140,11 +140,11 @@ msgstr "Nenhum vídeo encontrado"
 msgid "Password"
 msgstr "Senha"
 
-#: app/controllers/users/details.js:54
+#: app/users/details.js:54
 msgid "Password or password confirmation are empty."
 msgstr "Senha ou nova senha estão vazias."
 
-#: app/views/users/user-creation.html:42
+#: app/users/user-creation.html:42
 msgid "Password:"
 msgstr "Senha:"
 
@@ -152,7 +152,7 @@ msgstr "Senha:"
 msgid "Period"
 msgstr "Período"
 
-#: app/views/users/user-detail.html:142
+#: app/users/user-detail.html:158
 msgid ""
 "Please, give preference to PNG, GIF of TIF files, so we can make it more "
 "beautiful and rounded!"
@@ -160,7 +160,11 @@ msgstr ""
 "Por favor, dê preferência para arquivos PNG, GIF ou TIF, desta forma, "
 "podemos manipulá-la de forma mais elegante!"
 
-#: app/views/users/user-destroy.html:54
+#: app/users/user-creation.html:49 app/users/user-detail.html:86
+msgid "Preferred language:"
+msgstr "Língua preferencial:"
+
+#: app/users/user-destroy.html:56
 msgid "Profile picture"
 msgstr "Foto do perfil"
 
@@ -168,7 +172,7 @@ msgstr "Foto do perfil"
 msgid "Realtime"
 msgstr "Tempo real"
 
-#: app/views/users/user-detail.html:110
+#: app/users/user-detail.html:126
 msgid "Repeat your password"
 msgstr "Repitir sua senha"
 
@@ -181,21 +185,17 @@ msgid "SIGN IN"
 msgstr "LOGAR"
 
 #: app/components/user_dropdown/user.dropdown.html:2
-#: app/history/player/player.html:12
+#: app/history/player/player.html:14
 msgid "Select an user or group"
 msgstr "Selecione um usuário ou grupo"
 
-#: app/history/player/player.html:13
+#: app/history/player/player.html:15
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
 
 #: index.html:57
 msgid "Signed in as"
 msgstr "Logado como"
-
-#: app/login/login.controller.js:18 app/login/login.controller.js:57
-msgid "The email and password you entered don't match."
-msgstr "Email ou senha inválidos."
 
 #: app/views/realtime.html:12
 msgid ""
@@ -205,11 +205,11 @@ msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
 
-#: app/login/login.controller.js:34
+#: app/login/login.controller.js:31
 msgid "Trying to send email..."
 msgstr "Tentando enviar email…"
 
-#: app/login/login.controller.js:31
+#: app/login/login.controller.js:28
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
@@ -221,7 +221,7 @@ msgstr "Digite para filtrar o mapa"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/views/users/user-creation.html:2
+#: app/users/user-creation.html:2
 msgid "User detail"
 msgstr "Detalhe do usuário"
 
@@ -229,8 +229,8 @@ msgstr "Detalhe do usuário"
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: app/views/users/user-creation.html:24 app/views/users/user-destroy.html:24
-#: app/views/users/user-detail.html:66
+#: app/users/user-creation.html:24 app/users/user-destroy.html:24
+#: app/users/user-detail.html:66
 msgid "Username:"
 msgstr "Nome de usuário:"
 
@@ -242,17 +242,17 @@ msgstr "Usuários"
 msgid "View history"
 msgstr "Ver histórico"
 
-#: app/controllers/users/details.js:58
+#: app/users/details.js:58
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/history/player/player.html:18
+#: app/history/player/player.html:20
 msgid "Your browser does not support the video tag."
 msgstr "Seu browser não suporta a tag de vídeo."
 
-#: app/views/groups/group-destroy.html:41
-#: app/views/groups/group-detail.html:41 app/views/users/user-destroy.html:45
-#: app/views/users/user-detail.html:119 app/views/users/user-detail.html:87
+#: app/users/user-destroy.html:46 app/users/user-detail.html:103
+#: app/users/user-detail.html:135 app/views/groups/group-destroy.html:41
+#: app/views/groups/group-detail.html:41
 msgid "cancel"
 msgstr "cancelar"
 
@@ -260,11 +260,11 @@ msgstr "cancelar"
 msgid "create new group"
 msgstr "criar novo grupo"
 
-#: app/views/users/user-creation.html:50 app/views/users/user-list.html:2
+#: app/users/user-creation.html:65 app/users/user-list.html:2
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/views/groups/group-list.html:17 app/views/users/user-list.html:17
+#: app/users/user-list.html:17 app/views/groups/group-list.html:17
 msgid "delete"
 msgstr "excluir"
 
@@ -272,11 +272,11 @@ msgstr "excluir"
 msgid "delete group"
 msgstr "excluir grupo"
 
-#: app/views/users/user-destroy.html:46
+#: app/users/user-destroy.html:47
 msgid "delete user"
 msgstr "excluir usuário"
 
-#: app/views/groups/group-list.html:16 app/views/users/user-list.html:16
+#: app/users/user-list.html:16 app/views/groups/group-list.html:16
 msgid "edit"
 msgstr "editar"
 
@@ -288,9 +288,12 @@ msgstr "esqueci minha senha"
 msgid "update group"
 msgstr "atualizar grupo"
 
-#: app/views/users/user-detail.html:120 app/views/users/user-detail.html:88
+#: app/users/user-detail.html:104 app/users/user-detail.html:136
 msgid "update user"
 msgstr "atualizar usuário"
+
+#~ msgid "The email and password you entered don't match."
+#~ msgstr "Email ou senha inválidos."
 
 #~ msgid "No video selected"
 #~ msgstr "Nenhum vídeo selecionado"
