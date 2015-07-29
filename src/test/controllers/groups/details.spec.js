@@ -14,7 +14,7 @@ describe('Controller: GroupsDetailCtrl', function () {
     http = _$http_
     location = _$location_;
     serverUrl = "http://test";
-    spyOn(http, "get").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "get").andReturn({success: function(data){return {error: function(data){}}}} );
 
     GroupsDetailCtrl = $controller('GroupsDetailsCtrl', {
       $scope: scope,
@@ -34,7 +34,7 @@ describe('Controller: GroupsDetailCtrl', function () {
 
   it('updates group', function () {
     scope.group = {id: 20};
-    spyOn(http, "post").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "post").andReturn({success: function(data){return {error: function(data){}}}} );
 
     scope.updateGroup();
 

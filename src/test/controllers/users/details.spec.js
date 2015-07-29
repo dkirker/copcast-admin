@@ -14,7 +14,7 @@ describe('Controller: UsersDetailsCtrl', function () {
     http = $http;
     location = $location;
     serverUrl = "http://test";
-    spyOn(http, "get").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "get").andReturn({success: function(data){return {error: function(data){}}}} );
 
     UsersDetailsCtrl = $controller('UsersDetailsCtrl', {
       $scope: scope,
@@ -39,7 +39,7 @@ describe('Controller: UsersDetailsCtrl', function () {
 
   it('updates users', function () {
     scope.user = {id: 20};
-    spyOn(http, "post").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "post").andReturn({success: function(data){return {error: function(data){}}}} );
 
     scope.updateUser();
 

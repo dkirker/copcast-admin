@@ -23,7 +23,7 @@ describe('Controller: UsersCreationCtrl', function () {
   }));
 
   it('creates new user', function () {
-    spyOn(http, "post").and.callFake(function(){ return {success: function(data){return {error: function(data){}}}};} );
+    spyOn(http, "post").andCallFake(function(){ return {success: function(data){return {error: function(data){}}}};} );
 
     scope.createNewUser();
 

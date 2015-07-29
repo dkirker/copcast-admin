@@ -14,7 +14,7 @@ describe('Controller: GroupsDestroyCtrl', function () {
     http = _$http_
     location = _$location_;
     serverUrl = "http://test";
-    spyOn(http, "get").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "get").andReturn({success: function(data){return {error: function(data){}}}} );
 
     GroupsDestroyCtrl = $controller('GroupsDestroyCtrl', {
       $scope: scope,
@@ -34,8 +34,8 @@ describe('Controller: GroupsDestroyCtrl', function () {
 
   it('delete group', function () {
     scope.group = {id: 20};
-    spyOn(http, "delete").and.returnValue({success: function(data){return {error: function(data){}}}} );
-    spyOn(window, 'confirm').and.returnValue(true);
+    spyOn(http, "delete").andReturn({success: function(data){return {error: function(data){}}}} );
+    spyOn(window, 'confirm').andReturn(true);
 
     scope.deleteGroup();
 
@@ -46,8 +46,8 @@ describe('Controller: GroupsDestroyCtrl', function () {
   it('cancel delete group', function () {
     scope.group = {id: 20};
     console.log('testing' + spyOn);
-    spyOn(http, "delete").and.returnValue({success: function(data){return {error: function(data){}}}} );
-    spyOn(window, 'confirm').and.returnValue(false);
+    spyOn(http, "delete").andReturn({success: function(data){return {error: function(data){}}}} );
+    spyOn(window, 'confirm').andReturn(false);
 
     scope.deleteGroup();
 
