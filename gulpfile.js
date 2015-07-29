@@ -3,8 +3,9 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var wrench = require('wrench');
-var karma = require('gulp-karma');
+//var karma = require('gulp-karma');
 var gettext = require('gulp-angular-gettext');
+var Server = require('karma').Server;
 
 var options = {
   src: 'src',
@@ -58,17 +59,11 @@ var testFiles = [
   'src/test/**/*.js'
 ];
 
-gulp.task('test', function() {
-  // Be sure to return the stream
-  return gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+gulp.task('test', function (done) {
+  new Server({
+    configFile:  'karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('default', ['clean'], function () {
