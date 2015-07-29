@@ -27,7 +27,7 @@
             selectedPosition: -40,
             location: undefined
           });
-        }
+        };
       },
 
       scope: {

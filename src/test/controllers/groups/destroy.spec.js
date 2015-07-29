@@ -3,7 +3,7 @@
 describe('Controller: GroupsDestroyCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var GroupsDestroyCtrl,
     scope, location, serverUrl, http;
@@ -45,6 +45,7 @@ describe('Controller: GroupsDestroyCtrl', function () {
 
   it('cancel delete group', function () {
     scope.group = {id: 20};
+    console.log('testing' + spyOn);
     spyOn(http, "delete").and.returnValue({success: function(data){return {error: function(data){}}}} );
     spyOn(window, 'confirm').and.returnValue(false);
 

@@ -77,7 +77,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  }).run(function($rootScope, $location, loginService, gettextCatalog ) {
+  }).run(function($rootScope, $location, loginService ) {
 
     $rootScope.$on('event:auth-loginRequired', function() {
       loginService.show();

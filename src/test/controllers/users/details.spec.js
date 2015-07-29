@@ -3,7 +3,7 @@
 describe('Controller: UsersDetailsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var UsersDetailsCtrl,
     scope, location, serverUrl, http;

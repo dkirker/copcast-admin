@@ -7,7 +7,7 @@
 describe('Controller: RealtimeCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var RealtimeCtrl,
     scope,

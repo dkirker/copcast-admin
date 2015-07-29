@@ -3,7 +3,7 @@
 describe('Controller: GroupsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var GroupListCtrl,
     scope, location, serverUrl;

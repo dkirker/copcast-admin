@@ -3,7 +3,7 @@
 describe('Controller: ModalVideoCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var ModalVideoCtrl,
     scope,

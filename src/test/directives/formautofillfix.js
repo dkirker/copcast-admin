@@ -3,7 +3,7 @@
 describe('Directive: formAutoFillFix', function () {
 
   // load the directive's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var element,
     scope;

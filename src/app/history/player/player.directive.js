@@ -46,7 +46,7 @@
         scope.setUser = function setUser(user) {
           scope.selectedUser = user;
           onChangeUser(user);
-        }
+        };
 
         /*
          * Video functions

@@ -6,7 +6,7 @@
 describe('Controller: LogoutCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var LogoutCtrl,
     location,
