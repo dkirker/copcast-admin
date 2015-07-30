@@ -3,7 +3,7 @@
 describe('Service: peerManager', function () {
 
   // load the service's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   // instantiate service
   var peerManager;

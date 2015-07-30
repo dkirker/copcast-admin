@@ -7,8 +7,8 @@ describe('Directive: userName', function () {
     loginService;
 
   // Load the myApp module, which contains the directive
-  beforeEach(module('copcastAdminApp'));
-  beforeEach(module("templatesForTest"));
+  beforeEach(angular.mock.module('copcastAdminApp'));
+  beforeEach(angular.mock.module("templatesForTest"));
   // Store references to $rootScope and $compile
   // so they are available to all tests in this describe block
   beforeEach(inject(function(_$compile_, _$rootScope_, _loginService_){

@@ -4,9 +4,9 @@ node_js:
 before_script:
   - "npm install"
   - "npm install -g bower"
-  - "npm install -g gulp"
-  - "npm install -g karma"
-  - "npm install phantomjs"
+  - "npm install -g gulp@3.8.10"
+  - "npm install -g karma@0.12.9"
+  - "npm install phantomjs@1.9.17"
   - "bower install"
   - "gulp build"
 script:

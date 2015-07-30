@@ -7,7 +7,7 @@
 describe('Controller: RealtimeCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var RealtimeCtrl,
     scope,
@@ -84,7 +84,7 @@ describe('Controller: RealtimeCtrl', function () {
 
     it('load new user', function () {
       //expect(loginService.logout).toHaveBeenCalled();
-      spyOn(marker, "getPosition").and.callFake(function () {
+      spyOn(marker, "getPosition").andCallFake(function () {
         return {
           lat: function () {
             return 22;

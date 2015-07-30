@@ -5,7 +5,7 @@ describe('Service: UserService', function () {
   var httpBackend;
   var userService;
 
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   beforeEach(inject(function (_userService_, $httpBackend, _ServerUrl_) {
     userService = _userService_;

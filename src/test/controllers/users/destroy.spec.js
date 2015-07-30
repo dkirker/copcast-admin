@@ -3,7 +3,7 @@
 describe('Controller: UsersDestroyCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var UsersDestroyCtrl,
     scope, location, serverUrl, http;
@@ -14,7 +14,7 @@ describe('Controller: UsersDestroyCtrl', function () {
     http = _$http_
     location = _$location_;
     serverUrl = "http://test";
-    spyOn(http, "get").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "get").andReturn({success: function(data){return {error: function(data){}}}} );
 
     UsersDestroyCtrl = $controller('UsersDestroyCtrl', {
       $scope: scope,
@@ -34,8 +34,8 @@ describe('Controller: UsersDestroyCtrl', function () {
 
   it('delete user', function () {
     scope.user = {id: 20, username:'myUserTeste'};
-    spyOn(http, "delete").and.returnValue({success: function(data){return {error: function(data){}}}} );
-    spyOn(window, 'confirm').and.returnValue(true);
+    spyOn(http, "delete").andReturn({success: function(data){return {error: function(data){}}}} );
+    spyOn(window, 'confirm').andReturn(true);
 
     scope.deleteUser();
 
@@ -44,8 +44,8 @@ describe('Controller: UsersDestroyCtrl', function () {
 
   it('cancel delete user', function () {
     scope.user = {id: 20};
-    spyOn(http, "delete").and.returnValue({success: function(data){return {error: function(data){}}}} );
-    spyOn(window, 'confirm').and.returnValue(false);
+    spyOn(http, "delete").andReturn({success: function(data){return {error: function(data){}}}} );
+    spyOn(window, 'confirm').andReturn(false);
 
     scope.deleteUser();
 

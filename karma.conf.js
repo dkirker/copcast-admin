@@ -7,22 +7,16 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-    plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine',
-      'karma-ng-html2js-preprocessor',
-      'karma-spec-reporter'
-    ],
-
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: [ 'jasmine', 'browserify'],
 
     // list of files / patterns to load in the browser
     files: [
       'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',
       // bower:js
       'bower_components/jquery/dist/jquery.js',
-      'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
+      'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+      'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
@@ -30,14 +24,16 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-utils/ui-utils.js',
       'bower_components/angular-ui-map/ui-map.js',
       'bower_components/angular-http-auth/src/http-auth-interceptor.js',
-      'bower_components/angular-notify/dist/angular-notify.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
+      'bower_components/angular-notify/dist/angular-notify.js',
       'bower_components/moment/moment.js',
+      'bower_components/angular-gettext/dist/angular-gettext.js',
       // endbower
       'src/app/**/*.js',
       'src/app/views/**/*.html',
@@ -51,7 +47,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '**/*.html': ['ng-html2js']
+      '**/*.html': ['ng-html2js'],
+      'src/**/*.js': ['browserify']
+    },
+
+    browserify: {
+      debug: true,
+      transform: [ 'brfs' ]
     },
     ngHtml2JsPreprocessor: {
       // strip this from the file path

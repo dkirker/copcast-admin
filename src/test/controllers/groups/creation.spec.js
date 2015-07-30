@@ -3,7 +3,7 @@
 describe('Controller: GroupsCreationCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('copcastAdminApp'));
+  beforeEach(angular.mock.module('copcastAdminApp'));
 
   var GroupsCreationCtrl,
     scope, location, serverUrl, http;
@@ -23,7 +23,7 @@ describe('Controller: GroupsCreationCtrl', function () {
   }));
 
   it('creates new group', function () {
-    spyOn(http, "post").and.returnValue({success: function(data){return {error: function(data){}}}} );
+    spyOn(http, "post").andReturn({success: function(data){return {error: function(data){}}}} );
 
     scope.createGroup();
 

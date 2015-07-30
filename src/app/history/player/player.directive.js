@@ -56,7 +56,7 @@
         scope.setUser = function setUser(user) {
           scope.selectedUser = user;
           onChangeUser(user);
-        }
+        };
 
         scope.playVideo = function playVideo() {
           if(video.src) {
