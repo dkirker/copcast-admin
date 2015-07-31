@@ -5,7 +5,7 @@ var gutil = require('gulp-util');
 var wrench = require('wrench');
 //var karma = require('gulp-karma');
 var gettext = require('gulp-angular-gettext');
-var Server = require('karma').Server;
+var Server = require('karma').server;
 
 var options = {
   src: 'src',
@@ -30,40 +30,53 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
   require('./gulp/' + file)(options);
 });
 
-var testFiles = [
-  'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',
-  // bower:js
-  'bower_components/jquery/dist/jquery.js',
-  'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-  'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
-  'bower_components/angular/angular.js',
-  'bower_components/angular-animate/angular-animate.js',
-  'bower_components/angular-cookies/angular-cookies.js',
-  'bower_components/angular-touch/angular-touch.js',
-  'bower_components/angular-sanitize/angular-sanitize.js',
-  'bower_components/angular-resource/angular-resource.js',
-  'bower_components/angular-route/angular-route.js',
-  'bower_components/angular-mocks/angular-mocks.js',
-  'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-  'bower_components/angular-ui-utils/ui-utils.js',
-  'bower_components/angular-ui-map/ui-map.js',
-  'bower_components/angular-http-auth/src/http-auth-interceptor.js',
-  'bower_components/ng-file-upload/ng-file-upload.js',
-  'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
-  'bower_components/angular-notify/dist/angular-notify.js',
-  'bower_components/moment/moment.js',
-  'bower_components/angular-gettext/dist/angular-gettext.js',
-  // endbower
-  'src/app/**/*.js',
-  'src/app/views/**/*.html',
-  'src/test/**/*.js'
-];
+//var testFiles = [
+//  'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',
+//  // bower:js
+//  'bower_components/jquery/dist/jquery.js',
+//  'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+//  'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
+//  'bower_components/angular/angular.js',
+//  'bower_components/angular-animate/angular-animate.js',
+//  'bower_components/angular-cookies/angular-cookies.js',
+//  'bower_components/angular-touch/angular-touch.js',
+//  'bower_components/angular-sanitize/angular-sanitize.js',
+//  'bower_components/angular-resource/angular-resource.js',
+//  'bower_components/angular-route/angular-route.js',
+//  'bower_components/angular-mocks/angular-mocks.js',
+//  'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+//  'bower_components/angular-ui-utils/ui-utils.js',
+//  'bower_components/angular-ui-map/ui-map.js',
+//  'bower_components/angular-http-auth/src/http-auth-interceptor.js',
+//  'bower_components/ng-file-upload/ng-file-upload.js',
+//  'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
+//  'bower_components/angular-notify/dist/angular-notify.js',
+//  'bower_components/moment/moment.js',
+//  'bower_components/angular-gettext/dist/angular-gettext.js',
+//  // endbower
+//  'src/app/**/*.js',
+//  'src/app/views/**/*.html',
+//  'src/test/**/*.js'
+//];
 
 gulp.task('test', function (done) {
-  new Server({
-    configFile:  'karma.conf.js',
-    singleRun: true
-  }, done).start();
+  //var configFile = __dirname + '/karma.conf.js';
+  //new Server({
+  //  configFile: configFile,
+  //  singleRun: true
+  //}, done).start();
+  //return Server.start({
+  //  configFile: __dirname +'/karma.conf.js',
+  //  singleRun: true
+  //}, done);
+  var config = {
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true,
+    autoWatch: false
+  };
+
+  var server = new Server(config, done)
+  server.start()
 });
 
 gulp.task('default', ['clean'], function () {
