@@ -1,35 +1,35 @@
 <div class="containerUser">
     <h1 translate>User detail</h1>
 
-    <form novalidate="novalidate" class="form-horizontal">
+    <form novalidate class="form-horizontal" ng-submit="submittted = true" name="frm">
         <alert ng-show="serverMessage">
           <p>
-            {{serverMessage["detail"]}}
+            {{serverMessage}}
           </p>
         </alert>
         <div class="control-group">
             <label class="control-label" for="inputName" translate>Name:</label>
             <div class="controls">
-                <input type="text" id="inputName" ng-model="user.name"/>
+                <input type="text" id="inputName" ng-model="user.name" required/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="inputName" translate>Group:</label>
             <div class="controls">
-                <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
+                <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" required>
                 </select>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="inputUsername" translate>Username:</label>
             <div class="controls">
-                <input type="text" id="inputUsername" ng-model="user.username"/>
+                <input type="text" id="inputUsername" ng-model="user.username" required/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="inputEmail" translate>Email:</label>
             <div class="controls">
-                <input type="text" id="inputEmail" ng-model="user.email"/>
+                <input type="text" id="inputEmail" ng-model="user.email" required/>
             </div>
         </div>
         <div class="control-group">
@@ -41,7 +41,7 @@
         <div class="control-group">
             <label class="control-label" for="inputPassword" translate>Password:</label>
             <div class="controls">
-                <input type="password" id="inputPassword" ng-model="user.password"/>
+                <input type="password" id="inputPassword" ng-model="user.password" required ng-minlength="6"/>
             </div>
         </div>
 
@@ -59,10 +59,11 @@
         </div>
 
       <div class="control-group">
-            <div class="controls">
+            <div class="controls" >
               <br><br>
                 <!-- user-creation.html: -->
-                <a ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</a>
+              <a ng-show="!frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</a>
+              <label ng-show="frm.$invalid" class="disabled btn btn-small btn-primary" translate>create new user</label>
               <br><br>
             </div>
         </div>
