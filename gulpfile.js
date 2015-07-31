@@ -3,9 +3,8 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var wrench = require('wrench');
-//var karma = require('gulp-karma');
 var gettext = require('gulp-angular-gettext');
-var Server = require('karma').server;
+var Server = require('karma').Server;
 
 var options = {
   src: 'src',
@@ -60,23 +59,22 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
 //];
 
 gulp.task('test', function (done) {
-  //var configFile = __dirname + '/karma.conf.js';
-  //new Server({
-  //  configFile: configFile,
-  //  singleRun: true
-  //}, done).start();
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
   //return Server.start({
   //  configFile: __dirname +'/karma.conf.js',
   //  singleRun: true
   //}, done);
-  var config = {
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true,
-    autoWatch: false
-  };
-
-  var server = new Server(config, done)
-  server.start()
+  //var config = {
+  //  configFile: __dirname + '/karma.conf.js',
+  //  singleRun: true,
+  //  autoWatch: false
+  //};
+  //
+  //var server = new Server(config, done)
+  //server.start()
 });
 
 gulp.task('default', ['clean'], function () {
