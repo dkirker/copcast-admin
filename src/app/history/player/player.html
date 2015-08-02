@@ -11,21 +11,26 @@
     </div>
   </section>
   <section class="selected user">
-    <span ng-if="!selectedUser"><translate>Select an user or group</translate></span>
-    <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
+    <span ng-if="!selectedUser"><translate>Selecione um usuário ou grupo</translate></span>
+    <span ng-if="selectedUser"><translate>Usuário selecionado:</translate> <strong>{{selectedUser.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!src" translate>No video found</div>
+    <div class="no video" ng-if="!src" translate>Nenhum vídeo encontrado</div>
     <video width="400" height="260" controls>
-    <translate>Your browser does not support the video tag.</translate>
+    <translate>Seu navegador não suporta vídeos.</translate>
     </video>
   </section>
   <section class="time" ng-bind-html="time"></section>
   <section class="controls">
     <div>
-      <div class="previous"></div>
-      <div class="play"></div>
-      <div class="next"></div>
+      <div class="previous" ng-class="{'enabled': videos && videos.length > 0}" ng-click="previousVideo()">
+        <div></div>
+      </div>
+      <div class="play img-circle" ng-class="{'enabled': selectedUser && src}" ng-click="playVideo()">
+      </div>
+      <div class="next" ng-class="{'enabled': videos && videos.length > 0}" ng-click="nextVideo()">
+        <div></div>
+      </div>
     </div>
   </section>
 </section>

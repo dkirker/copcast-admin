@@ -17,9 +17,10 @@
     </div>
 
     <timeline-segment
-      ng-model="locations"
+      locations="locations"
       time-label="hour"
       last="$last"
+      selected-location="selectedLocation"
       ng-repeat="(hour, locations) in locationsByHour.getMap()">
     </timeline-segment>
 

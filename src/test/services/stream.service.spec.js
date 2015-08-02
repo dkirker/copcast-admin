@@ -1,5 +1,7 @@
 'use strict';
 
+var data = require('./user.mock.js');
+
 describe('Service: UserService', function () {
   var ServerUrl;
   var httpBackend;
@@ -17,18 +19,20 @@ describe('Service: UserService', function () {
     // given
     beforeEach(function () {
       httpBackend
-        .whenGET(ServerUrl + '/stream/1/start')
+        .whenPOST(ServerUrl + '/streams/1/start')
         .respond({});
     });
 
     it('should return success', function () {
-      var expectedUsers = angular.copy(activeUsers);
-      expectedUsers[0].profilePicture = ServerUrl + '/pictures/' + expectedUsers[0].id + '/medium/show';
+      var expectedUsers = angular.copy(data.activeUsers);
+      var userId = expectedUsers[0].id;
+
+      expectedUsers[0].profilePicture = ServerUrl + '/pictures/' + userId + '/medium/show';
 
       streamService
-        .startStreaming()
-        .then(function(data) {
-          expect(data).toEqual({});
+        .startStreaming(userId)
+        .then(function(streamingData) {
+          expect(streamingData).toEqual({});
         });
 
       httpBackend.flush();

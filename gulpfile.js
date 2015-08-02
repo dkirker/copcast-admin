@@ -61,7 +61,7 @@ var testFiles = [
 
 gulp.task('test', function (done) {
   new Server({
-    configFile:  'karma.conf.js',
+    configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done).start();
 });

@@ -84,7 +84,7 @@ describe('Controller: RealtimeCtrl', function () {
 
     it('load new user', function () {
       //expect(loginService.logout).toHaveBeenCalled();
-      spyOn(marker, "getPosition").andCallFake(function () {
+      spyOn(marker, "getPosition").and.callFake(function () {
         return {
           lat: function () {
             return 22;

@@ -15,16 +15,16 @@
             </li>
           </ul>
           <date-filter
-            from-date="filter.fromDate"
-            to-date="filter.toDate"
+            dates="filter"
             period="filter.period"
-            max-period-of-days="60" />
+            max-period-of-days="20" />
         </div>
     </nav>
   </div>
+  <loading></loading>
   <main map class="map canvas" marker-locations="userMapMarkers" heatmap-locations="userMapLocations"></main>
   <footer class="navbar navbar-default navbar-static-bottom">
-    <timeline ng-model="userLocations" on-select-location="setCurrentLocation"></timeline>
-    <player ng-model="currentGroup" src="currentVideo.src" on-change-user="setCurrentUser"></player>
+    <timeline locations="userLocations" selected-location="currentLocation"></timeline>
+    <player group="currentGroup" videos="groupVideos" src="currentVideo.src" on-change-user="setCurrentUser"></player>
   </footer>
 </div>
