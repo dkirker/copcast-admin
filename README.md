@@ -34,6 +34,6 @@ And to finally run the app:
   gulp serve
 ```
 
-To test copcast completely, you must have also the <a href="https://github.com/igarape/copcast-admin">Copcast Android</a> app installed in an Android phone and connected to the <a href="https://github.com/igarape/mogi-server">Copcast Server</a>.
+To test copcast completely, you must have also the <a href="https://github.com/igarape/copcast-android">Copcast Android</a> app installed in an Android phone and connected to the <a href="https://github.com/igarape/mogi-server">Copcast Server</a>.
 
 Copcast Admin is developed by <a href="http://www.igarape.org.br/en/">Instituto Igarapé</a> as part of the <a href="http://www.igarape.org.br/en/smart-policing/">Smart Policing Project</a>.
