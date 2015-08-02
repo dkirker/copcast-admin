@@ -7,6 +7,7 @@
           transition: $transition;
 }
 
+
 .history.player.window {
   position: fixed;
   right: 0px;
@@ -88,28 +89,66 @@
     z-index: 1;
 
     & > div {
-      padding-top: 4px;
+      padding-top: 9px;
+
+      .previous, .next {
+        height: 33px;
+        width: 20px;
+        display: inline-block;
+        cursor: pointer;
+        margin-bottom: 19px;
+        opacity: 0.3;
+
+        & > div {
+          margin-top: 7px;
+          height: 20px;
+          width: 18px;
+          @include transition(border 0.3s);
+        }
+
+        &.enabled {
+          opacity: 1;
+          &:hover {
+            & > div {
+              border-color: #0082CF;
+            }
+          }
+        }
+      }
 
       .previous {
         background: url('/assets/images/videoprevious.png') no-repeat center center;
-        height: 80px;
-        width: 20px;
-        display: inline-block;
+        & > div {
+          margin-left: 2px;
+          border-left: solid 2px #0c5d8d;
+        }
       }
 
       .next {
         background: url('/assets/images/videonext.png') no-repeat center center;
-        height: 80px;
-        width: 20px;
-        display: inline-block;
+        & > div {
+          border-right: solid 2px #0c5d8d;
+        }
       }
 
       .play {
         background: url('/assets/images/videoplay.png') no-repeat center center;
-        height: 80px;
-        width: 81px;
+        height: 72px;
+        width: 72px;
         display: inline-block;
-        margin: 0 12px;
+        margin: 0px 12px;
+        border: solid 2px #0c5d8d;
+        cursor: pointer;
+        opacity: 0.3;
+        @include transition(border 0.3s);
+
+        &.enabled {
+          opacity: 1;
+
+          &:hover {
+            border-color: #0082CF;
+          }
+        }
       }
     }
   } /* End controls */

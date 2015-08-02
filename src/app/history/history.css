@@ -1,0 +1,63 @@
+.history {
+  margin-top: -62px;
+  padding-top: 62px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /***************** Player ****************/
+  /*************** navbar ***************/ }
+  .history .map.canvas {
+    flex: 1; }
+  .history footer {
+    width: 100%; }
+  .history .player.window {
+    width: 400px;
+    height: 403px;
+    margin-top: -403px;
+    float: right;
+    z-index: 3;
+    color: #fff;
+    background-color: #182A40;
+    text-align: center; }
+    .history .player.window .users.group {
+      background-color: #fff;
+      width: 100%;
+      white-space: nowrap;
+      overflow-x: hidden;
+      padding-left: 5px; }
+    .history .player.window .avatar {
+      display: inline-block; }
+      .history .player.window .avatar > img {
+        width: 54px;
+        height: 54px;
+        margin: 8px 2px 6px 4px;
+        opacity: 0.5; }
+      .history .player.window .avatar > img.active {
+        opacity: 1; }
+    .history .player.window .user.selected {
+      margin: 8px; }
+    .history .player.window .scene {
+      overflow-x: hidden; }
+    .history .player.window .time {
+      font-size: 1.5em;
+      margin-top: 5px; }
+  .history head {
+    height: 110px; }
+  .history .navbar {
+    padding: 7px 20px 0 0;
+    color: #777777; }
+    .history .navbar .form-inline input,
+    .history .navbar .form-inline select {
+      color: #777777;
+      width: auto; }
+    .history .navbar .form-inline label {
+      font-weight: 300; }
+    .history .navbar .form-inline .divider {
+      margin-left: 30px; }
+    .history .navbar .glyphicon {
+      vertical-align: middle; }
+  .history .navbar-center {
+    float: right;
+    position: relative;
+    left: -50%;
+    text-align: left; }

@@ -9,14 +9,18 @@
       templateUrl: 'app/history/player/player.html',
       replace: true,
       scope: {
-        group: '=ngModel',
+        group: '=',
         src: '=',
+        videos: '=',
+        currentVideo: '=?',
         onChangeUser: '&'
       },
       link: function(scope, el) {
         var onChangeUser = scope.onChangeUser(); // Unwrap
         var $video = el.find('video');
+        var video = $video[0];
         var lastSrc;
+        var currentVideoIndex = -1;
 
         scope.time = formatTime(0);
 
@@ -34,19 +38,40 @@
           if(lastSrc === scope.src) {
             return;
           }
-          var video = $video[0];
           lastSrc = scope.src;
           video.src = scope.src ? scope.src : '';
           video.load();
         });
 
+        scope.$watch('videos', function() {
+          video.pause();
+          video.currentTime = 0;
+          scope.currentVideo = undefined;
+          scope.currentVideoIndex = -1;
+        });
+
         /*
-         * User functions
+         * Scope functions
          */
         scope.setUser = function setUser(user) {
           scope.selectedUser = user;
           onChangeUser(user);
         };
+
+        scope.playVideo = function playVideo() {
+          if(video.src) {
+            video.play();
+          }
+        }
+
+        scope.previousVideo = function previousVideo() {
+
+        }
+
+        scope.nextVideo = function nextVideo() {
+          scope.selectedUser = user;
+          onChangeUser(user);
+        }
 
         /*
          * Video functions
