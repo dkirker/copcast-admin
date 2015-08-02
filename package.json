@@ -7,8 +7,10 @@
   },
   "devDependencies": {
     "async": "~1.4.0",
+    "brfs": "^1.2.0",
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
+    "browserify-shim": "~3.8.0",
     "chalk": "~0.5.1",
     "concat-stream": "~1.4.7",
     "del": "~1.1.1",
@@ -40,21 +42,17 @@
     "http-proxy": "~1.8.0",
     "jasmine-core": "~2.3.4",
     "jshint-stylish": "~1.0.0",
-
-    "karma": "~0.12.9",
+    "karma": "~0.13.3",
+    "karma-browserify": "^3.0.0",
+    "karma-coffee-preprocessor": "~0.3.0",
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jade-preprocessor": "0.0.11",
-    "karma-jasmine": "^0.1.5",
+    "karma-jasmine": "^0.3.6",
     "karma-ng-html2js-preprocessor": "^0.1.2",
-    "karma-phantomjs-launcher": "~0.1.4",
-    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.2.0",
+    "karma-requirejs": "~0.2.2",
     "karma-script-launcher": "~0.1.0",
-    "karma-coffee-preprocessor": "~0.2.1",
-    
-    "brfs": "^1.2.0",
-    "browserify-shim": "~3.8.0",
-    "karma-browserify": "^3.0.0",
-
+    "karma-spec-reporter": "0.0.20",
     "lodash": "~3.2.0",
     "main-bower-files": "~2.5.0",
     "merge-stream": "~0.1.7",
@@ -67,7 +65,7 @@
     "wiredep": "~2.2.0",
     "wrench": "~1.5.8"
   },
-   "browserify-shim": {
+  "browserify-shim": {
     "external": "global:External"
   },
   "engines": {
