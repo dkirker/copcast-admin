@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/igarape/copcast-admin.png?label=ready&title=Ready)](https://waffle.io/igarape/copcast-admin)
 [![Build Status](https://travis-ci.org/igarape/copcast-admin.svg?branch=master)](https://travis-ci.org/igarape/copcast-admin)
 # Copcast Admin
 
