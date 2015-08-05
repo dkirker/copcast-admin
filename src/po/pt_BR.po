@@ -103,6 +103,10 @@ msgstr "É administrador?"
 msgid "Latitude:"
 msgstr "Latitude:"
 
+#: app/videoStream/player.html:6
+msgid "Loading..."
+msgstr "Carregando..."
+
 #: index.html:58
 msgid "Logout"
 msgstr "Sair"

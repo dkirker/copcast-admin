@@ -73,7 +73,17 @@ angular.module('copcastAdminApp')
 
       socketIo.on(ev,cb);
     };
+    socket.once = function(ev, cb) {
+      if ( !connected ) {
+        if ( ev !== 'connect' ) {
+          throw new Error('Socket not connected');
+        } else {
+          return onConnect.push(cb);
+        }
+      }
 
+      socketIo.once(ev,cb);
+    };
     socket.emit = function(action, data){
       socketIo.emit(action, data);
     };

@@ -49,7 +49,7 @@ msgid "Current password filed is empty."
 msgstr ""
 
 #: app/history/date_filter/date.filter.html:4
-msgid "Date"
+msgid "Data"
 msgstr ""
 
 #: app/login/login.controller.js:35
@@ -103,6 +103,11 @@ msgstr ""
 msgid "Latitude:"
 msgstr ""
 
+#: app/components/loading/loading.html:2
+#: app/videoStream/player.html:6
+msgid "Loading..."
+msgstr ""
+
 #: index.html:58
 msgid "Logout"
 msgstr ""
@@ -127,6 +132,10 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
+#: app/history/player/player.html:18
+msgid "Nenhum vídeo encontrado"
+msgstr ""
+
 #: app/views/groups/group-creation.html:2
 msgid "New group"
 msgstr ""
@@ -134,10 +143,6 @@ msgstr ""
 #: app/users/user-detail.html:123
 #: app/users/user-detail.html:125
 msgid "New password"
-msgstr ""
-
-#: app/history/player/player.html:18
-msgid "No video found"
 msgstr ""
 
 #: app/login/login.html:7
@@ -153,7 +158,7 @@ msgid "Password:"
 msgstr ""
 
 #: app/history/date_filter/date.filter.html:11
-msgid "Period"
+msgid "Período"
 msgstr ""
 
 #: app/users/user-detail.html:158
@@ -187,11 +192,11 @@ msgstr ""
 
 #: app/components/user_dropdown/user.dropdown.html:2
 #: app/history/player/player.html:14
-msgid "Select an user or group"
+msgid "Selecione um usuário ou grupo"
 msgstr ""
 
-#: app/history/player/player.html:15
-msgid "Selected user:"
+#: app/history/player/player.html:20
+msgid "Seu navegador não suporta vídeos."
 msgstr ""
 
 #: index.html:57
@@ -236,16 +241,16 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: app/history/player/player.html:15
+msgid "Usuário selecionado:"
+msgstr ""
+
 #: app/views/realtime.html:25
 msgid "View history"
 msgstr ""
 
 #: app/users/details.js:58
 msgid "Wrong password combination"
-msgstr ""
-
-#: app/history/player/player.html:20
-msgid "Your browser does not support the video tag."
 msgstr ""
 
 #: app/users/user-destroy.html:46
@@ -262,6 +267,7 @@ msgid "create new group"
 msgstr ""
 
 #: app/users/user-creation.html:65
+#: app/users/user-creation.html:66
 #: app/users/user-list.html:2
 msgid "create new user"
 msgstr ""
