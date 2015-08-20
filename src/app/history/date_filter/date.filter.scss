@@ -23,4 +23,21 @@ form.date.filter {
       background: url('/assets/images/copcast_history_icon.png') no-repeat;
     }
   }
+
+  input::-webkit-calendar-picker-indicator{
+    display: none;
+  }
+
+  input[type="date"]::-webkit-input-placeholder{
+    visibility: hidden !important;
+  }
+  ul{
+    right: inherit;
+  }
+
+  label.datepicker-right ul{
+    left: auto !important;
+    right: 0px; !important
+  }
+
 }
