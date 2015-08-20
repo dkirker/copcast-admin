@@ -15,7 +15,7 @@
     </label>
   </div>
   <div class="form-group">
-    <label class="control-label" for="toDate">
+    <label class="control-label datepicker-right" for="toDate">
       <input type="date" class="form-control to date" ng-model="toDate.value" ng-disabled="!period" ng-model-options="{ debounce: 500 }"
               datepicker-popup is-open="toDate.visible" min-date="fromDate.value" max-date="toDate.maxValue"
               date-disabled="!period" ng-required="true" ng-click="toDate.show()" close-text="{{'Close'|translate}}" />
