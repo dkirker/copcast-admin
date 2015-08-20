@@ -19,37 +19,63 @@
         var $fromDate = el.find('.from.date');
         var $toDate = el.find('.to.date');
 
+        scope.toDate = {
+          value: new Date(),
+          visible: false,
+          show: function(){
+            scope.toDate.visible = true;
+          },
+          hide: function(){
+            scope.toDate.visible = false;
+          }
+        };
+
+        scope.fromDate = {
+          value: new Date(),
+          maxDate: '',
+          visible: false,
+          show: function(){
+            scope.fromDate.visible = true;
+          },
+          hide: function(){
+            scope.fromDate.visible = false;
+          }
+        };
+
         scope.maxPeriodDays = scope.maxPeriodOfDays || MAX_PERIOD_OF_DAYS;
 
         scope.$watch('period', function() {
           if(scope.period) {
             if(toDate)  {
-              scope.toDate = toDate;
+              scope.toDate.value = toDate;
             }
           } else {
-            toDate = scope.toDate;
-            scope.toDate = null;
+            toDate = scope.toDate.value;
+            //scope.toDate.value = null;
           }
         }, true);
 
         scope.$watchCollection('dates', function() {
           updateMaxDate();
           var dates = scope.dates;
-          scope.fromDate = dates.fromDate;
-          scope.toDate = limitDate(dates.toDate);
+          scope.fromDate.value = dates.fromDate;
+          scope.toDate.value = limitDate(dates.toDate);
+          if (moment(scope.fromDate.value).isAfter(scope.toDate.value, 'day')){
+            scope.toDate.value = scope.fromDate.value;
+          }
         });
 
-        scope.$watch('fromDate', function() {
+        scope.$watch('fromDate.value', function() {
           updateDates();
         }, true);
 
-        scope.$watch('toDate', function() {
+        scope.$watch('toDate.value', function() {
           updateDates();
         }, true);
 
         function updateDates() {
-          var fromDate = scope.fromDate;
-          var toDate = limitDate(scope.toDate);
+          var fromDate = scope.fromDate.value;
+          var toDate = limitDate(scope.toDate.value);
           var newDates = {
             fromDate: fromDate,
             toDate: toDate
@@ -66,20 +92,17 @@
         }
 
         function limitDate(date) {
-          var maxDate = calculateMaxDateFrom(scope.fromDate);
+          var maxDate = calculateMaxDateFrom(scope.fromDate.value);
           if(moment(date).isAfter(maxDate, 'day')) {
             return maxDate.toDate();
-          }
-          if(moment(date).isAfter(maxDate, 'day')) {
-            return scope.fromDate;
           }
           return date;
         }
 
         function updateMaxDate() {
-          var maxDate = calculateMaxDateFrom(scope.dates.fromDate);
+          scope.toDate.maxDate = calculateMaxDateFrom(scope.dates.fromDate);
           $toDate.attr('min', moment(scope.dates.fromDate).format('YYYY-MM-DD'));
-          $toDate.attr('max', maxDate.format('YYYY-MM-DD'));
+          $toDate.attr('max', scope.toDate.maxDate.format('YYYY-MM-DD'));
         }
 
         function calculateMaxDateFrom(date) {

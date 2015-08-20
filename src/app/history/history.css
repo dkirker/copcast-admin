@@ -6,11 +6,11 @@
   flex-direction: column;
   /***************** Player ****************/
   /*************** navbar ***************/ }
-  .history .map.canvas {
+  .map.canvas {
     flex: 1; }
-  .history footer {
+  footer {
     width: 100%; }
-  .history .player.window {
+  .player.window {
     width: 400px;
     height: 403px;
     margin-top: -403px;
@@ -19,44 +19,45 @@
     color: #fff;
     background-color: #182A40;
     text-align: center; }
-    .history .player.window .users.group {
+    .player.window .users.group {
       background-color: #fff;
       width: 100%;
       white-space: nowrap;
       overflow-x: hidden;
       padding-left: 5px; }
-    .history .player.window .avatar {
+    .player.window .avatar {
       display: inline-block; }
-      .history .player.window .avatar > img {
+      .player.window .avatar > img {
         width: 54px;
         height: 54px;
         margin: 8px 2px 6px 4px;
         opacity: 0.5; }
-      .history .player.window .avatar > img.active {
+      .player.window .avatar > img.active {
         opacity: 1; }
-    .history .player.window .user.selected {
+    .player.window .user.selected {
       margin: 8px; }
-    .history .player.window .scene {
+    .player.window .scene {
       overflow-x: hidden; }
-    .history .player.window .time {
+    .player.window .time {
       font-size: 1.5em;
       margin-top: 5px; }
-  .history head {
+  head {
     height: 110px; }
-  .history .navbar {
+  .navbar {
     padding: 7px 20px 0 0;
     color: #777777; }
-    .history .navbar .form-inline input,
-    .history .navbar .form-inline select {
+    .navbar .form-inline input,
+    .navbar .form-inline select {
       color: #777777;
       width: auto; }
-    .history .navbar .form-inline label {
+    .navbar .form-inline label {
       font-weight: 300; }
-    .history .navbar .form-inline .divider {
-      margin-left: 30px; }
-    .history .navbar .glyphicon {
+    .navbar .form-inline .divider {
+      margin-left: 30px;
+      margin-right: 50px; !important}
+    .navbar .glyphicon {
       vertical-align: middle; }
-  .history .navbar-center {
+  .navbar-center {
     float: right;
     position: relative;
     left: -50%;
