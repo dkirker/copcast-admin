@@ -24,6 +24,9 @@
           visible: false,
           show: function(){
             scope.toDate.visible = true;
+
+            //angular.element(".date.filter ul").attr('style','display: block; top: 41px; left: auto;right: 0px;');
+            setTimeout(function(){angular.element(".date.filter ul").attr('style','display: block; top: 41px; left: auto;right: 0px;') },200);
           },
           hide: function(){
             scope.toDate.visible = false;
@@ -36,6 +39,7 @@
           visible: false,
           show: function(){
             scope.fromDate.visible = true;
+
           },
           hide: function(){
             scope.fromDate.visible = false;

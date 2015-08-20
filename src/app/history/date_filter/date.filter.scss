@@ -34,7 +34,10 @@ form.date.filter {
   ul{
     right: inherit;
   }
-  .datepicker-filter{
 
+  label.datepicker-right ul{
+    left: auto !important;
+    right: 0px; !important
   }
+
 }

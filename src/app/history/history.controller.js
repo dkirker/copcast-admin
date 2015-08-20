@@ -224,8 +224,8 @@
       }
       var promisses = [];
       var filter = $scope.filter;
-      promisses.push(userService.getUserLocations(user.id, filter.fromDate, filter.toDate, DEFAULT_ACCURACY));
-      promisses.push(userService.getUserVideos(user.id, filter.fromDate, filter.toDate));
+      promisses.push(userService.getUserLocations(user.id, filter.fromDate, filter.period ? filter.toDate : null, DEFAULT_ACCURACY));
+      promisses.push(userService.getUserVideos(user.id, filter.fromDate, filter.period ? filter.toDate : null));
 
       $q.all(promisses)
       .then(function(data) {
@@ -244,8 +244,8 @@
     function loadGroupLocationsAndVideos(group) {
       var promisses = [];
       var filter = $scope.filter;
-      promisses.push(groupService.getGroupLocations(group.id, filter.fromDate, filter.toDate, DEFAULT_ACCURACY));
-      promisses.push(groupService.getGroupVideos(group.id, filter.fromDate, filter.toDate));
+      promisses.push(groupService.getGroupLocations(group.id, filter.fromDate, filter.period ? filter.toDate : null, DEFAULT_ACCURACY));
+      promisses.push(groupService.getGroupVideos(group.id, filter.fromDate, filter.period ? filter.toDate : null));
 
       $q.all(promisses)
         .then(function(data) {
