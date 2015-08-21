@@ -35,8 +35,11 @@ form.date.filter {
     right: inherit;
   }
 
-  .datepicker-custom {
+  button.btn.btn-default.btn-sm{
+      border-width: 0px;
+    }
 
+  tbody td{
+    border: 1px solid #eeeeee;
   }
-
 }
