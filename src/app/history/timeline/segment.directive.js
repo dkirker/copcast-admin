@@ -3,7 +3,7 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('timelineSegment', function() {
+  app.directive('timelineSegment', function($timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -12,8 +12,7 @@
       scope: {
         timeLabel: '=',
         last: '=',
-        locations: '=',
-        selectedLocation: '='
+        activities: '='
       },
       link: function(scope, element, attrs, timelineSegmentsCtrl) {
         var PIXELS_PER_MINUTE = 3;
@@ -22,117 +21,67 @@
         var $dateSegments = $segment.closest('.date.segments');
         var $activities = $segment.find('.activities');
 
+        var segmentKey;
+
         /*
          * Watchers
          */
-        scope.$watch('selectedLocation', function() {
-          var selectedLocation = scope.selectedLocation;
-          var locations = scope.locations;
-
-          if(isSelectedLocationFromThisSegment()) {
-            console.log('selectedLocation', scope.timeLabel, scope.selectedLocation);
-            var position = calculateSelectedLocationPosition()
-            timelineSegmentsCtrl.setPosition(position);
-          }
-        }, true);
-
-        scope.$watch('locations', function() {
-          var activities = [];
-          var previousLocation;
-
-          if(scope.locations) {
-            for(var i = 0, length = scope.locations.length; i < length; i++) {
-              var location = scope.locations[i];
-              if(!previousLocation || location.getDate('m') - previousLocation.getDate('m') > 6) {
-                activities.push([]);
-              }
-              previousLocation = location;
-              activities[activities.length - 1].push(location);
-            }
-          }
-          scope.activities = activities;
-          console.log('activities', activities);
+        scope.$watch('activities', function() {
+          var firstActivity = getFirstActivity();
+          segmentKey = createSegmentKey(firstActivity[0].getDate());
         }, true);
 
         /*
          * Scope functions
          */
-        scope.firstLocationPosition = function firstLocationPosition() {
-          return activityPosition(getFirstLocation());
-        };
-
-        scope.lastLocationPosition = function lastLocationPosition() {
-          return activityPosition(getLastLocation());
+        scope.getLocationPosition = getLocationPosition;
+        function getLocationPosition(location) {
+            if(location) {
+              return location.getDate('m') * PIXELS_PER_MINUTE;
+            }
         };
 
         scope.nextTimeLabel = function nextTimeLabel() {
           return parseInt(scope.timeLabel) + 1;
         };
 
-        scope.selectLocationByPosition = function selectMinuteByPosition(event) {
-          var startPosition = scope.firstLocationPosition();
+        scope.selectPosition = function selectPosition(event, firstSectionLocation) {
+          var startPosition = getLocationPosition(firstSectionLocation);
           var pos = getClickPosition(event);
           var selectedMinute = ((pos.x + startPosition) / PIXELS_PER_MINUTE) | 0;
 
           console.log('selectedMinute', selectedMinute);
-          var selectedLocation = getClosestLocation(selectedMinute);
-          timelineSegmentsCtrl.setLocation(selectedLocation);
+
+          var selectedDate = moment(segmentKey + ':' + selectedMinute, "YYYY-MM-DD HH:mm");
+          var position = calculatePosition(selectedDate);
+          timelineSegmentsCtrl.setPosition(position);
+          timelineSegmentsCtrl.setSelectedDate(selectedDate);
         };
-
-
 
         /*
          * Internal functions
          */
+        function createSegmentKey(date) {
+          return date && date.format('YYYY-MM-DD HH');
+        }
 
-        function calculateSelectedLocationPosition() {
-          var selectedLocation = scope.selectedLocation;
-          if(selectedLocation) {
-            var minute = selectedLocation.getDate('m');
+        function calculatePosition(date) {
+          if(date) {
+            var minute = date.format('m');
             return $dateSegments.position().left +
                    $segment.position().left +
                    minute * PIXELS_PER_MINUTE + 1;
           }
         }
 
-        function isSelectedLocationFromThisSegment() {
-          var selectedLocation = scope.selectedLocation;
-          if(selectedLocation && hasLocations()) {
-            return selectedLocation.date.isSame(scope.locations[0].date, 'hour');
-          }
+        function hasActivities() {
+          return scope.activities && scope.activities.size() > 0;
         }
 
-        function hasLocations() {
-          return scope.locations && scope.locations.length > 0;
-        }
-
-        function getFirstLocation() {
-          if(hasLocations()) {
-            return scope.locations[0];
+        function getFirstActivity() {
+          if(hasActivities()) {
+            return scope.activities.first();
           }
-        }
-
-        function getLastLocation() {
-          if(hasLocations()) {
-            return scope.locations[scope.locations.length - 1];
-          }
-        }
-
-        function activityPosition(location) {
-          if(location) {
-            return location.getDate('m') * PIXELS_PER_MINUTE;
-          }
-        }
-
-        function getClosestLocation(minute) {
-          var locations = scope.locations;
-          for(var i = locations.length - 1; i >= 0; i--) {
-            var location = locations[i];
-            if(location.getDate('m') <= minute) {
-              return location;
-            }
-          }
-          return getFirstLocation();
         }
       }
     };

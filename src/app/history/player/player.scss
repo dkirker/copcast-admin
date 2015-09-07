@@ -97,22 +97,13 @@
         display: inline-block;
         cursor: pointer;
         margin-bottom: 19px;
-        opacity: 0.3;
 
         & > div {
           margin-top: 7px;
           height: 20px;
           width: 18px;
           @include transition(border 0.3s);
-        }
-
-        &.enabled {
-          opacity: 1;
-          &:hover {
-            & > div {
-              border-color: #0082CF;
-            }
-          }
+          border-color: #0082CF;
         }
       }
 
