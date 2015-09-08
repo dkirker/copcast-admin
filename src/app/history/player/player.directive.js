@@ -9,28 +9,30 @@
       templateUrl: 'app/history/player/player.html',
       replace: true,
       scope: {
-        group: '=',
+        users: '=',
         src: '=',
-        videos: '=',
         currentVideo: '=?',
-        onChangeUser: '&'
+        onChangeUser: '&',
+        onPreviousVideo: '&',
+        onNextVideo: '&'
       },
       link: function(scope, el) {
         var onChangeUser = scope.onChangeUser(); // Unwrap
+        var onPreviousVideo = scope.onPreviousVideo(); // Unwrap
+        var onNextVideo = scope.onNextVideo(); // Unwrap
+
         var $video = el.find('video');
         var video = $video[0];
         var lastSrc;
-        var currentVideoIndex = -1;
 
         scope.time = formatTime(0);
 
         /*
          * Watchers
          */
-        scope.$watchCollection('group', function() {
-          var group = scope.group;
-          var groupHasUsers = group && group.users && group.users.length > 0;
-          var user = groupHasUsers ? group.users[0] : null;
+        scope.$watchCollection('users', function() {
+          var hasUsers = scope.users && scope.users.length > 0;
+          var user = hasUsers ? scope.users[0] : null;
           scope.setUser(user);
         });
 
@@ -38,16 +40,10 @@
           if(lastSrc === scope.src) {
             return;
           }
+          formatTime(0);
           lastSrc = scope.src;
           video.src = scope.src ? scope.src : '';
           video.load();
-        });
-
-        scope.$watch('videos', function() {
-          video.pause();
-          video.currentTime = 0;
-          scope.currentVideo = undefined;
-          scope.currentVideoIndex = -1;
         });
 
         /*
@@ -65,12 +61,11 @@
         }
 
         scope.previousVideo = function previousVideo() {
-
+          onPreviousVideo();
         }
 
         scope.nextVideo = function nextVideo() {
-          scope.selectedUser = user;
-          onChangeUser(user);
+          onNextVideo();
         }
 
         /*

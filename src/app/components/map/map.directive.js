@@ -27,22 +27,25 @@
         scope.$watchCollection('heatmapLocations', function() {
           var latLngPoints = scope.heatmapLocations;
           disableHeatmap();
-          if(latLngPoints.length > 0) {
+          if(latLngPoints && latLngPoints.length > 0) {
             enableHeatmap(latLngPoints);
-            setMapPosition(latLngPoints[0]);
           }
+          fitBounds(latLngPoints);
         });
 
         scope.$watchCollection('markerLocations', function() {
           removeMarkers();
           var markerLocations = scope.markerLocations;
+          var positions = [];
           if(markerLocations && markerLocations.length > 0) {
-            angular.forEach(markerLocations, function(marker) {
+            for(var i = 0, len = markerLocations.length; i < len; i++) {
+              var marker = markerLocations[i];
               var makerClone = angular.copy(marker);
               marker.setMap(map);
               markers.push(marker);
-            });
-            fitBounds();
+              positions.push(marker.position);
+            };
+            fitBounds(positions);
           } else {
             resetMapPosition();
           }
@@ -52,20 +55,24 @@
          * Marker functions
          */
         function removeMarkers() {
-          angular.forEach(markers, function(marker) {
-            marker.setMap(null);
-          });
+          for(var i = 0, len = markers.length; i < len; i++) {
+            markers[i].setMap(null);
+          }
           markers = [];
         }
 
-        function fitBounds() {
-          if(markers.length === 1) {
-            setMapPosition(markers[0].position);
+        function fitBounds(latLngPoints) {
+          if(!latLngPoints || latLngPoints.length === 0) {
+            resetMapPosition();
+
+          } else if(latLngPoints.length === 1) {
+            setMapPosition(latLngPoints[0]);
+
           } else {
             var bounds = new google.maps.LatLngBounds();
-            angular.forEach(markers, function(marker) {
-              bounds.extend(marker.position);
-            });
+            for(var i = 0, len = latLngPoints.length; i < len; i++) {
+              bounds.extend(latLngPoints[i]);
+            };
             map.setZoom(null);
             map.fitBounds(bounds);
           }

@@ -12,42 +12,25 @@
       templateUrl: 'app/history/date_filter/date.filter.html',
       scope: {
         maxPeriodOfDays: '=?',
-        period: '=?',
-        dates: '='
+        initialPeriod: '=?',
+        onChangePeriod: '&?'
       },
+
       link: function(scope, el, attrs, controllers) {
         var $fromDate = el.find('.from.date');
         var $toDate = el.find('.to.date');
+        var onChangePeriod = scope.onChangePeriod(); // Unwrap
 
-        scope.toDate = {
-          value: new Date(),
-          visible: false,
-          show: function(){
-            scope.toDate.visible = true;
+        // Default state
+        if(!scope.initialPeriod) {
+          scope.initialPeriod = {
+            fromDate: new Date(),
+            toDate: new Date(),
+            period: false
+          };
+        }
 
-            //angular.element(".date.filter ul").attr('style','display: block; top: 41px; left: auto;right: 0px;');
-            setTimeout(function(){angular.element(".date.filter ul").attr('style','display: block; top: 41px; left: auto;right: 0px;') },200);
-          },
-          hide: function(){
-            scope.toDate.visible = false;
-          }
-        };
-
-        scope.fromDate = {
-          value: new Date(),
-          maxDate: '',
-          visible: false,
-          show: function(){
-            scope.fromDate.visible = true;
-
-          },
-          hide: function(){
-            scope.fromDate.visible = false;
-          }
-        };
-
-        scope.maxPeriodDays = scope.maxPeriodOfDays || MAX_PERIOD_OF_DAYS;
-
+        // Watchers
         scope.$watch('period', function() {
           if(scope.period) {
             if(toDate)  {
@@ -55,19 +38,9 @@
             }
           } else {
             toDate = scope.toDate.value;
-            //scope.toDate.value = null;
           }
+          updateDates();
         }, true);
-
-        scope.$watchCollection('dates', function() {
-          updateMaxDate();
-          var dates = scope.dates;
-          scope.fromDate.value = dates.fromDate;
-          scope.toDate.value = limitDate(dates.toDate);
-          if (moment(scope.fromDate.value).isAfter(scope.toDate.value, 'day')){
-            scope.toDate.value = scope.fromDate.value;
-          }
-        });
 
         scope.$watch('fromDate.value', function() {
           updateDates();
@@ -77,28 +50,75 @@
           updateDates();
         }, true);
 
+
+        // Scope initialization
+        scope.period = scope.initialPeriod.period;
+
+        scope.toDate = {
+          value: scope.initialPeriod.toDate || new Date(),
+          visible: false,
+          show: function(){
+            scope.toDate.visible = true;
+
+            //angular.element(".date.filter ul").attr('style','display: block; top: 41px; left: auto;right: 0px;');
+            setTimeout(function(){
+              angular
+                .element(".date.filter ul")
+                .attr('style','display: block; top: 41px; left: auto;right: 0px;')
+            }, 200);
+          },
+          hide: function(){
+            scope.toDate.visible = false;
+          }
+        };
+
+        scope.fromDate = {
+          value: scope.initialPeriod.fromDate || new Date(),
+          maxDate: '',
+          visible: false,
+          show: function(){
+            scope.fromDate.visible = true;
+          },
+          hide: function(){
+            scope.fromDate.visible = false;
+          }
+        };
+
+        scope.maxPeriodDays = scope.maxPeriodOfDays || MAX_PERIOD_OF_DAYS;
+
+
+        // Aux functions
         function updateDates() {
-          var fromDate = scope.fromDate.value;
-          var toDate = limitDate(scope.toDate.value);
-          var newDates = {
-            fromDate: fromDate,
-            toDate: toDate
-          };
-          if(hasDatesChanges(newDates)) {
-            scope.dates = angular.extend({}, scope.dates, newDates);
+          var toDate = calculateToDate();
+          if(moment(toDate).isSame(scope.toDate.value, 'day')) {
+            var newPeriod = {
+              fromDate: scope.fromDate.value,
+              toDate: scope.toDate.value,
+              period: scope.period
+            };
+            if(hasPeriodChanged(newPeriod)) {
+              scope.lastPeriod = newPeriod;
+              onChangePeriod(newPeriod);
+            }
+          } else {
+            scope.toDate.value = toDate;
           }
         }
 
-        function hasDatesChanges(newDates) {
-          var dates = scope.dates;
-          return !moment(newDates.fromDate).isSame(dates.fromDate, 'day') ||
-                 !moment(newDates.toDate).isSame(dates.toDate, 'day');
+        function hasPeriodChanged(newPeriod) {
+          return !angular.equals(newPeriod, scope.lastPeriod);
         }
 
-        function limitDate(date) {
-          var maxDate = calculateMaxDateFrom(scope.fromDate.value);
-          if(moment(date).isAfter(maxDate, 'day')) {
-            return maxDate.toDate();
+        function calculateToDate() {
+          var minDate = scope.fromDate.value;
+          var maxDate = calculateMaxDateFrom(minDate);
+          var date = moment(scope.toDate.value);
+
+          if(date.isAfter(maxDate, 'day')) {
+            return maxDate;
+          } else
+          if (date.isBefore(minDate, 'day')) {
+            return minDate;
           }
           return date;
         }
@@ -110,7 +130,7 @@
         }
 
         function calculateMaxDateFrom(date) {
-          return moment(date).add(scope.maxPeriodDays, 'd');
+          return moment(date).add(scope.maxPeriodDays, 'd').toDate();
         }
       }
     };

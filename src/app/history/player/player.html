@@ -1,6 +1,6 @@
 <section class="history player window" ng-class="{'nousers': !selectedUser, 'novideo': !selectedUser || !src}">
   <section class="users group">
-    <div class="avatar" ng-repeat="user in group.users">
+    <div class="avatar" ng-repeat="user in users">
       <img
         src="{{user.profilePicture}}"
         class="img-circle"
@@ -23,12 +23,12 @@
   <section class="time" ng-bind-html="time"></section>
   <section class="controls">
     <div>
-      <div class="previous" ng-class="{'enabled': videos && videos.length > 0}" ng-click="previousVideo()">
+      <div class="previous" ng-click="previousVideo()">
         <div></div>
       </div>
       <div class="play img-circle" ng-class="{'enabled': selectedUser && src}" ng-click="playVideo()">
       </div>
-      <div class="next" ng-class="{'enabled': videos && videos.length > 0}" ng-click="nextVideo()">
+      <div class="next" ng-click="nextVideo()">
         <div></div>
       </div>
     </div>

@@ -11,20 +11,36 @@
         <div class="collapse navbar-collapse main-nav">
           <ul class="nav navbar-nav">
             <li class="pull-left">
-              <user-dropdown ng-model="::usersAndGroups" on-change-user="setCurrentGroup" open-on-load="true"></user-dropdown>
+              <user-dropdown
+                ng-model="::manager.store.groups"
+                on-change-user="manager.setCurrentGroup"
+                open-on-load="true">
+              </user-dropdown>
             </li>
           </ul>
           <date-filter
-            dates="filter"
-            period="filter.period"
-            max-period-of-days="20" />
+            initial-period="initialPeriod"
+            on-change-period="manager.setPeriod"
+            max-period-of-days="20"></date-filter>
         </div>
     </nav>
   </div>
   <loading></loading>
-  <main map class="map canvas" marker-locations="userMapMarkers" heatmap-locations="userMapLocations"></main>
+  <main map class="map canvas"
+    marker-locations="manager.store.map.markers"
+    heatmap-locations="manager.store.map.locations">
+  </main>
   <footer class="navbar navbar-default navbar-static-bottom">
-    <timeline locations="userLocations" selected-location="currentLocation"></timeline>
-    <player group="currentGroup" videos="groupVideos" src="currentVideo.src" on-change-user="setCurrentUser"></player>
+    <timeline
+      on-select-date="manager.setSelectedDate"
+      user-data="manager.store.userData">
+    </timeline>
+    <player
+      users="manager.store.currentGroup.users"
+      src="manager.store.userData.currentVideo.src"
+      on-change-user="manager.setCurrentUser"
+      on-previous-video="manager.previousVideo"
+      on-next-video="manager.nextVideo">
+    </player>
   </footer>
 </div>

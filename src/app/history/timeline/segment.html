@@ -4,8 +4,10 @@
   <div class="line"></div>
 
   <div class="activities"
-    style="left: {{firstLocationPosition()}}px; width: {{lastLocationPosition() - firstLocationPosition()}}px;"
-    ng-click="selectLocationByPosition($event);">
+    style="left: {{getLocationPosition(activityLocations[0])}}px;
+           width: {{getLocationPosition(activityLocations[1]) - getLocationPosition(activityLocations[0])}}px;"
+    ng-click="selectPosition($event, activityLocations[0]);"
+    ng-repeat="(key, activityLocations) in activities.getMap()">
     <div class="line">
     </div>
   </div>
