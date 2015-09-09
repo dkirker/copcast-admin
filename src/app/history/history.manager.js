@@ -206,8 +206,8 @@
         var video = videos[i];
         var fromDate = moment(video.from);
         var toDate = moment(video.to);
-        if(cDate.isSame(fromDate)  || cDate.isSame(toDate) ||
-          (cDate.isAfter(fromDate) && cDate.isBefore(toDate))) {
+        if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
+          (cDate.isBetween(fromDate, toDate, 'minute'))) {
           currentVideo = video;
           if(i < len - 1) {
             nextVideo = videos[i + 1];
