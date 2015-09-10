@@ -201,13 +201,18 @@
       var videos = this.userData.videos || [];
       var currentVideo;
       var nextVideo;
-      var cDate = this.currentDate;
+      var cDate = moment(this.currentDate);
+
       for(var i = 0, len = videos.length; i < len; i++) {
         var video = videos[i];
         var fromDate = moment(video.from);
-        var toDate = moment(video.to);
-        if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
-          (cDate.isBetween(fromDate, toDate, 'minute'))) {
+        var toDate = moment(video.from).add(5, 'm'); //todo verify duration after upload
+
+        console.log ('utc-cDate:' , cDate.toISOString());
+        console.log ('utc-fromDate:' , fromDate.toISOString());
+        console.log ('utc-toDat:' , toDate.toISOString());
+
+        if( cDate>= fromDate && cDate<= toDate ) {
           currentVideo = video;
           if(i < len - 1) {
             nextVideo = videos[i + 1];
@@ -215,9 +220,14 @@
           break;
         }
       }
+
       this.userData.previousVideo = this.userData.currentVideo;
       this.userData.currentVideo = currentVideo;
       this.userData.nextVideo = nextVideo;
+
+      console.log ("_updateCurrentDateVideo:", this.userData.previousVideo, this.userData.currentVideo,
+        this.userData.nextVideo);
+
       this._notifyCurrentVideoChange();
     },
 
@@ -401,6 +411,7 @@
 
     _notifyCurrentVideoChange: function _notifyCurrentVideoChange() {
       var userData = this.userData;
+      console.log('_notifyCurrentVideoChange:', userData.currentVideo, userData.previousVideo, userData.nextVideo);
       this.trigger('currentVideoChanged', userData.currentVideo, userData.previousVideo, userData.nextVideo);
     }
   };
