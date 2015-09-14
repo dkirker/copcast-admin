@@ -24,12 +24,10 @@
   <section class="controls">
     <div>
       <div class="previous" ng-click="previousVideo()">
-        <div></div>
       </div>
-      <div class="play img-circle" ng-class="{'enabled': selectedUser && src}" ng-click="playVideo()">
+      <div class="play img-circle" ng-class="{'enabled': selectedUser && src, 'playing': playing}" ng-click="playVideo()">
       </div>
       <div class="next" ng-click="nextVideo()">
-        <div></div>
       </div>
     </div>
   </section>
