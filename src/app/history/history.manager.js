@@ -36,15 +36,19 @@
     }
 
     // User and Groups Events
-    groups.groupsChanged.addListener(function(groups, indexedUsers) {
-      console.log('groups', groups, indexedUsers);
-      self.store.groups = groups;
+    groups.usersIndexed.addListener(function(indexedUsers) {
+      console.log('indexedUsers', indexedUsers);
       groupsLocationsAndVideos.setUsers(indexedUsers);
+    });
+    groups.groupsChanged.addListener(function(groups) {
+      console.log('groups', groups);
+      self.store.groups = groups;
     });
 
     // Group Locations and Videos Events
     groupsLocationsAndVideos.currentGroupChanged.addListener(function(group) {
       console.log('currentGroup', group);
+      self.store.currentUser = undefined;
       self.store.currentGroup = group;
     });
 
@@ -69,8 +73,8 @@
       console.log('currentGroupLocations updated', groupData);
     });
 
-    groupsLocationsAndVideos.currentVideoChanged.addListener(function(currentVideo, previousVideo, nextVideo) {
-      console.log('currentVideoChanged', currentVideo, previousVideo, nextVideo);
+    groupsLocationsAndVideos.currentVideoChanged.addListener(function(videoData) {
+      console.log('currentVideoChanged', videoData.currentVideo, videoData.previousVideo, videoData.nextVideo);
     });
 
     /* Google Maps Data */
@@ -112,7 +116,7 @@
       this.$timeout(function() {
         var locations = userData.locations || [];
         self.userMapLocations = utils.GoogleMaps.transformLocationsToLatLngPoints(locations);
-        self.userLocationsChange.emit(this.userMapLocations);
+        self.userLocationsChanged.emit(self.userMapLocations);
       }, 600);
     },
 
@@ -133,7 +137,7 @@
           }
         }
         self.groupLocationsMarkers = markers;
-        self.groupLocationsMarkersChanged.emit(this.groupLocationsMarkers);
+        self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
       }, 600);
     }
   };
@@ -220,7 +224,11 @@
       userData.previousVideo = userData.currentVideo;
       userData.currentVideo = currentVideo;
       userData.nextVideo = nextVideo;
-      this.currentVideoChanged.emit(userData.currentVideo, userData.previousVideo, userData.nextVideo);
+      this.currentVideoChanged.emit({
+        current: userData.currentVideo,
+        previous: userData.previousVideo,
+        next: userData.nextVideo
+      });
     },
 
     _calculateClosestGroupLocations: function _calculateClosestGroupLocations() {
@@ -362,7 +370,7 @@
           self._updateGroupUsers();
           self._indexLocations();
           self._indexVideos();
-          self.groupDataChanged.emit(this.groupData);
+          self.groupDataChanged.emit(self.groupData);
           self._updateCurrentUser();
         }, error);
     },
@@ -387,7 +395,8 @@
     this._groupService = groupService;
     this._indexedUsers = [];
 
-    // Event
+    // Events
+    this.usersIndexed = new EventSignal();
     this.groupsChanged = new EventSignal();
   }
   Groups.prototype = {
@@ -429,8 +438,9 @@
 
     _update: function update(users, groups) {
       this._indexUsers(users);
+      this.usersIndexed.emit(this._indexedUsers);
       this.list = groups.concat(users);
-      this.groupsChanged.emit(this.list, this._indexedUsers);
+      this.groupsChanged.emit(this.list);
     }
   };
 
