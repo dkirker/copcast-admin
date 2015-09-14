@@ -34,6 +34,8 @@
           var hasUsers = scope.users && scope.users.length > 0;
           var user = hasUsers ? scope.users[0] : null;
           scope.setUser(user);
+          scope.playing = false;
+          video.src = undefined;
         });
 
         scope.$watch('src', function() {
@@ -43,6 +45,7 @@
           formatTime(0);
           lastSrc = scope.src;
           video.src = scope.src ? scope.src : '';
+          scope.playing = false;
           video.load();
         });
 
@@ -56,7 +59,13 @@
 
         scope.playVideo = function playVideo() {
           if(video.src) {
-            video.play();
+            if(scope.playing) {
+              scope.playing = false;
+              video.pause();
+            } else {
+              scope.playing = true;
+              video.play();
+            }
           }
         }
 
@@ -79,6 +88,18 @@
           onTrackedVideoFrame(this.currentTime, this.duration);
         });
 
+        $video.on('play', function(event){
+          scope.playing = true;
+        });
+
+        $video.on('pause', function(event){
+          scope.playing = false;
+        });
+
+        $video.on('ended', function(event){
+          scope.playing = false;
+        });
+
         function onTrackedVideoFrame(currentTime, duration){
           $timeout(function() {
             scope.time = formatTime(currentTime);
@@ -86,7 +107,7 @@
         }
 
         function formatTime(time) {
-          var seconds = rightPad(time | 0, '00', 2);
+          var seconds = rightPad((time % 60) | 0, '00', 2);
           var minutes = rightPad(time / 60 | 0, '00', 2);
           var hours = rightPad(time / 60 / 60 | 0, '00', 2);
           return '<strong>' + hours + ':' + minutes + '</strong>:' + seconds;
