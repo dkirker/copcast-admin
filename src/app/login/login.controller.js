@@ -11,7 +11,7 @@ angular.module('copcastAdminApp')
 
   .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
 
-    $scope.user = {username: 'bsiqueira', password: 'bsiqueira'};
+    $scope.user = {username: 'admin', password: 'admin'};
     $scope.email = '';
     $scope.selected = 'login';
 
@@ -90,4 +90,14 @@ angular.module('copcastAdminApp')
         $http.defaults.headers.common.Authorization = 'Bearer ' + $rootScope.globals.currentUser.token;
         socket.connect($rootScope.globals.currentUser.token);
       }
-    }]);
+    }])
+  .directive('stopEvent', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attr) {
+        element.on(attr.stopEvent, function (e) {
+          e.stopPropagation();
+        });
+      }
+    };
+  });
