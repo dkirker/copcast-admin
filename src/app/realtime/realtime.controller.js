@@ -208,11 +208,12 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   };
 
   $scope.requestStream = function(user) {
-    $scope.streamButtonText = 'Sending...';
     $scope.waitingStreaming = true;
     if ($scope.isStreaming(user)){
+      $scope.streamButtonText = 'streaming';
       showModal($scope.activeUsers[user.id]);
     } else {
+      $scope.streamButtonText = 'Sending...';
       streamService.startStreaming(user.id)
         .then(function (data) {
           $scope.streamButtonText = 'awaiting response';
@@ -278,7 +279,6 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   };
 
   $scope.popModal = function(id){
-    mapService.closeBalloon();
     showModal($scope.activeUsers[id]);
   }
 
@@ -290,6 +290,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
 
   function showModal(user){
     console.log('showModal with user=['+user+']');
+    mapService.closeBalloon();
     $scope.activeStreams[user.id].modal =  $modal.open({
       templateUrl: 'app/realtime/videoStream/player.html',
       controller: 'ModalVideoCtrl',
