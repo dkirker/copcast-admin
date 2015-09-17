@@ -17,6 +17,7 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
   $scope.windowWidth = window.innerWidth;
   $rootScope.selected = 'realtime';
   $scope.streamButtonText = 'Livestream';
+  $scope.waitingStreaming = false;
   $scope.searchString = '';
   $scope.alerts = [];
 
@@ -191,7 +192,8 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
 
   $scope.showUser = function(userId) {
     $scope.currentUser = $scope.activeUsers[userId];
-    $scope.streamButtonText = 'Livestream';
+    $scope.streamButtonText = 'Begin stream';
+    $scope.waitingStreaming = false;
     if ( $scope.currentUser ) {
       google.maps.event.trigger($scope.myMap, "resize");
       $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
@@ -201,14 +203,19 @@ app.controller('RealtimeCtrl', function ($scope, peerManager, $modal, socket, Se
     }
   };
 
+  $scope.isStreaming = function(user) {
+    return $scope.activeStreams[user.id];
+  };
+
   $scope.requestStream = function(user) {
     $scope.streamButtonText = 'Sending...';
-    if ($scope.activeStreams[user.id]){
+    $scope.waitingStreaming = true;
+    if ($scope.isStreaming(user)){
       showModal($scope.activeUsers[user.id]);
     } else {
       streamService.startStreaming(user.id)
         .then(function (data) {
-          $scope.streamButtonText = 'Waiting for users response...';
+          $scope.streamButtonText = 'awaiting response';
         }, function (data) {
           $scope.streamButtonText = data.message;
         });

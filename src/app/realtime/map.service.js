@@ -16,7 +16,7 @@
               if (infoWindow){
                 infoWindow.close();
               }
-             infoWindow = new google.maps.InfoWindow({maxWidth: 350});
+             infoWindow = new google.maps.InfoWindow({maxWidth: 230});
              infoWindow.setContent($compile($templateCache.get('balloon.html'))(scope)[0]);
              infoWindow.open(scope.myMap,scope.currentUser.marker);
 

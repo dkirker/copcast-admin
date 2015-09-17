@@ -1,0 +1,45 @@
+#balloonContent{
+  text-align: center;
+  width: 230px;
+  height: 240px;
+  img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 4px;
+    margin: 5px;
+  }
+  img.streaming{
+    border: solid #4e9a10;
+  }
+  strong{
+    font-size: 1.7em;
+  }
+  a{
+    color: #ffffff;
+    text-transform: uppercase;
+
+    height: 40px;
+    line-height: 25px;
+  }
+  a.view-history {
+    background: #2f88d1;
+  }
+  a.stream{
+    background: #4e9a10;
+  }
+  a.offline,a.waiting{
+    background: #bcbcbc;
+    color: #dddddd;
+  }
+  div.btn-group{
+    width: 100%;
+  }
+  .gm-style-iw{
+    width: inherit !important;
+  }
+  p.battery-info{
+    color: red;
+    font-size: 1.2em;
+  }
+}

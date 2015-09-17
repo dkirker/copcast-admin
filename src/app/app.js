@@ -26,7 +26,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/views/realtime.html',
+        templateUrl: 'app/realtime/realtime.html',
         controller: 'RealtimeCtrl'
       })
       .when('/main', {

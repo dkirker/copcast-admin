@@ -1,0 +1,36 @@
+<div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
+<div>
+    <span class="glyphicon ">
+      <div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
+        <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control"
+               placeholder="{{'Type to filter the map' | translate }}..." aria-describedby="basic-addon1">
+      </div>
+    </span>
+</div>
+
+<footer ng-hide="canStream()">
+  <span translate>
+    This browser does not support live streaming visualization. Use Chrome or Firefox instead.
+  </span>
+</footer>
+
+<script type="text/ng-template" id="balloon.html">
+  <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
+
+    <img ng-src="{{currentUser.picture}}" ng-class="{streaming: isStreaming(currentUser)}"/><br/>
+
+    <p><strong>{{currentUser.userName}}</strong></p>
+    <p class="battery-info">
+      34% Battery
+    </p>
+    <div class="btn-group">
+      <a class="btn btn-default btn-block view-history" ng-click="goToUser(currentUser)" translate>View history</a>
+
+      <a class="btn btn-default btn-block"
+         ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser) && canStream()" ng-click="requestStream(currentUser)"
+         ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
+      <a class="btn btn-default btn-block offline" ng-show="!isOnline(currentUser) || !canStream()" translate> No streaming available</a>
+    </div>
+  </div>
+</script>
