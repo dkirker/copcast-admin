@@ -10,7 +10,7 @@
     -->
 
     <div class="gap segment">
-      <div class="first date" ng-bind-html="$first ? '' : getPreviousDateLabel()"></div>
+      <div class="first date" ng-bind-html="$first ? '' : getPreviousDateLabel(key)"></div>
       <div class="last date" ng-bind-html="getCurrentDateLabel(key)"></div>
       <div class="line"></div>
       <div class="box"></div>

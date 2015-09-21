@@ -35,7 +35,6 @@
         var timelineCtrl = ctrls[0];
         var localCtrl = ctrls[1];
         var currentGroup;
-        var previousDate;
 
         scope.$watch('userData', function() {
           if(scope.userData) {
@@ -48,13 +47,14 @@
         scope.setSelectedDate = timelineCtrl.setSelectedDate;
 
         scope.getPreviousDateLabel = function getPreviousDateLabel(key) {
-          return previousDate;
+          var previousDate = scope.userData.timeline.datesSequence.get(key);
+          return previousDate
+            ? moment(previousDate, 'YYYY-MM-DD').format('DD/MM')
+            : undefined;
         };
 
         scope.getCurrentDateLabel = function getCurrentDateLabel(key) {
-          var currentDate = moment(key, 'YYYY-MM-DD').format('DD/MM');
-          previousDate = currentDate;
-          return currentDate;
+          return moment(key, 'YYYY-MM-DD').format('DD/MM');
         };
 
         function initPosition() {

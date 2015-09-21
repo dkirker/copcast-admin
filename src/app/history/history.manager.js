@@ -33,7 +33,15 @@
       if(userData && userData.nextVideo) {
         self.setSelectedDate(userData.nextVideo.from);
       }
-    }
+    };
+    this.hasPreviousVideo = function hasPreviousVideo() {
+      var userData = self.store.userData;
+      return userData && userData.previousVideo;
+    };
+    this.hasNextVideo = function hasNextVideo() {
+      var userData = self.store.userData;
+      return userData && userData.nextVideo;
+    };
 
     // User and Groups Events
     groups.usersIndexed.addListener(function(indexedUsers) {
@@ -165,7 +173,7 @@
     setUsers: function setUsers(users) {
       this._users = users;
       this.reset();
-      this.MAX_MINUTES_TO_CLOSEST_LOCATION = 6;
+      this.MAX_MINUTES_TO_CLOSEST_LOCATION = 10;
     },
 
     setCurrentGroup: function setCurrentGroup(currentGroup) {
@@ -204,8 +212,7 @@
     /* Private */
     _updateCurrentDateVideo: function _updateCurrentDateVideo() {
       var videos = this.userData.videos || [];
-      var currentVideo;
-      var nextVideo;
+      var videoIndex;
       var cDate = this.currentDate;
       for(var i = 0, len = videos.length; i < len; i++) {
         var video = videos[i];
@@ -213,17 +220,25 @@
         var toDate = moment(video.to);
         if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
           (cDate.isBetween(fromDate, toDate, 'minute'))) {
-          currentVideo = video;
-          if(i < len - 1) {
-            nextVideo = videos[i + 1];
-          }
+          videoIndex = i;
           break;
         }
       }
-      var userData = this.userData;
-      userData.previousVideo = userData.currentVideo;
-      userData.currentVideo = currentVideo;
-      userData.nextVideo = nextVideo;
+      this._setCurrentVideo(videoIndex);
+    },
+
+    _setCurrentVideo: function _setCurrentVideo(videoIndex) {
+      var videos = this.userData.videos || [];
+      if(videos.length > 0) {
+        var userData = this.userData;
+        userData.previousVideo = videoIndex > 0
+          ? videos[videoIndex - 1]
+          : undefined;
+        userData.currentVideo = videos[videoIndex];
+        userData.nextVideo = videos.length > videoIndex + 1
+          ? videos[videoIndex + 1]
+          : undefined;
+      }
       this.currentVideoChanged.emit({
         current: userData.currentVideo,
         previous: userData.previousVideo,
@@ -333,7 +348,10 @@
         if(userData) {
           var userVideos = userData.videos || [];
           userVideos.push(video);
-          this.groupData[video.userId].videos = userVideos;
+          userData.videos = userVideos;
+          if(userVideos.length > 0) {
+            userData.nextVideo = userVideos[0];
+          }
         }
       }
     },
