@@ -1,7 +1,8 @@
 .modal-login{
   text-align: center;
   .modal-dialog{
-    width: 400px;
+    width: 300px;
+    margin: 0 auto;
   }
   input{
     background-color: #2e3e52;
@@ -17,7 +18,7 @@
   .modal-content{
     color: #ffffff;
     margin: 0px;
-    width: 400px;
+    width: 300px;
     background-color: #182a40;
     padding: 10px 0px 10px 0px;
     text-align: center;

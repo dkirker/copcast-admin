@@ -27,43 +27,8 @@
       <p class="browsehappy"><translate>You are using an </translate><strong><translate>outdated</translate></strong><translate> browser. Please </translate><a href="http://browsehappy.com/"><translate>upgrade your browser</translate></a><translate> to improve your experience.</translate></p>
     <![endif]-->
 
-    <div>
-        <header class="header">
-          <div class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-                  <span class="sr-only">Copcast-Admin</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#/">
-                  <img alt="Brand" src="assets/images/logo.png" height="30px";>
-                </a>
-              </div>
-              <div class="collapse navbar-collapse" id="js-navbar-collapse">
-                <ul class="nav navbar-nav ">
-                  <li ng-class="{active:isActive('/')}"><a href="#/" translate>Realtime</a></li>
-                  <li ng-class="{active:isActive('/history')}"><a ng-href="#/history" translate>History</a></li>
-                  <li class="dropdown">
-                    <a href="javascript:" data-toggle="dropdown" class="dropdown-toggle"><translate>Admin</translate> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li ng-class="{active:isActive('/user-list')}"><a ng-href="#/user-list" translate>Users</a></li>
-                      <li ng-class="{active:isActive('/group-list')}"><a ng-href="#/group-list" translate>Groups</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <p class="navbar-text navbar-right"><translate>Signed in as</translate> &nbsp;<user-name></user-name>
-                  &nbsp<a ng-href="#/logout" translate>Logout</a>
-                  <button type="button" class="btn btn-default btn-xs" ng-click="clickLang()"  ng-controller="TranslateController">
-                    <img src="{{imgFlag}}">
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-        </header>
+    <div ng-controller="IndexCtrl">
+      <app-header></app-header>
         <div ng-view=""></div>
 
     </div>
