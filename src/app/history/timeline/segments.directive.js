@@ -3,7 +3,7 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('timelineSegments', function($timeout) {
+  app.directive('timelineSegments', function TimelineSegments($timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -18,8 +18,11 @@
         };
 
         this.setPosition = function setPosition(position) {
-          $scope.selectedPosition = position - 1;
-          $scope.userData.timeline.lastPosition = $scope.selectedPosition;
+          var adjustedPosition = position - 1;
+          if($scope.selectedPosition !== adjustedPosition) {
+            $scope.selectedPosition = adjustedPosition;
+            $scope.userData.timeline.lastPosition = $scope.selectedPosition;
+          }
         };
 
         this.resetSelectedPosition = function resetSelectedPosition() {
@@ -41,16 +44,17 @@
             loadTimelineData();
             initPosition();
           }
-          previousDate = undefined;
         });
 
         scope.setSelectedDate = timelineCtrl.setSelectedDate;
 
         scope.getPreviousDateLabel = function getPreviousDateLabel(key) {
-          var previousDate = scope.userData.timeline.datesSequence.get(key);
-          return previousDate
-            ? moment(previousDate, 'YYYY-MM-DD').format('DD/MM')
-            : undefined;
+          if(scope.userData.timeline.datesSequence) {
+            var previousDate = scope.userData.timeline.datesSequence.get(key);
+            return previousDate
+              ? moment(previousDate, 'YYYY-MM-DD').format('DD/MM')
+              : undefined;
+          }
         };
 
         scope.getCurrentDateLabel = function getCurrentDateLabel(key) {
@@ -76,8 +80,8 @@
           var hasLocations = userData.locationsByDay;
           var hasActivities = userData.timeline && userData.timeline.activitiesByDay;
 
+          userData.timeline = userData.timeline || {};
           if(!hasActivities && hasLocations) {
-            userData.timeline = {};
             createActivitiesByDay();
             createDatesSequence();
           }
