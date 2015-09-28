@@ -68,9 +68,10 @@ angular.module('copcastAdminApp')
         };
         peer.pc.onaddstream = function(event) {
           attachMediaStream(peer.remoteVideoEl, event.stream);
-          var videoElement = document.getElementById('remoteVideosContainer');
+          var videoElement = document.getElementById('video-wrapper');
           videoElement.innerHTML = '';
           videoElement.appendChild(peer.remoteVideoEl);
+          videoElement.className = videoElement.className + ' watermark-wrapper';
         };
         peer.pc.onremovestream = function(event) {
           peer.remoteVideoEl.src = '';

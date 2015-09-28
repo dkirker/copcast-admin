@@ -3,7 +3,7 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('timelineSegment', function($timeout) {
+  app.directive('timelineSegment', function($timeout, timelineService) {
     return {
       restrict: 'E',
       replace: true,
@@ -28,8 +28,16 @@
          */
         scope.$watch('activities', function() {
           var firstActivity = getFirstActivity();
-          segmentKey = createSegmentKey(firstActivity[0].getDate());
+          segmentKey = createKey(firstActivity[0].getDate());
         }, true);
+
+        timelineService.currentLocationChanged.addListener(function (location) {
+          var locationKey = createKey(location.date);
+          if(locationKey === segmentKey) {
+            console.log('Current Location Changed in Segment', location, locationKey);
+            setPositionFromCurrentDate(location.date);
+          }
+        });
 
         /*
          * Scope functions
@@ -52,16 +60,20 @@
 
           console.log('selectedMinute', selectedMinute);
 
-          var selectedDate = moment(segmentKey + ':' + selectedMinute, "YYYY-MM-DD HH:mm");
-          var position = calculatePosition(selectedDate);
-          timelineSegmentsCtrl.setPosition(position);
-          timelineSegmentsCtrl.setSelectedDate(selectedDate);
+          var currentDate = moment(segmentKey + ':' + selectedMinute, "YYYY-MM-DD HH:mm");
+          setPositionFromCurrentDate(currentDate);
+          timelineSegmentsCtrl.setSelectedDate(currentDate);
         };
 
         /*
          * Internal functions
          */
-        function createSegmentKey(date) {
+        function setPositionFromCurrentDate(date) {
+          var position = calculatePosition(date);
+          timelineSegmentsCtrl.setPosition(position);
+        }
+
+        function createKey(date) {
           return date && date.format('YYYY-MM-DD HH');
         }
 
