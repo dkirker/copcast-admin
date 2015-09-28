@@ -23,7 +23,7 @@ With node installed, install Bower, Gulp, Karma and PhantomJs (the last two, to 
 ```
 Now you have Copcast Admin installed. To connect it with the server, you must have installed <a href="https://github.com/igarape/mogi-server">Copcast Server</a>. If you did not install it yet, this is the time!
 
-Open the file <b>src/app/app.js</b> and make sure that the constant <b>ServerUrl</b> points to <b>//<COPCAST_SERVER_ADDRESS\>:\<COPCAST_SERVER_PORT\></b>
+Open the file <b>src/app/app.js</b> and make sure that the constant <b>ServerUrl</b> points to <b>//\<COPCAST_SERVER_ADDRESS\>:\<COPCAST_SERVER_PORT\></b>
 
 ```
 angular.module('copcastAdminApp').constant('ServerUrl', '//localhost:3000');
