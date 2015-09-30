@@ -5,7 +5,7 @@
 
 Copcast Admin is part of the Copcast solution to help improve police accountability using mobile phones to record the video and the audio and register their GPS location.
 
-Copcast Admin is developed with <a href="https://angularjs.org">Angularjs</a>
+Copcast Admin is developed with <a href="https://angularjs.org">AngularJS</a>
 
 ## Installation
 
