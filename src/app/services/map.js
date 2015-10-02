@@ -22,6 +22,11 @@
 
             };
 
+           service.showErrorInBallon = function(scope) {
+             if (infoWindow){
+               scope.balloonErrorMessage = gettextCatalog.getString('Not able to start streaming now. Try again later.');
+             }
+           };
            service.closeBalloon = function () {
              if (infoWindow){
                infoWindow.close();
