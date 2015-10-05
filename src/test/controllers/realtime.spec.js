@@ -11,12 +11,16 @@ describe('Controller: RealtimeCtrl', function () {
 
   var RealtimeCtrl,
     scope,
-    mapService;
+    mapService,
+    userService;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-
+    userService = {
+      getOnlineUsers: function(){},
+      getStreamingUsers: function(){}
+    };
     mapService = {
       getGreyMarker: function (name) {
         return "anyURL";
@@ -37,7 +41,8 @@ describe('Controller: RealtimeCtrl', function () {
 
     RealtimeCtrl = $controller('RealtimeCtrl', {
       $scope: scope,
-      mapService: mapService
+      mapService: mapService,
+      userService: userService
     });
   }));
 
@@ -51,7 +56,8 @@ describe('Controller: RealtimeCtrl', function () {
       user = {
         id: 0, name: "Test Name",
         lat: 23, lng: 23, groupId: 1, accuracy: 10
-      }
+      };
+
       marker = {
         getPosition: function () {
         }, setPosition: function (pos) {
@@ -103,6 +109,32 @@ describe('Controller: RealtimeCtrl', function () {
       expect(scope.activeUsers.length).toBe(2);
       expect(mapService.createMarker).toHaveBeenCalled();
       expect(mapService.fitBounds).toHaveBeenCalled();
+    });
+  });
+  describe("Test refresh user", function(){
+
+    it("get offline users", function(){
+      spyOn(userService, 'getOnlineUsers').and.callFake(function(){
+        return [{lat: 1, lng: 1}];
+      });
+      spyOn(userService, 'getStreamingUsers').and.callFake(function(){
+        return [];
+      });
+
+      scope.refreshUsers();
+
+      expect(mapService.createMarker).toHaveBeenCalled();
+
+      expect(scope.activeUsers.length).toBe(1);
+      expect(scope.activeStreams.length).toBe(0);
+    });
+
+    it("get streaming users", function() {
+      //TODO
+    });
+
+    it("get no users", function(){
+      //TODO
     });
   });
 });

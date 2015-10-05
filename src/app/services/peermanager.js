@@ -53,9 +53,11 @@ angular.module('copcastAdminApp')
         localStream,
         socketIO = socket;
 
+      function hasPeers(){
+        return peerDatabase
+      }
 
-
-      function addPeer(remoteId, diconnectListener) {
+      function addPeer(remoteId, startedListener, diconnectListener) {
         var peer = new Peer(config.peerConnectionConfig, config.peerConnectionConstraints);
         peer.pc.onicecandidate = function(event) {
           if (event.candidate) {
@@ -67,6 +69,9 @@ angular.module('copcastAdminApp')
           }
         };
         peer.pc.onaddstream = function(event) {
+          if (startedListener) {
+            startedListener();
+          }
           attachMediaStream(peer.remoteVideoEl, event.stream);
           var videoElement = document.getElementById('video-wrapper');
           videoElement.innerHTML = '';
@@ -170,8 +175,8 @@ angular.module('copcastAdminApp')
           return localId;
         },
 
-        peerInit: function(remoteId, disconnectListener) {
-          var peer = peerDatabase[remoteId] || addPeer(remoteId, disconnectListener);
+        peerInit: function(remoteId, startedListener, disconnectListener) {
+          var peer = peerDatabase[remoteId] || addPeer(remoteId, startedListener, disconnectListener);
           send('init', remoteId, null);
         },
 

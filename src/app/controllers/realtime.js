@@ -13,7 +13,7 @@
   angular.module('copcastAdminApp').
     controller('RealtimeCtrl', RealtimeCtrl);
 
-  function RealtimeCtrl($scope, peerManager, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+  function RealtimeCtrl($scope, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService,
                         userService, streamService, $location, $timeout, gettextCatalog) {
 
     $scope.windowHeight = window.innerHeight;
@@ -66,7 +66,7 @@
 
     $scope.popModal = function (id) {
       mapService.closeBalloon();
-      showModal($scope.activeUsers[id]);
+      streamService.startPeer($scope.activeUsers[id], showModal.bind(null, $scope.activeUsers[id]), closeModal);
     }
 
     $scope.goToUser = function (user) {
@@ -196,9 +196,9 @@
           position: "right",
           scope: $scope
         });
+        streamService.stopPeer();
       });
     });
-
 
     function filterUsers() {
 
@@ -329,16 +329,24 @@
         windowClass: 'modal-stream',
         backdrop: false,
         scope: $scope,
-        peerManager: peerManager,
         resolve: {
           user: function () {
             return user;
           },
+          closeModalCallback: closeModal,
           ServerUrl: function () {
             return ServerUrl;
           }
         }
       });
+    }
+
+    function closeModal() {
+      if (streamService.isPeerActive()){
+        streamService.stopPeer();
+      }
+
+      $modal.close();
     }
 
     function showStream(user) {
