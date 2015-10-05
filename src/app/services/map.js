@@ -9,7 +9,7 @@
  * Factory in the copcastAdminApp.
  */
        angular.module('copcastAdminApp')
-         .factory('mapService',function($compile, $templateCache) {
+         .factory('mapService',function($compile,gettextCatalog, $templateCache) {
            var service = {}, infoWindow =null;
 
            service.showBalloon = function (scope) {
