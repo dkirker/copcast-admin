@@ -16,7 +16,7 @@
 
   <script type="text/ng-template" id="balloon.html">
     <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
-      <div style="">
+      <div>
         <div style="float: left;width:80px">
           <img ng-src="{{currentUser.picture}}" style="padding-right: 5px; padding-bottom: 5px" width="80" ng-show="currentUser.picture">
         </div>
@@ -25,6 +25,9 @@
           <a ng-click="goToUser(currentUser)" translate>View history</a>
 
           <div ng-show="isOnline(currentUser) && canStream()">
+            <div class="error-message" ng-show="balloonErrorMessage">
+              {{balloonErrorMessage}}
+            </div>
             <div>
               <div class="btn-group btn-group-sm">
                 <a class="btn btn-primary" ng-click="requestStream(currentUser)"

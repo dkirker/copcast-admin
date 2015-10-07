@@ -48,7 +48,7 @@ angular.module('copcastAdminApp')
         return;
       }
 
-      socketIo = io.connect(ServerUrl, { query : 'token=' + token });
+      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin' });
       socketIo.once('connect', function() {
         connected = true;
         console.log('socket connected!');
