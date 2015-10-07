@@ -13,7 +13,7 @@
   angular.module('copcastAdminApp').
     controller('RealtimeCtrl', RealtimeCtrl);
 
-  function RealtimeCtrl($scope, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+  function RealtimeCtrl($scope, peerManager, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService,
                         userService, streamService, $location, $timeout, gettextCatalog) {
 
     $scope.windowHeight = window.innerHeight;
@@ -66,7 +66,7 @@
 
     $scope.popModal = function (id) {
       mapService.closeBalloon();
-      streamService.startPeer($scope.activeUsers[id], showModal.bind(null, $scope.activeUsers[id]), closeModal);
+      showModal($scope.activeUsers[id]);
     }
 
     $scope.goToUser = function (user) {
@@ -189,6 +189,9 @@
         if ($scope.currentUser.id === data.id) {
           mapService.showErrorInBallon($scope);
         }
+        if ($scope.activeStreams[$scope.currentUser.id].modal){
+          $scope.activeStreams[$scope.currentUser.id].modal.close();
+        }
         //show notification error
         notify({
           templateUrl: 'app/views/notifications/errorNotification.html',
@@ -196,9 +199,9 @@
           position: "right",
           scope: $scope
         });
-        streamService.stopPeer();
       });
     });
+
 
     function filterUsers() {
 
@@ -329,24 +332,16 @@
         windowClass: 'modal-stream',
         backdrop: false,
         scope: $scope,
+        peerManager: peerManager,
         resolve: {
           user: function () {
             return user;
           },
-          closeModalCallback: closeModal,
           ServerUrl: function () {
             return ServerUrl;
           }
         }
       });
-    }
-
-    function closeModal() {
-      if (streamService.isPeerActive()){
-        streamService.stopPeer();
-      }
-
-      $modal.close();
     }
 
     function showStream(user) {
