@@ -1,10 +1,11 @@
 [![Stories in Ready](https://badge.waffle.io/igarape/copcast-admin.png?label=ready&title=Ready)](https://waffle.io/igarape/copcast-admin)
 [![Build Status](https://travis-ci.org/igarape/copcast-admin.svg?branch=master)](https://travis-ci.org/igarape/copcast-admin)
+[![Code Climate](https://codeclimate.com/github/igarape/copcast-admin/badges/gpa.svg)](https://codeclimate.com/github/igarape/mogi-server)
 # Copcast Admin
 
 Copcast Admin is part of the Copcast solution to help improve police accountability using mobile phones to record the video and the audio and register their GPS location.
 
-Copcast Admin is developed with <a href="https://angularjs.org">Angularjs</a>
+Copcast Admin is developed with <a href="https://angularjs.org">AngularJS</a>
 
 ## Installation
 
