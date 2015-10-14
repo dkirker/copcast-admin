@@ -8,7 +8,7 @@
     hours.push(hour);
   }
 
-  app.directive('timeline', function() {
+  app.directive('timeline', function TimelineDirective() {
     return {
       restrict: 'E',
       replace: true,

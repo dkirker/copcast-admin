@@ -23,11 +23,11 @@
   <section class="time" ng-bind-html="time"></section>
   <section class="controls">
     <div>
-      <div class="previous" ng-click="previousVideo()">
+      <div class="previous" ng-click="previousVideo()" ng-class="{'enabled': hasPreviousVideo}" ng-click="playVideo()">
       </div>
-      <div class="play img-circle" ng-class="{'enabled': selectedUser && src, 'playing': playing}" ng-click="playVideo()">
+      <div class="play img-circle" ng-class="{'enabled': hasVideo(), 'playing': playing}" ng-click="playVideo()">
       </div>
-      <div class="next" ng-click="nextVideo()">
+      <div class="next" ng-click="nextVideo()" ng-class="{'enabled': hasNextVideo}">
       </div>
     </div>
   </section>

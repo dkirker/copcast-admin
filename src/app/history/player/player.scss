@@ -111,12 +111,20 @@
         background: url('/assets/images/video_player.png') no-repeat -12px -15px;
         width: 20px;
         height: 30px;
+        opacity: 0.3;
+        &.enabled {
+          opacity: 1;
+        }
       }
 
       .next {
         background: url('/assets/images/video_player.png') no-repeat -261px -15px;
         width: 20px;
         height: 30px;
+        opacity: 0.3;
+        &.enabled {
+          opacity: 1;
+        }
       }
 
       .play {

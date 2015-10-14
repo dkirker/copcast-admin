@@ -2,43 +2,51 @@
 ;(function(angular, moment, EventSignal, utils) {
   var app = angular.module('copcastAdminApp');
 
-  app.service('HistoryManager', function($q, $timeout, userService, groupService) {
+  app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService) {
     var self = this;
     this.store = {};
 
     // Objects
     var groups = new Groups($q, userService, groupService);
-    var groupsLocationsAndVideos = new GroupsLocationsAndVideos($q, $timeout, userService, groupService);
+    var groupsDataManager = new GroupsDataManager($q, $timeout, userService, groupService);
     var googleMapsHelper = new GoogleMapsHelper($timeout);
 
     // Manager API
     this.loadUsersAndGroups = groups.load.bind(groups);
 
-    this.setCurrentGroup = groupsLocationsAndVideos.setCurrentGroup.bind(groupsLocationsAndVideos);
-    this.setCurrentUser = groupsLocationsAndVideos.setCurrentUser.bind(groupsLocationsAndVideos);
-    this.setPeriod = groupsLocationsAndVideos.setPeriod.bind(groupsLocationsAndVideos);
-    this.setSelectedDate = function setSelectedDate(selectedDate) {
-      console.log('selectedDate', selectedDate);
-      groupsLocationsAndVideos.setCurrentDate(selectedDate);
+    this.setCurrentGroup = groupsDataManager.setCurrentGroup.bind(groupsDataManager);
+    this.setCurrentUser = groupsDataManager.setCurrentUser.bind(groupsDataManager);
+    this.setPeriod = groupsDataManager.setPeriod.bind(groupsDataManager);
+    this.setCurrentDate = function setCurrentDate(currentDate) {
+      console.log('currentDate', currentDate);
+      groupsDataManager.setCurrentDate(currentDate);
     };
 
     this.previousVideo = function previousVideo() {
       var userData = self.store.userData;
       if(userData && userData.previousVideo) {
-        self.setSelectedDate(userData.previousVideo.from);
+        groupsDataManager.setCurrentVideo(userData.previousVideo);
       }
     };
     this.nextVideo = function nextVideo() {
       var userData = self.store.userData;
       if(userData && userData.nextVideo) {
-        self.setSelectedDate(userData.nextVideo.from);
+        groupsDataManager.setCurrentVideo(userData.nextVideo);
       }
-    }
+    };
+    this.hasPreviousVideo = function hasPreviousVideo() {
+      var userData = self.store.userData;
+      return userData && userData.previousVideo;
+    };
+    this.hasNextVideo = function hasNextVideo() {
+      var userData = self.store.userData;
+      return userData && userData.nextVideo;
+    };
 
     // User and Groups Events
     groups.usersIndexed.addListener(function(indexedUsers) {
       console.log('indexedUsers', indexedUsers);
-      groupsLocationsAndVideos.setUsers(indexedUsers);
+      groupsDataManager.setUsers(indexedUsers);
     });
     groups.groupsChanged.addListener(function(groups) {
       console.log('groups', groups);
@@ -46,35 +54,39 @@
     });
 
     // Group Locations and Videos Events
-    groupsLocationsAndVideos.currentGroupChanged.addListener(function(group) {
+    groupsDataManager.currentGroupChanged.addListener(function(group) {
       console.log('currentGroup', group);
       self.store.currentUser = undefined;
       self.store.currentGroup = group;
     });
 
-    groupsLocationsAndVideos.currentUserChanged.addListener(function(user) {
+    groupsDataManager.currentUserChanged.addListener(function(user) {
       console.log('currentUser', user);
       self.store.currentUser = user;
     });
 
-    groupsLocationsAndVideos.groupDataChanged.addListener(function(groupData) {
+    groupsDataManager.groupDataChanged.addListener(function(groupData) {
       self.store.groupData = groupData;
       console.log('groupData', groupData);
     });
 
-    groupsLocationsAndVideos.userDataChanged.addListener(function(userData) {
+    groupsDataManager.userDataChanged.addListener(function(userData) {
+      console.log('userData', userData);
       self.store.userData = userData;
       googleMapsHelper.updateUserLocations(userData);
-      console.log('userData', userData);
     });
 
-    groupsLocationsAndVideos.currentGroupLocationsChanged.addListener(function(groupData) {
+    groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
+      console.log('currentGroupLocations changed', groupData);
       googleMapsHelper.updateCurrentGroupLocationsMarkers(groupData);
-      console.log('currentGroupLocations updated', groupData);
     });
 
-    groupsLocationsAndVideos.currentVideoChanged.addListener(function(videoData) {
-      console.log('currentVideoChanged', videoData.currentVideo, videoData.previousVideo, videoData.nextVideo);
+    groupsDataManager.currentUserLocationChanged.addListener(function(userData) {
+      console.log('currentUserLocationChanged changed', userData);
+      timelineService.setCurrentLocation(userData.currentLocation);
+    });
+    groupsDataManager.currentVideoChanged.addListener(function(videoData) {
+      console.log('currentVideoChanged', videoData);
     });
 
     /* Google Maps Data */
@@ -145,7 +157,7 @@
   /****************************************************************
    * GroupLocations
    ****************************************************************/
-  function GroupsLocationsAndVideos($q, $timeout, userService, groupService) {
+  function GroupsDataManager($q, $timeout, userService, groupService) {
     this.$q = $q;
     this.$timeout = $timeout;
     this.DEFAULT_ACCURACY = 20;
@@ -159,13 +171,14 @@
     this.currentUserChanged = new EventSignal();
     this.periodChanged = new EventSignal();
     this.currentGroupLocationsChanged = new EventSignal();
+    this.currentUserLocationChanged = new EventSignal();
     this.currentVideoChanged = new EventSignal();
   }
-  GroupsLocationsAndVideos.prototype = {
+  GroupsDataManager.prototype = {
     setUsers: function setUsers(users) {
       this._users = users;
       this.reset();
-      this.MAX_MINUTES_TO_CLOSEST_LOCATION = 6;
+      this.MAX_MINUTES_TO_CLOSEST_LOCATION = 10;
     },
 
     setCurrentGroup: function setCurrentGroup(currentGroup) {
@@ -194,6 +207,12 @@
       this._updateCurrentDateVideo();
     },
 
+    setCurrentVideo: function setCurrentVideo(video) {
+      this.currentDate = moment(video.from);
+      this._calculateClosestGroupLocations();
+      this._setVideoData(video.index);
+    },
+
     reset: function reset() {
       this.locationsByUser = {};
       this.videos = [];
@@ -204,8 +223,7 @@
     /* Private */
     _updateCurrentDateVideo: function _updateCurrentDateVideo() {
       var videos = this.userData.videos || [];
-      var currentVideo;
-      var nextVideo;
+      var videoIndex;
       var cDate = this.currentDate;
       for(var i = 0, len = videos.length; i < len; i++) {
         var video = videos[i];
@@ -213,17 +231,29 @@
         var toDate = moment(video.to);
         if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
           (cDate.isBetween(fromDate, toDate, 'minute'))) {
-          currentVideo = video;
-          if(i < len - 1) {
-            nextVideo = videos[i + 1];
-          }
+          videoIndex = i;
           break;
         }
       }
-      var userData = this.userData;
-      userData.previousVideo = userData.currentVideo;
-      userData.currentVideo = currentVideo;
-      userData.nextVideo = nextVideo;
+      this._setVideoData(videoIndex);
+    },
+
+    _setVideoData: function _setVideoData(videoIndex) {
+      var videos = this.userData.videos || [];
+      if(videos.length > 0) {
+        var userData = this.userData;
+        userData.previousVideo = videoIndex > 0
+          ? videos[videoIndex - 1]
+          : undefined;
+        userData.currentVideo = videos[videoIndex];
+        if(videoIndex >= 0) {
+          userData.nextVideo = videos.length > videoIndex + 1
+            ? videos[videoIndex + 1]
+            : undefined;
+        } else {
+          userData.nextVideo = videos[0];
+        }
+      }
       this.currentVideoChanged.emit({
         current: userData.currentVideo,
         previous: userData.previousVideo,
@@ -244,6 +274,9 @@
         if(locationsByHour) {
           var location = this._getClosestLocation(locationsByHour.get(hour) || []);
           this.groupData[userId].currentLocation = location;
+          if(this.currentUser && this.currentUser.id === userId) {
+            this.currentUserLocationChanged.emit(this.groupData[userId]);
+          }
         }
       }
       this.currentGroupLocationsChanged.emit(this.groupData);
@@ -332,8 +365,12 @@
         var userData = this.groupData[video.userId];
         if(userData) {
           var userVideos = userData.videos || [];
+          video.index = userVideos.length;
           userVideos.push(video);
-          this.groupData[video.userId].videos = userVideos;
+          userData.videos = userVideos;
+          if(userVideos.length > 0) {
+            userData.nextVideo = userVideos[0];
+          }
         }
       }
     },

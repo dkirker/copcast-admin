@@ -9,13 +9,14 @@
  * Factory in the copcastAdminApp.
  */
        angular.module('copcastAdminApp')
-         .factory('mapService',function($compile, $templateCache) {
+         .factory('mapService',function($compile,gettextCatalog, $templateCache) {
            var service = {}, infoWindow =null;
 
            service.showBalloon = function (scope) {
               if (infoWindow){
                 infoWindow.close();
               }
+             scope.balloonErrorMessage = '';
              infoWindow = new InfoBubble({minWidth: 250, minHeight: 260,
                arrowSize: 20, borderRadius: 0, disableAnimation: true, shadowStyle: 0,
                closeSrc: 'https://maps.gstatic.com/intl/en_us/mapfiles/close.gif'});
@@ -24,6 +25,11 @@
 
             };
 
+           service.showErrorInBallon = function(scope) {
+             if (infoWindow){
+               scope.balloonErrorMessage = gettextCatalog.getString('Not able to start streaming now. Try again later.');
+             }
+           };
            service.closeBalloon = function () {
              if (infoWindow){
                infoWindow.close();

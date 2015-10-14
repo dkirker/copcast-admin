@@ -37,4 +37,21 @@
   h3 {
     margin-top: 5px !important;
   }
+  #video-wrapper.watermark-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  #video-wrapper.watermark-wrapper:before {
+    content: " ";
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    opacity: 0.7;
+    width: 40px;
+    height: 33px;
+    background: url('../assets/images/watermark.png');
+
+  }
+
+
 }

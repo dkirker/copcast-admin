@@ -3,7 +3,7 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('timelineSegments', function($timeout) {
+  app.directive('timelineSegments', function TimelineSegments($timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -18,8 +18,11 @@
         };
 
         this.setPosition = function setPosition(position) {
-          $scope.selectedPosition = position - 1;
-          $scope.userData.timeline.lastPosition = $scope.selectedPosition;
+          var adjustedPosition = position - 1;
+          if($scope.selectedPosition !== adjustedPosition) {
+            $scope.selectedPosition = adjustedPosition;
+            $scope.userData.timeline.lastPosition = $scope.selectedPosition;
+          }
         };
 
         this.resetSelectedPosition = function resetSelectedPosition() {
@@ -35,26 +38,27 @@
         var timelineCtrl = ctrls[0];
         var localCtrl = ctrls[1];
         var currentGroup;
-        var previousDate;
 
         scope.$watch('userData', function() {
           if(scope.userData) {
             loadTimelineData();
             initPosition();
           }
-          previousDate = undefined;
         });
 
         scope.setSelectedDate = timelineCtrl.setSelectedDate;
 
         scope.getPreviousDateLabel = function getPreviousDateLabel(key) {
-          return previousDate;
+          if(scope.userData.timeline.datesSequence) {
+            var previousDate = scope.userData.timeline.datesSequence.get(key);
+            return previousDate
+              ? moment(previousDate, 'YYYY-MM-DD').format('DD/MM')
+              : undefined;
+          }
         };
 
         scope.getCurrentDateLabel = function getCurrentDateLabel(key) {
-          var currentDate = moment(key, 'YYYY-MM-DD').format('DD/MM');
-          previousDate = currentDate;
-          return currentDate;
+          return moment(key, 'YYYY-MM-DD').format('DD/MM');
         };
 
         function initPosition() {
@@ -76,8 +80,8 @@
           var hasLocations = userData.locationsByDay;
           var hasActivities = userData.timeline && userData.timeline.activitiesByDay;
 
+          userData.timeline = userData.timeline || {};
           if(!hasActivities && hasLocations) {
-            userData.timeline = {};
             createActivitiesByDay();
             createDatesSequence();
           }

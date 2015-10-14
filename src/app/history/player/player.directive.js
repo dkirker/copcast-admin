@@ -14,7 +14,9 @@
         currentVideo: '=?',
         onChangeUser: '&',
         onPreviousVideo: '&',
-        onNextVideo: '&'
+        onNextVideo: '&',
+        hasPreviousVideo: '=?',
+        hasNextVideo: '=?'
       },
       link: function(scope, el) {
         var onChangeUser = scope.onChangeUser(); // Unwrap
@@ -25,7 +27,7 @@
         var video = $video[0];
         var lastSrc;
 
-        scope.time = formatTime(0);
+        resetVideoTime();
 
         /*
          * Watchers
@@ -42,12 +44,16 @@
           if(lastSrc === scope.src) {
             return;
           }
-          formatTime(0);
+          resetVideoTime();
           lastSrc = scope.src;
           video.src = scope.src ? scope.src : '';
           scope.playing = false;
           video.load();
         });
+
+        function resetVideoTime() {
+          scope.time = formatTime(0);
+        }
 
         /*
          * Scope functions
@@ -75,6 +81,10 @@
 
         scope.nextVideo = function nextVideo() {
           onNextVideo();
+        }
+
+        scope.hasVideo = function() {
+          return scope.selectedUser && scope.src;
         }
 
         /*
