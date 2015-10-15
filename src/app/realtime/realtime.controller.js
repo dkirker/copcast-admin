@@ -20,8 +20,8 @@
     $scope.windowWidth = window.innerWidth;
     $rootScope.selected = 'realtime';
     $scope.streamButtonText = gettextCatalog.getString('Livestream');
-    $scope.searchString = '';
     $scope.waitingStreaming = false;
+    $scope.searchString = '';
     $scope.alerts = [];
 
     $scope.mapOptions = {
@@ -58,6 +58,8 @@
 
     $scope.refreshUsers = refreshUsers;
 
+    $scope.isStreaming = isStreaming;
+
     $scope.popNotification = function (user) {
       notify({
         messageTemplate: '<a ng-click="popModal(' + user.id + ')">' + user.userName + ' is streaming </a>',
@@ -66,10 +68,8 @@
     };
 
     $scope.popModal = function (id) {
-      mapService.closeBalloon();
       showModal($scope.activeUsers[id]);
     }
-  };
 
     $scope.goToUser = function (user) {
       var path = '/analytics/' + user.id;
@@ -105,148 +105,158 @@
     //  },10);
     //});
 
+
     angular.element($window).bind('resize', function () {
       $scope.myStyle.height = window.innerHeight + 'px';
       google.maps.event.trigger($scope.myMap, 'resize');
       $scope.refreshUsers();
     });
-  function loadUser(data) {
-    console.log("Socket: Location received!");
-    var pos = null;
-    if ($scope.activeUsers[data.id]) {
-      pos = new google.maps.LatLng(data.lat, data.lng);
-      $scope.activeUsers[data.id].marker.setPosition(pos);
-      $scope.activeUsers[data.id].accuracy = data.accuracy;
-      if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
-        $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
+
+    function timeoutUser(user) {
+      user.marker.setIcon(mapService.getGreyMarker(user.userName));
+    };
+
+    function loadUser(data) {
+      console.log("Socket: Location received!");
+      var pos = null;
+      if ($scope.activeUsers[data.id]) {
+        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+        $scope.activeUsers[data.id].marker.setPosition(pos);
+        $scope.activeUsers[data.id].accuracy = data.location.accuracy;
+        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
+        if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
+          $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
+        }
+      } else {
+        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+
+        var marker = mapService.createMarker($scope, pos, data);
+
+        $scope.activeUsers[data.id] = {
+          id: data.id,
+          userName: data.name,
+          login: data.username,
+          deploymentGroup: data.group,
+          marker: marker,
+          groupId: data.groupId,
+          accuracy: data.location.accuracy,
+          picture: ServerUrl + data.profilePicture,
+          timeoutPromisse: null
+        };
+
+        mapService.fitBounds($scope, $scope.activeUsers);
       }
-    } else {
-      pos = new google.maps.LatLng(data.lat, data.lng);
 
-      var marker = mapService.createMarker($scope, pos, data);
+      mapService.applyCircle($scope, $scope.activeUsers[data.id]);
 
-      $scope.activeUsers[data.id] = {
-        id: data.id,
-        userName: data.name,
-        login: data.username,
-        deploymentGroup: data.group,
-        marker: marker,
-        groupId: data.groupId,
-        accuracy: data.accuracy,
-        picture: data.profilePicture ? ServerUrl + data.profilePicture : null,
-        timeoutPromisse: null
-      };
-
-      mapService.fitBounds($scope, $scope.activeUsers);
-    }
-
-    mapService.applyCircle($scope, $scope.activeUsers[data.id]);
-
-    if ($scope.activeUsers[data.id].timeoutPromisse != null) {
-      $timeout.cancel($scope.activeUsers[data.id].timeoutPromisse);
-    }
-    $scope.activeUsers[data.id].timeoutPromisse = $timeout(function () {
-      timeoutUser($scope.activeUsers[data.id]);
-    }, 60000);
-  };
-
-
-  socket.on('connect', function () {
-    socket.on('users:location', loadUser);
-
-    socket.on('streaming:start', function (data) {
-
-      var user = $scope.activeUsers[data.id];
-      if (!user) {
-        return console.log('Unable to find user for streaming');
+      if ($scope.activeUsers[data.id].timeoutPromisse != null) {
+        $timeout.cancel($scope.activeUsers[data.id].timeoutPromisse);
       }
-      userService.getMyData().
-        then(function (data) {
-          if (data.length === 0) {
-            return;
+      $scope.activeUsers[data.id].timeoutPromisse = $timeout(function () {
+        timeoutUser($scope.activeUsers[data.id]);
+      }, 60000);
+    };
+
+
+    socket.on('connect', function () {
+      socket.on('users:heartbeat', loadUser);
+
+      socket.on('streaming:start', function (data) {
+
+        var user = $scope.activeUsers[data.id];
+        if (!user) {
+          return console.log('Unable to find user for streaming');
+        }
+        userService.getMyData().
+          then(function (data) {
+            if (data.length === 0) {
+              return;
+            }
+            showStream(user);
+            if ($scope.canStream()) {
+              $scope.popNotification(user);
+            }
+          });
+      });
+
+      socket.on('streaming:stop', function (data) {
+        stopStream($scope.activeUsers[data.id]);
+        notify.closeAll();
+        $scope.$apply();
+      });
+      socket.on('disconnect', function (socket) {
+        console.log('Got disconnect!');
+      });
+      socket.on('streaming:alreadyConnected', function (data) {
+        //show message in balloon
+        if ($scope.currentUser.id === data.id) {
+          mapService.showErrorInBallon($scope);
+        }
+        if ($scope.activeStreams[$scope.currentUser.id].modal){
+          $scope.activeStreams[$scope.currentUser.id].modal.close();
+        }
+        //show notification error
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
+          position: "right",
+          scope: $scope
+        });
+      });
+    });
+
+
+    function filterUsers() {
+
+      if (!$scope.searchString) {
+        //show all users
+        angular.forEach($scope.activeUsers, function (user) {
+          //TODO add group so we can search for specific groups
+          user.marker.setMap($scope.myMap);
+          if (user.cityCircle) {
+            user.cityCircle.setMap($scope.myMap);
           }
-          showStream(user);
-          if ($scope.canStream()) {
-            $scope.popNotification(user);
+
+        });
+      } else {
+        //allows filter by regex
+        angular.forEach($scope.activeUsers, function (user) {
+          //TODO add group so we can search for specific groups
+          var lUserName = user.userName;
+          var lUserLogin = user.login;
+          var reMatch = new RegExp($scope.searchString, 'gi');
+
+          if (lUserName.match(reMatch) || lUserLogin.match(reMatch)) {
+            user.marker.setMap($scope.myMap);
+            if (user.cityCircle) {
+              user.cityCircle.setMap($scope.myMap);
+            }
+          } else {
+            user.marker.setMap(null);
+            if (user.cityCircle) {
+              user.cityCircle.setMap(null);
+            }
           }
         });
-    });
-
-    socket.on('streaming:stop', function (data) {
-      stopStream($scope.activeUsers[data.id]);
-      notify.closeAll();
-      $scope.$apply();
-    });
-    socket.on('disconnect', function (socket) {
-      console.log('Got disconnect!');
-    });
-    socket.on('streaming:alreadyConnected', function (data) {
-      //show message in balloon
-      if ($scope.currentUser.id === data.id) {
-        mapService.showErrorInBallon($scope);
       }
-      if ($scope.activeStreams[$scope.currentUser.id].modal){
-        $scope.activeStreams[$scope.currentUser.id].modal.close();
+    };
+
+    function showUser(userId) {
+      $scope.currentUser = $scope.activeUsers[userId];
+      $scope.streamButtonText = 'Begin stream';
+      $scope.waitingStreaming = false;
+      if ( $scope.currentUser ) {
+        google.maps.event.trigger($scope.myMap, "resize");
+        $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
+
+
+        mapService.showBalloon($scope);
       }
-      //show notification error
-      notify({
-        templateUrl: 'app/views/notifications/errorNotification.html',
-        message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
-        position: "right",
-        scope: $scope
-      });
-    });
-  });
+    };
 
-
-
-
-  function filterUsers() {
-
-    if(!$scope.searchString){
-      //show all users
-      angular.forEach($scope.activeUsers, function(user) {
-        //TODO add group so we can search for specific groups
-        user.marker.setMap($scope.myMap);
-        if (user.cityCircle) {user.cityCircle.setMap($scope.myMap);}
-
-      });
-    }else{
-      //allows filter by regex
-      angular.forEach($scope.activeUsers, function(user) {
-        //TODO add group so we can search for specific groups
-        var lUserName = user.userName;
-        var lUserLogin = user.login;
-        var reMatch = new RegExp( $scope.searchString, 'gi');
-
-        if( lUserName.match( reMatch ) || lUserLogin.match( reMatch) ){
-          user.marker.setMap($scope.myMap);
-          if (user.cityCircle) {user.cityCircle.setMap($scope.myMap);}
-        }else{
-          user.marker.setMap(null);
-          if (user.cityCircle) {user.cityCircle.setMap(null);}
-        }
-      });
+    function isStreaming(user) {
+      return $scope.activeStreams[user.id];
     }
-  };
-
-  $scope.goToUser = function(user) {
-    var path = '/analytics/' + user.id;
-    $location.path(path);
-  };
-
-  function showUser(userId) {
-    $scope.currentUser = $scope.activeUsers[userId];
-    $scope.streamButtonText = 'Begin stream';
-    $scope.waitingStreaming = false;
-    if ( $scope.currentUser ) {
-      google.maps.event.trigger($scope.myMap, "resize");
-      $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
-
-
-      mapService.showBalloon($scope);
-  };
-
 
     function requestStream(user) {
       $scope.waitingStreaming = true;
@@ -276,6 +286,7 @@
       user.marker.setIcon(mapService.getRedMarker(user.userName));
     };
 
+
     function refreshUsers() {
       userService.getOnlineUsers().then(function (data) {
         if (data.length === 0) {
@@ -285,7 +296,7 @@
         var bounds = new google.maps.LatLngBounds();
         angular.forEach(data, function (user) {
           $scope.loadUser(user);
-          var coord = new google.maps.LatLng(user.lat, user.lng);
+          var coord = new google.maps.LatLng(user.location.lat, user.location.lng);
           bounds.extend(coord);
         });
         $scope.myMap.fitBounds(bounds);
@@ -298,31 +309,6 @@
       });
     };
 
-    function refreshMap() {
-      userService.getMyData().
-        then(function (data) {
-          if (data.length === 0) {
-            return;
-          }
-          if (data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)) {
-            changeMapPos(data.lastPos.lat, data.lastPos.lng);
-          } else if (data.group.lat && data.group.lng && !isNaN(data.group.lat) && !isNaN(data.group.lat)) {
-            changeMapPos(data.group.lat, data.group.lng);
-          } else {
-            changeMapPos(0, 0);
-          }
-        });
-    };
-
-  $scope.popNotification = function(user){
-    notify({messageTemplate: '<a ng-click="popModal(' + user.id + ')">' + user.userName + ' is streaming </a>',
-      position: "right", scope: $scope});
-  };
-
-  $scope.popModal = function(id){
-    mapService.closeBalloon();
-    showModal($scope.activeUsers[id]);
-  }
 
     function refreshMap() {
       userService.getMyData().
@@ -348,9 +334,10 @@
     }
 
     function showModal(user) {
+      mapService.closeBalloon();
       console.log('showModal with user=[' + user + ']');
       $scope.activeStreams[user.id].modal = $modal.open({
-        templateUrl: 'app/videoStream/player.html',
+        templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
         backdrop: false,
@@ -378,18 +365,8 @@
       user.marker.setIcon(mapService.getGreenMarker(user.userName));
     }
 
-    $scope.refreshUsers();      status: 'streaming',
-      streamId: user.id,
-      userName: user.userName,
-      groupId: user.groupId,
-      modal: null
-    };
-    user.marker.setIcon(mapService.getGreenMarker(user.userName));
-  }
-
-  $scope.refreshUsers();
+    $scope.refreshUsers();
 
 
   } //end-RealTimeCtrl
 })();
-
