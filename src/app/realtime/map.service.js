@@ -17,7 +17,9 @@
                 infoWindow.close();
               }
              scope.balloonErrorMessage = '';
-             infoWindow = new google.maps.InfoWindow({maxWidth: 350});
+             infoWindow = new InfoBubble({minWidth: 250, minHeight: 260,
+               arrowSize: 20, borderRadius: 0, disableAnimation: true, shadowStyle: 0,
+               closeSrc: 'https://maps.gstatic.com/intl/en_us/mapfiles/close.gif'});
              infoWindow.setContent($compile($templateCache.get('balloon.html'))(scope)[0]);
              infoWindow.open(scope.myMap,scope.currentUser.marker);
 

@@ -20,6 +20,7 @@
     $scope.windowWidth = window.innerWidth;
     $rootScope.selected = 'realtime';
     $scope.streamButtonText = gettextCatalog.getString('Livestream');
+    $scope.waitingStreaming = false;
     $scope.searchString = '';
     $scope.alerts = [];
 
@@ -57,6 +58,8 @@
 
     $scope.refreshUsers = refreshUsers;
 
+    $scope.isStreaming = isStreaming;
+
     $scope.popNotification = function (user) {
       notify({
         messageTemplate: '<a ng-click="popModal(' + user.id + ')">' + user.userName + ' is streaming </a>',
@@ -65,7 +68,6 @@
     };
 
     $scope.popModal = function (id) {
-      mapService.closeBalloon();
       showModal($scope.activeUsers[id]);
     }
 
@@ -118,14 +120,15 @@
       console.log("Socket: Location received!");
       var pos = null;
       if ($scope.activeUsers[data.id]) {
-        pos = new google.maps.LatLng(data.lat, data.lng);
+        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
         $scope.activeUsers[data.id].marker.setPosition(pos);
-        $scope.activeUsers[data.id].accuracy = data.accuracy;
+        $scope.activeUsers[data.id].accuracy = data.location.accuracy;
+        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
         if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
           $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
         }
       } else {
-        pos = new google.maps.LatLng(data.lat, data.lng);
+        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
 
         var marker = mapService.createMarker($scope, pos, data);
 
@@ -136,8 +139,8 @@
           deploymentGroup: data.group,
           marker: marker,
           groupId: data.groupId,
-          accuracy: data.accuracy,
-          picture: data.profilePicture ? ServerUrl + data.profilePicture : null,
+          accuracy: data.location.accuracy,
+          picture: ServerUrl + data.profilePicture,
           timeoutPromisse: null
         };
 
@@ -156,7 +159,7 @@
 
 
     socket.on('connect', function () {
-      socket.on('users:location', loadUser);
+      socket.on('users:heartbeat', loadUser);
 
       socket.on('streaming:start', function (data) {
 
@@ -240,8 +243,9 @@
 
     function showUser(userId) {
       $scope.currentUser = $scope.activeUsers[userId];
-      $scope.streamButtonText = gettextCatalog.getString('Livestream');
-      if ($scope.currentUser) {
+      $scope.streamButtonText = 'Begin stream';
+      $scope.waitingStreaming = false;
+      if ( $scope.currentUser ) {
         google.maps.event.trigger($scope.myMap, "resize");
         $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
 
@@ -250,15 +254,20 @@
       }
     };
 
+    function isStreaming(user) {
+      return $scope.activeStreams[user.id];
+    }
 
     function requestStream(user) {
-      $scope.streamButtonText = gettextCatalog.getString('Sending...');
-      if ($scope.activeStreams[user.id]) {
+      $scope.waitingStreaming = true;
+      if ($scope.isStreaming(user)){
+        $scope.streamButtonText = 'streaming';
         showModal($scope.activeUsers[user.id]);
       } else {
+        $scope.streamButtonText = 'Sending...';
         streamService.startStreaming(user.id)
           .then(function (data) {
-            $scope.streamButtonText = gettextCatalog.getString('Waiting for users response...');
+            $scope.streamButtonText = 'awaiting response';
           }, function (data) {
             $scope.streamButtonText = data.message;
           });
@@ -287,7 +296,7 @@
         var bounds = new google.maps.LatLngBounds();
         angular.forEach(data, function (user) {
           $scope.loadUser(user);
-          var coord = new google.maps.LatLng(user.lat, user.lng);
+          var coord = new google.maps.LatLng(user.location.lat, user.location.lng);
           bounds.extend(coord);
         });
         $scope.myMap.fitBounds(bounds);
@@ -325,9 +334,10 @@
     }
 
     function showModal(user) {
+      mapService.closeBalloon();
       console.log('showModal with user=[' + user + ']');
       $scope.activeStreams[user.id].modal = $modal.open({
-        templateUrl: 'app/videoStream/player.html',
+        templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
         backdrop: false,
@@ -360,4 +370,3 @@
 
   } //end-RealTimeCtrl
 })();
-
