@@ -159,6 +159,10 @@
 
 
     socket.on('connect', function () {
+      socket.on('users:incident', function(data){
+        console.log('incident!!');
+        console.log(data);
+      });
       socket.on('users:heartbeat', loadUser);
 
       socket.on('streaming:start', function (data) {
