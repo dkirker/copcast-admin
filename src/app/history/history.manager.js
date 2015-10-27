@@ -1,5 +1,5 @@
 'use strict';
-;(function(angular, moment, EventSignal, utils) {
+(function(angular, moment, EventSignal, utils) {
   var app = angular.module('copcastAdminApp');
 
   app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService) {
@@ -215,6 +215,7 @@
 
     reset: function reset() {
       this.locationsByUser = {};
+      this.incidentsByUser = {};
       this.videos = [];
       this.groupData = {};
       this.groupDataChanged.emit(this.groupData);
@@ -308,10 +309,9 @@
       if(!this.currentGroup || !this.period) {
         this.reset();
       } else {
-        this._loadGroupLocationsAndVideos();
+        this._loadGroupLocationsVideosAndIncidents();
       }
     },
-
     _updateUserData: function _userData() {
       var userId = this.currentUser && this.currentUser.id;
       this.userData = userId ? this.groupData[userId] : {};
@@ -359,6 +359,16 @@
       }
     },
 
+    _indexIncidents: function _indexIncidents() {
+      var userIds = getObjectKeys(this.incidentsByUser);
+      for(var i = 0, len = userIds.length; i < len; i++) {
+        var userId = userIds[i];
+        var incidents = this.incidentsByUser[userId];
+        var userData = this.groupData[userId];
+        userData["incidents"] = incidents;
+        userData["incidentsByDay"] = new IncidentsByDay(incidents);
+      }
+    },
     _indexVideos: function _indexVideos() {
       for(var i = 0, len = this.videos.length; i < len; i++) {
         var video = this.videos[i];
@@ -375,38 +385,43 @@
       }
     },
 
-    _getGroupLocationsAndVideos: function _getGroupLocationsAndVideos() {
+    _getGroupLocationsVideosAndIncidents: function _getGroupLocationsVideosAndIncidents() {
       var toDate = this.period.period ? this.period.toDate : null;
       var groupId = this.currentGroup.id;
       return [
         this._groupService.getGroupLocations(groupId, this.period.fromDate, toDate, this.DEFAULT_ACCURACY),
-        this._groupService.getGroupVideos(groupId, this.period.fromDate, toDate)
+        this._groupService.getGroupVideos(groupId, this.period.fromDate, toDate),
+        this._groupService.getGroupIncidents(groupId, this.period.fromDate, toDate)
       ];
     },
 
-    _getUserLocationsAndVideos: function _getUserLocationsAndVideos() {
+    _getUserLocationsVideosAndIncidents: function _getUserLocationsVideosAndIncidents() {
       var toDate = this.period.period ? this.period.toDate : null;
       var userId = this.currentGroup.id;
       return [
         this._userService.getUserLocations(userId, this.period.fromDate, toDate, this.DEFAULT_ACCURACY),
-        this._userService.getUserVideos(userId, this.period.fromDate, toDate)
+        this._userService.getUserVideos(userId, this.period.fromDate, toDate),
+        this._userService.getUserIncidents(userId, this.period.fromDate, toDate)
       ];
     },
 
-    _loadGroupLocationsAndVideos: function _loadGroupLocationsAndVideos() {
+    _loadGroupLocationsVideosAndIncidents: function _loadGroupLocationsVideosAndIncidents() {
       var promisses = this.currentGroup.isGroup
-        ? this._getGroupLocationsAndVideos()
-        : this._getUserLocationsAndVideos();
+        ? this._getGroupLocationsVideosAndIncidents()
+        : this._getUserLocationsVideosAndIncidents();
 
       var self = this;
       this.$q.all(promisses)
         .then(function(data) {
           self._setLocationsByUser(data[0]);
+          self._setIncidentsByUser(data[2]);
           self.videos = data[1];
+          self.incidents = data[2];
           self.groupData = {};
           self._updateGroupUsers();
           self._indexLocations();
           self._indexVideos();
+          self._indexIncidents();
           self.groupDataChanged.emit(self.groupData);
           self._updateCurrentUser();
         }, error);
@@ -419,6 +434,15 @@
         var userId = this.currentGroup.id;
         this.locationsByUser = {};
         this.locationsByUser[userId] = locations || {};
+      }
+    },
+    _setIncidentsByUser: function _setIncidentsByUser(incidents) {
+      if(this.currentGroup.isGroup) {
+        this.incidentsByUser = incidents || {};
+      } else {
+        var userId = this.currentGroup.id;
+        this.incidentsByUser = {};
+        this.incidentsByUser[userId] = incidents || {};
       }
     }
   };
@@ -588,7 +612,53 @@
     }
   };
 
+  /****************************************************************
+   * IncidentsByDay
+   ****************************************************************/
+  function IncidentsByDay(incidents) {
+    this.data = new utils.Map();
+    this.groupIncidentsByDay(incidents);
+  }
+  IncidentsByDay.prototype = {
+    groupIncidentsByDay: function groupIncidentsByDay(incidents) {
+      for(var i = 0, len = incidents.length; i < len; i++) {
+        this.addIncident(incidents[i]);
+      };
+    },
 
+    addIncident: function addIncident(inc) {
+      var incident = new Incident(inc);
+      var key = incident.getDate('YYYY-MM-DD');
+      var data = this.data.get(key);
+      if (!data){
+        this.data.put(key,[]);
+      }
+      this.data.get(key).push(incident);
+
+    },
+
+    getMap: function getMap() {
+      return this.data;
+    },
+
+  };
+
+
+  /****************************************************************
+   * Incident Wrapper
+   ****************************************************************/
+  function Incident(incident) {
+    this.incident = angular.copy(incident);
+    this.date = moment(incident.date).clone();
+  }
+  Incident.prototype = {
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    },
+    unwrap: function unwrap() {
+      return this.incident;
+    }
+  };
   /****************************************************************
    * Aux functions
    ****************************************************************/

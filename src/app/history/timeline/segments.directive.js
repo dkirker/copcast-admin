@@ -83,6 +83,7 @@
           userData.timeline = userData.timeline || {};
           if(!hasActivities && hasLocations) {
             createActivitiesByDay();
+            createIncidentsByDay();
             createDatesSequence();
           }
           var timeline = userData.timeline || {};
@@ -120,6 +121,23 @@
           }
         }
 
+        function createIncidentsByDay() {
+          scope.userData.timeline.incidentsByDay = scope.userData.incidentsByDay.getMap();
+          //var dates = incidentsByDay.keys();
+          //
+          //if(dates.length > 0) {
+          //  var incidentsByDay = new utils.Map();
+          //  for(var i = 0, len = dates.length; i < len; i++) {
+          //    var date = dates[i];
+          //    var incidentsByHour = incidentsByDay.get(date);
+          //    var activitiesByHour = createIncidentsByHour(incidentsByHour.getMap());
+          //    incidentsByDay.put(date, activitiesByHour);
+          //  }
+          //  scope.userData.timeline.incidentsByDay = incidentsByDay;
+          //  console.log('incidentsByDay', incidentsByDay);
+          //}
+        }
+
         function createActivitiesByHour(locationsByHour) {
           var activitiesByHour = new utils.Map();
           var hours = locationsByHour.keys();
@@ -129,6 +147,19 @@
             var locations = locationsByHour.get(hour);
             var activities = createActivities(locations);
             activitiesByHour.put(hour, activities);
+          }
+          return activitiesByHour;
+        }
+
+        function createIncidentsByHour(incidentsByHour) {
+          var activitiesByHour = new utils.Map();
+          var hours = incidentsByHour.keys();
+
+          for(var i = 0, len = hours.length; i < len; i++) {
+            var hour = hours[i];
+            var incidents = incidentsByHour.get(hour);
+            var incidentsMap = createIncidents(incidents);
+            activitiesByHour.put(hour, incidentsMap);
           }
           return activitiesByHour;
         }
@@ -166,6 +197,17 @@
           }
         }
 
+        function createIncidents(incidents) {
+          var incidentsMap = new utils.ListMap();
+          if(!incidents) {
+            return incidentsMap;
+          }
+
+          for(var i = 0; i < incidents.length; i++) {
+              incidentsMap.put(count++, location);
+          }
+          return incidentsMap;
+        }
       }
     };
   });

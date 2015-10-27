@@ -11,7 +11,7 @@ angular.module('copcastAdminApp')
 
   .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
 
-    $scope.user = {username: 'admin', password: 'admin'};
+    $scope.user = {username: null, password: null};
     $scope.email = '';
     $scope.selected = 'login';
 
