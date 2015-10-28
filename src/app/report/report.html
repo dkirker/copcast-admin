@@ -1,0 +1,148 @@
+<div class="container" style="margin-top: 50px;">
+  <div class="panel">
+    <div class="panel-title" translate>Filter</div>
+    <div class="panel-body">
+      <form novalidate="novalidate" class="form-inline">
+        <div class="form-group">
+          <label translate>From</label>
+
+          <div class="input-group">
+            <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
+                   datepicker-popup is-open="fromDate.visible"
+                   ng-required="true" show-button-bar="false" show-weeks="false" />
+              <span class="input-group-addon">
+                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              </span>
+          </div>
+        </div>
+        <div class="form-group">
+          &nbsp;&nbsp;<label translate>To</label>
+
+          <div class="input-group">
+            <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="toDate.value" ng-model-options="{ debounce: 500 }"
+                   datepicker-popup is-open="toDate.visible"
+                   ng-required="true" show-button-bar="false" show-weeks="false" />
+              <span class="input-group-addon">
+                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+              </span>
+          </div>
+        </div>
+        <a ng-click="updateFilter()" class="btn btn-small btn-primary" translate>Update</a>
+      </form>
+      </form>
+    </div>
+  </div>
+
+  <h3>Use of Copcast - Report from 2015-07-08 to 2015-08-15</h3>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Active officers users</strong></div>
+    <div class="col-md-4">{{reportData.activeOfficers}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Number of missions initiated (missions greater than 30 minutes)</strong></div>
+    <div class="col-md-4">{{reportData.missions}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Average and median length of recordings</strong></div>
+    <div class="col-md-4">{{reportData.recordingLength}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Number of hours of recorded footage</strong></div>
+    <div class="col-md-4">{{reportData.recordedHours}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Number of hours of streamed footage</strong></div>
+    <div class="col-md-4">{{reportData.streamedHours}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Number of flagged incidents</strong></div>
+    <div class="col-md-4">{{reportData.incidents}}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>
+    <div class="col-md-4">{{reportData.adminAccess}}</div>
+  </div>
+  <hr/>
+  <div >
+    <h4 translate><strong>Exported videos</strong></h4>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table table-condensed table-hover">
+          <tr>
+            <th translate>Video</th>
+            <th translate>User</th>
+            <th translate>Video Time</th>
+            <th translate>User who exported</th>
+          </tr>
+          <tr>
+            <th>xxxxx.mp4 (replace with player)</th>
+            <td>bsiqueira</td>
+            <td>2015-07-10 15:04 to 15:10</td>
+            <td>admin</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" translate><strong>How much total footage, by time and number of distinct pieces, has each person viewed</strong></div>
+    <div class="col-md-4">25</div>
+  </div>
+  <hr/>
+  <div>
+    <h4 translate>Information by user<br/>
+      <small translate>grouped by day</small>
+    </h4>
+    <table class="table table-condensed table-hover" ng-repeat="">
+      <caption>Bruno Siqueira</caption>
+      <tr>
+        <th translate>Day</th>
+        <th translate>Total time recording</th>
+        <th translate>Total time streaming</th>
+        <th translate>Total time paused</th>
+        <th translate>Number of times mission was stopped</th>
+      </tr>
+      <tr>
+        <td>2015-10-07</td>
+        <td>8:34</td>
+        <td>0:25</td>
+        <td>0:10</td>
+        <td>5</td>
+      </tr>
+    </table>
+  </div>
+  <br/>
+  <div>
+    <h4 translate>Number of traffic incidents reported</h4>
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table table-condensed table-hover">
+          <tr>
+            <th translate>Gravity</th>
+          </tr>
+          <tr>
+            <th>1</th>
+            <td>{{reportData.incidentReport[0]}}</td>
+          </tr>
+          <tr>
+          <th>2</th>
+          <td>{{reportData.incidentReport[1]}}</td>
+          </tr>
+          <tr>
+          <th>3</th>
+          <td>{{reportData.incidentReport[2]}}</td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td>{{reportData.incidentReport[3]}}</td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td>{{reportData.incidentReport[4]}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
