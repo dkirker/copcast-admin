@@ -98,6 +98,7 @@
           <th translate>Total time recording</th>
           <th translate>Total time streaming</th>
           <th translate>Total time paused</th>
+          <th translate>Total</th>
           <th translate>Number of times mission was stopped</th>
         </tr>
         <tr ng-repeat="activity in user.activities">
@@ -105,6 +106,7 @@
           <td>{{activity.recordingTime}}</td>
           <td>{{activity.streamingTime}}</td>
           <td>{{activity.pausedTime}}</td>
+          <td><strong>{{activity.total}}</strong></td>
           <td>{{activity.numberMissionStopped}}</td>
         </tr>
       </table>

@@ -35,6 +35,7 @@
             date: '2015-10-07',
             recordingTime: '08:25',
             streamingTime: '00:25',
+            total: '18:00',
             pausedTime: '00:10',
             numberMissionStopped: 4
           }
