@@ -55,6 +55,25 @@ $line-color: #d7d7d7;
         padding-top: 25px;
         position: relative;
 
+        div.incidents{
+          width: 27px;
+          height: 27px;
+          margin-top: 7px;
+          position: absolute;
+          img{
+            width: 27px;
+            height: 27px;
+          };
+          .vertical-line{
+            height: 14px;
+            width: 4px;
+            background-color: #a00000;
+            position: absolute;
+            margin-left: 12px;
+            top: -10px;
+            z-index: 9;
+          }
+        }
         & > .selected.line {
           position:absolute;
           top: 0;
