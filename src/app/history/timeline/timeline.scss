@@ -56,18 +56,22 @@ $line-color: #d7d7d7;
         position: relative;
 
         div.incidents{
-          background: url("/assets/images/incident.png");
           width: 27px;
           height: 27px;
-          margin-top: 5px;
+          margin-top: 7px;
           position: absolute;
+          img{
+            width: 27px;
+            height: 27px;
+          };
           .vertical-line{
-            height: 11px;
-            width: 3px;
+            height: 14px;
+            width: 4px;
             background-color: #a00000;
             position: absolute;
             margin-left: 12px;
-            top: -6px;
+            top: -10px;
+            z-index: 9;
           }
         }
         & > .selected.line {
