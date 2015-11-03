@@ -74,6 +74,14 @@ angular
         templateUrl: 'app/users/user-destroy.html',
         controller: 'UsersDestroyCtrl'
       })
+      .when('/incidentForm-list', {
+        templateUrl: 'app/incidentForms/incidentForm-list.html',
+        controller: 'IncidentsListCtrl'
+      })
+      .when('/incidentForm-view/:id', {
+        templateUrl: 'app/incidentForms/incidentForm-view.html',
+        controller: 'IncidentsViewCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
