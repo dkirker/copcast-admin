@@ -4,6 +4,7 @@
         <thead>
         <tr>
             <th style="min-width: 80px;" translate>date</th>
+            <th style="min-width: 80px;" translate>username</th>
             <th style="min-width: 80px;" translate>address</th>
             <th style="width:20px;" > </th>
             <th style="width:20px;" > </th>
@@ -11,7 +12,8 @@
         </thead>
         <tbody>
         <tr ng-repeat="incident in incidentForms">
-            <td>{{ incident.date }}</td>
+            <td>{{ incident.date | date:'yyyy-MM-dd' }}</td>
+            <td>{{ incident.userId }}</td>
             <td>{{ incident.address }}</td>
             <td><a ng-click="viewIncident(incident.id)" class="btn btn-small btn-primary"  translate>view</a></td>
         </tr>
