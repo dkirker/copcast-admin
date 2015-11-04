@@ -74,6 +74,14 @@ angular
         templateUrl: 'app/users/user-destroy.html',
         controller: 'UsersDestroyCtrl'
       })
+      .when('/incidentForm-list', {
+        templateUrl: 'app/incidentForms/incidentForm-list.html',
+        controller: 'IncidentsListCtrl'
+      })
+      .when('/incidentForm-view/:id', {
+        templateUrl: 'app/incidentForms/incidentForm-view.html',
+        controller: 'IncidentsViewCtrl'
+      })
       .when('/report', {
         templateUrl: 'app/report/report.html',
         controller: 'ReportCtrl'
@@ -94,7 +102,7 @@ angular
   });
 
 //insert the constant value ServerUrl
-//angular.module('copcastAdminApp').constant('ServerUrl', '//mogi-api.igarape.org');
-angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
+angular.module('copcastAdminApp').constant('ServerUrl', '//mogi-api.igarape.org');
+//angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
 
 

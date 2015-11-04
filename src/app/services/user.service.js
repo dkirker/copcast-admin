@@ -78,6 +78,27 @@
       return defer.promise;
     };
 
+
+    service.getUserIncidents = function getUserIncidents(userId, fromDate, toDate) {
+      var defer = $q.defer();
+
+      fromDate = moment(fromDate).format('YYYY-MM-DD');
+      toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+
+
+      var endPoint = ServerUrl + '/users/' + userId + '/incidents/' + fromDate + toDate;
+      $http
+        .get(endPoint)
+        .success(function(data) {
+          console.log('service.getUserIncidents', data);
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
     service.getUserVideos = function getUserVideos(userId, fromDate, toDate) {
       var defer = $q.defer();
 

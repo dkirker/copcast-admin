@@ -12,7 +12,9 @@
       scope: {
         timeLabel: '=',
         last: '=',
-        activities: '='
+        day: '=',
+        activities: '=',
+        incidentsByDay: '='
       },
       link: function(scope, element, attrs, timelineSegmentsCtrl) {
         var PIXELS_PER_MINUTE = 3;
@@ -48,6 +50,11 @@
               return location.getDate('m') * PIXELS_PER_MINUTE;
             }
         };
+
+        scope.getIncidentsInThisDay = getIncidentsInThisDay;
+        function getIncidentsInThisDay(){
+          return scope.incidentsByDay.getMap().get(scope.day)
+        }
 
         scope.nextTimeLabel = function nextTimeLabel() {
           return parseInt(scope.timeLabel) + 1;

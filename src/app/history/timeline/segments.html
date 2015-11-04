@@ -19,6 +19,8 @@
     <timeline-segment
       activities="activities"
       time-label="hour"
+      day="key"
+      incidents-by-day="userData.incidentsByDay"
       last="$last"
       ng-repeat="(hour, activities) in activitiesByHour.getMap()">
     </timeline-segment>
