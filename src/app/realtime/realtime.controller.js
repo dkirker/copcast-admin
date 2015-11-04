@@ -67,6 +67,13 @@
       });
     };
 
+    $scope.popIssue = function (username) {
+      notify({
+        messageTemplate: '<span>' + username + ' has reported an issue </span>',
+        position: "right", scope: $scope
+      });
+    };
+
     $scope.popModal = function (id) {
       showModal($scope.activeUsers[id]);
     }
@@ -159,9 +166,10 @@
 
 
     socket.on('connect', function () {
-      socket.on('users:incident', function(data){
+      socket.on('users:issue', function(data){
         console.log('incident!!');
         console.log(data);
+        $scope.popIssue(data.username);
       });
       socket.on('users:heartbeat', loadUser);
 
