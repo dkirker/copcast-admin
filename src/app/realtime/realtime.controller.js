@@ -67,9 +67,9 @@
       });
     };
 
-    $scope.popIssue = function (username) {
+    $scope.popIncidentFlag = function (username) {
       notify({
-        messageTemplate: '<span>' + username + ' has reported an issue </span>',
+        messageTemplate: '<span>' + username + ' has flagged an incident </span>',
         position: "right", scope: $scope
       });
     };
@@ -166,10 +166,10 @@
 
 
     socket.on('connect', function () {
-      socket.on('users:issue', function(data){
+      socket.on('users:incidentFlag', function(data){
         console.log('incident!!');
         console.log(data);
-        $scope.popIssue(data.username);
+        $scope.popIncidentFlag(data.username);
       });
       socket.on('users:heartbeat', loadUser);
 
