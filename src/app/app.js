@@ -94,7 +94,7 @@ angular
   });
 
 //insert the constant value ServerUrl
-angular.module('copcastAdminApp').constant('ServerUrl', '//mogi-api.igarape.org');
-//angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
+//angular.module('copcastAdminApp').constant('ServerUrl', '//mogi-api.igarape.org');
+angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
 
 

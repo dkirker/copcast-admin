@@ -44,11 +44,11 @@
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of recorded footage</strong></div>
-      <div class="col-md-4">{{reportData.recordedHours}}</div>
+      <div class="col-md-4">{{reportData.recordedHours | minutesToHours}}</div>
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of streamed footage</strong></div>
-      <div class="col-md-4">{{reportData.streamedHours}}</div>
+      <div class="col-md-4">{{reportData.streamedHours | minutesToHours }}</div>
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of flagged incidents</strong></div>
@@ -92,7 +92,7 @@
         <small translate>grouped by day</small>
       </h4>
       <table class="table table-condensed table-hover" ng-repeat="user in reportData.users">
-        <caption>{{user.userName}}</caption>
+        <caption>{{user.username}}</caption>
         <tr>
           <th translate>Day</th>
           <th translate>Total time recording</th>
@@ -103,10 +103,10 @@
         </tr>
         <tr ng-repeat="activity in user.activities">
           <td>{{activity.date}}</td>
-          <td>{{activity.recordingTime}}</td>
-          <td>{{activity.streamingTime}}</td>
-          <td>{{activity.pausedTime}}</td>
-          <td><strong>{{activity.total}}</strong></td>
+          <td>{{activity.recordedHours | minutesToHours}}</td>
+          <td>{{activity.streamingTime | minutesToHours}}</td>
+          <td>{{activity.pausedTime | minutesToHours}}</td>
+          <td><strong>{{activity.total | minutesToHours}}</strong></td>
           <td>{{activity.numberMissionStopped}}</td>
         </tr>
       </table>
