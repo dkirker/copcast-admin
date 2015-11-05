@@ -9,14 +9,39 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/report/report.html:40
+msgid "<strong>Active officers users</strong>"
+msgstr "<strong>Usuários ativos</strong>"
+
+#: app/report/report.html:88
+msgid ""
+"<strong>How much total footage, by time and number of distinct pieces, has "
+"each\n"
+"        person viewed</strong>"
+msgstr ""
+"<strong>Total de gravações, por período e número de arquivos, que cada\n"
+"        pessoa visualizou</strong>"
+
+#: app/report/report.html:57
+msgid "<strong>Number of flagged incidents</strong>"
+msgstr "<strong>Número de incidentes registrados</strong>"
+
+#: app/report/report.html:49
+msgid "<strong>Number of hours of recorded footage</strong>"
+msgstr "<strong>Total de horas de gravação</strong>"
+
+#: app/report/report.html:53
+msgid "<strong>Number of hours of streamed footage</strong>"
+msgstr "<strong>Total de horas de transmissão em tempo real</strong>"
 
 #: app/users/user-detail.html:20 app/users/user-detail.html:43
 msgid "Account Settings"
 msgstr "Configurações de conta"
 
-#: index.html:50
+#: app/views/appheader.html:20
 msgid "Admin"
 msgstr "Admin"
 
@@ -28,9 +53,19 @@ msgstr "Você tem certeza que deseja excluir este usuário?"
 msgid "Are you sure you want to delete this group?"
 msgstr "Você tem certeza que deseja excluir este grupo?"
 
-#: app/login/login.html:1
+#: app/realtime/realtime.html:25
+msgid "Battery"
+msgstr "Bateria"
+
+#: app/login/login.html:2
 msgid "Brand"
 msgstr "Marca"
+
+#: app/realtime/realtime.controller.js:205
+msgid "Can not start streaming now. Try again later."
+msgstr ""
+"Não é possível iniciar a transmissão neste momento. Tente novamente mais "
+"tarde."
 
 #: app/users/user-detail.html:113 app/users/user-detail.html:26
 msgid "Change Password"
@@ -53,8 +88,17 @@ msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
 #: app/history/date_filter/date.filter.html:4
-msgid "Date"
-msgstr "Data"
+msgid "Data"
+msgstr "Dados"
+
+#: app/incidentForms/incidentForm-view.html:13
+#: app/incidentForms/incidentForm-view.html:20
+msgid "Date/Time:"
+msgstr "Data/Hora:"
+
+#: app/report/report.html:100
+msgid "Day"
+msgstr "Dia"
 
 #: app/login/login.controller.js:35
 msgid "Email sent successfully"
@@ -64,6 +108,18 @@ msgstr "Email enviado com sucesso"
 #: app/users/user-detail.html:72
 msgid "Email:"
 msgstr "Email:"
+
+#: app/report/report.html:6
+msgid "Filter"
+msgstr "Filtro"
+
+#: app/report/report.html:10
+msgid "From"
+msgstr "De"
+
+#: app/report/report.html:126
+msgid "Gravity"
+msgstr "Gravidade"
 
 #: app/users/user-list.html:7
 msgid "Group"
@@ -78,18 +134,33 @@ msgstr "Detalhe do grupo"
 msgid "Group:"
 msgstr "Grupo:"
 
-#: index.html:53
+#: app/views/appheader.html:23
 msgid "Groups"
 msgstr "Grupos"
 
-#: index.html:48
+#: app/views/appheader.html:18
 msgid "History"
 msgstr "Histórico"
 
+#: app/incidentForms/incidentForm-view.html:4
+msgid "Incident Form"
+msgstr "Formulário de Incidentes"
+
+#: app/views/appheader.html:24
+msgid "Incident Forms"
+msgstr "Formulários de Incidentes"
+
+#: app/report/report.html:94
+msgid ""
+"Information by user<br>\n"
+"        <small translate=\"\">grouped by day</small>"
+msgstr ""
+"Informações de Usuários<br>\n"
+"        <small translate=\"\">agrupados por dia</small>"
+
 #: app/users/user-creation.html:36 app/users/user-destroy.html:36
 #: app/users/user-detail.html:78 app/views/groups/group-creation.html:32
-#: app/views/groups/group-destroy.html:31
-#: app/views/groups/group-detail.html:32
+#: app/views/groups/group-destroy.html:31 app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr "É Admin?"
 
@@ -98,22 +169,24 @@ msgid "Is Administrative?"
 msgstr "É administrador?"
 
 #: app/views/groups/group-creation.html:18
-#: app/views/groups/group-destroy.html:17
-#: app/views/groups/group-detail.html:18
+#: app/views/groups/group-destroy.html:17 app/views/groups/group-detail.html:18
 msgid "Latitude:"
 msgstr "Latitude:"
 
-#: app/videoStream/player.html:6
+#: app/realtime/realtime.controller.js:22
+msgid "Livestream"
+msgstr "Transmissão ao vivo"
+
+#: app/components/loading/loading.html:2 app/realtime/videoStream/player.html:7
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: index.html:58
+#: app/views/appheader.html:30
 msgid "Logout"
 msgstr "Sair"
 
 #: app/views/groups/group-creation.html:25
-#: app/views/groups/group-destroy.html:24
-#: app/views/groups/group-detail.html:25
+#: app/views/groups/group-destroy.html:24 app/views/groups/group-detail.html:25
 msgid "Longitude:"
 msgstr "Longitude:"
 
@@ -123,10 +196,13 @@ msgstr "Nome"
 
 #: app/users/user-creation.html:11 app/users/user-destroy.html:11
 #: app/users/user-detail.html:53 app/views/groups/group-creation.html:11
-#: app/views/groups/group-destroy.html:10
-#: app/views/groups/group-detail.html:11
+#: app/views/groups/group-destroy.html:10 app/views/groups/group-detail.html:11
 msgid "Name:"
 msgstr "Nome:"
+
+#: app/history/player/player.html:18
+msgid "Nenhum vídeo encontrado"
+msgstr "Nenhum vídeo encontrado"
 
 #: app/views/groups/group-creation.html:2
 msgid "New group"
@@ -136,11 +212,28 @@ msgstr "Novo grupo"
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/history/player/player.html:18
-msgid "No video found"
-msgstr "Nenhum vídeo encontrado"
+#: app/report/report.html:156
+msgid "No data selected"
+msgstr "Nenhuma informação selecionada"
 
-#: app/login/login.html:7
+#: app/realtime/realtime.html:33
+msgid "No streaming available"
+msgstr "Transmissão ao vivo indisponível"
+
+#: app/realtime/map.service.js:30
+msgid "Not able to start streaming now. Try again later."
+msgstr ""
+"Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
+
+#: app/report/report.html:105
+msgid "Number of times mission was stopped"
+msgstr "Número de vezes que a missão foi interrompida"
+
+#: app/report/report.html:120
+msgid "Number of traffic incidents reported"
+msgstr "Número de incidentes rodoviários registrados"
+
+#: app/login/login.html:8
 msgid "Password"
 msgstr "Senha"
 
@@ -152,9 +245,13 @@ msgstr "Senha ou nova senha estão vazias."
 msgid "Password:"
 msgstr "Senha:"
 
-#: app/history/date_filter/date.filter.html:11
+#: app/history/date_filter/date.filter.html:13
 msgid "Period"
 msgstr "Período"
+
+#: app/report/report.controller.js:60
+msgid "Period not valid."
+msgstr "Período inválido."
 
 #: app/users/user-detail.html:158
 msgid ""
@@ -172,42 +269,66 @@ msgstr "Língua preferencial:"
 msgid "Profile picture"
 msgstr "Foto do perfil"
 
-#: index.html:47
+#: app/views/appheader.html:17
 msgid "Realtime"
 msgstr "Tempo real"
 
 #: app/users/user-detail.html:126
 msgid "Repeat your password"
-msgstr "Repitir sua senha"
+msgstr "Repeitir sua senha"
 
-#: app/login/login.html:15
+#: app/views/appheader.html:25
+msgid "Report"
+msgstr "Relatório"
+
+#: app/login/login.html:16
 msgid "Reset Password"
 msgstr "Redefinir senha"
 
-#: app/login/login.html:9
+#: app/login/login.html:10
 msgid "SIGN IN"
 msgstr "LOGAR"
 
 #: app/components/user_dropdown/user.dropdown.html:2
 #: app/history/player/player.html:14
-msgid "Select an user or group"
+msgid "Selecione um usuário ou grupo"
 msgstr "Selecione um usuário ou grupo"
 
-#: app/history/player/player.html:15
-msgid "Selected user:"
-msgstr "Usuário selecionado:"
+#: app/history/player/player.html:20
+msgid "Seu navegador não suporta vídeos."
+msgstr "Seu navegador não suporta vídeos."
 
-#: index.html:57
+#: app/views/appheader.html:29
 msgid "Signed in as"
 msgstr "Logado como"
 
-#: app/views/realtime.html:12
+#: app/realtime/realtime.html:13 app/views/realtime.html:12
 msgid ""
 "This browser does not support live streaming visualization. Use Chrome or "
 "Firefox instead."
 msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
+
+#: app/report/report.html:20
+msgid "To"
+msgstr "Para"
+
+#: app/report/report.html:104
+msgid "Total"
+msgstr "Total"
+
+#: app/report/report.html:103
+msgid "Total time paused"
+msgstr "Tempo pausado total"
+
+#: app/report/report.html:101
+msgid "Total time recording"
+msgstr "Tempo gravando total"
+
+#: app/report/report.html:102
+msgid "Total time streaming"
+msgstr "Tempo de transmissão ao vivo total"
 
 #: app/login/login.controller.js:31
 msgid "Trying to send email..."
@@ -217,19 +338,35 @@ msgstr "Tentando enviar email…"
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
-#: app/views/realtime.html:6
+#: app/realtime/realtime.html:7 app/views/realtime.html:6
 msgid "Type to filter the map"
 msgstr "Digite para filtrar o mapa"
 
-#: app/login/login.html:14
+#: app/login/login.html:15
 msgid "Type your email"
 msgstr "Digite seu email"
+
+#: app/report/report.html:30
+msgid "Update"
+msgstr "Atualizar"
+
+#: app/report/report.html:37
+msgid ""
+"Use of Copcast - Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to "
+"{{filter.toDate  | date:\"dd/MM/yyyy\"}}"
+msgstr ""
+"Uso do Copcast - Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até "
+"{{filter.toDate  | date:\"dd/MM/yyyy\"}}"
 
 #: app/users/user-creation.html:2
 msgid "User detail"
 msgstr "Detalhe do usuário"
 
-#: app/login/login.html:6
+#: app/incidentForms/incidentForm-list.html:7
+msgid "User:"
+msgstr "Usuário:"
+
+#: app/login/login.html:7
 msgid "Username"
 msgstr "Nome de usuário"
 
@@ -238,11 +375,15 @@ msgstr "Nome de usuário"
 msgid "Username:"
 msgstr "Nome de usuário:"
 
-#: index.html:52
+#: app/views/appheader.html:22
 msgid "Users"
 msgstr "Usuários"
 
-#: app/views/realtime.html:25
+#: app/history/player/player.html:15
+msgid "Usuário selecionado:"
+msgstr "Usuário selecionado:"
+
+#: app/realtime/realtime.html:28 app/views/realtime.html:25
 msgid "View history"
 msgstr "Ver histórico"
 
@@ -250,9 +391,13 @@ msgstr "Ver histórico"
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/history/player/player.html:20
-msgid "Your browser does not support the video tag."
-msgstr "Seu browser não suporta a tag de vídeo."
+#: app/incidentForms/incidentForm-list.html:16
+msgid "address"
+msgstr "endereço"
+
+#: app/incidentForms/incidentForm-view.html:30
+msgid "back"
+msgstr "voltar"
 
 #: app/users/user-destroy.html:46 app/users/user-detail.html:103
 #: app/users/user-detail.html:135 app/views/groups/group-destroy.html:41
@@ -264,9 +409,14 @@ msgstr "cancelar"
 msgid "create new group"
 msgstr "criar novo grupo"
 
-#: app/users/user-creation.html:65 app/users/user-list.html:2
+#: app/users/user-creation.html:65 app/users/user-creation.html:66
+#: app/users/user-list.html:2
 msgid "create new user"
 msgstr "criar novo usuário"
+
+#: app/incidentForms/incidentForm-list.html:14
+msgid "date"
+msgstr "data"
 
 #: app/users/user-list.html:17 app/views/groups/group-list.html:17
 msgid "delete"
@@ -284,9 +434,17 @@ msgstr "excluir usuário"
 msgid "edit"
 msgstr "editar"
 
-#: app/login/login.html:8
+#: app/login/login.html:9
 msgid "forgot password"
 msgstr "esqueci minha senha"
+
+#: app/report/report.html:95
+msgid "grouped by day"
+msgstr "agrupado por dia"
+
+#: app/report/report.html:158
+msgid "select a period to present related data."
+msgstr "selecione um período para apresentar as informações"
 
 #: app/views/groups/group-detail.html:42
 msgid "update group"
@@ -295,6 +453,29 @@ msgstr "atualizar grupo"
 #: app/users/user-detail.html:104 app/users/user-detail.html:136
 msgid "update user"
 msgstr "atualizar usuário"
+
+#: app/incidentForms/incidentForm-list.html:15
+msgid "username"
+msgstr "nome do usuário"
+
+#: app/incidentForms/incidentForm-list.html:26
+msgid "view"
+msgstr "visão"
+
+#~ msgid "Date"
+#~ msgstr "Data"
+
+#~ msgid "No video found"
+#~ msgstr "Nenhum vídeo encontrado"
+
+#~ msgid "Select an user or group"
+#~ msgstr "Selecione um usuário ou grupo"
+
+#~ msgid "Selected user:"
+#~ msgstr "Usuário selecionado:"
+
+#~ msgid "Your browser does not support the video tag."
+#~ msgstr "Seu browser não suporta a tag de vídeo."
 
 #~ msgid "The email and password you entered don't match."
 #~ msgstr "Email ou senha inválidos."
