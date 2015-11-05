@@ -9,12 +9,13 @@
  */
 angular.module('copcastAdminApp')
   .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl) {
+
     // callback for ng-click 'editIncident':
     $scope.viewIncident = function (incidentId) {
-      $location.path('/incidentForms-view/' + incidentId);
+      $location.path('/incidentForm-view/' + incidentId);
     };
 
-    $http.get(ServerUrl + '/incidentForms-list',
+    $http.get(ServerUrl + '/incidentForms',
       { params : {
         page : $scope.page
       }
