@@ -10,6 +10,13 @@
 angular.module('copcastAdminApp')
   .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl) {
 
+    //sort list
+    $scope.sort = function(keyname){
+      $scope.sortKey = keyname;
+      $scope.reverse = !$scope.reverse;
+
+    };
+
     // callback for ng-click 'editIncident':
     $scope.viewIncident = function (incidentId) {
       $location.path('/incidentForm-view/' + incidentId);
