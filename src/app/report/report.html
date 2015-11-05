@@ -1,4 +1,7 @@
 <div class="container" style="margin-top: 50px;">
+  <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="panel">
     <div class="panel-title" translate>Filter</div>
     <div class="panel-body">
@@ -37,11 +40,11 @@
       <div class="col-md-4" translate><strong>Active officers users</strong></div>
       <div class="col-md-4">{{reportData.activeOfficers}}</div>
     </div>
-    <div class="row">
-      <div class="col-md-4" translate><strong>Number of missions initiated (missions greater than 30 minutes)</strong>
-      </div>
-      <div class="col-md-4">{{reportData.missions}}</div>
-    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-md-4" translate><strong>Number of missions initiated (missions greater than 30 minutes)</strong>-->
+      <!--</div>-->
+      <!--<div class="col-md-4">{{reportData.missions}}</div>-->
+    <!--</div>-->
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of recorded footage</strong></div>
       <div class="col-md-4">{{reportData.recordedTime | minutesToHours}}</div>

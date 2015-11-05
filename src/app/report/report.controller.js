@@ -6,7 +6,7 @@
 
   angular.module('copcastAdminApp').controller('ReportCtrl', ReportCtrl);
 
-  function ReportCtrl($scope, $http, ServerUrl) {
+  function ReportCtrl($scope, $http, ServerUrl, gettextCatalog) {
     $scope.filter = {
       fromDate: null,
       toDate: null,
@@ -49,9 +49,16 @@
 
 
     function updateFilter(){
-      $http.get(ServerUrl + "/report/use/"+moment($scope.filter.fromDate).format('YYYY-MM-DD')+"/"+moment($scope.filter.toDate).format('YYYY-MM-DD')).success(function(data) {
-        $scope.reportData = data;
-      });
+      var fromDate = moment($scope.filter.fromDate);
+      var toDate = moment($scope.filter.toDate);
+        if (fromDate.isValid() && toDate.isValid()) {
+          $scope.errorMessage = null;
+            $http.get(ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD')).success(function (data) {
+            $scope.reportData = data;
+          });
+        } else {
+          $scope.errorMessage = gettextCatalog.getString('Period not valid.')
+        }
     }
 
     function hasData(){
