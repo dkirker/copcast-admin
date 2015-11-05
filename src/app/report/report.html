@@ -44,43 +44,43 @@
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of recorded footage</strong></div>
-      <div class="col-md-4">{{reportData.recordedHours | minutesToHours}}</div>
+      <div class="col-md-4">{{reportData.recordedTime | minutesToHours}}</div>
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of streamed footage</strong></div>
-      <div class="col-md-4">{{reportData.streamedHours | minutesToHours }}</div>
+      <div class="col-md-4">{{reportData.streamedTime | minutesToHours }}</div>
     </div>
     <div class="row">
       <div class="col-md-4" translate><strong>Number of flagged incidents</strong></div>
       <div class="col-md-4">{{reportData.incidents}}</div>
     </div>
-    <div class="row">
-      <div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>
-      <div class="col-md-4">{{reportData.adminAccess}}</div>
-    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>-->
+      <!--<div class="col-md-4">{{reportData.adminAccess}}</div>-->
+    <!--</div>-->
     <hr/>
-    <div>
-      <h4 translate><strong>Exported videos</strong></h4>
+    <!--<div>-->
+      <!--<h4 translate><strong>Exported videos</strong></h4>-->
 
-      <div class="row">
-        <div class="col-md-8">
-          <table class="table table-condensed table-hover">
-            <tr>
-              <th translate>Video</th>
-              <th translate>User</th>
-              <th translate>Video Time</th>
-              <th translate>User who exported</th>
-            </tr>
-            <tr>
-              <th>xxxxx.mp4 (replace with player)</th>
-              <td>bsiqueira</td>
-              <td>2015-07-10 15:04 to 15:10</td>
-              <td>admin</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
+      <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+          <!--<table class="table table-condensed table-hover">-->
+            <!--<tr>-->
+              <!--<th translate>Video</th>-->
+              <!--<th translate>User</th>-->
+              <!--<th translate>Video Time</th>-->
+              <!--<th translate>User who exported</th>-->
+            <!--</tr>-->
+            <!--<tr>-->
+              <!--<th>xxxxx.mp4 (replace with player)</th>-->
+              <!--<td>bsiqueira</td>-->
+              <!--<td>2015-07-10 15:04 to 15:10</td>-->
+              <!--<td>admin</td>-->
+            <!--</tr>-->
+          <!--</table>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="row">
       <div class="col-md-4" translate><strong>How much total footage, by time and number of distinct pieces, has each
         person viewed</strong></div>
@@ -102,11 +102,11 @@
           <th translate>Number of times mission was stopped</th>
         </tr>
         <tr ng-repeat="activity in user.activities">
-          <td>{{activity.date}}</td>
-          <td>{{activity.recordedHours | minutesToHours}}</td>
-          <td>{{activity.streamingTime | minutesToHours}}</td>
+          <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
+          <td>{{activity.recordedTime | minutesToHours}}</td>
+          <td>{{activity.streamedTime | minutesToHours}}</td>
           <td>{{activity.pausedTime | minutesToHours}}</td>
-          <td><strong>{{activity.total | minutesToHours}}</strong></td>
+          <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
           <td>{{activity.numberMissionStopped}}</td>
         </tr>
       </table>

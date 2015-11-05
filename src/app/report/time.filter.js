@@ -12,7 +12,7 @@
         return "00:00"
       }
 
-      var hours = parseInt(minutes) / 60;
+      var hours = Math.floor(parseInt(minutes) / 60);
       var min = parseInt(minutes) - hours * 60;
 
       return hours + ':'+min
