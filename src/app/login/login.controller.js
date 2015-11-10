@@ -9,7 +9,7 @@
  */
 angular.module('copcastAdminApp')
 
-  .controller('LoginCtrl', function ($scope, $modalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
+  .controller('LoginCtrl', function ($scope, $uibModalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
 
     $scope.user = {username: null, password: null};
     $scope.email = '';
@@ -50,7 +50,7 @@ angular.module('copcastAdminApp')
         scope : 'admin'
       },{ignoreAuthModule: true}).success(function(token) {
         loginService.setToken($scope.user.username, token.token);
-        $modalInstance.close();
+        $uibModalInstance.close();
 
         //get user information
         userService.getMyData().then(

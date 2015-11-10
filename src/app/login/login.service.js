@@ -8,14 +8,14 @@
  * Factory in the copcastAdminApp.
  */
 var app = angular.module('copcastAdminApp');
-app.service('loginService',function($rootScope, $cookies, $modal, $http, authService, socket) {
+app.service('loginService',function($rootScope, $cookies, $uibModal, $http, authService, socket) {
 
   var loginService = { isOpen: false};
 
 
   loginService.show = function() {
     if (!loginService.isOpen) {
-      $modal.open({
+      $uibModal.open({
         templateUrl: 'app/login/login.html',
         controller: 'LoginCtrl',
         backdrop: 'static',
