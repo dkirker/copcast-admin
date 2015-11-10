@@ -13,7 +13,7 @@
   angular.module('copcastAdminApp').
     controller('RealtimeCtrl', RealtimeCtrl);
 
-  function RealtimeCtrl($scope, peerManager, $modal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+  function RealtimeCtrl($scope, peerManager, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
                         userService, streamService, $location, $timeout, gettextCatalog) {
 
     $scope.windowHeight = window.innerHeight;
@@ -348,7 +348,7 @@
     function showModal(user) {
       mapService.closeBalloon();
       console.log('showModal with user=[' + user + ']');
-      $scope.activeStreams[user.id].modal = $modal.open({
+      $scope.activeStreams[user.id].modal = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
