@@ -8,7 +8,7 @@
  * Factory in the copcastAdminApp.
  */
 var app = angular.module('copcastAdminApp');
-app.service('loginService',function($rootScope, $cookieStore, $modal, $http, authService, socket) {
+app.service('loginService',function($rootScope, $cookies, $modal, $http, authService, socket) {
 
   var loginService = { isOpen: false};
 
@@ -27,11 +27,11 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
   };
 
   loginService.getToken = function() {
-    if ($rootScope.globals == null && !$cookieStore.get('globals')){
+    if ($rootScope.globals == null && !$cookies.getObject('globals')){
       return null;
     }
     if ($rootScope.globals == null){
-      $rootScope.globals = $cookieStore.get('globals');
+      $rootScope.globals = $cookies.getObject('globals');
     }
     return $rootScope.globals.currentUser.token;
   };
@@ -44,7 +44,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
       }
     };
     //TODO removed for it was breaking the socket load
-    $cookieStore.put('globals', $rootScope.globals);
+    $cookies.putObject('globals', $rootScope.globals);
     authService.loginConfirmed();
     socket.connect(accessToken);
     loginService.isOpen = false;
@@ -60,7 +60,7 @@ app.service('loginService',function($rootScope, $cookieStore, $modal, $http, aut
 
   loginService.logout = function(){
     $rootScope.globals = null;
-    $cookieStore.remove('globals');
+    $cookies.remove('globals');
     loginService.show();
   };
 
