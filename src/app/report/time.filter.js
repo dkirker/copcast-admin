@@ -15,7 +15,7 @@
       var hours = Math.floor(parseInt(minutes) / 60);
       var min = parseInt(minutes) - hours * 60;
 
-      return hours + ':'+min
+      return ("0" + hours).slice(-2) + ':'+("0" + min).slice(-2);
 
     }
 
