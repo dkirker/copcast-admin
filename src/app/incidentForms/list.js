@@ -10,6 +10,9 @@
 angular.module('copcastAdminApp')
   .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl) {
 
+    $scope.sortKey = "date";
+    $scope.reverse = 1;
+
     //sort list
     $scope.sort = function(keyname){
       $scope.sortKey = keyname;
