@@ -12,34 +12,30 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/report/report.html:40
+#: app/report/report.html:42
 msgid "<strong>Active officers users</strong>"
 msgstr "<strong>Usuários ativos</strong>"
 
-#: app/report/report.html:88
-msgid ""
-"<strong>How much total footage, by time and number of distinct pieces, has "
-"each\n"
-"        person viewed</strong>"
-msgstr ""
-"<strong>Total de gravações, por período e número de arquivos, que cada\n"
-"        pessoa visualizou</strong>"
-
-#: app/report/report.html:57
+#: app/report/report.html:59
 msgid "<strong>Number of flagged incidents</strong>"
 msgstr "<strong>Número de incidentes registrados</strong>"
 
-#: app/report/report.html:49
+#: app/report/report.html:51
 msgid "<strong>Number of hours of recorded footage</strong>"
 msgstr "<strong>Total de horas de gravação</strong>"
 
-#: app/report/report.html:53
+#: app/report/report.html:55
 msgid "<strong>Number of hours of streamed footage</strong>"
 msgstr "<strong>Total de horas de transmissão em tempo real</strong>"
 
 #: app/users/user-detail.html:20 app/users/user-detail.html:43
 msgid "Account Settings"
 msgstr "Configurações de conta"
+
+#: app/incidentForms/incidentForm-list.html:12
+#: app/incidentForms/incidentForm-view.html:35
+msgid "Address:"
+msgstr "Endereço"
 
 #: app/views/appheader.html:20
 msgid "Admin"
@@ -53,6 +49,15 @@ msgstr "Você tem certeza que deseja excluir este usuário?"
 msgid "Are you sure you want to delete this group?"
 msgstr "Você tem certeza que deseja excluir este grupo?"
 
+#: app/incidentForms/incidentForm-view.html:93
+msgid "Argument?"
+msgstr "Discussão?"
+
+#: app/incidentForms/incidentForm-view.html:42
+#: app/incidentForms/incidentForm-view.html:77
+msgid "Arrest?"
+msgstr "Voz de Prisão?"
+
 #: app/realtime/realtime.html:25
 msgid "Battery"
 msgstr "Bateria"
@@ -61,7 +66,7 @@ msgstr "Bateria"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/realtime/realtime.controller.js:205
+#: app/realtime/realtime.controller.js:213
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 "Não é possível iniciar a transmissão neste momento. Tente novamente mais "
@@ -91,12 +96,12 @@ msgstr "Senha atual está vazia"
 msgid "Data"
 msgstr "Dados"
 
-#: app/incidentForms/incidentForm-view.html:13
-#: app/incidentForms/incidentForm-view.html:20
+#: app/incidentForms/incidentForm-view.html:21
+#: app/incidentForms/incidentForm-view.html:28
 msgid "Date/Time:"
 msgstr "Data/Hora:"
 
-#: app/report/report.html:100
+#: app/report/report.html:102
 msgid "Day"
 msgstr "Dia"
 
@@ -109,15 +114,19 @@ msgstr "Email enviado com sucesso"
 msgid "Email:"
 msgstr "Email:"
 
-#: app/report/report.html:6
+#: app/report/report.html:8
 msgid "Filter"
 msgstr "Filtro"
 
-#: app/report/report.html:10
+#: app/incidentForms/incidentForm-view.html:63
+msgid "Fine?"
+msgstr "Multa?"
+
+#: app/report/report.html:12
 msgid "From"
 msgstr "De"
 
-#: app/report/report.html:126
+#: app/incidentForms/incidentForm-view.html:49 app/report/report.html:128
 msgid "Gravity"
 msgstr "Gravidade"
 
@@ -150,7 +159,7 @@ msgstr "Formulário de Incidentes"
 msgid "Incident Forms"
 msgstr "Formulários de Incidentes"
 
-#: app/report/report.html:94
+#: app/report/report.html:96
 msgid ""
 "Information by user<br>\n"
 "        <small translate=\"\">grouped by day</small>"
@@ -200,10 +209,6 @@ msgstr "Nome"
 msgid "Name:"
 msgstr "Nome:"
 
-#: app/history/player/player.html:18
-msgid "Nenhum vídeo encontrado"
-msgstr "Nenhum vídeo encontrado"
-
 #: app/views/groups/group-creation.html:2
 msgid "New group"
 msgstr "Novo grupo"
@@ -212,7 +217,7 @@ msgstr "Novo grupo"
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/report/report.html:156
+#: app/report/report.html:158
 msgid "No data selected"
 msgstr "Nenhuma informação selecionada"
 
@@ -220,16 +225,24 @@ msgstr "Nenhuma informação selecionada"
 msgid "No streaming available"
 msgstr "Transmissão ao vivo indisponível"
 
+#: app/history/player/player.html:18
+msgid "No video found"
+msgstr "Nenhum vídeo encontrado"
+
 #: app/realtime/map.service.js:30
 msgid "Not able to start streaming now. Try again later."
 msgstr ""
 "Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
 
-#: app/report/report.html:105
+#: app/incidentForms/incidentForm-view.html:56
+msgid "Number of Injured"
+msgstr ""
+
+#: app/report/report.html:107
 msgid "Number of times mission was stopped"
 msgstr "Número de vezes que a missão foi interrompida"
 
-#: app/report/report.html:120
+#: app/report/report.html:122
 msgid "Number of traffic incidents reported"
 msgstr "Número de incidentes rodoviários registrados"
 
@@ -285,6 +298,10 @@ msgstr "Relatório"
 msgid "Reset Password"
 msgstr "Redefinir senha"
 
+#: app/incidentForms/incidentForm-view.html:85
+msgid "Resistance?"
+msgstr "Houve Resistência"
+
 #: app/login/login.html:10
 msgid "SIGN IN"
 msgstr "LOGAR"
@@ -310,23 +327,23 @@ msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
 
-#: app/report/report.html:20
+#: app/report/report.html:22
 msgid "To"
 msgstr "Para"
 
-#: app/report/report.html:104
+#: app/report/report.html:106
 msgid "Total"
 msgstr "Total"
 
-#: app/report/report.html:103
+#: app/report/report.html:105
 msgid "Total time paused"
 msgstr "Tempo pausado total"
 
-#: app/report/report.html:101
+#: app/report/report.html:103
 msgid "Total time recording"
 msgstr "Tempo gravando total"
 
-#: app/report/report.html:102
+#: app/report/report.html:104
 msgid "Total time streaming"
 msgstr "Tempo de transmissão ao vivo total"
 
@@ -338,6 +355,10 @@ msgstr "Tentando enviar email…"
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
+#: app/incidentForms/incidentForm-view.html:70
+msgid "Type of Fine"
+msgstr "Tipo de Multa"
+
 #: app/realtime/realtime.html:7 app/views/realtime.html:6
 msgid "Type to filter the map"
 msgstr "Digite para filtrar o mapa"
@@ -346,11 +367,23 @@ msgstr "Digite para filtrar o mapa"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/report/report.html:30
+#: app/report/report.html:32
 msgid "Update"
 msgstr "Atualizar"
 
-#: app/report/report.html:37
+#: app/incidentForms/incidentForm-view.html:109
+msgid "Use Lethal Force?"
+msgstr "Uso de Força Letal?"
+
+#: app/incidentForms/incidentForm-view.html:101
+msgid "Use Of Force?"
+msgstr "Use de Força?"
+
+#: app/report/report.html:2
+msgid "Use Report"
+msgstr "Relatório de Atividade"
+
+#: app/report/report.html:39
 msgid ""
 "Use of Copcast - Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to "
 "{{filter.toDate  | date:\"dd/MM/yyyy\"}}"
@@ -362,7 +395,11 @@ msgstr ""
 msgid "User detail"
 msgstr "Detalhe do usuário"
 
-#: app/incidentForms/incidentForm-list.html:7
+#: app/incidentForms/incidentForm-view.html:14
+msgid "User name:"
+msgstr "Usuário:"
+
+#: app/incidentForms/incidentForm-list.html:9
 msgid "User:"
 msgstr "Usuário:"
 
@@ -391,11 +428,19 @@ msgstr "Ver histórico"
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/incidentForms/incidentForm-list.html:16
-msgid "address"
-msgstr "endereço"
+#: app/incidentForms/incidentForm-list.html:26
+msgid ""
+"address\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
+msgstr ""
+"endereço\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
 
-#: app/incidentForms/incidentForm-view.html:30
+#: app/incidentForms/incidentForm-view.html:121
 msgid "back"
 msgstr "voltar"
 
@@ -414,9 +459,17 @@ msgstr "criar novo grupo"
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/incidentForms/incidentForm-list.html:14
-msgid "date"
-msgstr "data"
+#: app/incidentForms/incidentForm-list.html:20
+msgid ""
+"date\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"> </span>"
+msgstr ""
+"data\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"> </span>"
 
 #: app/users/user-list.html:17 app/views/groups/group-list.html:17
 msgid "delete"
@@ -438,11 +491,11 @@ msgstr "editar"
 msgid "forgot password"
 msgstr "esqueci minha senha"
 
-#: app/report/report.html:95
+#: app/report/report.html:97
 msgid "grouped by day"
 msgstr "agrupado por dia"
 
-#: app/report/report.html:158
+#: app/report/report.html:160
 msgid "select a period to present related data."
 msgstr "selecione um período para apresentar as informações"
 
@@ -454,19 +507,44 @@ msgstr "atualizar grupo"
 msgid "update user"
 msgstr "atualizar usuário"
 
-#: app/incidentForms/incidentForm-list.html:15
-msgid "username"
-msgstr "nome do usuário"
+#: app/incidentForms/incidentForm-list.html:23
+msgid ""
+"username\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
+msgstr ""
+"usuário\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
 
-#: app/incidentForms/incidentForm-list.html:26
+#: app/incidentForms/incidentForm-list.html:38
 msgid "view"
 msgstr "visão"
 
+#~ msgid ""
+#~ "<strong>How much total footage, by time and number of distinct pieces, "
+#~ "has each\n"
+#~ "        person viewed</strong>"
+#~ msgstr ""
+#~ "<strong>Total de gravações, por período e número de arquivos, que cada\n"
+#~ "        pessoa visualizou</strong>"
+
+#~ msgid "Nenhum vídeo encontrado"
+#~ msgstr "Nenhum vídeo encontrado"
+
+#~ msgid "address"
+#~ msgstr "endereço"
+
+#~ msgid "date"
+#~ msgstr "data"
+
+#~ msgid "username"
+#~ msgstr "nome do usuário"
+
 #~ msgid "Date"
 #~ msgstr "Data"
-
-#~ msgid "No video found"
-#~ msgstr "Nenhum vídeo encontrado"
 
 #~ msgid "Select an user or group"
 #~ msgstr "Selecione um usuário ou grupo"

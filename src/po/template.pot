@@ -4,31 +4,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/report/report.html:40
+#: app/report/report.html:42
 msgid "<strong>Active officers users</strong>"
 msgstr ""
 
-#: app/report/report.html:88
-msgid ""
-"<strong>How much total footage, by time and number of distinct pieces, has each\n"
-"        person viewed</strong>"
-msgstr ""
-
-#: app/report/report.html:57
+#: app/report/report.html:59
 msgid "<strong>Number of flagged incidents</strong>"
 msgstr ""
 
-#: app/report/report.html:49
+#: app/report/report.html:51
 msgid "<strong>Number of hours of recorded footage</strong>"
 msgstr ""
 
-#: app/report/report.html:53
+#: app/report/report.html:55
 msgid "<strong>Number of hours of streamed footage</strong>"
 msgstr ""
 
 #: app/users/user-detail.html:20
 #: app/users/user-detail.html:43
 msgid "Account Settings"
+msgstr ""
+
+#: app/incidentForms/incidentForm-list.html:12
+#: app/incidentForms/incidentForm-view.html:35
+msgid "Address:"
 msgstr ""
 
 #: app/views/appheader.html:20
@@ -43,6 +42,15 @@ msgstr ""
 msgid "Are you sure you want to delete this group?"
 msgstr ""
 
+#: app/incidentForms/incidentForm-view.html:93
+msgid "Argument?"
+msgstr ""
+
+#: app/incidentForms/incidentForm-view.html:42
+#: app/incidentForms/incidentForm-view.html:77
+msgid "Arrest?"
+msgstr ""
+
 #: app/realtime/realtime.html:25
 msgid "Battery"
 msgstr ""
@@ -51,7 +59,7 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:205
+#: app/realtime/realtime.controller.js:213
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -82,12 +90,12 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:13
-#: app/incidentForms/incidentForm-view.html:20
+#: app/incidentForms/incidentForm-view.html:21
+#: app/incidentForms/incidentForm-view.html:28
 msgid "Date/Time:"
 msgstr ""
 
-#: app/report/report.html:100
+#: app/report/report.html:102
 msgid "Day"
 msgstr ""
 
@@ -101,15 +109,20 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
-#: app/report/report.html:6
+#: app/report/report.html:8
 msgid "Filter"
 msgstr ""
 
-#: app/report/report.html:10
+#: app/incidentForms/incidentForm-view.html:63
+msgid "Fine?"
+msgstr ""
+
+#: app/report/report.html:12
 msgid "From"
 msgstr ""
 
-#: app/report/report.html:126
+#: app/incidentForms/incidentForm-view.html:49
+#: app/report/report.html:128
 msgid "Gravity"
 msgstr ""
 
@@ -143,7 +156,7 @@ msgstr ""
 msgid "Incident Forms"
 msgstr ""
 
-#: app/report/report.html:94
+#: app/report/report.html:96
 msgid ""
 "Information by user<br>\n"
 "        <small translate=\"\">grouped by day</small>"
@@ -201,10 +214,6 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: app/history/player/player.html:18
-msgid "No video found"
-msgstr ""
-
 #: app/views/groups/group-creation.html:2
 msgid "New group"
 msgstr ""
@@ -214,7 +223,7 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/report/report.html:156
+#: app/report/report.html:158
 msgid "No data selected"
 msgstr ""
 
@@ -222,15 +231,23 @@ msgstr ""
 msgid "No streaming available"
 msgstr ""
 
+#: app/history/player/player.html:18
+msgid "No video found"
+msgstr ""
+
 #: app/realtime/map.service.js:30
 msgid "Not able to start streaming now. Try again later."
 msgstr ""
 
-#: app/report/report.html:105
+#: app/incidentForms/incidentForm-view.html:56
+msgid "Number of Injured"
+msgstr ""
+
+#: app/report/report.html:107
 msgid "Number of times mission was stopped"
 msgstr ""
 
-#: app/report/report.html:120
+#: app/report/report.html:122
 msgid "Number of traffic incidents reported"
 msgstr ""
 
@@ -283,6 +300,10 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
+#: app/incidentForms/incidentForm-view.html:85
+msgid "Resistance?"
+msgstr ""
+
 #: app/login/login.html:10
 msgid "SIGN IN"
 msgstr ""
@@ -305,23 +326,23 @@ msgstr ""
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
-#: app/report/report.html:20
+#: app/report/report.html:22
 msgid "To"
 msgstr ""
 
-#: app/report/report.html:104
+#: app/report/report.html:106
 msgid "Total"
 msgstr ""
 
-#: app/report/report.html:103
+#: app/report/report.html:105
 msgid "Total time paused"
 msgstr ""
 
-#: app/report/report.html:101
+#: app/report/report.html:103
 msgid "Total time recording"
 msgstr ""
 
-#: app/report/report.html:102
+#: app/report/report.html:104
 msgid "Total time streaming"
 msgstr ""
 
@@ -333,6 +354,10 @@ msgstr ""
 msgid "Type an valid email address"
 msgstr ""
 
+#: app/incidentForms/incidentForm-view.html:70
+msgid "Type of Fine"
+msgstr ""
+
 #: app/realtime/realtime.html:7
 #: app/views/realtime.html:6
 msgid "Type to filter the map"
@@ -342,11 +367,23 @@ msgstr ""
 msgid "Type your email"
 msgstr ""
 
-#: app/report/report.html:30
+#: app/report/report.html:32
 msgid "Update"
 msgstr ""
 
-#: app/report/report.html:37
+#: app/incidentForms/incidentForm-view.html:109
+msgid "Use Lethal Force?"
+msgstr ""
+
+#: app/incidentForms/incidentForm-view.html:101
+msgid "Use Of Force?"
+msgstr ""
+
+#: app/report/report.html:2
+msgid "Use Report"
+msgstr ""
+
+#: app/report/report.html:39
 msgid "Use of Copcast - Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
 msgstr ""
 
@@ -354,7 +391,11 @@ msgstr ""
 msgid "User detail"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:7
+#: app/incidentForms/incidentForm-view.html:14
+msgid "User name:"
+msgstr ""
+
+#: app/incidentForms/incidentForm-list.html:9
 msgid "User:"
 msgstr ""
 
@@ -385,11 +426,13 @@ msgstr ""
 msgid "Wrong password combination"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:16
-msgid "address"
+#: app/incidentForms/incidentForm-list.html:26
+msgid ""
+"address\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:30
+#: app/incidentForms/incidentForm-view.html:121
 msgid "back"
 msgstr ""
 
@@ -412,8 +455,10 @@ msgstr ""
 msgid "create new user"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:14
-msgid "date"
+#: app/incidentForms/incidentForm-list.html:20
+msgid ""
+"date\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"> </span>"
 msgstr ""
 
 #: app/users/user-list.html:17
@@ -438,11 +483,11 @@ msgstr ""
 msgid "forgot password"
 msgstr ""
 
-#: app/report/report.html:95
+#: app/report/report.html:97
 msgid "grouped by day"
 msgstr ""
 
-#: app/report/report.html:158
+#: app/report/report.html:160
 msgid "select a period to present related data."
 msgstr ""
 
@@ -455,10 +500,12 @@ msgstr ""
 msgid "update user"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:15
-msgid "username"
+#: app/incidentForms/incidentForm-list.html:23
+msgid ""
+"username\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:26
+#: app/incidentForms/incidentForm-list.html:38
 msgid "view"
 msgstr ""
