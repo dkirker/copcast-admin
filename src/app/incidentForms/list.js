@@ -32,7 +32,7 @@ angular.module('copcastAdminApp')
       }
     ).success(function(data) {
         $scope.incidentForms = data;
-        console.log("IncidentForm=" , data);
+        console.log("IncidentForm==" , data);
       }).error(function(data) {
         console.error(data);
       });
