@@ -11,13 +11,13 @@
     </div>
   </section>
   <section class="selected user">
-    <span ng-if="!selectedUser"><translate>Selecione um usuário ou grupo</translate></span>
-    <span ng-if="selectedUser"><translate>Usuário selecionado:</translate> <strong>{{selectedUser.name}}</strong></span>
+    <span ng-if="!selectedUser"><translate>Select a user of group</translate></span>
+    <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
   </section>
   <section class="scene">
-    <div class="no video" ng-if="!src" translate>Nenhum vídeo encontrado</div>
+    <div class="no video" ng-if="!src" translate>No video found</div>
     <video width="400" height="260" controls>
-    <translate>Seu navegador não suporta vídeos.</translate>
+    <translate>Your browser does not support videos.</translate>
     </video>
   </section>
   <section class="time" ng-bind-html="time"></section>

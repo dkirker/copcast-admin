@@ -4,7 +4,7 @@
     <thead>
     <tr>
       <th style="min-width: 80px;" translate>Name</th>
-      <th style="min-width: 80px;" translate>Is Administrative?</th>
+      <th style="min-width: 80px;" translate>Group Type</th>
       <th style="width:20px;"> </th>
       <th style="width:20px;"> </th>
     </tr>
@@ -12,7 +12,8 @@
     <tbody>
     <tr ng-repeat="group in groups">
       <td>{{ group.name }}</td>
-      <td>{{ group.isAdmin }}</td>
+      <td ng-show="group.isAdmin" translate>Admin</td>
+      <td ng-hide="group.isAdmin" translate>Normal</td>
       <td><a ng-click="editGroup(group.id)" class="btn btn-small btn-primary" translate>edit</a></td>
       <td><a ng-click="deleteGroup(group.id)" class="btn btn-small btn-danger" ng-show="isAdminGroup" translate>delete</a></td>
     </tr>
