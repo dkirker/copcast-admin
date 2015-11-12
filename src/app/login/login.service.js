@@ -44,8 +44,14 @@ app.service('loginService',function($rootScope, $cookies, $uibModal, $http, auth
       }
     };
     //TODO removed for it was breaking the socket load
-    var dom = '.'+window.location.hostname.split('.').slice(1,100).join('.')
-    $cookies.putObject('globals', $rootScope.globals, {domain: dom});
+
+    if (window.location.hostname.split('.').length > 1) { // won't set domain if localhost
+        var dom = '.'+window.location.hostname.split('.').slice(1,100).join('.')
+        $cookies.putObject('globals', $rootScope.globals, {domain: dom});
+    } else {
+        console.log('localhost here.');
+        $cookies.putObject('globals', $rootScope.globals);
+    }
     authService.loginConfirmed();
     socket.connect(accessToken);
     loginService.isOpen = false;
