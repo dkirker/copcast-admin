@@ -32,12 +32,11 @@ msgstr "<strong>Total de horas de transmissão em tempo real</strong>"
 msgid "Account Settings"
 msgstr "Configurações de conta"
 
-#: app/incidentForms/incidentForm-list.html:12
 #: app/incidentForms/incidentForm-view.html:35
 msgid "Address:"
 msgstr "Endereço"
 
-#: app/views/appheader.html:20
+#: app/views/appheader.html:20 app/views/groups/group-list.html:15
 msgid "Admin"
 msgstr "Admin"
 
@@ -93,8 +92,8 @@ msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
 #: app/history/date_filter/date.filter.html:4
-msgid "Data"
-msgstr "Dados"
+msgid "Date"
+msgstr "Data"
 
 #: app/incidentForms/incidentForm-view.html:21
 #: app/incidentForms/incidentForm-view.html:28
@@ -122,7 +121,7 @@ msgstr "Filtro"
 msgid "Fine?"
 msgstr "Multa?"
 
-#: app/report/report.html:12
+#: app/incidentForms/incidentForm-list.html:19 app/report/report.html:12
 msgid "From"
 msgstr "De"
 
@@ -134,12 +133,16 @@ msgstr "Gravidade"
 msgid "Group"
 msgstr "Grupo"
 
-#: app/views/groups/group-detail.html:2
-msgid "Group detail"
-msgstr "Detalhe do grupo"
+#: app/views/groups/group-list.html:7
+msgid "Group Type"
+msgstr "Tipo do Grupo"
 
-#: app/users/user-creation.html:17 app/users/user-destroy.html:18
-#: app/users/user-detail.html:59
+#: app/views/groups/group-detail.html:2
+msgid "Group details"
+msgstr "Detalhes do Grupo"
+
+#: app/incidentForms/incidentForm-list.html:13 app/users/user-creation.html:17
+#: app/users/user-destroy.html:18 app/users/user-detail.html:59
 msgid "Group:"
 msgstr "Grupo:"
 
@@ -167,15 +170,15 @@ msgstr ""
 "Informações de Usuários<br>\n"
 "        <small translate=\"\">agrupados por dia</small>"
 
+#: app/incidentForms/list.js:52
+msgid "Invalid data range."
+msgstr "Período Inválido"
+
 #: app/users/user-creation.html:36 app/users/user-destroy.html:36
 #: app/users/user-detail.html:78 app/views/groups/group-creation.html:32
 #: app/views/groups/group-destroy.html:31 app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr "É Admin?"
-
-#: app/views/groups/group-list.html:7
-msgid "Is Administrative?"
-msgstr "É administrador?"
 
 #: app/views/groups/group-creation.html:18
 #: app/views/groups/group-destroy.html:17 app/views/groups/group-detail.html:18
@@ -203,8 +206,9 @@ msgstr "Longitude:"
 msgid "Name"
 msgstr "Nome"
 
-#: app/users/user-creation.html:11 app/users/user-destroy.html:11
-#: app/users/user-detail.html:53 app/views/groups/group-creation.html:11
+#: app/incidentForms/incidentForm-list.html:10 app/users/user-creation.html:11
+#: app/users/user-destroy.html:11 app/users/user-detail.html:53
+#: app/views/groups/group-creation.html:11
 #: app/views/groups/group-destroy.html:10 app/views/groups/group-detail.html:11
 msgid "Name:"
 msgstr "Nome:"
@@ -229,6 +233,10 @@ msgstr "Transmissão ao vivo indisponível"
 msgid "No video found"
 msgstr "Nenhum vídeo encontrado"
 
+#: app/views/groups/group-list.html:16
+msgid "Normal"
+msgstr "Normal"
+
 #: app/realtime/map.service.js:30
 msgid "Not able to start streaming now. Try again later."
 msgstr ""
@@ -236,7 +244,7 @@ msgstr ""
 
 #: app/incidentForms/incidentForm-view.html:56
 msgid "Number of Injured"
-msgstr ""
+msgstr "Número de Feridos"
 
 #: app/report/report.html:107
 msgid "Number of times mission was stopped"
@@ -306,14 +314,17 @@ msgstr "Houve Resistência"
 msgid "SIGN IN"
 msgstr "LOGAR"
 
-#: app/components/user_dropdown/user.dropdown.html:2
 #: app/history/player/player.html:14
-msgid "Selecione um usuário ou grupo"
-msgstr "Selecione um usuário ou grupo"
+msgid "Select a user of group"
+msgstr "Selecione um usuário"
 
-#: app/history/player/player.html:20
-msgid "Seu navegador não suporta vídeos."
-msgstr "Seu navegador não suporta vídeos."
+#: app/components/user_dropdown/user.dropdown.html:2
+msgid "Select a user or group"
+msgstr "Selecione um grupo ou usuário"
+
+#: app/history/player/player.html:15
+msgid "Selected user:"
+msgstr "Usuário selecionado:"
 
 #: app/views/appheader.html:29
 msgid "Signed in as"
@@ -327,7 +338,7 @@ msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
 
-#: app/report/report.html:22
+#: app/incidentForms/incidentForm-list.html:29 app/report/report.html:22
 msgid "To"
 msgstr "Para"
 
@@ -367,7 +378,7 @@ msgstr "Digite para filtrar o mapa"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/report/report.html:32
+#: app/incidentForms/incidentForm-list.html:39 app/report/report.html:32
 msgid "Update"
 msgstr "Atualizar"
 
@@ -392,15 +403,11 @@ msgstr ""
 "{{filter.toDate  | date:\"dd/MM/yyyy\"}}"
 
 #: app/users/user-creation.html:2
-msgid "User detail"
-msgstr "Detalhe do usuário"
+msgid "User details"
+msgstr "Detalhes do Usuário"
 
 #: app/incidentForms/incidentForm-view.html:14
 msgid "User name:"
-msgstr "Usuário:"
-
-#: app/incidentForms/incidentForm-list.html:9
-msgid "User:"
 msgstr "Usuário:"
 
 #: app/login/login.html:7
@@ -416,10 +423,6 @@ msgstr "Nome de usuário:"
 msgid "Users"
 msgstr "Usuários"
 
-#: app/history/player/player.html:15
-msgid "Usuário selecionado:"
-msgstr "Usuário selecionado:"
-
 #: app/realtime/realtime.html:28 app/views/realtime.html:25
 msgid "View history"
 msgstr "Ver histórico"
@@ -428,17 +431,9 @@ msgstr "Ver histórico"
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/incidentForms/incidentForm-list.html:26
-msgid ""
-"address\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-msgstr ""
-"endereço\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
+#: app/history/player/player.html:20
+msgid "Your browser does not support videos."
+msgstr "Seu browser não suporta vídeos"
 
 #: app/incidentForms/incidentForm-view.html:121
 msgid "back"
@@ -459,19 +454,19 @@ msgstr "criar novo grupo"
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/incidentForms/incidentForm-list.html:20
+#: app/incidentForms/incidentForm-list.html:48
 msgid ""
 "date\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"> </span>"
+"'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
+"chevron-down':!reverse}\"> </span>"
 msgstr ""
 "data\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"> </span>"
+"'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
+"chevron-down':!reverse}\"> </span>"
 
-#: app/users/user-list.html:17 app/views/groups/group-list.html:17
+#: app/users/user-list.html:17 app/views/groups/group-list.html:18
 msgid "delete"
 msgstr "excluir"
 
@@ -483,13 +478,25 @@ msgstr "excluir grupo"
 msgid "delete user"
 msgstr "excluir usuário"
 
-#: app/users/user-list.html:16 app/views/groups/group-list.html:16
+#: app/users/user-list.html:16 app/views/groups/group-list.html:17
 msgid "edit"
 msgstr "editar"
 
 #: app/login/login.html:9
 msgid "forgot password"
 msgstr "esqueci minha senha"
+
+#: app/incidentForms/incidentForm-list.html:54
+msgid ""
+"group name\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
+msgstr ""
+"nome do grupo\n"
+"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+"down':!reverse}\"></span>"
 
 #: app/report/report.html:97
 msgid "grouped by day"
@@ -507,7 +514,7 @@ msgstr "atualizar grupo"
 msgid "update user"
 msgstr "atualizar usuário"
 
-#: app/incidentForms/incidentForm-list.html:23
+#: app/incidentForms/incidentForm-list.html:51
 msgid ""
 "username\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -519,9 +526,55 @@ msgstr ""
 "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
 "down':!reverse}\"></span>"
 
-#: app/incidentForms/incidentForm-list.html:38
+#: app/incidentForms/incidentForm-list.html:66
 msgid "view"
 msgstr "visão"
+
+#~ msgid "Data"
+#~ msgstr "Dados"
+
+#~ msgid "Group detail"
+#~ msgstr "Detalhe do grupo"
+
+#~ msgid "Is Administrative?"
+#~ msgstr "É administrador?"
+
+#~ msgid "Selecione um usuário ou grupo"
+#~ msgstr "Selecione um usuário ou grupo"
+
+#~ msgid "Seu navegador não suporta vídeos."
+#~ msgstr "Seu navegador não suporta vídeos."
+
+#~ msgid "User detail"
+#~ msgstr "Detalhe do usuário"
+
+#~ msgid "User:"
+#~ msgstr "Usuário:"
+
+#~ msgid "Usuário selecionado:"
+#~ msgstr "Usuário selecionado:"
+
+#~ msgid ""
+#~ "address\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "endereço\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+
+#~ msgid ""
+#~ "date\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"> </span>"
+#~ msgstr ""
+#~ "data\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"> </span>"
 
 #~ msgid ""
 #~ "<strong>How much total footage, by time and number of distinct pieces, "
@@ -543,14 +596,8 @@ msgstr "visão"
 #~ msgid "username"
 #~ msgstr "nome do usuário"
 
-#~ msgid "Date"
-#~ msgstr "Data"
-
 #~ msgid "Select an user or group"
 #~ msgstr "Selecione um usuário ou grupo"
-
-#~ msgid "Selected user:"
-#~ msgstr "Usuário selecionado:"
 
 #~ msgid "Your browser does not support the video tag."
 #~ msgstr "Seu browser não suporta a tag de vídeo."
