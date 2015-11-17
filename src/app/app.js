@@ -100,9 +100,3 @@ angular
     };
 
   });
-
-//insert the constant value ServerUrl
-angular.module('copcastAdminApp').constant('ServerUrl', '//docs-api.mycopcast.com');
-//angular.module('copcastAdminApp').constant('ServerUrl', 'http://localhost:3000');
-
-
