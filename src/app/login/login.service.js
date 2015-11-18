@@ -8,10 +8,9 @@
  * Factory in the copcastAdminApp.
  */
 var app = angular.module('copcastAdminApp');
-app.service('loginService',function($rootScope, $cookies, $uibModal, $http, authService, socket) {
+app.service('loginService', function($rootScope, $cookies, $uibModal, $http, authService, socket, ServerUrl) {
 
   var loginService = { isOpen: false};
-
 
   loginService.show = function() {
     if (!loginService.isOpen) {
@@ -43,15 +42,27 @@ app.service('loginService',function($rootScope, $cookies, $uibModal, $http, auth
         token: accessToken
       }
     };
-    //TODO removed for it was breaking the socket load
 
-    console.log(window.location.hostname);
-    if (window.location.hostname.split('.').length > 1) { // won't set domain if localhost
-        var dom = '.'+window.location.hostname.split('.').slice(1,100).join('.')
-        console.log(dom);
-        $cookies.putObject('globals', $rootScope.globals, {domain: dom});
+    // hack to let the browser parse the ServerUrl.
+    var apiserver = document.createElement('a');
+    apiserver.href = ServerUrl;
+
+    if (apiserver.hostname != window.location.hostname) {
+      var common_domain = [];
+      var adminTokens = window.location.hostname.split('.');
+      var apiTokens = apiserver.hostname.split('.');
+      adminTokens.reverse();
+      apiTokens.reverse();
+
+      for(var i=0; apiTokens[i]==adminTokens[i]; i++)
+        common_domain.push(apiTokens[i]);
+
+      common_domain.reverse();
+      var cookie_dom = '.'+common_domain.join('.');
+      console.log('Cookie domain: '+cookie_dom);
+      $cookies.putObject('globals', $rootScope.globals, {domain: cookie_dom});
     } else {
-        console.log('localhost here.');
+        console.log('cookies not mangled');
         $cookies.putObject('globals', $rootScope.globals);
     }
     authService.loginConfirmed();
