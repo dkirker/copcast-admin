@@ -6,3 +6,4 @@ dist/
 .idea/
 *.orig
 *.log
+src/app/config.js
