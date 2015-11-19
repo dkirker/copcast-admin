@@ -8,7 +8,10 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersCreationCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
+  .controller('UsersCreationCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, userService){
+    userService.getRoles().then(function(roles){
+      $scope.roles = roles;
+    });
 
     // callback for ng-click 'createNewUser':
     $scope.createNewUser = function () {

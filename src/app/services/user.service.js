@@ -143,6 +143,18 @@
       return defer.promise;
     };
 
+    service.getRoles = function getRoles(){
+      var defer = $q.defer();
+      $http.get(ServerUrl + '/users/roles')
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
     service.getStreamingUsers = function getStreamingUsers(){
       var defer = $q.defer();
       $http.get(ServerUrl + '/users/streaming')

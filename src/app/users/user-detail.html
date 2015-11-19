@@ -63,6 +63,13 @@
                 </div>
               </div>
               <div class="control-group">
+                <label class="control-label" for="inputName" translate>Role:</label>
+                <div class="controls">
+                  <select ng-options="role for role in roles" ng-model="user.role" required>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
                 <label class="control-label" for="inputUsername" translate>Username:</label>
                 <div class="controls">
                   <input type="text" id="inputUsername" ng-model="user.username"/>
