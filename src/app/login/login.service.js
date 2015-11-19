@@ -53,7 +53,8 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
       var apiTokens = apiserver.hostname.split('.');
       adminTokens.reverse();
       apiTokens.reverse();
-
+      console.log(adminTokens);
+      console.log(apiTokens);
       for(var i=0; apiTokens[i]==adminTokens[i]; i++)
         common_domain.push(apiTokens[i]);
 
