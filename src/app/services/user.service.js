@@ -15,7 +15,7 @@
    */
   var app = angular.module('copcastAdminApp');
 
-  app.factory('userService', function($compile, $templateCache, $q, $http, ServerUrl) {
+  app.factory('userService', function($compile, $templateCache, $q, $http, ServerUrl, $rootScope) {
     var service = {};
 
     service.delete = function deleteUser( userId, userName ) {
@@ -115,7 +115,7 @@
           defer.resolve(data);
         })
         .error(function(data, status) {
-          defer.reject(data, status);
+          defer.resolve([]);
         });
       return defer.promise;
     };
@@ -165,6 +165,18 @@
           defer.reject(data, status);
         });
       return defer.promise;
+    };
+
+    service.isAdminOne = function(){
+      return 'admin_1' === $rootScope.globals["currentUser"]["role"]
+    };
+
+    service.isAdminTwo = function(){
+      return 'admin_2' === $rootScope.globals["currentUser"]["role"]
+    };
+
+    service.isAdminThree = function(){
+      return 'admin_3' === $rootScope.globals["currentUser"]["role"]
     };
 
     return service;

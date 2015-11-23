@@ -33,9 +33,10 @@
   <footer class="navbar navbar-default navbar-static-bottom">
     <timeline
       on-select-date="manager.setCurrentDate"
-      user-data="manager.store.userData">
+      user-data="manager.store.userData"
+      show-video="showVideo()">
     </timeline>
-    <player
+    <player ng-show="showVideo()"
       users="manager.store.currentGroup.users"
       src="manager.store.userData.currentVideo.src"
       on-change-user="manager.setCurrentUser"
