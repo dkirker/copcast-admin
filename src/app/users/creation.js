@@ -19,7 +19,11 @@ angular.module('copcastAdminApp')
         $scope.user).success(function(data) {
           $location.path('/user-list');
         }).error(function(data) {
-          $scope.serverMessage = data;
+          if (data.errors){
+            $scope.serverMessage = data.errors[0].message;
+          } else {
+            $scope.serverMessage = data;
+          }
         });
     };
 

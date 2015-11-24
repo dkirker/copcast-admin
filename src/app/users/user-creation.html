@@ -20,10 +20,16 @@
                 </select>
             </div>
         </div>
-        <div class="control-group">
+        <div class="control-group" >
+          <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
+          <div class="controls">
+            <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
+          </div>
+        </div>
+        <div class="control-group" ng-show="user.isAdmin">
           <label class="control-label" for="inputName" translate>Role:</label>
           <div class="controls">
-            <select ng-options="role  for role in roles" ng-model="user.role" required>
+            <select ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin">
             </select>
           </div>
         </div>
@@ -39,12 +45,7 @@
                 <input type="text" id="inputEmail" ng-model="user.email" required/>
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
-            <div class="controls">
-                <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
-            </div>
-        </div>
+
         <div class="control-group">
             <label class="control-label" for="inputPassword" translate>Password:</label>
             <div class="controls">
@@ -56,10 +57,10 @@
           <label class="control-label" for="language" translate>Preferred language:</label>
           <div class="controls">
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
+              <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
             </label>
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+              <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
             </label>
 
           </div>
@@ -69,8 +70,7 @@
             <div class="controls" >
               <br><br>
                 <!-- user-creation.html: -->
-              <a ng-show="!frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</a>
-              <label ng-show="frm.$invalid" class="disabled btn btn-small btn-primary" translate>create new user</label>
+              <button ng-disabled="frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</button>
               <br><br>
             </div>
         </div>

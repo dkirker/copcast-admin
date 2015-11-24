@@ -43,7 +43,7 @@
           <div class="panel-heading" translate>Account Settings</div>
           <div class="panel-body">
             <br>
-            <form novalidate="novalidate" class="form-horizontal">
+            <form novalidate="novalidate" class="form-horizontal"  name="frmUpdate">
               <alert ng-show="serverMessage">
                 <p>
                   {{serverMessage["detail"]}}
@@ -52,33 +52,14 @@
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Name:</label>
                 <div class="controls">
-                  <input type="text" id="inputName" ng-model="user.name"/>
+                  <input type="text" id="inputName" required ng-model="user.name"/>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Group:</label>
                 <div class="controls">
-                  <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
+                  <select required ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
                   </select>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputName" translate>Role:</label>
-                <div class="controls">
-                  <select ng-options="role  for role in roles" ng-model="user.role" required>
-                  </select>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputUsername" translate>Username:</label>
-                <div class="controls">
-                  <input type="text" id="inputUsername" ng-model="user.username"/>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputEmail" translate>Email:</label>
-                <div class="controls">
-                  <input type="text" id="inputEmail" ng-model="user.email"/>
                 </div>
               </div>
               <div class="control-group">
@@ -87,16 +68,34 @@
                   <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
                 </div>
               </div>
-
+              <div class="control-group" ng-show="user.isAdmin">
+                <label class="control-label" for="inputName" translate>Role:</label>
+                <div class="controls">
+                  <select ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin">
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputUsername" translate>Username:</label>
+                <div class="controls">
+                  <input type="text" id="inputUsername" required ng-model="user.username"/>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail" translate>Email:</label>
+                <div class="controls">
+                  <input type="text" id="inputEmail" required ng-model="user.email"/>
+                </div>
+              </div>
 
               <div class="control-group">
                 <label class="control-label" for="language" translate>Preferred language:</label>
                 <div class="controls">
                   <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="language" value="pt_BR" ng-model="user.language"><img src="../assets/images/br-icon.png">
+                    <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language"><img src="../assets/images/br-icon.png">
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+                    <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
                   </label>
 
                 </div>
@@ -108,7 +107,7 @@
                 <div class="controls">
                   <!-- user-detail.html: -->
                   <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                  <a ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</a>
+                  <button ng-disabled="frmUpdate.$invalid" ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</button>
                 </div>
               </div>
             </form>
