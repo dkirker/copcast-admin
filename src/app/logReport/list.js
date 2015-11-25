@@ -46,7 +46,7 @@ angular.module('copcastAdminApp')
         $scope.errorMessage = null;
         $http.get(ServerUrl + "/logreports/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD'))
           .success(function (data) {
-            $scope.logreport = data;
+            $scope.logreports = data;
           });
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid data range.')
