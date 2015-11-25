@@ -1,0 +1,78 @@
+<div class="container-crud">
+  <div class="pull-right" ></div>
+  <div class="control-group">
+    <h1>Log Report</h1>
+    <h3>Search filter</h3>
+  </div>
+  <div class="control-group" id="searchBox">
+    <div class="panel-body">
+      <div class="controls">
+        <label class="control-label" for="lblAddress" translate> Name:</label>
+        <input type="text" id="inputAddress" ng-model="globalSearch.user.name"/>
+
+        <label class="control-label" for="lblAddress" translate> Group:</label>
+        <input type="text" id="inputAddress" ng-model="globalSearch.user.group.name"/><br><br>
+      </div>
+
+      <form novalidate="novalidate" class="form-inline date filter">
+        <div class="form-group">
+          <label translate>From</label>
+
+          <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
+                 ng-model="filter.fromDate" ng-model-options="{ debounce: 500 }"
+                 uib-datepicker-popup is-open="filter.fromDateVisible"
+                 ng-required="true" show-button-bar="false" show-weeks="false"
+                 ng-click="filter.fromDateShow()"/>
+          <i class="icon calendar"></i>
+        </div>
+        <div class="form-group">
+          &nbsp;&nbsp;&nbsp;<label translate>To</label>
+
+          <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
+                 ng-model="filter.toDate" ng-model-options="{ debounce: 500 }"
+                 uib-datepicker-popup is-open="filter.toDateVisible"
+                 ng-required="true" show-button-bar="false" show-weeks="false"
+                 ng-click="filter.toDateShow()"/>
+          <i class="icon calendar"></i>
+        </div>
+        <div class="form-group">
+          &nbsp;&nbsp;&nbsp;<a ng-click="searchByDate()" class="btn btn-small btn-primary" translate>Update</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <table class="table table-striped table-condensed">
+    <thead>
+    <tr>
+      <th style="min-width: 40px;" ng-click="sort('date')" translate>date
+            <span class="glyphicon sort-icon" ng-show="sortKey == 'date'"
+                  ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/> </th>
+      <th style="min-width: 40px;"  ng-click="sort('userId')" translate>username
+            <span class="glyphicon sort-icon" ng-show="sortKey == 'userId'"
+                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
+      <th style="min-width: 50px;"  ng-click="sort('groupId')" translate>group name
+            <span class="glyphicon sort-icon" ng-show="sortKey == 'groupId'"
+                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
+      <th style="min-width: 80px;"  ng-click="sort('>previousstate')" translate>previous state
+            <span class="glyphicon sort-icon" ng-show="sortKey == 'previousstate'"
+                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
+      <th style="min-width: 80px;"  ng-click="sort('nextstate')" translate>next state
+            <span class="glyphicon sort-icon" ng-show="sortKey == 'nextstate'"
+                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
+      <th style="width:20px;" > </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="logreport in logreports  | filter: globalSearch | orderBy:sortKey:reverse" >
+      <td>{{ logreport.date | date:'yyyy-MM-dd' }}</td>
+      <td>{{ logreport.user.name }}</td>
+      <td>{{ logreport.user.group.name }}</td>
+      <td>{{ logreport.previousState }}</td>
+      <td>{{ logreport.nextState }}</td>
+      <td><a ng-click="viewLog(logreport.id)" class="btn btn-small btn-primary"  translate>view</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,128 @@
+
+<div class="container-fluid">
+
+  <h1 translate>Log report</h1>
+  <div class="col-md-4">
+    <form novalidate="novalidate" class="form-horizontal">
+      <alert ng-show="serverMessage">
+        <p>
+          {{serverMessage["detail"]}}
+        </p>
+      </alert>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>User name:</label>
+        <div class="controls">
+          {{incidentForm.user.name }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Date/Time:</label>
+        <div class="controls">
+          {{incidentForm.date | date:'medium' }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Previous State:</label>
+        <div class="controls">
+          {{incidentForm.lat }} , {{incidentForm.lng}}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Address:</label>
+        <div class="controls">
+          {{incidentForm.address }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="arrest" translate>Arrest?</label>
+        <div class="controls">
+          {{incidentForm.arrest }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="gravity" translate>Gravity</label>
+        <div class="controls">
+          {{incidentForm.gravity }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="numInjured" translate>Number of Injured</label>
+        <div class="controls">
+          {{incidentForm.injured }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="fine" translate>Fine?</label>
+        <div class="controls">
+          {{incidentForm.fine }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="fineType" translate>Type of Fine</label>
+        <div class="controls">
+          {{incidentForm.fineType }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="arrest" translate>Arrest?</label>
+        <div class="controls">
+          {{incidentForm.arrest }}
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <label class="control-label" for="resistance" translate>Resistance?</label>
+        <div class="controls">
+          {{incidentForm.resistance }}
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <label class="control-label" for="argument" translate>Argument?</label>
+        <div class="controls">
+          {{incidentForm.argument }}
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <label class="control-label" for="useOfForce" translate>Use Of Force?</label>
+        <div class="controls">
+          {{incidentForm.useOfForce }}
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <label class="control-label" for="useLethalForce" translate>Use Lethal Force?</label>
+        <div class="controls">
+          {{incidentForm.useLethalForce }}
+        </div>
+      </div>
+
+
+
+      <div class="control-group">
+        <div class="controls">
+          <br><br>
+          <!-- user-detail.html: -->
+          <a ng-click="back()" class="btn btn-default" translate>back</a>
+          <br><br>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
