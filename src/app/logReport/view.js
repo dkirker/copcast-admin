@@ -2,22 +2,22 @@
 
 /**
  * @ngdoc function
- * @name copcastAdminApp.controller:IncidentsViewCtrl
+ * @name copcastAdminApp.controller:LogViewCtrl
  * @description
- * # IncidentsViewCtrl
+ * # LogViewCtrl
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('IncidentsViewCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
+  .controller('LogReportViewCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
 
     // callback for ng-click 'back':
     $scope.back = function () {
-      $location.path('/incidentForm-list');
+      $location.path('/log-report-list');
     };
 
     //get incidentForm by id
-    $http.get(ServerUrl + '/incidentForm/'+ $routeParams.id).success(function(data) {
-      $scope.incidentForm = data;
+    $http.get(ServerUrl + '/logreports/'+ $routeParams.id).success(function(data) {
+      $scope.logreport = data;
 
     }).error(function(data) {
       console.log("Error: " + data);

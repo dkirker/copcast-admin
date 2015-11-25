@@ -79,7 +79,7 @@ angular
         controller: 'LogReportListCtrl'
       })
       .when('/log-report-view/:id', {
-        templateUrl: 'app/logreports/logReport-view.html',
+        templateUrl: 'app/logreport/logReport-view.html',
         controller: 'LogReportViewCtrl'
       })
       .otherwise({
