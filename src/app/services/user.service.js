@@ -15,7 +15,7 @@
    */
   var app = angular.module('copcastAdminApp');
 
-  app.factory('userService', function($compile, $templateCache, $q, $http, ServerUrl) {
+  app.factory('userService', function($compile, $templateCache, $q, $http, ServerUrl, $rootScope) {
     var service = {};
 
     service.delete = function deleteUser( userId, userName ) {
@@ -115,7 +115,7 @@
           defer.resolve(data);
         })
         .error(function(data, status) {
-          defer.reject(data, status);
+          defer.resolve([]);
         });
       return defer.promise;
     };
@@ -143,6 +143,18 @@
       return defer.promise;
     };
 
+    service.getRoles = function getRoles(){
+      var defer = $q.defer();
+      $http.get(ServerUrl + '/users/roles')
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
     service.getStreamingUsers = function getStreamingUsers(){
       var defer = $q.defer();
       $http.get(ServerUrl + '/users/streaming')
@@ -153,6 +165,22 @@
           defer.reject(data, status);
         });
       return defer.promise;
+    };
+
+    service.getCurrentRole = function(){
+      return $rootScope.globals["currentUser"]["role"];
+    }
+
+    service.isAdminOne = function(){
+      return 'admin_1' === service.getCurrentRole();
+    };
+
+    service.isAdminTwo = function(){
+      return 'admin_2' === service.getCurrentRole();
+    };
+
+    service.isAdminThree = function(){
+      return 'admin_3' === service.getCurrentRole();
     };
 
     return service;

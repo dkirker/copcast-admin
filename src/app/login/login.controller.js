@@ -48,8 +48,8 @@ angular.module('copcastAdminApp')
         username : $scope.user.username,
         password : $scope.user.password,
         scope : 'admin'
-      },{ignoreAuthModule: true}).success(function(token) {
-        loginService.setToken($scope.user.username, token.token);
+      },{ignoreAuthModule: true}).success(function(data) {
+        loginService.setToken(data.userName, data.role, data.token);
         $uibModalInstance.close();
 
         //get user information
@@ -64,7 +64,7 @@ angular.module('copcastAdminApp')
         });
 
       }).error(function (data, status, headers, config) {
-        $scope.errorMessage = 'The email and password you entered don\'t match.';
+        $scope.errorMessage = gettext('The email and password you entered don\'t match.');
         $scope.emailMessage = '';
       });
     };

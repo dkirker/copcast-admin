@@ -8,11 +8,19 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload, gettext) {
+  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload, gettext, userService) {
     var $upload = Upload;
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
     $scope.blnShowTab = [true, false, false] ;
+
+    userService.getRoles().then(function(roles){
+      $scope.roles = roles;
+    });
+
+    $scope.canUpdate = function(){
+      return $scope.user && $scope.roles.indexOf($scope.user.role) > -1;
+    }
 
     //load the picture
     $scope.$watch('files', function () {
@@ -74,7 +82,11 @@ angular.module('copcastAdminApp')
       $http.post(ServerUrl + '/users/' + $scope.user.id, $scope.user).success(function(data){
         $location.path('/user-list');
       }).error(function(data) {
-        $scope.serverMessage = data;
+        if (data.errors){
+          $scope.serverMessage = data.errors[0].message;
+        } else {
+          $scope.serverMessage = data;
+        }
       });
     };
 

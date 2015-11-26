@@ -21,6 +21,7 @@
 
       scope: {
         userData: '=',
+        showVideo: '=',
         onSelectDate: '&'
       }
     };
