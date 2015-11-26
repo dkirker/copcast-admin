@@ -167,16 +167,20 @@
       return defer.promise;
     };
 
+    service.getCurrentRole = function(){
+      return $rootScope.globals["currentUser"]["role"];
+    }
+
     service.isAdminOne = function(){
-      return 'admin_1' === $rootScope.globals["currentUser"]["role"]
+      return 'admin_1' === service.getCurrentRole();
     };
 
     service.isAdminTwo = function(){
-      return 'admin_2' === $rootScope.globals["currentUser"]["role"]
+      return 'admin_2' === service.getCurrentRole();
     };
 
     service.isAdminThree = function(){
-      return 'admin_3' === $rootScope.globals["currentUser"]["role"]
+      return 'admin_3' === service.getCurrentRole();
     };
 
     return service;

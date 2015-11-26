@@ -52,39 +52,40 @@
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Name:</label>
                 <div class="controls">
-                  <input type="text" id="inputName" required ng-model="user.name"/>
+                  <input type="text" id="inputName" required ng-model="user.name" ng-disabled="!canUpdate()"/>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Group:</label>
                 <div class="controls">
-                  <select required ng-options="group.id as group.name for group in groups" ng-model="user.groupId" >
+                  <select required ng-options="group.id as group.name for group in groups" ng-model="user.groupId" ng-disabled="!canUpdate()" >
                   </select>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
                 <div class="controls">
-                  <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
+                  <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin" ng-disabled="!canUpdate()"/>
                 </div>
               </div>
               <div class="control-group" ng-show="user.isAdmin">
                 <label class="control-label" for="inputName" translate>Role:</label>
                 <div class="controls">
-                  <select ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin">
+                  <select  ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin" ng-show="canUpdate()">
                   </select>
+                  <div ng-show="!canUpdate()">{{user.role}}</div>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputUsername" translate>Username:</label>
                 <div class="controls">
-                  <input type="text" id="inputUsername" required ng-model="user.username"/>
+                  <input type="text" id="inputUsername" required ng-model="user.username" ng-disabled="!canUpdate()"/>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputEmail" translate>Email:</label>
                 <div class="controls">
-                  <input type="text" id="inputEmail" required ng-model="user.email"/>
+                  <input type="text" id="inputEmail" required ng-model="user.email" ng-disabled="!canUpdate()"/>
                 </div>
               </div>
 
@@ -92,10 +93,10 @@
                 <label class="control-label" for="language" translate>Preferred language:</label>
                 <div class="controls">
                   <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language"><img src="../assets/images/br-icon.png">
+                    <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" ng-disabled="!canUpdate()"><img src="../assets/images/br-icon.png">
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+                    <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language" ng-disabled="!canUpdate()"><img src="../assets/images/us-icon.png">
                   </label>
 
                 </div>
@@ -107,7 +108,7 @@
                 <div class="controls">
                   <!-- user-detail.html: -->
                   <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                  <button ng-disabled="frmUpdate.$invalid" ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</button>
+                  <button ng-disabled="frmUpdate.$invalid || !canUpdate()" ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</button>
                 </div>
               </div>
             </form>
@@ -124,12 +125,12 @@
               <div class="control-group" ng-cloak>
                 <label class="control-label" for="currentpassword" translate>Current password</label>
                 <div class="controlsPassword">
-                  <input type="password" id="currentpassword" ng-model="currentPassword" placeholder="{{'Current password' | translate}}"/></br>
+                  <input type="password" ng-disabled="!canUpdate()" id="currentpassword" ng-model="currentPassword" placeholder="{{'Current password' | translate}}"/></br>
                 </div>
                 <label class="control-label" for="currentpassword" translate>New password</label>
                 <div class="controlsPassword">
-                  <input type="password" id="newpassword" ng-model="newPassword" placeholder="{{'New password'| translate}}"/></br>
-                  <input type="password" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="{{'Repeat your password'| translate}}"/>
+                  <input type="password" ng-disabled="!canUpdate()" id="newpassword" ng-model="newPassword" placeholder="{{'New password'| translate}}"/></br>
+                  <input type="password" ng-disabled="!canUpdate()" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="{{'Repeat your password'| translate}}"/>
                 </div>
                 <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span></br>
 
@@ -139,7 +140,7 @@
                   <div class="controls">
                     <!-- user-detail.html: -->
                     <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                    <a ng-click="changePassword()" class="btn btn-small btn-primary" translate>update user</a>
+                    <a ng-click="changePassword()" ng-disabled="!canUpdate()" class="btn btn-small btn-primary" translate>update user</a>
                   </div>
                 </div>
 
@@ -156,7 +157,7 @@
             <br>
 
             <div ngf-select ng-model="files" class="btn btn-primary"
-                 ngf-multiple="false" ngf-allow-dir="true"
+                 ngf-multiple="false" ngf-allow-dir="true" ng-disabled="!canUpdate()"
                  ngf-accept="'image/*'" translate>Click here to send a new image</div>
 
             <br/>

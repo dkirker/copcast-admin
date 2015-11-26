@@ -18,6 +18,10 @@ angular.module('copcastAdminApp')
       $scope.roles = roles;
     });
 
+    $scope.canUpdate = function(){
+      return $scope.user && $scope.roles.indexOf($scope.user.role) > -1;
+    }
+
     //load the picture
     $scope.$watch('files', function () {
       $scope.upload($scope.files);
