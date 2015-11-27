@@ -34,10 +34,14 @@
         }, true);
 
         timelineService.currentLocationChanged.addListener(function (location) {
-          var locationKey = createKey(location.date);
-          if(locationKey === segmentKey) {
-            console.log('Current Location Changed in Segment', location, locationKey);
-            setPositionFromCurrentDate(location.date);
+          try {
+            var locationKey = createKey(location.date);
+            if (locationKey === segmentKey) {
+              console.log('Current Location Changed in Segment', location, locationKey);
+              setPositionFromCurrentDate(location.date);
+            }
+          } catch(ex) {
+            console.log("Video with empty location.");
           }
         });
 
