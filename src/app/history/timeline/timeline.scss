@@ -28,9 +28,10 @@ $line-color: #d7d7d7;
 .nav {
   &.timeline {
     background-color: $background-color;
-    margin-right: 400px;
     height: $timeline-height;
-
+    &.timeline-fix{
+      margin-right: 400px;
+    }
     & > .container {
       height: $timeline-height;
       width: 100%;

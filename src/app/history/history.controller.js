@@ -15,6 +15,10 @@
       toDate: moment().toDate(),
       period: true
     };
+
+    $scope.showVideo = function(){
+      return userService.isAdminTwo() || userService.isAdminThree();
+    };
   });
 
 })(window.angular, window.moment);

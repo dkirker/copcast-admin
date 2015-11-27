@@ -91,7 +91,7 @@
           defer.resolve(data);
         })
         .error(function(data, status) {
-          defer.reject(data, status);
+          defer.resolve([]);
         });
       return defer.promise;
     };

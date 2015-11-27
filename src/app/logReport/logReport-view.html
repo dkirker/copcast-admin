@@ -1,0 +1,59 @@
+
+<div class="container-fluid">
+
+  <h1 translate>Log report</h1>
+  <div class="col-md-4">
+    <form novalidate="novalidate" class="form-horizontal">
+      <alert ng-show="serverMessage">
+        <p>
+          {{serverMessage["detail"]}}
+        </p>
+      </alert>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>User name:</label>
+        <div class="controls">
+          {{logreport.user.name }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Date/Time:</label>
+        <div class="controls">
+          {{logreport.date | date:'medium' }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Previous State:</label>
+        <div class="controls">
+          {{logreport.previousState }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Next State:</label>
+        <div class="controls">
+          {{logreport.nextState }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputName" translate>Extras:</label>
+        <div class="controls">
+          {{logreport.extras }}
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <br><br>
+          <!-- user-detail.html: -->
+          <a ng-click="back()" class="btn btn-default" translate>back</a>
+          <br><br>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

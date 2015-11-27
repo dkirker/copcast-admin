@@ -35,10 +35,11 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
     return $rootScope.globals.currentUser.token;
   };
 
-  loginService.setToken = function(userName, accessToken) {
+  loginService.setToken = function(userName, role, accessToken) {
     $rootScope.globals = {
       currentUser: {
         username: userName,
+        role: role,
         token: accessToken
       }
     };

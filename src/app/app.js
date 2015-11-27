@@ -74,13 +74,13 @@ angular
         templateUrl: 'app/users/user-destroy.html',
         controller: 'UsersDestroyCtrl'
       })
-      .when('/incidentForm-list', {
-        templateUrl: 'app/incidentForms/incidentForm-list.html',
-        controller: 'IncidentsListCtrl'
+      .when('/log-report-list', {
+        templateUrl: 'app/logreport/logReport-list.html',
+        controller: 'LogReportListCtrl'
       })
-      .when('/incidentForm-view/:id', {
-        templateUrl: 'app/incidentForms/incidentForm-view.html',
-        controller: 'IncidentsViewCtrl'
+      .when('/log-report-view/:id', {
+        templateUrl: 'app/logreport/logReport-view.html',
+        controller: 'LogReportViewCtrl'
       })
       .when('/report', {
         templateUrl: 'app/report/report.html',
