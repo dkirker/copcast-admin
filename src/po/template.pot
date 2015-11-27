@@ -430,6 +430,10 @@ msgstr ""
 msgid "View history"
 msgstr ""
 
+#: app/history/history.manager.js:157
+msgid "Warning: video with missing location information."
+msgstr ""
+
 #: app/users/details.js:58
 msgid "Wrong password combination"
 msgstr ""

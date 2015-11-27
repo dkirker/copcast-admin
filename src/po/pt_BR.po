@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: copcast-admin\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Leandro Martelli <leandro@igarape.org.br>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.6.10\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/report/report.html:42
@@ -176,12 +176,14 @@ msgstr "Período Inválido"
 
 #: app/users/user-creation.html:36 app/users/user-destroy.html:36
 #: app/users/user-detail.html:78 app/views/groups/group-creation.html:32
-#: app/views/groups/group-destroy.html:31 app/views/groups/group-detail.html:32
+#: app/views/groups/group-destroy.html:31
+#: app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr "É Admin?"
 
 #: app/views/groups/group-creation.html:18
-#: app/views/groups/group-destroy.html:17 app/views/groups/group-detail.html:18
+#: app/views/groups/group-destroy.html:17
+#: app/views/groups/group-detail.html:18
 msgid "Latitude:"
 msgstr "Latitude:"
 
@@ -189,7 +191,8 @@ msgstr "Latitude:"
 msgid "Livestream"
 msgstr "Transmissão ao vivo"
 
-#: app/components/loading/loading.html:2 app/realtime/videoStream/player.html:7
+#: app/components/loading/loading.html:2
+#: app/realtime/videoStream/player.html:7
 msgid "Loading..."
 msgstr "Carregando..."
 
@@ -198,7 +201,8 @@ msgid "Logout"
 msgstr "Sair"
 
 #: app/views/groups/group-creation.html:25
-#: app/views/groups/group-destroy.html:24 app/views/groups/group-detail.html:25
+#: app/views/groups/group-destroy.html:24
+#: app/views/groups/group-detail.html:25
 msgid "Longitude:"
 msgstr "Longitude:"
 
@@ -209,7 +213,8 @@ msgstr "Nome"
 #: app/incidentForms/incidentForm-list.html:10 app/users/user-creation.html:11
 #: app/users/user-destroy.html:11 app/users/user-detail.html:53
 #: app/views/groups/group-creation.html:11
-#: app/views/groups/group-destroy.html:10 app/views/groups/group-detail.html:11
+#: app/views/groups/group-destroy.html:10
+#: app/views/groups/group-detail.html:11
 msgid "Name:"
 msgstr "Nome:"
 
@@ -426,6 +431,10 @@ msgstr "Usuários"
 #: app/realtime/realtime.html:28 app/views/realtime.html:25
 msgid "View history"
 msgstr "Ver histórico"
+
+#: app/history/history.manager.js:157
+msgid "Warning: video with missing location information."
+msgstr "Atenção: vídeo sem informação de localização disponível."
 
 #: app/users/details.js:58
 msgid "Wrong password combination"
