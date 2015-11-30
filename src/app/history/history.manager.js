@@ -2,7 +2,7 @@
 (function(angular, moment, EventSignal, utils) {
   var app = angular.module('copcastAdminApp');
 
-  app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService) {
+  app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
     var self = this;
     this.store = {};
 
@@ -78,7 +78,7 @@
 
     groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
       console.log('currentGroupLocations changed', groupData);
-      googleMapsHelper.updateCurrentGroupLocationsMarkers(groupData);
+      googleMapsHelper.updateCurrentGroupLocationsMarkers(groupData, notify, gettextCatalog);
     });
 
     groupsDataManager.currentUserLocationChanged.addListener(function(userData) {
@@ -132,7 +132,7 @@
       }, 600);
     },
 
-    updateCurrentGroupLocationsMarkers: function updateCurrentGroupLocationsMarkers(groupData) {
+    updateCurrentGroupLocationsMarkers: function updateCurrentGroupLocationsMarkers(groupData, notify, gettextCatalog) {
       var self = this;
       if(!groupData) {
         return;
@@ -149,7 +149,15 @@
           }
         }
         self.groupLocationsMarkers = markers;
-        self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
+        if (self.groupLocationsMarkers.length > 0)
+          self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
+        else {
+          notify({
+            templateUrl: 'app/views/notifications/errorNotification.html',
+            message: gettextCatalog.getString('Warning: video with missing location information.'),
+            position: "right"
+          });
+        }
       }, 600);
     }
   };
