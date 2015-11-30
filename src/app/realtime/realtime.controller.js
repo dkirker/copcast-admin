@@ -213,6 +213,18 @@
       socket.on('disconnect', function (socket) {
         console.log('Got disconnect!');
       });
+      socket.on('streaming:failed', function (data) {
+        if ($scope.activeStreams[data.id].modal){
+          $scope.activeStreams[data.id].modal.close();
+        }
+        //show notification error
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
+          position: "right",
+          scope: $scope
+        });
+      });
       socket.on('streaming:alreadyConnected', function (data) {
         //show message in balloon
         if ($scope.currentUser.id === data.id) {
