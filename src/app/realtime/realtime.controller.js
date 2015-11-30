@@ -69,8 +69,9 @@
 
     $scope.popIncidentFlag = function (username) {
       notify({
-        messageTemplate: '<span>' + username + ' has flagged an incident </span>',
-        position: "right", scope: $scope
+        templateUrl: 'app/views/notifications/errorNotification.html',
+        message: username + ' ' + gettextCatalog.getString('has flagged an incident'),
+        position: "right"
       });
     };
 
