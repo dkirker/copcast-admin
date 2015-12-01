@@ -433,14 +433,14 @@
             console.log(Object.keys(data[0]));
             console.log(Object.keys(data[1]));
 
-            if (Object.keys(data[0]).length == 0 && Object.keys(data[1]).length == 0 )
-              message = 'No location data or videos available for the selected interval';
-            else if (Object.keys(data[0]).length == 0)
-              message = 'No location data available for the selected interval';
-            else
-              message = 'No video available for the selected interval';
+            var gettextCatalog = self._gettextCatalog; // needed to make 'gulp pot' work
 
-            //var translated_message = gettextCatalog.getString('has flagged an incident'),
+            if (Object.keys(data[0]).length == 0 && Object.keys(data[1]).length == 0 )
+              message = gettextCatalog.getString('No location data or videos available for the selected interval');
+            else if (Object.keys(data[0]).length == 0)
+              message = gettextCatalog.getString('No location data available for the selected interval');
+            else
+              message = gettextCatalog.getString('No video available for the selected interval');
 
             self._notify({
               templateUrl: 'app/views/notifications/warningNotification.html',

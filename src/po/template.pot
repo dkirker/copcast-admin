@@ -30,7 +30,9 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:219
+#: app/realtime/realtime.controller.js:185
+#: app/realtime/realtime.controller.js:224
+#: app/realtime/realtime.controller.js:240
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -184,8 +186,20 @@ msgstr ""
 msgid "Next State:"
 msgstr ""
 
+#: app/history/history.manager.js:441
+msgid "No location data available for the selected interval"
+msgstr ""
+
+#: app/history/history.manager.js:439
+msgid "No location data or videos available for the selected interval"
+msgstr ""
+
 #: app/realtime/realtime.html:33
 msgid "No streaming available"
+msgstr ""
+
+#: app/history/history.manager.js:443
+msgid "No video available for the selected interval"
 msgstr ""
 
 #: app/history/player/player.html:18
@@ -331,10 +345,6 @@ msgstr ""
 msgid "View history"
 msgstr ""
 
-#: app/history/history.manager.js:157
-msgid "Warning: video with missing location information."
-msgstr ""
-
 #: app/users/details.js:66
 msgid "Wrong password combination"
 msgstr ""
@@ -399,7 +409,7 @@ msgid ""
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:78
+#: app/realtime/realtime.controller.js:73
 msgid "has flagged an incident"
 msgstr ""
 
