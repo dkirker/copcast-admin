@@ -1,0 +1,24 @@
+<div class="warning-template cg-notify-message" ng-click="$close()" ng-class="[$classes,
+    $position === 'center' ? 'cg-notify-message-center' : '',
+    $position === 'left' ? 'cg-notify-message-left' : '',
+    $position === 'right' ? 'cg-notify-message-right' : '']"
+     ng-style="{'margin-left': $centerMargin}">
+
+
+  <style>
+    .warning-template {
+      color: #9E8624;
+      background-color: #FFF5AD;
+      border-color: #EBEBCC;
+    }
+  </style>
+
+  <div ng-show="!$messageTemplate">
+    {{$message}}
+  </div>
+
+  <div ng-show="$messageTemplate" class="cg-notify-message-template">
+
+  </div>
+
+</div>
