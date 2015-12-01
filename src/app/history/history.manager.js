@@ -446,7 +446,7 @@
               templateUrl: 'app/views/notifications/warningNotification.html',
               position: 'right',
               message: message,
-              duration: 2000
+              duration: 3500
             });
 
           }
