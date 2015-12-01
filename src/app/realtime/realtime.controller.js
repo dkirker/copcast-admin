@@ -131,7 +131,8 @@
         pos = new google.maps.LatLng(data.location.lat, data.location.lng);
         $scope.activeUsers[data.id].marker.setPosition(pos);
         $scope.activeUsers[data.id].accuracy = data.location.accuracy;
-        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
+        if (data.battery)
+          $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
         if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
           $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
         }
@@ -174,6 +175,19 @@
       });
       socket.on('users:heartbeat', loadUser);
 
+      socket.on('streaming:failed', function(data){
+        if ($scope.activeStreams[data.id].modal){
+          $scope.activeStreams[data.id].modal.close();
+        }
+        //show notification error
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
+          position: "right",
+          scope: $scope
+        });
+      });
+
       socket.on('streaming:start', function (data) {
 
         var user = $scope.activeUsers[data.id];
@@ -199,6 +213,18 @@
       });
       socket.on('disconnect', function (socket) {
         console.log('Got disconnect!');
+      });
+      socket.on('streaming:failed', function (data) {
+        if ($scope.activeStreams[data.id].modal){
+          $scope.activeStreams[data.id].modal.close();
+        }
+        //show notification error
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
+          position: "right",
+          scope: $scope
+        });
       });
       socket.on('streaming:alreadyConnected', function (data) {
         //show message in balloon
