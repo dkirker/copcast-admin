@@ -131,7 +131,8 @@
         pos = new google.maps.LatLng(data.location.lat, data.location.lng);
         $scope.activeUsers[data.id].marker.setPosition(pos);
         $scope.activeUsers[data.id].accuracy = data.location.accuracy;
-        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
+        if (data.battery)
+          $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
         if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
           $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
         }
