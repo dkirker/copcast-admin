@@ -8,7 +8,7 @@
 
     // Objects
     var groups = new Groups($q, userService, groupService);
-    var groupsDataManager = new GroupsDataManager($q, $timeout, userService, groupService);
+    var groupsDataManager = new GroupsDataManager($q, $timeout, userService, groupService, notify, gettextCatalog);
     var googleMapsHelper = new GoogleMapsHelper($timeout);
 
     // Manager API
@@ -151,13 +151,13 @@
         self.groupLocationsMarkers = markers;
         if (self.groupLocationsMarkers.length > 0)
           self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
-        else {
-          notify({
-            templateUrl: 'app/views/notifications/errorNotification.html',
-            message: gettextCatalog.getString('Warning: video with missing location information.'),
-            position: "right"
-          });
-        }
+        //else {
+        //  notify({
+        //    templateUrl: 'app/views/notifications/errorNotification.html',
+        //    message: gettextCatalog.getString('Warning: video with missing location information.'),
+        //    position: "right"
+        //  });
+        //}
       }, 600);
     }
   };
@@ -165,12 +165,14 @@
   /****************************************************************
    * GroupLocations
    ****************************************************************/
-  function GroupsDataManager($q, $timeout, userService, groupService) {
+  function GroupsDataManager($q, $timeout, userService, groupService, notify, gettextCatalog) {
     this.$q = $q;
     this.$timeout = $timeout;
     this.DEFAULT_ACCURACY = 20;
     this._userService = userService;
     this._groupService = groupService;
+    this._notify = notify;
+    this._gettextCatalog = gettextCatalog;
 
     // Events
     this.groupDataChanged = new EventSignal();
@@ -262,12 +264,13 @@
         } else {
           userData.nextVideo = videos[0];
         }
+        this.currentVideoChanged.emit({
+          current: userData.currentVideo,
+          previous: userData.previousVideo,
+          next: userData.nextVideo
+        });
       }
-      this.currentVideoChanged.emit({
-        current: userData.currentVideo,
-        previous: userData.previousVideo,
-        next: userData.nextVideo
-      });
+
     },
 
     _calculateClosestGroupLocations: function _calculateClosestGroupLocations() {
@@ -421,6 +424,33 @@
       var self = this;
       this.$q.all(promisses)
         .then(function(data) {
+
+          if (Object.keys(data[0]).length == 0 || Object.keys(data[1]).length==0) { // no user location on this interval
+
+            var message;
+
+            console.log('AQUIIII');
+            console.log(Object.keys(data[0]));
+            console.log(Object.keys(data[1]));
+
+            if (Object.keys(data[0]).length == 0 && Object.keys(data[1]).length == 0 )
+              message = 'No location data or videos available for the selected interval';
+            else if (Object.keys(data[0]).length == 0)
+              message = 'No location data available for the selected interval';
+            else
+              message = 'No video available for the selected interval';
+
+            //var translated_message = gettextCatalog.getString('has flagged an incident'),
+
+            self._notify({
+              templateUrl: 'app/views/notifications/warningNotification.html',
+              position: 'right',
+              message: message,
+              duration: 2000
+            });
+
+          }
+
           self._setLocationsByUser(data[0]);
           self._setIncidentsByUser(data[2]);
           self.videos = data[1];
@@ -571,7 +601,7 @@
         var previousDate = this.previousLocationsByHour.getDate();
         var nextDate = previousDate.clone().add(1, 'days');
         this.hasGap = !previousDate.isSame(this.date, 'day') &&
-                      !nextDate.isSame(this.date, 'day');
+          !nextDate.isSame(this.date, 'day');
       }
     },
 

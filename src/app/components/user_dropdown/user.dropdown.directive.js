@@ -3,18 +3,26 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('userDropdown', function($timeout) {
+  app.directive('userDropdown', function($timeout, HistoryManager) {
+
     return {
       restrict: 'E',
       templateUrl: 'app/components/user_dropdown/user.dropdown.html',
       scope: {
         users: '=ngModel',
-        openOnLoad: '=?',
-        onChangeUser: '&'
+        onChangeUser: '&',
       },
       link: function(scope, el, attrs) {
         var $selectpicker = el.find('.selectpicker');
         var onChangeUser = scope.onChangeUser(); // Unwrap
+
+        try {
+          scope.currentUserId = HistoryManager.store.currentGroup.id;
+          scope.openOnLoad = false;
+        } catch (err) {
+          scope.currentUserId = 0;
+          scope.openOnLoad = true;
+        }
 
         $selectpicker.on('change', function() {
           $timeout(function () {

@@ -57,7 +57,11 @@
 
         scope.getIncidentsInThisDay = getIncidentsInThisDay;
         function getIncidentsInThisDay(){
-          return scope.incidentsByDay.getMap().get(scope.day)
+          try {
+            return scope.incidentsByDay.getMap().get(scope.day);
+          } catch (err) {
+            return [];
+          }
         }
 
         scope.nextTimeLabel = function nextTimeLabel() {

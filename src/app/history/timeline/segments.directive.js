@@ -122,7 +122,11 @@
         }
 
         function createIncidentsByDay() {
-          scope.userData.timeline.incidentsByDay = scope.userData.incidentsByDay.getMap();
+          try {
+            scope.userData.timeline.incidentsByDay = scope.userData.incidentsByDay.getMap();
+          } catch (err) {
+            console.log('no incidents found.');
+          }
           //var dates = incidentsByDay.keys();
           //
           //if(dates.length > 0) {
