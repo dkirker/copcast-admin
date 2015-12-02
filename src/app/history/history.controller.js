@@ -4,7 +4,7 @@
   var app = angular.module('copcastAdminApp');
 
 
-  app.controller('HistoryCtrl', function ($scope, $q, $timeout, HistoryManager, userService, groupService) {
+  app.controller('HistoryCtrl', function ($scope, $q, $timeout, HistoryManager, userService, $routeParams) {
 
     $scope.manager = HistoryManager;
 

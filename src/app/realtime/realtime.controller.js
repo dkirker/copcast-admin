@@ -14,7 +14,7 @@
     controller('RealtimeCtrl', RealtimeCtrl);
 
   function RealtimeCtrl($scope, peerManager, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
-                        userService, streamService, $location, $timeout, gettextCatalog) {
+                        userService, streamService, $location, $timeout, HistoryManager, gettextCatalog) {
 
     $scope.windowHeight = window.innerHeight;
     $scope.windowWidth = window.innerWidth;
@@ -80,7 +80,8 @@
     }
 
     $scope.goToUser = function (user) {
-      var path = '/analytics/' + user.id;
+      HistoryManager.setCurrentUserId(user.id);
+      var path = '/history';
       $location.path(path);
     };
 

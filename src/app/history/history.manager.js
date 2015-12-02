@@ -5,6 +5,7 @@
   app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
     var self = this;
     this.store = {};
+    this.paramUserId = null;
 
     // Objects
     var groups = new Groups($q, userService, groupService);
@@ -49,9 +50,23 @@
       groupsDataManager.setUsers(indexedUsers);
     });
     groups.groupsChanged.addListener(function(groups) {
-      console.log('groups', groups);
       self.store.groups = groups;
+      if (self.paramUserId)
+        for (var i=0; i<Object.keys(self.store.groups).length; i++) {
+          if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId) && !self.store.groups[i].isGroup) {
+            self.setCurrentGroup(self.store.groups[i]);
+            self.paramUserId = null;
+            return;
+          }
+        }
     });
+
+    this.setCurrentUserId = function(userId) {
+      if (userId) {
+        //this.store.currentGroup = null;
+        this.paramUserId = userId;
+      }
+    }
 
     // Group Locations and Videos Events
     groupsDataManager.currentGroupChanged.addListener(function(group) {
@@ -429,18 +444,14 @@
 
             var message;
 
-            console.log('AQUIIII');
-            console.log(Object.keys(data[0]));
-            console.log(Object.keys(data[1]));
+            var gettextCatalog = self._gettextCatalog; // needed to make 'gulp pot' work
 
             if (Object.keys(data[0]).length == 0 && Object.keys(data[1]).length == 0 )
-              message = 'No location data or videos available for the selected interval';
+              message = gettextCatalog.getString('No location data or videos available for the selected interval');
             else if (Object.keys(data[0]).length == 0)
-              message = 'No location data available for the selected interval';
+              message = gettextCatalog.getString('No location data available for the selected interval');
             else
-              message = 'No video available for the selected interval';
-
-            //var translated_message = gettextCatalog.getString('has flagged an incident'),
+              message = gettextCatalog.getString('No video available for the selected interval');
 
             self._notify({
               templateUrl: 'app/views/notifications/warningNotification.html',

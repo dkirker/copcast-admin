@@ -36,7 +36,9 @@ msgstr "Bateria"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/realtime/realtime.controller.js:219
+#: app/realtime/realtime.controller.js:185
+#: app/realtime/realtime.controller.js:224
+#: app/realtime/realtime.controller.js:240
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 "Não é possível iniciar a transmissão neste momento. Tente novamente mais "
@@ -180,9 +182,21 @@ msgstr "Nova senha"
 msgid "Next State:"
 msgstr "Estado seguinte:"
 
+#: app/history/history.manager.js:441
+msgid "No location data available for the selected interval"
+msgstr "Não há dados de localização para o intervalo selecionado"
+
+#: app/history/history.manager.js:439
+msgid "No location data or videos available for the selected interval"
+msgstr "Não há dados de localização ou vídeos para o intervalo selecionado"
+
 #: app/realtime/realtime.html:33
 msgid "No streaming available"
 msgstr "Transmissão ao vivo indisponível"
+
+#: app/history/history.manager.js:443
+msgid "No video available for the selected interval"
+msgstr "Não há vídeos para o intervalo selecionado"
 
 #: app/history/player/player.html:18
 msgid "No video found"
@@ -330,10 +344,6 @@ msgstr "Usuários"
 msgid "View history"
 msgstr "Ver histórico"
 
-#: app/history/history.manager.js:157
-msgid "Warning: video with missing location information."
-msgstr "Atenção: vídeo sem informação de localização disponível."
-
 #: app/users/details.js:66
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
@@ -393,7 +403,6 @@ msgid "forgot password"
 msgstr "esqueci minha senha"
 
 #: app/logReport/logReport-list.html:54
-#, fuzzy
 msgid ""
 "group name\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -405,12 +414,11 @@ msgstr ""
 "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
 "down':!reverse}\"></span>"
 
-#: app/realtime/realtime.controller.js:78
+#: app/realtime/realtime.controller.js:73
 msgid "has flagged an incident"
 msgstr "reportou um incidente"
 
 #: app/logReport/logReport-list.html:60
-#, fuzzy
 msgid ""
 "next state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -423,7 +431,6 @@ msgstr ""
 "down':!reverse}\"> </span>"
 
 #: app/logReport/logReport-list.html:57
-#, fuzzy
 msgid ""
 "previous state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -458,6 +465,9 @@ msgstr ""
 #: app/logReport/logReport-list.html:73
 msgid "view"
 msgstr "visão"
+
+#~ msgid "Warning: video with missing location information."
+#~ msgstr "Atenção: vídeo sem informação de localização disponível."
 
 #~ msgid "<strong>Active officers users</strong>"
 #~ msgstr "<strong>Usuários ativos</strong>"
