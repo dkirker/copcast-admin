@@ -50,21 +50,20 @@
       groupsDataManager.setUsers(indexedUsers);
     });
     groups.groupsChanged.addListener(function(groups) {
-      console.log('groups', groups);
       self.store.groups = groups;
       if (self.paramUserId)
-        Object.keys(self.store.groups).forEach(function(i) {
-          if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId)) {
+        for (var i=0; i<Object.keys(self.store.groups).length; i++) {
+          if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId) && !self.store.groups[i].isGroup) {
             self.setCurrentGroup(self.store.groups[i]);
-            self.paramUserId=null;
+            self.paramUserId = null;
             return;
           }
-        });
+        }
     });
 
     this.setCurrentUserId = function(userId) {
       if (userId) {
-        this.store.currentGroup = null;
+        //this.store.currentGroup = null;
         this.paramUserId = userId;
       }
     }

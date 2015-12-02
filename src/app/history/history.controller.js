@@ -10,8 +10,6 @@
 
     HistoryManager.loadUsersAndGroups();
 
-    HistoryManager.setCurrentUserId($routeParams.userId);
-
     $scope.initialPeriod = {
       fromDate: moment().add(-7, 'days').toDate(),
       toDate: moment().toDate(),

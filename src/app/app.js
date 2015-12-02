@@ -41,11 +41,6 @@ angular
         templateUrl: 'app/history/history.html',
         controller: 'HistoryCtrl'
       })
-      .when('/history/:userId', {
-        templateUrl: 'app/history/history.html',
-        controller: 'HistoryCtrl'
-      })
-
       .when('/group-list', {
         templateUrl: 'app/views/groups/group-list.html',
         controller: 'GroupsListCtrl'

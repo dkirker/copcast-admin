@@ -1,6 +1,6 @@
 <div class="user dropdown">
   <select class="selectpicker" data-live-search="true" title='{{"Select a user or group" | translate}}'>
-    <option ng-repeat="user in users" value="{{user.id}}" ng-selected="user.id == currentUserId" data-content="
+    <option ng-repeat="user in users" value="{{ [user.id, user.isGroup]}}" ng-selected="currentUser && user.id == currentUser.id && user.isGroup == currentUser.isGroup" data-content="
       <div class='user'>
         <div class='avatar'><img src='{{user.profilePicture}}' class='img-circle'></div>
         <div class='info'>
