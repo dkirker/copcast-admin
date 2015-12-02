@@ -5,6 +5,7 @@
   app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
     var self = this;
     this.store = {};
+    this.paramUserId = null;
 
     // Objects
     var groups = new Groups($q, userService, groupService);
@@ -51,7 +52,22 @@
     groups.groupsChanged.addListener(function(groups) {
       console.log('groups', groups);
       self.store.groups = groups;
+      if (self.paramUserId)
+        Object.keys(self.store.groups).forEach(function(i) {
+          if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId)) {
+            self.setCurrentGroup(self.store.groups[i]);
+            self.paramUserId=null;
+            return;
+          }
+        });
     });
+
+    this.setCurrentUserId = function(userId) {
+      if (userId) {
+        this.store.currentGroup = null;
+        this.paramUserId = userId;
+      }
+    }
 
     // Group Locations and Videos Events
     groupsDataManager.currentGroupChanged.addListener(function(group) {
@@ -428,10 +444,6 @@
           if (Object.keys(data[0]).length == 0 || Object.keys(data[1]).length==0) { // no user location on this interval
 
             var message;
-
-            console.log('AQUIIII');
-            console.log(Object.keys(data[0]));
-            console.log(Object.keys(data[1]));
 
             var gettextCatalog = self._gettextCatalog; // needed to make 'gulp pot' work
 

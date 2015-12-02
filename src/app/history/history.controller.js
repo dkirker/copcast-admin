@@ -4,11 +4,13 @@
   var app = angular.module('copcastAdminApp');
 
 
-  app.controller('HistoryCtrl', function ($scope, $q, $timeout, HistoryManager, userService, groupService) {
+  app.controller('HistoryCtrl', function ($scope, $q, $timeout, HistoryManager, userService, $routeParams) {
 
     $scope.manager = HistoryManager;
 
     HistoryManager.loadUsersAndGroups();
+
+    HistoryManager.setCurrentUserId($routeParams.userId);
 
     $scope.initialPeriod = {
       fromDate: moment().add(-7, 'days').toDate(),

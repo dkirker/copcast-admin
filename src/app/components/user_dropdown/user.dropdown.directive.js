@@ -16,8 +16,10 @@
         var $selectpicker = el.find('.selectpicker');
         var onChangeUser = scope.onChangeUser(); // Unwrap
 
+
+
         try {
-          scope.currentUserId = HistoryManager.store.currentGroup.id;
+          scope.currentUserId = HistoryManager.paramUserId || HistoryManager.store.currentGroup.id;
           scope.openOnLoad = false;
         } catch (err) {
           scope.currentUserId = 0;
@@ -27,6 +29,11 @@
         $selectpicker.on('change', function() {
           $timeout(function () {
             var userObj = JSON.parse($selectpicker.val());
+            Object.keys(HistoryManager.store.groups).forEach(function(i) {
+              if (parseInt(HistoryManager.store.groups[i].id) == parseInt($selectpicker.val()))
+                userObj = HistoryManager.store.groups[i]
+            });
+            console.log(userObj);
             onChangeUser(userObj);
           });
         });
