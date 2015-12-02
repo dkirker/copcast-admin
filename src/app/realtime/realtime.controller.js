@@ -80,7 +80,7 @@
     }
 
     $scope.goToUser = function (user) {
-      var path = '/analytics/' + user.id;
+      var path = '/history/' + user.id;
       $location.path(path);
     };
 
