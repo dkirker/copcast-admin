@@ -11,9 +11,14 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('IndexCtrl', function ($scope, $window) {
+app.controller('IndexCtrl', function ($scope, $window, userService ) {
 
-  $scope.isMobile =('ontouchstart' in $window)
+  $scope.isMobile =('ontouchstart' in $window);
+
+  $scope.canAccessReports = function(){
+    return userService.isAdminTwo() || userService.isAdminThree();
+  };
+
 
   //$window.alert($scope.isMobile)
 
