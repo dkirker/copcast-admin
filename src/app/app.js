@@ -85,6 +85,14 @@ angular
         templateUrl: 'app/report/report.html',
         controller: 'ReportCtrl'
       })
+      .when('/incidentForm-list', {
+        templateUrl: 'app/incidentForms/incidentForm-list.html',
+        controller: 'IncidentsListCtrl'
+      })
+      .when('/incidentForm-view/:id', {
+        templateUrl: 'app/incidentForms/incidentForm-view.html',
+        controller: 'IncidentsViewCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
