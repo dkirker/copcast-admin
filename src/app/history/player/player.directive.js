@@ -3,7 +3,7 @@
 
   var app = angular.module('copcastAdminApp');
 
-  app.directive('player', function($sce, $timeout) {
+  app.directive('player', function($sce, $timeout, historyService) {
     return {
       restrict: 'E',
       templateUrl: 'app/history/player/player.html',
@@ -26,6 +26,13 @@
         var $video = el.find('video');
         var video = $video[0];
         var lastSrc;
+
+        $(video).on("play",function(){
+          historyService.registerVideoPlay(video.src, video.currentTime).then(function(){
+            console.log('registered video watching');
+
+          });
+        });
 
         resetVideoTime();
 

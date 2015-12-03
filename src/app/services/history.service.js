@@ -8,13 +8,32 @@
     .factory('historyService', function($q, $http, ServerUrl) {
       var service = {};
 
-      service.registerLoggedIn = function(user){
+      service.registerLoggedIn = function(){
 
         var defer = $q.defer();
         $http
           .post(ServerUrl + '/histories', {
             previousState: 'NOT_LOGGED',
             nextState: 'LOGGED_ADMIN',
+            date: moment().toDate()
+          })
+          .success(function(data) {
+            defer.resolve(data);
+          })
+          .error(function(data, status) {
+            defer.reject(data, status);
+          });
+        return defer.promise;
+      };
+
+      service.registerVideoPlay = function(videoName, startTime){
+
+        var defer = $q.defer();
+        $http
+          .post(ServerUrl + '/histories', {
+            previousState: 'LOGGED_ADMIN',
+            nextState: 'PLAYING_VIDEO',
+            extras: JSON.stringify({videoName: videoName, startTime: startTime}),
             date: moment().toDate()
           })
           .success(function(data) {

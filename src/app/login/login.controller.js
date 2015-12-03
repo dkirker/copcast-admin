@@ -60,7 +60,7 @@ angular.module('copcastAdminApp')
           //change the flag
           TranslateService.setLanguage();
         });
-        historyService.registerLoggedIn(data);
+        historyService.registerLoggedIn();
 
       }).error(function (data, status, headers, config) {
         $scope.errorMessage = gettext('The email and password you entered don\'t match.');
