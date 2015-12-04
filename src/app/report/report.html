@@ -94,12 +94,14 @@
           <th translate>Played at</th>
           <th translate>Started Time</th>
           <th translate>Who watched it</th>
+          <th translate>Who recorded it</th>
         </tr>
         <tr ng-repeat="videoData in reportData.playedVideos">
           <td>{{videoData.url}}</td>
           <td>{{videoData.date | date:'dd/MM/yyyy HH:mm'}}</td>
           <td>{{videoData.startTime}} s</td>
           <td>{{videoData.userName}}</td>
+          <td>{{videoData.userRecorderName}}</td>
         </tr>
       </table>
     </div>
