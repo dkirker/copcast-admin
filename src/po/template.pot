@@ -22,7 +22,7 @@ msgstr ""
 msgid "Are you sure you want to delete this group?"
 msgstr ""
 
-#: app/realtime/realtime.html:25
+#: app/realtime/realtime.html:32
 msgid "Battery"
 msgstr ""
 
@@ -30,9 +30,9 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:185
-#: app/realtime/realtime.controller.js:224
-#: app/realtime/realtime.controller.js:240
+#: app/realtime/realtime.controller.js:186
+#: app/realtime/realtime.controller.js:225
+#: app/realtime/realtime.controller.js:241
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Date/Time:"
 msgstr ""
 
-#: app/login/login.controller.js:35
+#: app/login/login.controller.js:36
 msgid "Email sent successfully"
 msgstr ""
 
@@ -186,19 +186,19 @@ msgstr ""
 msgid "Next State:"
 msgstr ""
 
-#: app/history/history.manager.js:441
+#: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
 msgstr ""
 
-#: app/history/history.manager.js:439
+#: app/history/history.manager.js:450
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
-#: app/realtime/realtime.html:33
+#: app/realtime/realtime.html:40
 msgid "No streaming available"
 msgstr ""
 
-#: app/history/history.manager.js:443
+#: app/history/history.manager.js:454
 msgid "No video available for the selected interval"
 msgstr ""
 
@@ -284,12 +284,11 @@ msgstr ""
 msgid "Signed in as"
 msgstr ""
 
-#: app/login/login.controller.js:67
+#: app/login/login.controller.js:66
 msgid "The email and password you entered don't match."
 msgstr ""
 
-#: app/realtime/realtime.html:13
-#: app/views/realtime.html:12
+#: app/realtime/realtime.html:20
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
@@ -297,17 +296,16 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: app/login/login.controller.js:31
+#: app/login/login.controller.js:32
 msgid "Trying to send email..."
 msgstr ""
 
-#: app/login/login.controller.js:28
+#: app/login/login.controller.js:29
 msgid "Type an valid email address"
 msgstr ""
 
-#: app/realtime/realtime.html:7
-#: app/views/realtime.html:6
-msgid "Type to filter the map"
+#: app/realtime/realtime.html:10
+msgid "Type to filter the users in the map"
 msgstr ""
 
 #: app/login/login.html:15
@@ -340,8 +338,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/realtime/realtime.html:28
-#: app/views/realtime.html:25
+#: app/realtime/realtime.html:35
 msgid "View history"
 msgstr ""
 
