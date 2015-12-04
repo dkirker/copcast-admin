@@ -59,7 +59,7 @@ msgstr ""
 msgid "Arrest?"
 msgstr ""
 
-#: app/realtime/realtime.html:25
+#: app/realtime/realtime.html:30
 msgid "Battery"
 msgstr ""
 
@@ -67,9 +67,9 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:186
-#: app/realtime/realtime.controller.js:225
-#: app/realtime/realtime.controller.js:241
+#: app/realtime/realtime.controller.js:183
+#: app/realtime/realtime.controller.js:222
+#: app/realtime/realtime.controller.js:238
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -214,10 +214,6 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: app/views/appheader.html:24
-msgid "Log audit report"
-msgstr ""
-
 #: app/logReport/logReport-view.html:4
 msgid "Log report"
 msgstr ""
@@ -269,15 +265,15 @@ msgstr ""
 msgid "No location data available for the selected interval"
 msgstr ""
 
-#: app/history/history.manager.js:439
+#: app/history/history.manager.js:450
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
-#: app/realtime/realtime.html:33
+#: app/realtime/realtime.html:38
 msgid "No streaming available"
 msgstr ""
 
-#: app/history/history.manager.js:443
+#: app/history/history.manager.js:454
 msgid "No video available for the selected interval"
 msgstr ""
 
@@ -387,7 +383,7 @@ msgstr ""
 msgid "Selected user:"
 msgstr ""
 
-#: app/views/appheader.html:28
+#: app/views/appheader.html:29
 msgid "Signed in as"
 msgstr ""
 
@@ -399,11 +395,13 @@ msgstr ""
 msgid "The email and password you entered don't match."
 msgstr ""
 
-#: app/realtime/realtime.html:20
+#: app/realtime/realtime.html:18
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
+#: app/incidentForms/incidentForm-list.html:29
 #: app/logReport/logReport-list.html:29
+#: app/report/report.html:22
 msgid "To"
 msgstr ""
 
@@ -427,7 +425,7 @@ msgstr ""
 msgid "Trying to send email..."
 msgstr ""
 
-#: app/login/login.controller.js:28
+#: app/login/login.controller.js:29
 msgid "Type an valid email address"
 msgstr ""
 
@@ -435,8 +433,7 @@ msgstr ""
 msgid "Type of Fine"
 msgstr ""
 
-#: app/realtime/realtime.html:7
-#: app/views/realtime.html:6
+#: app/realtime/realtime.html:8
 msgid "Type to filter the users in the map"
 msgstr ""
 
@@ -470,6 +467,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
+#: app/incidentForms/incidentForm-view.html:14
 #: app/logReport/logReport-view.html:14
 msgid "User name:"
 msgstr ""
@@ -492,8 +490,7 @@ msgstr ""
 msgid "Video URL"
 msgstr ""
 
-#: app/realtime/realtime.html:28
-#: app/views/realtime.html:25
+#: app/realtime/realtime.html:33
 msgid "View history"
 msgstr ""
 
@@ -581,7 +578,7 @@ msgstr ""
 msgid "grouped by day"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:73
+#: app/realtime/realtime.controller.js:70
 msgid "has flagged an incident"
 msgstr ""
 

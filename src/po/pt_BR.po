@@ -65,7 +65,7 @@ msgstr "Discussão?"
 msgid "Arrest?"
 msgstr "Voz de Prisão?"
 
-#: app/realtime/realtime.html:25
+#: app/realtime/realtime.html:30
 msgid "Battery"
 msgstr "Bateria"
 
@@ -73,9 +73,9 @@ msgstr "Bateria"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/realtime/realtime.controller.js:186
-#: app/realtime/realtime.controller.js:225
-#: app/realtime/realtime.controller.js:241
+#: app/realtime/realtime.controller.js:183
+#: app/realtime/realtime.controller.js:222
+#: app/realtime/realtime.controller.js:238
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 "Não é possível iniciar a transmissão neste momento. Tente novamente mais "
@@ -193,14 +193,12 @@ msgstr "Período Inválido"
 
 #: app/users/user-creation.html:24 app/users/user-destroy.html:36
 #: app/users/user-detail.html:66 app/views/groups/group-creation.html:32
-#: app/views/groups/group-destroy.html:31
-#: app/views/groups/group-detail.html:32
+#: app/views/groups/group-destroy.html:31 app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr "É Admin?"
 
 #: app/views/groups/group-creation.html:18
-#: app/views/groups/group-destroy.html:17
-#: app/views/groups/group-detail.html:18
+#: app/views/groups/group-destroy.html:17 app/views/groups/group-detail.html:18
 msgid "Latitude:"
 msgstr "Latitude:"
 
@@ -208,26 +206,20 @@ msgstr "Latitude:"
 msgid "Livestream"
 msgstr "Transmissão ao vivo"
 
-#: app/components/loading/loading.html:2
-#: app/realtime/videoStream/player.html:7
+#: app/components/loading/loading.html:2 app/realtime/videoStream/player.html:7
 msgid "Loading..."
 msgstr "Carregando..."
-
-#: app/views/appheader.html:24
-msgid "Log audit report"
-msgstr "Relatório de auditoria"
 
 #: app/logReport/logReport-view.html:4
 msgid "Log report"
 msgstr "Relatório"
 
-#: app/views/appheader.html:29
+#: app/views/appheader.html:30
 msgid "Logout"
 msgstr "Sair"
 
 #: app/views/groups/group-creation.html:25
-#: app/views/groups/group-destroy.html:24
-#: app/views/groups/group-detail.html:25
+#: app/views/groups/group-destroy.html:24 app/views/groups/group-detail.html:25
 msgid "Longitude:"
 msgstr "Longitude:"
 
@@ -263,15 +255,15 @@ msgstr "Nenhuma informação selecionada"
 msgid "No location data available for the selected interval"
 msgstr "Não há dados de localização para o intervalo selecionado"
 
-#: app/history/history.manager.js:439
+#: app/history/history.manager.js:450
 msgid "No location data or videos available for the selected interval"
 msgstr "Não há dados de localização ou vídeos para o intervalo selecionado"
 
-#: app/realtime/realtime.html:33
+#: app/realtime/realtime.html:38
 msgid "No streaming available"
 msgstr "Transmissão ao vivo indisponível"
 
-#: app/history/history.manager.js:443
+#: app/history/history.manager.js:454
 msgid "No video available for the selected interval"
 msgstr "Não há vídeos para o intervalo selecionado"
 
@@ -396,7 +388,7 @@ msgstr "Iniciado no momento"
 msgid "The email and password you entered don't match."
 msgstr "Email ou senha inválidos."
 
-#: app/realtime/realtime.html:13 app/views/realtime.html:12
+#: app/realtime/realtime.html:18
 msgid ""
 "This browser does not support live streaming visualization. Use Chrome or "
 "Firefox instead."
@@ -429,7 +421,7 @@ msgstr "Tempo de transmissão ao vivo total"
 msgid "Trying to send email..."
 msgstr "Tentando enviar email…"
 
-#: app/login/login.controller.js:28
+#: app/login/login.controller.js:29
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
@@ -437,7 +429,7 @@ msgstr "Digite um endereço de email válido"
 msgid "Type of Fine"
 msgstr "Tipo de Multa"
 
-#: app/realtime/realtime.html:7 app/views/realtime.html:6
+#: app/realtime/realtime.html:8
 msgid "Type to filter the users in the map"
 msgstr "Digite para filtrar o mapa"
 
@@ -474,6 +466,7 @@ msgstr ""
 msgid "User details"
 msgstr "Detalhes do Usuário"
 
+#: app/incidentForms/incidentForm-view.html:14
 #: app/logReport/logReport-view.html:14
 msgid "User name:"
 msgstr "Usuário:"
@@ -495,7 +488,7 @@ msgstr "Usuários"
 msgid "Video URL"
 msgstr "Endereço do Vídeo"
 
-#: app/realtime/realtime.html:28 app/views/realtime.html:25
+#: app/realtime/realtime.html:33
 msgid "View history"
 msgstr "Ver histórico"
 
@@ -595,7 +588,7 @@ msgstr ""
 msgid "grouped by day"
 msgstr "agrupado por dia"
 
-#: app/realtime/realtime.controller.js:73
+#: app/realtime/realtime.controller.js:70
 msgid "has flagged an incident"
 msgstr "reportou um incidente"
 
@@ -655,79 +648,3 @@ msgstr "visão"
 
 #~ msgid "Log audit report"
 #~ msgstr "Relatório de auditoria"
-
-#~ msgid "Warning: video with missing location information."
-#~ msgstr "Atenção: vídeo sem informação de localização disponível."
-
-#~ msgid "Data"
-#~ msgstr "Dados"
-
-#~ msgid "Group detail"
-#~ msgstr "Detalhe do grupo"
-
-#~ msgid "Is Administrative?"
-#~ msgstr "É administrador?"
-
-#~ msgid "Selecione um usuário ou grupo"
-#~ msgstr "Selecione um usuário ou grupo"
-
-#~ msgid "Seu navegador não suporta vídeos."
-#~ msgstr "Seu navegador não suporta vídeos."
-
-#~ msgid "User detail"
-#~ msgstr "Detalhe do usuário"
-
-#~ msgid "User:"
-#~ msgstr "Usuário:"
-
-#~ msgid "Usuário selecionado:"
-#~ msgstr "Usuário selecionado:"
-
-#~ msgid ""
-#~ "address\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "endereço\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
-
-#~ msgid ""
-#~ "<strong>How much total footage, by time and number of distinct pieces, "
-#~ "has each\n"
-#~ "        person viewed</strong>"
-#~ msgstr ""
-#~ "<strong>Total de gravações, por período e número de arquivos, que cada\n"
-#~ "        pessoa visualizou</strong>"
-
-#~ msgid "Nenhum vídeo encontrado"
-#~ msgstr "Nenhum vídeo encontrado"
-
-#~ msgid "address"
-#~ msgstr "endereço"
-
-#~ msgid "date"
-#~ msgstr "data"
-
-#~ msgid "username"
-#~ msgstr "nome do usuário"
-
-#~ msgid "Select an user or group"
-#~ msgstr "Selecione um usuário ou grupo"
-
-#~ msgid "Your browser does not support the video tag."
-#~ msgstr "Seu browser não suporta a tag de vídeo."
-
-#~ msgid "No video selected"
-#~ msgstr "Nenhum vídeo selecionado"
-
-#~ msgid "Select user or group"
-#~ msgstr "Selecione um usuário ou grupo"
-
-#~ msgid "Admin <b class=\"caret\"></b>"
-#~ msgstr "Admin<b class=“caret”></b>"
-
-#~ msgid "Signed in as &nbsp;"
-#~ msgstr "Logado como &nbsp;"
