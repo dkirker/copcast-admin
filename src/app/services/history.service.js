@@ -26,14 +26,14 @@
         return defer.promise;
       };
 
-      service.registerVideoPlay = function(videoName, startTime){
+      service.registerVideoPlay = function(videoName, startTime, user){
 
         var defer = $q.defer();
         $http
           .post(ServerUrl + '/histories', {
             previousState: 'LOGGED_ADMIN',
             nextState: 'PLAYING_VIDEO',
-            extras: JSON.stringify({videoName: videoName, startTime: startTime}),
+            extras: JSON.stringify({videoName: videoName, startTime: startTime, userId: user.id, userName: user.name}),
             date: moment().toDate()
           })
           .success(function(data) {

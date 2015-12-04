@@ -28,7 +28,7 @@
         var lastSrc;
 
         $(video).on("play",function(){
-          historyService.registerVideoPlay(video.src, video.currentTime).then(function(){
+          historyService.registerVideoPlay(video.src, video.currentTime, scope.selectedUser).then(function(){
             console.log('registered video watching');
 
           });
