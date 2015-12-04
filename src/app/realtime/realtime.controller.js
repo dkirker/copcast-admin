@@ -30,7 +30,7 @@
       mapTypeControl: true,
       mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-        position: google.maps.ControlPosition.LEFT_BOTTOM
+        position: google.maps.ControlPosition.LEFT_TOP
       },
       panControl: true,
       panControlOptions: {
