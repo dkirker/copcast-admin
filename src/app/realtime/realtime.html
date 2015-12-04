@@ -1,13 +1,18 @@
-<div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
-<div>
-    <span class="glyphicon ">
-      <div class="input-group">
-        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
-        <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control"
-               placeholder="{{'Type to filter the map' | translate }}..." aria-describedby="basic-addon1">
-      </div>
-    </span>
+<div class="navbar navbar-default navbar-static-top">
+   <nav class="container-fluid">
+
+       <form class="navbar-form navbar-left" role="search">
+         <div class="input-group">
+         <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
+         <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control"
+         placeholder="{{'Type to filter the users in the map' | translate }}..." aria-describedby="basic-addon1">
+         </div>
+       </form>
+
+   </nav>
 </div>
+<div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
+
 
 <footer ng-hide="canStream()">
   <span translate>

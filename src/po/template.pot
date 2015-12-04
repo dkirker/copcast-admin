@@ -214,6 +214,10 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
+#: app/views/appheader.html:24
+msgid "Log audit report"
+msgstr ""
+
 #: app/logReport/logReport-view.html:4
 msgid "Log report"
 msgstr ""
@@ -265,7 +269,7 @@ msgstr ""
 msgid "No location data available for the selected interval"
 msgstr ""
 
-#: app/history/history.manager.js:450
+#: app/history/history.manager.js:439
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
@@ -273,7 +277,7 @@ msgstr ""
 msgid "No streaming available"
 msgstr ""
 
-#: app/history/history.manager.js:454
+#: app/history/history.manager.js:443
 msgid "No video available for the selected interval"
 msgstr ""
 
@@ -383,7 +387,7 @@ msgstr ""
 msgid "Selected user:"
 msgstr ""
 
-#: app/views/appheader.html:29
+#: app/views/appheader.html:28
 msgid "Signed in as"
 msgstr ""
 
@@ -395,14 +399,11 @@ msgstr ""
 msgid "The email and password you entered don't match."
 msgstr ""
 
-#: app/realtime/realtime.html:13
-#: app/views/realtime.html:12
+#: app/realtime/realtime.html:20
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:29
 #: app/logReport/logReport-list.html:29
-#: app/report/report.html:22
 msgid "To"
 msgstr ""
 
@@ -426,7 +427,7 @@ msgstr ""
 msgid "Trying to send email..."
 msgstr ""
 
-#: app/login/login.controller.js:29
+#: app/login/login.controller.js:28
 msgid "Type an valid email address"
 msgstr ""
 
@@ -436,7 +437,7 @@ msgstr ""
 
 #: app/realtime/realtime.html:7
 #: app/views/realtime.html:6
-msgid "Type to filter the map"
+msgid "Type to filter the users in the map"
 msgstr ""
 
 #: app/login/login.html:15
@@ -469,7 +470,6 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:14
 #: app/logReport/logReport-view.html:14
 msgid "User name:"
 msgstr ""
