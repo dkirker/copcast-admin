@@ -1,10 +1,11 @@
 #balloonContent{
   text-align: center;
   width: 230px;
-  height: 240px;
+  height: 230px;
+  min-height: 230px;
   img{
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     border: 4px;
     margin: 5px;
@@ -13,7 +14,7 @@
     border: solid #4e9a10;
   }
   strong{
-    font-size: 1.7em;
+    font-size: 1.5em;
   }
   a{
     color: #ffffff;
@@ -33,14 +34,14 @@
     color: #dddddd;
   }
   div.btn-group{
-    width: 100%;
+    width: 95%;
   }
   .gm-style-iw{
     width: inherit !important;
   }
   p.battery-info{
     color: red;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 }
 
@@ -61,10 +62,6 @@ footer{
   text-align: center;
   height: 30px;
   line-height: 30px;
-}
-#balloonContent{
-  min-width: 180px;
-  align-content: center;
 }
 /*search box*/
 .input-group .form-control {

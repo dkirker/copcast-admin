@@ -22,12 +22,17 @@
 
 <script type="text/ng-template" id="balloon.html">
   <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
-
+<div>
     <img ng-src="{{currentUser.picture}}" ng-class="{streaming: isStreaming(currentUser)}"/><br/>
 
     <p><strong>{{currentUser.userName}}</strong></p>
-    <p class="battery-info" ng-show="currentUser.batteryPercentage">
-      {{currentUser.batteryPercentage}}% <span translate>Battery</span>
+    <p class="battery-info">
+      <span ng-show="currentUser.batteryPercentage">
+        {{currentUser.batteryPercentage}}% <span translate>Battery</span>
+      </span>
+      <span ng-hide="currentUser.batteryPercentage">
+        <span translate>No battery information</span>
+      </span>
     </p>
     <div class="btn-group">
       <a class="btn btn-default btn-block view-history" ng-if="true" ng-click="goToUser(currentUser)" translate>View history</a>
@@ -37,5 +42,6 @@
          ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
       <a class="btn btn-default btn-block offline" ng-show="!isOnline(currentUser) || !canStream()" translate> No streaming available</a>
     </div>
+  </div>
   </div>
 </script>

@@ -22,7 +22,7 @@ msgstr ""
 msgid "Are you sure you want to delete this group?"
 msgstr ""
 
-#: app/realtime/realtime.html:32
+#: app/realtime/realtime.html:31
 msgid "Battery"
 msgstr ""
 
@@ -30,9 +30,9 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:186
-#: app/realtime/realtime.controller.js:225
-#: app/realtime/realtime.controller.js:241
+#: app/realtime/realtime.controller.js:183
+#: app/realtime/realtime.controller.js:222
+#: app/realtime/realtime.controller.js:238
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -186,6 +186,10 @@ msgstr ""
 msgid "Next State:"
 msgstr ""
 
+#: app/realtime/realtime.html:34
+msgid "No battery information"
+msgstr ""
+
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
 msgstr ""
@@ -194,7 +198,7 @@ msgstr ""
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
-#: app/realtime/realtime.html:40
+#: app/realtime/realtime.html:43
 msgid "No streaming available"
 msgstr ""
 
@@ -288,7 +292,7 @@ msgstr ""
 msgid "The email and password you entered don't match."
 msgstr ""
 
-#: app/realtime/realtime.html:20
+#: app/realtime/realtime.html:18
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
@@ -304,7 +308,7 @@ msgstr ""
 msgid "Type an valid email address"
 msgstr ""
 
-#: app/realtime/realtime.html:10
+#: app/realtime/realtime.html:8
 msgid "Type to filter the users in the map"
 msgstr ""
 
@@ -338,7 +342,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/realtime/realtime.html:35
+#: app/realtime/realtime.html:38
 msgid "View history"
 msgstr ""
 
@@ -406,7 +410,7 @@ msgid ""
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:73
+#: app/realtime/realtime.controller.js:70
 msgid "has flagged an incident"
 msgstr ""
 
