@@ -74,7 +74,7 @@ angular
         controller: 'UsersDestroyCtrl'
       })
       .when('/log-report-list', {
-        templateUrl: 'app/logreport/logReport-list.html',
+        templateUrl: 'app/logReport/logReport-list.html',
         controller: 'LogReportListCtrl'
       })
       .when('/log-report-view/:id', {
