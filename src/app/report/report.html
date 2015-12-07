@@ -59,10 +59,10 @@
       <div class="col-md-4" translate><strong>Number of flagged incidents</strong></div>
       <div class="col-md-4">{{reportData.incidents}}</div>
     </div>
-    <!--<div class="row">-->
-      <!--<div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>-->
-      <!--<div class="col-md-4">{{reportData.adminAccess}}</div>-->
-    <!--</div>-->
+    <div class="row">
+      <div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>
+      <div class="col-md-4">{{reportData.adminAccess}}</div>
+    </div>
     <hr/>
     <!--<div>-->
       <!--<h4 translate><strong>Exported videos</strong></h4>-->
@@ -86,11 +86,25 @@
         <!--</div>-->
       <!--</div>-->
     <!--</div>-->
-<!--     <div class="row">
-      <div class="col-md-4" translate><strong>How much total footage, by time and number of distinct pieces, has each
-        person viewed</strong></div>
-      <div class="col-md-4">25</div>
-    </div> -->
+    <div class="row" ng-show="reportData.playedVideos.length > 0 ">
+      <h4 translate><strong>Videos viewed</strong></h4>
+      <table class="table table-condensed table-hover" >
+        <tr>
+          <th translate>Video URL</th>
+          <th translate>Played at</th>
+          <th translate>Started Time</th>
+          <th translate>Who watched it</th>
+          <th translate>Who recorded it</th>
+        </tr>
+        <tr ng-repeat="videoData in reportData.playedVideos">
+          <td>{{videoData.url}}</td>
+          <td>{{videoData.date | date:'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{videoData.startTime}} s</td>
+          <td>{{videoData.userName}}</td>
+          <td>{{videoData.userRecorderName}}</td>
+        </tr>
+      </table>
+    </div>
     <hr/>
     <div>
       <h4 translate>Information by user<br/>

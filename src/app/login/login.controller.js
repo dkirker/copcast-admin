@@ -9,7 +9,8 @@
  */
 angular.module('copcastAdminApp')
 
-  .controller('LoginCtrl', function ($scope, $uibModalInstance, $http, loginService, ServerUrl, gettext, userService, gettextCatalog, TranslateService) {
+  .controller('LoginCtrl', function ($scope, $uibModalInstance, $http, loginService, ServerUrl, gettext, userService,
+                                     gettextCatalog, TranslateService, historyService) {
 
     $scope.user = {username: null, password: null};
     $scope.email = '';
@@ -51,7 +52,6 @@ angular.module('copcastAdminApp')
       },{ignoreAuthModule: true}).success(function(data) {
         loginService.setToken(data.userName, data.role, data.token);
         $uibModalInstance.close();
-
         //get user information
         userService.getMyData().then(
           function(data)
@@ -59,9 +59,8 @@ angular.module('copcastAdminApp')
           gettextCatalog.setCurrentLanguage(data.language);
           //change the flag
           TranslateService.setLanguage();
-
-
         });
+        historyService.registerLoggedIn();
 
       }).error(function (data, status, headers, config) {
         $scope.errorMessage = gettext('The email and password you entered don\'t match.');
