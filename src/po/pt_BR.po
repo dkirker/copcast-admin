@@ -175,7 +175,7 @@ msgstr "Histórico"
 msgid "Incident Form"
 msgstr "Formulário de Incidentes"
 
-#: app/views/appheader.html:24
+#: app/incidentForms/incidentForm-list.html:4 app/views/appheader.html:24
 msgid "Incident Forms"
 msgstr "Formulários de Incidentes"
 
@@ -364,6 +364,10 @@ msgstr "Papel:"
 msgid "SIGN IN"
 msgstr "LOGAR"
 
+#: app/incidentForms/incidentForm-list.html:5
+msgid "Search filter"
+msgstr "Filtro de busca"
+
 #: app/history/player/player.html:14
 msgid "Select a user of group"
 msgstr "Selecione um usuário"
@@ -528,6 +532,9 @@ msgid "create new user"
 msgstr "criar novo usuário"
 
 #: app/incidentForms/incidentForm-list.html:48
+msgid "date"
+msgstr "data"
+
 #: app/logReport/logReport-list.html:48
 msgid ""
 "date\n"
@@ -561,16 +568,8 @@ msgid "forgot password"
 msgstr "esqueci minha senha"
 
 #: app/incidentForms/incidentForm-list.html:54
-msgid ""
-"group name\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-msgstr ""
-"nome do grupo\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
+msgid "group name"
+msgstr "nome do grupo"
 
 #: app/logReport/logReport-list.html:54
 msgid ""
@@ -629,6 +628,9 @@ msgid "update user"
 msgstr "atualizar usuário"
 
 #: app/incidentForms/incidentForm-list.html:51
+msgid "username"
+msgstr "usuário"
+
 #: app/logReport/logReport-list.html:51
 msgid ""
 "username\n"
@@ -645,6 +647,17 @@ msgstr ""
 #: app/logReport/logReport-list.html:73
 msgid "view"
 msgstr "visão"
+
+#~ msgid ""
+#~ "group name\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "nome do grupo\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
 
 #~ msgid "Log audit report"
 #~ msgstr "Relatório de auditoria"

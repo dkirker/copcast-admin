@@ -175,6 +175,7 @@ msgstr ""
 msgid "Incident Form"
 msgstr ""
 
+#: app/incidentForms/incidentForm-list.html:4
 #: app/views/appheader.html:24
 msgid "Incident Forms"
 msgstr ""
@@ -371,6 +372,10 @@ msgstr ""
 msgid "SIGN IN"
 msgstr ""
 
+#: app/incidentForms/incidentForm-list.html:5
+msgid "Search filter"
+msgstr ""
+
 #: app/history/player/player.html:14
 msgid "Select a user of group"
 msgstr ""
@@ -534,6 +539,9 @@ msgid "create new user"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:48
+msgid "date"
+msgstr ""
+
 #: app/logReport/logReport-list.html:48
 msgid ""
 "date\n"
@@ -563,9 +571,7 @@ msgid "forgot password"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:54
-msgid ""
-"group name\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
+msgid "group name"
 msgstr ""
 
 #: app/logReport/logReport-list.html:54
@@ -608,6 +614,9 @@ msgid "update user"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:51
+msgid "username"
+msgstr ""
+
 #: app/logReport/logReport-list.html:51
 msgid ""
 "username\n"
