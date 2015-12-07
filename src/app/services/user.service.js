@@ -168,7 +168,11 @@
     };
 
     service.getCurrentRole = function(){
-      return $rootScope.globals["currentUser"]["role"];
+      if ($rootScope.globals) {
+        return $rootScope.globals["currentUser"]["role"];
+      } else {
+        return null;
+      }
     }
 
     service.isAdminOne = function(){
