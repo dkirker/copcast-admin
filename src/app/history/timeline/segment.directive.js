@@ -55,10 +55,10 @@
             }
         };
 
-        scope.getIncidentsInThisDay = getIncidentsInThisDay;
-        function getIncidentsInThisDay(){
+        scope.getIncidentsInThisHour = getIncidentsInThisHour;
+        function getIncidentsInThisHour(){
           try {
-            return scope.incidentsByDay.getMap().get(scope.day);
+            return scope.incidentsByDay.getMap().get(scope.day).getMap().get(scope.timeLabel);
           } catch (err) {
             return [];
           }
