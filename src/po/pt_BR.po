@@ -251,6 +251,10 @@ msgstr "Estado seguinte:"
 msgid "No data selected"
 msgstr "Nenhuma informação selecionada"
 
+#app/realtime/realtime.html:34
+msgid "No battery information"
+msgstr "Sem dados da bateria"
+
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
 msgstr "Não há dados de localização para o intervalo selecionado"
@@ -259,7 +263,7 @@ msgstr "Não há dados de localização para o intervalo selecionado"
 msgid "No location data or videos available for the selected interval"
 msgstr "Não há dados de localização ou vídeos para o intervalo selecionado"
 
-#: app/realtime/realtime.html:38
+#: app/realtime/realtime.html:40
 msgid "No streaming available"
 msgstr "Transmissão ao vivo indisponível"
 

@@ -262,6 +262,10 @@ msgstr ""
 msgid "No data selected"
 msgstr ""
 
+#: app/realtime/realtime.html:34
+msgid "No battery information"
+msgstr ""
+
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
 msgstr ""
@@ -270,7 +274,7 @@ msgstr ""
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
-#: app/realtime/realtime.html:38
+#: app/realtime/realtime.html:40
 msgid "No streaming available"
 msgstr ""
 
