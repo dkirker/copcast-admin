@@ -674,16 +674,16 @@
         this.addIncident(incidents[i]);
       };
     },
-
-    addIncident: function addIncident(inc) {
-      var incident = new Incident(inc);
-      var key = incident.getDate('YYYY-MM-DD');
-      var data = this.data.get(key);
-      if (!data){
-        this.data.put(key,[]);
+    addIncident: function addIncident(incident) {
+      var inc = new Incident(incident);
+      var key = inc.getDate('YYYY-MM-DD');
+      var incidentsByHour = this.data.get(key);
+      if(!incidentsByHour) {
+        incidentsByHour = new IncidentsByHour(inc.getDate());
+        this.data.put(key, incidentsByHour);
       }
-      this.data.get(key).push(incident);
-
+      incidentsByHour.addIncident(inc);
+      return incidentsByHour;
     },
 
     getMap: function getMap() {
@@ -692,6 +692,32 @@
 
   };
 
+  /****************************************************************
+   * IncidentsByHour
+   ****************************************************************/
+  function IncidentsByHour(date) {
+    this.date = date;
+    this.data = new utils.ListMap();
+  }
+  IncidentsByHour.prototype = {
+    addIncident: function addIncident(incident) {
+      var key = incident.getDate('HH');
+      this.data.put(key, incident);
+    },
+
+    getMap: function getMap() {
+      return this.data;
+    },
+
+    get: function get(hour) {
+      return this.data.get(hour);
+    },
+
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    },
+
+  };
 
   /****************************************************************
    * Incident Wrapper
