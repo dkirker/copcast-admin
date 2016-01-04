@@ -41,6 +41,7 @@
 
         scope.$watch('userData', function() {
           if(scope.userData) {
+            console.log('ASIUHASIUAHSIAUSHAISUHAIUHS')
             loadTimelineData();
             initPosition();
           }
@@ -68,10 +69,10 @@
           }
           $timeout(function () {
             var user = userData.user || {};
-            if(!currentGroup || currentGroup !== user.group) {
-              localCtrl.resetSelectedPosition();
-              currentGroup = user.group;
-            }
+
+            localCtrl.resetSelectedPosition();
+            currentGroup = user.group;
+
           }, 200);
         }
 
