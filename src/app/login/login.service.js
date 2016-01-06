@@ -62,9 +62,11 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
       common_domain.reverse();
       var cookie_dom = '.'+common_domain.join('.');
       console.log('Cookie domain: '+cookie_dom);
+      $rootScope.cookie_domain = cookie_dom;
       $cookies.putObject('globals', $rootScope.globals, {domain: cookie_dom});
     } else {
         console.log('cookies not mangled');
+      $rootScope.cookie_domain = null;
         $cookies.putObject('globals', $rootScope.globals);
     }
     authService.loginConfirmed();
@@ -82,7 +84,11 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
 
   loginService.logout = function(){
     $rootScope.globals = null;
-    $cookies.remove('globals');
+    try {
+      $cookies.remove('globals', {domain: $rootScope.cookie_domain});
+    } catch (err) {
+      $cookies.remove('globals');
+    }
     loginService.show();
   };
 
