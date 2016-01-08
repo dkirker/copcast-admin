@@ -68,7 +68,7 @@ msgstr "Senha atual está vazia"
 msgid "Date"
 msgstr "Data"
 
-#: app/logReport/logReport-view.html:21
+#: app/logreport/logreport-view.html:21
 msgid "Date/Time:"
 msgstr "Data/Hora:"
 
@@ -81,11 +81,11 @@ msgstr "Email enviado com sucesso"
 msgid "Email:"
 msgstr "Email:"
 
-#: app/logReport/logReport-view.html:42
+#: app/logreport/logreport-view.html:42
 msgid "Extras:"
 msgstr "Extras:"
 
-#: app/logReport/logReport-list.html:19
+#: app/logreport/logreport-list.html:19
 msgid "From"
 msgstr "De"
 
@@ -101,7 +101,7 @@ msgstr "Tipo do Grupo"
 msgid "Group details"
 msgstr "Detalhes do Grupo"
 
-#: app/logReport/logReport-list.html:13 app/users/user-creation.html:17
+#: app/logreport/logreport-list.html:13 app/users/user-creation.html:17
 #: app/users/user-destroy.html:18 app/users/user-detail.html:59
 msgid "Group:"
 msgstr "Grupo:"
@@ -114,7 +114,7 @@ msgstr "Grupos"
 msgid "History"
 msgstr "Histórico"
 
-#: app/logReport/list.js:52
+#: app/logreport/list.js:52
 msgid "Invalid data range."
 msgstr "Período Inválido"
 
@@ -141,7 +141,7 @@ msgstr "Carregando..."
 msgid "Log audit report"
 msgstr "Relatório de auditoria"
 
-#: app/logReport/logReport-view.html:4
+#: app/logreport/logreport-view.html:4
 msgid "Log report"
 msgstr "Relatório"
 
@@ -158,7 +158,7 @@ msgstr "Longitude:"
 msgid "Name"
 msgstr "Nome"
 
-#: app/logReport/logReport-list.html:10 app/users/user-creation.html:11
+#: app/logreport/logreport-list.html:10 app/users/user-creation.html:11
 #: app/users/user-destroy.html:11 app/users/user-detail.html:53
 #: app/views/groups/group-creation.html:11
 #: app/views/groups/group-destroy.html:10 app/views/groups/group-detail.html:11
@@ -173,7 +173,7 @@ msgstr "Novo grupo"
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/logReport/logReport-view.html:35
+#: app/logreport/logreport-view.html:35
 msgid "Next State:"
 msgstr "Estado seguinte:"
 
@@ -238,7 +238,7 @@ msgstr ""
 msgid "Preferred language:"
 msgstr "Língua preferencial:"
 
-#: app/logReport/logReport-view.html:28
+#: app/logreport/logreport-view.html:28
 msgid "Previous State:"
 msgstr "Estado anterior:"
 
@@ -294,7 +294,7 @@ msgstr ""
 "Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
 "Chrome ou Firefox."
 
-#: app/logReport/logReport-list.html:29
+#: app/logreport/logreport-list.html:29
 msgid "To"
 msgstr "Para"
 
@@ -314,7 +314,7 @@ msgstr "Digite o nome do usuário"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/logReport/logReport-list.html:39
+#: app/logreport/logreport-list.html:39
 msgid "Update"
 msgstr "Atualizar"
 
@@ -322,7 +322,7 @@ msgstr "Atualizar"
 msgid "User details"
 msgstr "Detalhes do Usuário"
 
-#: app/logReport/logReport-view.html:14
+#: app/logreport/logreport-view.html:14
 msgid "User name:"
 msgstr "Usuário:"
 
@@ -351,7 +351,7 @@ msgstr "Combinação de senha errada"
 msgid "Your browser does not support videos."
 msgstr "Seu browser não suporta vídeos"
 
-#: app/logReport/logReport-view.html:52
+#: app/logreport/logreport-view.html:52
 msgid "back"
 msgstr "voltar"
 
@@ -369,7 +369,7 @@ msgstr "criar novo grupo"
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/logReport/logReport-list.html:48
+#: app/logreport/logreport-list.html:48
 msgid ""
 "date\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -401,7 +401,7 @@ msgstr "editar"
 msgid "forgot password"
 msgstr "esqueci minha senha"
 
-#: app/logReport/logReport-list.html:54
+#: app/logreport/logreport-list.html:54
 msgid ""
 "group name\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -417,7 +417,7 @@ msgstr ""
 msgid "has flagged an incident"
 msgstr "reportou um incidente"
 
-#: app/logReport/logReport-list.html:60
+#: app/logreport/logreport-list.html:60
 msgid ""
 "next state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -429,7 +429,7 @@ msgstr ""
 "'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
 "down':!reverse}\"> </span>"
 
-#: app/logReport/logReport-list.html:57
+#: app/logreport/logreport-list.html:57
 msgid ""
 "previous state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -449,7 +449,7 @@ msgstr "atualizar grupo"
 msgid "update user"
 msgstr "atualizar usuário"
 
-#: app/logReport/logReport-list.html:51
+#: app/logreport/logreport-list.html:51
 msgid ""
 "username\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
@@ -461,7 +461,7 @@ msgstr ""
 "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
 "down':!reverse}\"></span>"
 
-#: app/logReport/logReport-list.html:73
+#: app/logreport/logreport-list.html:73
 msgid "view"
 msgstr "visão"
 

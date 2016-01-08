@@ -63,7 +63,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/logReport/logReport-view.html:21
+#: app/logreport/logreport-view.html:21
 msgid "Date/Time:"
 msgstr ""
 
@@ -77,11 +77,11 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
-#: app/logReport/logReport-view.html:42
+#: app/logreport/logreport-view.html:42
 msgid "Extras:"
 msgstr ""
 
-#: app/logReport/logReport-list.html:19
+#: app/logreport/logreport-list.html:19
 msgid "From"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Group details"
 msgstr ""
 
-#: app/logReport/logReport-list.html:13
+#: app/logreport/logreport-list.html:13
 #: app/users/user-creation.html:17
 #: app/users/user-destroy.html:18
 #: app/users/user-detail.html:59
@@ -112,7 +112,7 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: app/logReport/list.js:52
+#: app/logreport/list.js:52
 msgid "Invalid data range."
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Log audit report"
 msgstr ""
 
-#: app/logReport/logReport-view.html:4
+#: app/logreport/logreport-view.html:4
 msgid "Log report"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: app/logReport/logReport-list.html:10
+#: app/logreport/logreport-list.html:10
 #: app/users/user-creation.html:11
 #: app/users/user-destroy.html:11
 #: app/users/user-detail.html:53
@@ -182,7 +182,7 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/logReport/logReport-view.html:35
+#: app/logreport/logreport-view.html:35
 msgid "Next State:"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Preferred language:"
 msgstr ""
 
-#: app/logReport/logReport-view.html:28
+#: app/logreport/logreport-view.html:28
 msgid "Previous State:"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
 msgstr ""
 
-#: app/logReport/logReport-list.html:29
+#: app/logreport/logreport-list.html:29
 msgid "To"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgstr ""
 msgid "Type your email"
 msgstr ""
 
-#: app/logReport/logReport-list.html:39
+#: app/logreport/logreport-list.html:39
 msgid "Update"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: app/logReport/logReport-view.html:14
+#: app/logreport/logreport-view.html:14
 msgid "User name:"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Your browser does not support videos."
 msgstr ""
 
-#: app/logReport/logReport-view.html:52
+#: app/logreport/logreport-view.html:52
 msgid "back"
 msgstr ""
 
@@ -376,7 +376,7 @@ msgstr ""
 msgid "create new user"
 msgstr ""
 
-#: app/logReport/logReport-list.html:48
+#: app/logreport/logreport-list.html:48
 msgid ""
 "date\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"> </span>"
@@ -404,7 +404,7 @@ msgstr ""
 msgid "forgot password"
 msgstr ""
 
-#: app/logReport/logReport-list.html:54
+#: app/logreport/logreport-list.html:54
 msgid ""
 "group name\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
@@ -414,13 +414,13 @@ msgstr ""
 msgid "has flagged an incident"
 msgstr ""
 
-#: app/logReport/logReport-list.html:60
+#: app/logreport/logreport-list.html:60
 msgid ""
 "next state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'nextstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/logReport/logReport-list.html:57
+#: app/logreport/logreport-list.html:57
 msgid ""
 "previous state\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'previousstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
@@ -435,12 +435,12 @@ msgstr ""
 msgid "update user"
 msgstr ""
 
-#: app/logReport/logReport-list.html:51
+#: app/logreport/logreport-list.html:51
 msgid ""
 "username\n"
 "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
-#: app/logReport/logReport-list.html:73
+#: app/logreport/logreport-list.html:73
 msgid "view"
 msgstr ""

@@ -67,7 +67,7 @@ angular.module('copcastAdminApp')
       }
     ).success(function(data) {
         $scope.logreports = data;
-        console.log("logReport==" , data);
+        console.log("logreport==" , data);
       }).error(function(data) {
         console.error(data);
       });
