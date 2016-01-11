@@ -45,6 +45,38 @@
         return defer.promise;
       };
 
+      service.listHistories = function(page, perPage){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/logreports',
+          { params : {
+            page : page,
+            perPage: perPage
+          }
+          }
+        ).success(function(data) {
+          defer.resolve(data);
+        }).error(function(data, status) {
+          defer.reject(data, status);
+        });
+        return defer.promise;
+      }
+
+      service.listHistoriesByPeriod = function(fromDate, toDate, page, perPage){
+        var defer = $q.defer();
+        $http.get(ServerUrl + '/logreports/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD'),
+          { params : {
+            page : page,
+            perPage: perPage
+          }
+          }
+        ).success(function(data) {
+          defer.resolve(data);
+        }).error(function(data, status) {
+          defer.reject(data, status);
+        });
+        return defer.promise;
+      }
+
       return service;
   });
 })(window.angular, window.moment);

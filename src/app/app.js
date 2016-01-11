@@ -21,7 +21,8 @@ angular
     'http-auth-interceptor',
     'cgNotify',
     'ngFileUpload',
-    'gettext'
+    'gettext',
+    'angularUtils.directives.dirPagination'
   ])
   .config(function ($routeProvider) {
     $routeProvider
