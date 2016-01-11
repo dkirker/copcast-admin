@@ -30,7 +30,7 @@ $line-color: #d7d7d7;
     background-color: $background-color;
     height: $timeline-height;
     &.timeline-fix{
-      margin-right: 400px;
+      margin-right: 0px;
     }
     & > .container {
       height: $timeline-height;
