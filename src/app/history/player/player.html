@@ -10,22 +10,19 @@
         ng-click="setUser(user)">
     </div>
   </section>
-  <section class="selected user">
-    <span ng-if="!selectedUser"><translate>Select a user of group</translate></span>
-    <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
-  </section>
   <section class="scene">
     <div class="no video" ng-if="!src" translate>No video found</div>
     <video width="400" height="260" controls>
-    <translate>Your browser does not support videos.</translate>
+      <translate>Your browser does not support videos.</translate>
     </video>
   </section>
-  <section class="time" ng-bind-html="time"></section>
   <section class="controls">
     <div>
       <div class="previous" ng-click="previousVideo()" ng-class="{'enabled': hasPreviousVideo}" ng-click="playVideo()">
       </div>
-      <div class="play img-circle" ng-class="{'enabled': hasVideo(), 'playing': playing}" ng-click="playVideo()">
+      <div class="middle">
+        <span ng-if="!selectedUser"><translate>Select a user of group</translate></span>
+        <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
       </div>
       <div class="next" ng-click="nextVideo()" ng-class="{'enabled': hasNextVideo}">
       </div>

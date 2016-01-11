@@ -12,7 +12,8 @@
   position: fixed;
   right: 0px;
   bottom: 0px;
-  height: 498px;
+  height: 370px;
+  margin-bottom: 130px;
   width: 400px;
   padding: 0 0;
   z-index: 3;
@@ -84,19 +85,19 @@
 
   .controls {
     display: inline-block;
-    height: 90px;
-    vertical-align: bottom;
+    height: 50px;
+    vertical-align: middle;
     z-index: 1;
 
     & > div {
       padding-top: 9px;
 
-      .previous, .next {
+      .previous, .next, .middle {
         height: 33px;
         width: 20px;
         display: inline-block;
         cursor: pointer;
-        margin-bottom: 19px;
+        //margin-bottom: 19px;
 
         & > div {
           margin-top: 7px;
@@ -106,11 +107,16 @@
           border-color: #0082CF;
         }
       }
-
+      .middle {
+        width: 300px;
+        max-width: 350px;
+        vertical-align: top;
+        overflow: hidden;
+      }
       .previous {
-        background: url('/assets/images/video_player.png') no-repeat -12px -15px;
+        background: url('/assets/images/video_player_sm.png') no-repeat -12px -10px;
         width: 20px;
-        height: 30px;
+        height: 23px;
         opacity: 0.3;
         &.enabled {
           opacity: 1;
@@ -118,9 +124,9 @@
       }
 
       .next {
-        background: url('/assets/images/video_player.png') no-repeat -261px -15px;
+        background: url('/assets/images/video_player_sm.png') no-repeat -261px -10px;
         width: 20px;
-        height: 30px;
+        height: 23px;
         opacity: 0.3;
         &.enabled {
           opacity: 1;
@@ -128,7 +134,7 @@
       }
 
       .play {
-        background: url('/assets/images/video_player.png') no-repeat -70px 0px;
+        background: url('/assets/images/video_player_sm.png') no-repeat -70px 0px;
         width: 23px;
         height: 45px;
         padding: 30px;
@@ -140,7 +146,7 @@
         @include transition(border 0.3s);
 
         &.playing {
-          background: url('/assets/images/video_player.png') no-repeat -155px -0px;
+          background: url('/assets/images/video_player_sm.png') no-repeat -155px -0px;
           width: 18px;
           height: 32px;
         }
@@ -157,7 +163,8 @@
   } /* End controls */
 
   &.novideo {
-    height: 238px;
+    height: 110px;
+    margin-bottom: 130px;
 
     .scene {
       height: 0;
@@ -169,7 +176,8 @@
   }
 
   &.nousers {
-    height: 176px;
+    height: 50px;
+    margin-bottom: 130px;
 
     .users.group {
       padding-top: 0px;
