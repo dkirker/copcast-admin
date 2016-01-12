@@ -143,6 +143,18 @@
       return defer.promise;
     };
 
+    service.getAdminRoles = function getAdminRoles(){
+      var defer = $q.defer();
+      $http.get(ServerUrl + '/users/adminRoles')
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
     service.getRoles = function getRoles(){
       var defer = $q.defer();
       $http.get(ServerUrl + '/users/roles')

@@ -9,7 +9,7 @@
  */
 angular.module('copcastAdminApp')
   .controller('UsersCreationCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, userService){
-    userService.getRoles().then(function(roles){
+    userService.getAdminRoles().then(function(roles){
       $scope.roles = roles;
     });
 
@@ -27,6 +27,9 @@ angular.module('copcastAdminApp')
         });
     };
 
+    $scope.canCreateAdmin = function(){
+      return $scope.roles && $scope.roles.length > 0;
+    };
     //get a list of groups
     $http.get(ServerUrl + '/groups').success(function(data){
       $scope.groups = data;

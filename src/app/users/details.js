@@ -14,12 +14,20 @@ angular.module('copcastAdminApp')
     $scope.userPicture = '';
     $scope.blnShowTab = [true, false, false] ;
 
-    userService.getRoles().then(function(roles){
-      $scope.roles = roles;
+    userService.getAdminRoles().then(function(roles){
+      $scope.adminRoles = roles;
     });
 
+    userService.getRoles().then(function(roles){
+      $scope.allRoles = roles;
+    });
+
+    $scope.canEditAdmin = function(){
+      return $scope.adminRoles && $scope.adminRoles.length > 0;
+    };
+
     $scope.canUpdate = function(){
-      return $scope.user && $scope.roles.indexOf($scope.user.role) > -1;
+      return $scope.user && $scope.allRoles.indexOf($scope.user.role) > -1;
     }
 
     //load the picture
