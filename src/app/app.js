@@ -21,7 +21,8 @@ angular
     'http-auth-interceptor',
     'cgNotify',
     'ngFileUpload',
-    'gettext'
+    'gettext',
+    'angularUtils.directives.dirPagination'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -74,24 +75,12 @@ angular
         controller: 'UsersDestroyCtrl'
       })
       .when('/log-report-list', {
-        templateUrl: 'app/logReport/logReport-list.html',
+        templateUrl: 'app/logreport/logReport-list.html',
         controller: 'LogReportListCtrl'
       })
       .when('/log-report-view/:id', {
         templateUrl: 'app/logreport/logReport-view.html',
         controller: 'LogReportViewCtrl'
-      })
-      .when('/report', {
-        templateUrl: 'app/report/report.html',
-        controller: 'ReportCtrl'
-      })
-      .when('/incidentForm-list', {
-        templateUrl: 'app/incidentForms/incidentForm-list.html',
-        controller: 'IncidentsListCtrl'
-      })
-      .when('/incidentForm-view/:id', {
-        templateUrl: 'app/incidentForms/incidentForm-view.html',
-        controller: 'IncidentsViewCtrl'
       })
       .otherwise({
         redirectTo: '/'

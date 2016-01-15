@@ -8,10 +8,23 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('LogReportListCtrl', function ($scope, $http, $location, ServerUrl, gettextCatalog) {
+  .controller('LogReportListCtrl', function ($scope, $http, $location, ServerUrl, historyService, gettextCatalog) {
 
     $scope.sortKey = "date";
     $scope.reverse = 1;
+    $scope.perPage = 30;
+    $scope.totalHistories = 0
+    $scope.pagination = 1;
+
+    $scope.pageChanged = function(newPage) {
+      $scope.pagination = newPage;
+      if ($scope.filter.fromDate && $scope.filter.toDate){
+        $scope.searchByDate();
+      } else {
+        loadHistory();
+      }
+    };
+
 
     //filter to catch data range behavior
     $scope.filter = {
@@ -44,12 +57,15 @@ angular.module('copcastAdminApp')
       var toDate = moment($scope.filter.toDate);
       if (fromDate.isValid() && toDate.isValid()) {
         $scope.errorMessage = null;
-        $http.get(ServerUrl + "/logreports/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD'))
-          .success(function (data) {
-            $scope.logreports = data;
+        historyService.listHistoriesByPeriod(fromDate, toDate, $scope.pagination, $scope.perPage).
+          then(function(data){
+            $scope.logreports = data.rows;
+            $scope.totalHistories = data.count;
+          }, function(error){
+            console.error(error);
           });
       } else {
-        $scope.errorMessage = gettextCatalog.getString('Invalid data range.')
+        $scope.errorMessage = gettextCatalog.getString('Invalid date range.')
       }
     }
 
@@ -58,18 +74,15 @@ angular.module('copcastAdminApp')
       $location.path('/log-report-view/' + historyId);
     };
 
-    console.log(ServerUrl + '/logreports');
-
-    $http.get(ServerUrl + '/logreports',
-      { params : {
-        page : $scope.page
+    function loadHistory(){
+      historyService.listHistories($scope.pagination, $scope.perPage).
+      then(function(data){
+        $scope.logreports = data.rows;
+        $scope.totalHistories = data.count;
+      }, function(error){
+        console.error(error);
+          });
       }
-      }
-    ).success(function(data) {
-        $scope.logreports = data;
-        console.log("logReport==" , data);
-      }).error(function(data) {
-        console.error(data);
-      });
 
+    loadHistory();
   });
