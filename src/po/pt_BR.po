@@ -65,7 +65,7 @@ msgstr "Discussão?"
 msgid "Arrest?"
 msgstr "Voz de Prisão?"
 
-#: app/realtime/realtime.html:30
+#: app/realtime/realtime.html:31
 msgid "Battery"
 msgstr "Bateria"
 
@@ -97,7 +97,7 @@ msgstr "Clique aqui para enviar uma nova imagem"
 msgid "Current password"
 msgstr "Senha atual"
 
-#: app/users/details.js:58
+#: app/users/details.js:66
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
@@ -107,7 +107,7 @@ msgstr "Data"
 
 #: app/incidentForms/incidentForm-view.html:21
 #: app/incidentForms/incidentForm-view.html:28
-#: app/logReport/logReport-view.html:21
+#: app/logReport/logreport-view.html:21
 msgid "Date/Time:"
 msgstr "Data/Hora:"
 
@@ -124,11 +124,11 @@ msgstr "Email enviado com sucesso"
 msgid "Email:"
 msgstr "Email:"
 
-#: app/logReport/logReport-view.html:42
+#: app/logReport/logreport-view.html:42
 msgid "Extras:"
 msgstr "Extras:"
 
-#: app/report/report.html:8
+#: app/logReport/logreport-list.html:8 app/report/report.html:8
 msgid "Filter"
 msgstr "Filtro"
 
@@ -137,7 +137,7 @@ msgid "Fine?"
 msgstr "Multa?"
 
 #: app/incidentForms/incidentForm-list.html:19
-#: app/logReport/logReport-list.html:19 app/report/report.html:12
+#: app/logReport/logreport-list.html:13 app/report/report.html:12
 msgid "From"
 msgstr "De"
 
@@ -158,7 +158,7 @@ msgid "Group details"
 msgstr "Detalhes do Grupo"
 
 #: app/incidentForms/incidentForm-list.html:13
-#: app/logReport/logReport-list.html:13 app/users/user-creation.html:17
+#: app/logReport/logreport-list.html:44 app/users/user-creation.html:17
 #: app/users/user-destroy.html:18 app/users/user-detail.html:59
 msgid "Group:"
 msgstr "Grupo:"
@@ -187,9 +187,13 @@ msgstr ""
 "Informações de Usuários<br>\n"
 "        <small translate=\"\">agrupados por dia</small>"
 
-#: app/incidentForms/list.js:52 app/logReport/list.js:52
+#: app/incidentForms/list.js:52
 msgid "Invalid data range."
 msgstr "Período Inválido"
+
+#: app/logReport/list.controller.js:68
+msgid "Invalid date range."
+msgstr "Período Inválido."
 
 #: app/users/user-creation.html:24 app/users/user-destroy.html:36
 #: app/users/user-detail.html:66 app/views/groups/group-creation.html:32
@@ -210,11 +214,15 @@ msgstr "Transmissão ao vivo"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: app/logReport/logReport-view.html:4
+#: app/logReport/logreport-list.html:2
+msgid "Log Report"
+msgstr "Relatório de Auditoria"
+
+#: app/logReport/logreport-view.html:4
 msgid "Log report"
 msgstr "Relatório"
 
-#: app/views/appheader.html:30
+#: app/views/appheader.html:31
 msgid "Logout"
 msgstr "Sair"
 
@@ -228,7 +236,7 @@ msgid "Name"
 msgstr "Nome"
 
 #: app/incidentForms/incidentForm-list.html:10
-#: app/logReport/logReport-list.html:10 app/users/user-creation.html:11
+#: app/logReport/logreport-list.html:41 app/users/user-creation.html:11
 #: app/users/user-destroy.html:11 app/users/user-detail.html:53
 #: app/views/groups/group-creation.html:11
 #: app/views/groups/group-destroy.html:10 app/views/groups/group-detail.html:11
@@ -243,17 +251,18 @@ msgstr "Novo grupo"
 msgid "New password"
 msgstr "Nova senha"
 
-#: app/logReport/logReport-view.html:35
+#: app/logReport/logreport-view.html:35
 msgid "Next State:"
 msgstr "Estado seguinte:"
+
+# app/realtime/realtime.html:34
+#: app/realtime/realtime.html:34
+msgid "No battery information"
+msgstr "Sem dados da bateria"
 
 #: app/report/report.html:172
 msgid "No data selected"
 msgstr "Nenhuma informação selecionada"
-
-#app/realtime/realtime.html:34
-msgid "No battery information"
-msgstr "Sem dados da bateria"
 
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
@@ -263,7 +272,7 @@ msgstr "Não há dados de localização para o intervalo selecionado"
 msgid "No location data or videos available for the selected interval"
 msgstr "Não há dados de localização ou vídeos para o intervalo selecionado"
 
-#: app/realtime/realtime.html:40
+#: app/realtime/realtime.html:43
 msgid "No streaming available"
 msgstr "Transmissão ao vivo indisponível"
 
@@ -271,7 +280,7 @@ msgstr "Transmissão ao vivo indisponível"
 msgid "No video available for the selected interval"
 msgstr "Não há vídeos para o intervalo selecionado"
 
-#: app/history/player/player.html:18
+#: app/history/player/player.html:14
 msgid "No video found"
 msgstr "Nenhum vídeo encontrado"
 
@@ -300,7 +309,7 @@ msgstr "Número de incidentes rodoviários registrados"
 msgid "Password"
 msgstr "Senha"
 
-#: app/users/details.js:62
+#: app/users/details.js:70
 msgid "Password or password confirmation are empty."
 msgstr "Senha ou nova senha estão vazias."
 
@@ -332,7 +341,7 @@ msgstr ""
 msgid "Preferred language:"
 msgstr "Língua preferencial:"
 
-#: app/logReport/logReport-view.html:28
+#: app/logReport/logreport-view.html:28
 msgid "Previous State:"
 msgstr "Estado anterior:"
 
@@ -372,7 +381,7 @@ msgstr "LOGAR"
 msgid "Search filter"
 msgstr "Filtro de busca"
 
-#: app/history/player/player.html:14
+#: app/history/player/player.html:24
 msgid "Select a user of group"
 msgstr "Selecione um usuário"
 
@@ -380,11 +389,11 @@ msgstr "Selecione um usuário"
 msgid "Select a user or group"
 msgstr "Selecione um grupo ou usuário"
 
-#: app/history/player/player.html:15
+#: app/history/player/player.html:25
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
 
-#: app/views/appheader.html:29
+#: app/views/appheader.html:30
 msgid "Signed in as"
 msgstr "Logado como"
 
@@ -405,7 +414,7 @@ msgstr ""
 "Chrome ou Firefox."
 
 #: app/incidentForms/incidentForm-list.html:29
-#: app/logReport/logReport-list.html:29 app/report/report.html:22
+#: app/logReport/logreport-list.html:23 app/report/report.html:22
 msgid "To"
 msgstr "Para"
 
@@ -446,7 +455,7 @@ msgid "Type your email"
 msgstr "Digite seu email"
 
 #: app/incidentForms/incidentForm-list.html:39
-#: app/logReport/logReport-list.html:39 app/report/report.html:32
+#: app/logReport/logreport-list.html:33 app/report/report.html:32
 msgid "Update"
 msgstr "Atualizar"
 
@@ -475,7 +484,7 @@ msgid "User details"
 msgstr "Detalhes do Usuário"
 
 #: app/incidentForms/incidentForm-view.html:14
-#: app/logReport/logReport-view.html:14
+#: app/logReport/logreport-view.html:14
 msgid "User name:"
 msgstr "Usuário:"
 
@@ -496,7 +505,7 @@ msgstr "Usuários"
 msgid "Video URL"
 msgstr "Endereço do Vídeo"
 
-#: app/realtime/realtime.html:33
+#: app/realtime/realtime.html:38
 msgid "View history"
 msgstr "Ver histórico"
 
@@ -508,16 +517,16 @@ msgstr "Quem gravou"
 msgid "Who watched it"
 msgstr "Quem assistiu"
 
-#: app/users/details.js:66
+#: app/users/details.js:74
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/history/player/player.html:20
+#: app/history/player/player.html:16
 msgid "Your browser does not support videos."
 msgstr "Seu browser não suporta vídeos"
 
 #: app/incidentForms/incidentForm-view.html:121
-#: app/logReport/logReport-view.html:52
+#: app/logReport/logreport-view.html:52
 msgid "back"
 msgstr "voltar"
 
@@ -536,20 +545,9 @@ msgid "create new user"
 msgstr "criar novo usuário"
 
 #: app/incidentForms/incidentForm-list.html:48
+#: app/logReport/logreport-list.html:50
 msgid "date"
 msgstr "data"
-
-#: app/logReport/logReport-list.html:48
-msgid ""
-"date\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
-"chevron-down':!reverse}\"> </span>"
-msgstr ""
-"data\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
-"chevron-down':!reverse}\"> </span>"
 
 #: app/users/user-list.html:17 app/views/groups/group-list.html:18
 msgid "delete"
@@ -572,20 +570,9 @@ msgid "forgot password"
 msgstr "esqueci minha senha"
 
 #: app/incidentForms/incidentForm-list.html:54
+#: app/logReport/logreport-list.html:56
 msgid "group name"
 msgstr "nome do grupo"
-
-#: app/logReport/logReport-list.html:54
-msgid ""
-"group name\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-msgstr ""
-"nome do grupo\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
 
 #: app/report/report.html:111
 msgid "grouped by day"
@@ -595,29 +582,13 @@ msgstr "agrupado por dia"
 msgid "has flagged an incident"
 msgstr "reportou um incidente"
 
-#: app/logReport/logReport-list.html:60
-msgid ""
-"next state\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'nextstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-msgstr ""
-"data\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"> </span>"
+#: app/logReport/logreport-list.html:62
+msgid "next state"
+msgstr "próximo estado"
 
-#: app/logReport/logReport-list.html:57
-msgid ""
-"previous state\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'previousstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-"
-"chevron-down':!reverse}\"></span>"
-msgstr ""
-"nome do grupo\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
+#: app/logReport/logreport-list.html:59
+msgid "previous state"
+msgstr "estado anterior"
 
 #: app/report/report.html:174
 msgid "select a period to present related data."
@@ -632,25 +603,69 @@ msgid "update user"
 msgstr "atualizar usuário"
 
 #: app/incidentForms/incidentForm-list.html:51
+#: app/logReport/logreport-list.html:53
 msgid "username"
 msgstr "usuário"
 
-#: app/logReport/logReport-list.html:51
-msgid ""
-"username\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-msgstr ""
-"usuário\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-"'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-"down':!reverse}\"></span>"
-
 #: app/incidentForms/incidentForm-list.html:66
-#: app/logReport/logReport-list.html:73
+#: app/logReport/logreport-list.html:76
 msgid "view"
 msgstr "visão"
+
+#~ msgid ""
+#~ "date\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
+#~ "chevron-down':!reverse}\"> </span>"
+#~ msgstr ""
+#~ "data\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
+#~ "chevron-down':!reverse}\"> </span>"
+
+#~ msgid ""
+#~ "group name\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "nome do grupo\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+
+#~ msgid ""
+#~ "next state\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'nextstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-"
+#~ "chevron-down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "data\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"> </span>"
+
+#~ msgid ""
+#~ "previous state\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'previousstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-"
+#~ "chevron-down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "nome do grupo\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+
+#~ msgid ""
+#~ "username\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
+#~ msgstr ""
+#~ "usuário\n"
+#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
+#~ "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
+#~ "down':!reverse}\"></span>"
 
 #~ msgid ""
 #~ "group name\n"

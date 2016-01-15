@@ -59,7 +59,7 @@ msgstr ""
 msgid "Arrest?"
 msgstr ""
 
-#: app/realtime/realtime.html:30
+#: app/realtime/realtime.html:31
 msgid "Battery"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Current password"
 msgstr ""
 
-#: app/users/details.js:58
+#: app/users/details.js:66
 msgid "Current password filed is empty."
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 
 #: app/incidentForms/incidentForm-view.html:21
 #: app/incidentForms/incidentForm-view.html:28
-#: app/logReport/logReport-view.html:21
+#: app/logReport/logreport-view.html:21
 msgid "Date/Time:"
 msgstr ""
 
@@ -120,10 +120,11 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
-#: app/logReport/logReport-view.html:42
+#: app/logReport/logreport-view.html:42
 msgid "Extras:"
 msgstr ""
 
+#: app/logReport/logreport-list.html:8
 #: app/report/report.html:8
 msgid "Filter"
 msgstr ""
@@ -133,7 +134,7 @@ msgid "Fine?"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:19
-#: app/logReport/logReport-list.html:19
+#: app/logReport/logreport-list.html:13
 #: app/report/report.html:12
 msgid "From"
 msgstr ""
@@ -156,7 +157,7 @@ msgid "Group details"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:13
-#: app/logReport/logReport-list.html:13
+#: app/logReport/logreport-list.html:44
 #: app/users/user-creation.html:17
 #: app/users/user-destroy.html:18
 #: app/users/user-detail.html:59
@@ -187,8 +188,11 @@ msgid ""
 msgstr ""
 
 #: app/incidentForms/list.js:52
-#: app/logReport/list.js:52
 msgid "Invalid data range."
+msgstr ""
+
+#: app/logReport/list.controller.js:68
+msgid "Invalid date range."
 msgstr ""
 
 #: app/users/user-creation.html:24
@@ -215,11 +219,15 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: app/logReport/logReport-view.html:4
+#: app/logReport/logreport-list.html:2
+msgid "Log Report"
+msgstr ""
+
+#: app/logReport/logreport-view.html:4
 msgid "Log report"
 msgstr ""
 
-#: app/views/appheader.html:30
+#: app/views/appheader.html:31
 msgid "Logout"
 msgstr ""
 
@@ -235,7 +243,7 @@ msgid "Name"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:10
-#: app/logReport/logReport-list.html:10
+#: app/logReport/logreport-list.html:41
 #: app/users/user-creation.html:11
 #: app/users/user-destroy.html:11
 #: app/users/user-detail.html:53
@@ -254,16 +262,16 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/logReport/logReport-view.html:35
+#: app/logReport/logreport-view.html:35
 msgid "Next State:"
-msgstr ""
-
-#: app/report/report.html:172
-msgid "No data selected"
 msgstr ""
 
 #: app/realtime/realtime.html:34
 msgid "No battery information"
+msgstr ""
+
+#: app/report/report.html:172
+msgid "No data selected"
 msgstr ""
 
 #: app/history/history.manager.js:452
@@ -274,7 +282,7 @@ msgstr ""
 msgid "No location data or videos available for the selected interval"
 msgstr ""
 
-#: app/realtime/realtime.html:40
+#: app/realtime/realtime.html:43
 msgid "No streaming available"
 msgstr ""
 
@@ -282,7 +290,7 @@ msgstr ""
 msgid "No video available for the selected interval"
 msgstr ""
 
-#: app/history/player/player.html:18
+#: app/history/player/player.html:14
 msgid "No video found"
 msgstr ""
 
@@ -310,7 +318,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/users/details.js:62
+#: app/users/details.js:70
 msgid "Password or password confirmation are empty."
 msgstr ""
 
@@ -339,7 +347,7 @@ msgstr ""
 msgid "Preferred language:"
 msgstr ""
 
-#: app/logReport/logReport-view.html:28
+#: app/logReport/logreport-view.html:28
 msgid "Previous State:"
 msgstr ""
 
@@ -380,7 +388,7 @@ msgstr ""
 msgid "Search filter"
 msgstr ""
 
-#: app/history/player/player.html:14
+#: app/history/player/player.html:24
 msgid "Select a user of group"
 msgstr ""
 
@@ -388,11 +396,11 @@ msgstr ""
 msgid "Select a user or group"
 msgstr ""
 
-#: app/history/player/player.html:15
+#: app/history/player/player.html:25
 msgid "Selected user:"
 msgstr ""
 
-#: app/views/appheader.html:29
+#: app/views/appheader.html:30
 msgid "Signed in as"
 msgstr ""
 
@@ -409,7 +417,7 @@ msgid "This browser does not support live streaming visualization. Use Chrome or
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:29
-#: app/logReport/logReport-list.html:29
+#: app/logReport/logreport-list.html:23
 #: app/report/report.html:22
 msgid "To"
 msgstr ""
@@ -451,7 +459,7 @@ msgid "Type your email"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:39
-#: app/logReport/logReport-list.html:39
+#: app/logReport/logreport-list.html:33
 #: app/report/report.html:32
 msgid "Update"
 msgstr ""
@@ -477,7 +485,7 @@ msgid "User details"
 msgstr ""
 
 #: app/incidentForms/incidentForm-view.html:14
-#: app/logReport/logReport-view.html:14
+#: app/logReport/logreport-view.html:14
 msgid "User name:"
 msgstr ""
 
@@ -499,7 +507,7 @@ msgstr ""
 msgid "Video URL"
 msgstr ""
 
-#: app/realtime/realtime.html:33
+#: app/realtime/realtime.html:38
 msgid "View history"
 msgstr ""
 
@@ -511,16 +519,16 @@ msgstr ""
 msgid "Who watched it"
 msgstr ""
 
-#: app/users/details.js:66
+#: app/users/details.js:74
 msgid "Wrong password combination"
 msgstr ""
 
-#: app/history/player/player.html:20
+#: app/history/player/player.html:16
 msgid "Your browser does not support videos."
 msgstr ""
 
 #: app/incidentForms/incidentForm-view.html:121
-#: app/logReport/logReport-view.html:52
+#: app/logReport/logreport-view.html:52
 msgid "back"
 msgstr ""
 
@@ -543,13 +551,8 @@ msgid "create new user"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:48
+#: app/logReport/logreport-list.html:50
 msgid "date"
-msgstr ""
-
-#: app/logReport/logReport-list.html:48
-msgid ""
-"date\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"> </span>"
 msgstr ""
 
 #: app/users/user-list.html:17
@@ -575,13 +578,8 @@ msgid "forgot password"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:54
+#: app/logReport/logreport-list.html:56
 msgid "group name"
-msgstr ""
-
-#: app/logReport/logReport-list.html:54
-msgid ""
-"group name\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
 msgstr ""
 
 #: app/report/report.html:111
@@ -592,16 +590,12 @@ msgstr ""
 msgid "has flagged an incident"
 msgstr ""
 
-#: app/logReport/logReport-list.html:60
-msgid ""
-"next state\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'nextstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
+#: app/logReport/logreport-list.html:62
+msgid "next state"
 msgstr ""
 
-#: app/logReport/logReport-list.html:57
-msgid ""
-"previous state\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'previousstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
+#: app/logReport/logreport-list.html:59
+msgid "previous state"
 msgstr ""
 
 #: app/report/report.html:174
@@ -618,16 +612,11 @@ msgid "update user"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:51
+#: app/logReport/logreport-list.html:53
 msgid "username"
 msgstr ""
 
-#: app/logReport/logReport-list.html:51
-msgid ""
-"username\n"
-"            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == 'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}\"></span>"
-msgstr ""
-
 #: app/incidentForms/incidentForm-list.html:66
-#: app/logReport/logReport-list.html:73
+#: app/logReport/logreport-list.html:76
 msgid "view"
 msgstr ""
