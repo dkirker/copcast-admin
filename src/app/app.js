@@ -86,6 +86,10 @@ angular
         templateUrl: 'app/exports/list.html',
         controller: 'ExportsListCtrl'
       })
+      .when('/exports/creation', {
+        templateUrl: 'app/exports/creation.html',
+        controller: 'ExportsCreationCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,33 @@
+<div class="container">
+  <h3 translate>New Videos Export</h3>
+  <div class="panel">
+    <div class="panel-header"><h4 translate>Filter</h4></div>
+    <div class="panel-body">
+      <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2" translate>User</label>
+          <div class="col-sm-10">
+            <select class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" translate>Date</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group" ng-hide="resultSuccess">
+          <div class="col-sm-offset-2 col-sm-10 text-right">
+            <a ng-href="#/exports" class="btn btn-default" translate>Cancel</a>
+            <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
+        </div>
+      </form>
+      <div class="alert alert-warning" translate ng-show="resultEmpty">There are no videos for {{filter.user}} at {{filter.date | date: 'yyyy-MM-dd'}}</div>
+      <div class="alert alert-success" ng-show="resultSuccess"><span translate>The videos are being generated. We will send you an e-mail when we are done!</span>
+      <a translate ng-href="#/exports">Go back to the export list</a></div>
+    </div>
+  </div>
+
+</div>
