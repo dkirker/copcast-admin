@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h3 translate>Videos Exported</h3>
+    </div>
+    <div class="col-md-4 text-right ">
+      <h3>
+        <a class="btn btn-success" translate>New Export</a>
+      </h3>
+    </div>
+  </div>
+  <hr/>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+  <table class="table table-striped">
+    <tr>
+      <th translate>User</th>
+      <th translate>Export date</th>
+      <th translate>Period</th>
+      <th translate>Exporter</th>
+      <th translate>Status</th>
+    </tr>
+
+    <tr dir-paginate="export in exports | itemsPerPage: perPage " total-items="totalExports"
+        current-page="pagination">
+      <td>{{export.user }}</td>
+      <td>{{export.date | date : 'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{export.period}}</td>
+      <td>{{export.exporter}}</td>
+      <td ng-show="!isAvailable(export)">{{export.status}}</td>
+      <td ng-show="isAvailable(export)"><a ng-href="downloadZip(export)">{{export.status}}</a></td>
+    </tr>
+  </table>
+</div>

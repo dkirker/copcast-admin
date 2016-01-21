@@ -82,6 +82,10 @@ angular
         templateUrl: 'app/logreport/logreport-view.html',
         controller: 'LogReportViewCtrl'
       })
+      .when('/exports', {
+        templateUrl: 'app/exports/list.html',
+        controller: 'ExportsListCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
