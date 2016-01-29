@@ -75,12 +75,24 @@ angular
         controller: 'UsersDestroyCtrl'
       })
       .when('/log-report-list', {
-        templateUrl: 'app/logreport/logreport-list.html',
+        templateUrl: 'app/logreport/logReport-list.html',
         controller: 'LogReportListCtrl'
       })
       .when('/log-report-view/:id', {
-        templateUrl: 'app/logreport/logreport-view.html',
+        templateUrl: 'app/logreport/logReport-view.html',
         controller: 'LogReportViewCtrl'
+      })
+      .when('/report', {
+        templateUrl: 'app/report/report.html',
+        controller: 'ReportCtrl'
+      })
+      .when('/incidentForm-list', {
+        templateUrl: 'app/incidentForms/incidentForm-list.html',
+        controller: 'IncidentsListCtrl'
+      })
+      .when('/incidentForm-view/:id', {
+        templateUrl: 'app/incidentForms/incidentForm-view.html',
+        controller: 'IncidentsViewCtrl'
       })
       .otherwise({
         redirectTo: '/'
