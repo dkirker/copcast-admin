@@ -8,18 +8,19 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, $uibModalInstance, user, peerManager) {
+  .controller('ModalVideoCtrl', function ($scope, $uibModalInstance, user) {
     $scope.user = user;
 
-    peerManager.start();
-    peerManager.peerInit(user.id, function(){
-      $scope.stopStream(user.id);
-    });
+    $scope.jwOptions = {
+      file: streamUrl,
+      height: 300,
+      autostart: true,
+      width: "100%",
+      flashplayer: "/jwplayer/jwplayer.flash.swf"
+    };
 
     $scope.ok = function () {
-      peerManager.clearPeers();
       $uibModalInstance.close();
-
-      $scope.activeStreams[user.id].modal = null;
+      delete $scope.activeStreams[user.id];
     };
   });
