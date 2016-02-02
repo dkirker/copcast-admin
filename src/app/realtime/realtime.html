@@ -14,12 +14,6 @@
 <div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
 
 
-<footer ng-hide="canStream()">
-  <span translate>
-    This browser does not support live streaming visualization. Use Chrome or Firefox instead.
-  </span>
-</footer>
-
 <script type="text/ng-template" id="balloon.html">
   <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
 <div>
@@ -38,9 +32,9 @@
       <a class="btn btn-default btn-block view-history" ng-if="true" ng-click="goToUser(currentUser)" translate>View history</a>
 
       <a class="btn btn-default btn-block"
-         ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser) && canStream()" ng-click="requestStream(currentUser)"
+         ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser)" ng-click="requestStream(currentUser)"
          ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
-      <a class="btn btn-default btn-block offline" ng-show="!isOnline(currentUser) || !canStream()" translate> No streaming available</a>
+
     </div>
   </div>
   </div>

@@ -22,6 +22,7 @@ angular
     'cgNotify',
     'ngFileUpload',
     'gettext',
+    'ng-jwplayer',
     'angularUtils.directives.dirPagination'
   ])
   .config(function ($routeProvider) {

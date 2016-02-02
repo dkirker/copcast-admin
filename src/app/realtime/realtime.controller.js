@@ -73,7 +73,7 @@
     };
 
     $scope.popModal = function (id) {
-      showModal($scope.activeUsers[id]);
+      showModal($scope.activeStreams[id]);
     }
 
     $scope.goToUser = function (user) {
@@ -86,9 +86,6 @@
       return currentUser != null && currentUser.marker.icon !== mapService.getGreyMarker(currentUser.userName);
     };
 
-    $scope.canStream = function () {
-      return RTCPeerConnection != null;
-    };
 
     $scope.myStyle = {
       'height': (window.innerHeight) + 'px',
@@ -148,7 +145,8 @@
           groupId: data.groupId,
           accuracy: data.location.accuracy,
           picture: ServerUrl + data.profilePicture,
-          timeoutPromisse: null
+          timeoutPromisse: null,
+          streamUrl: data.streamUrl
         };
 
         mapService.fitBounds($scope, $scope.activeUsers);
@@ -198,9 +196,9 @@
               return;
             }
             showStream(user);
-            if ($scope.canStream()) {
-              $scope.popNotification(user);
-            }
+
+            $scope.popNotification(user);
+
           });
       });
 
@@ -304,7 +302,17 @@
         $scope.streamButtonText = 'Sending...';
         streamService.startStreaming(user.id)
           .then(function (data) {
-            $scope.streamButtonText = 'awaiting response';
+            if (data.stream){
+              showStream({
+                  status: 'streaming',
+                  id: data.stream.id,
+                  userName: $scope.activeUsers[data.stream.id].userName,
+                  groupId: $scope.activeUsers[data.stream.id].groupId,
+                  streamUrl: data.stream.streamUrl
+              })
+            } else {
+              $scope.streamButtonText = 'awaiting response';
+            }
           }, function (data) {
             $scope.streamButtonText = data.message;
           });
@@ -379,11 +387,11 @@
         windowClass: 'modal-stream',
         backdrop: false,
         scope: $scope,
-        peerManager: peerManager,
         resolve: {
           user: function () {
             return user;
           },
+          streamUrl: function(){return user.streamUrl;},
           ServerUrl: function () {
             return ServerUrl;
           }
@@ -397,6 +405,7 @@
         streamId: user.id,
         userName: user.userName,
         groupId: user.groupId,
+        streamUrl: user.streamUrl,
         modal: null
       };
       user.marker.setIcon(mapService.getGreenMarker(user.userName));

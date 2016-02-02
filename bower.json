@@ -24,7 +24,7 @@
     "ng-file-upload": "~5.0.3",
     "ng-file-upload-shim": "~5.0.3",
     "angularUtils-pagination": "angular-utils-pagination#~0.9.4",
-    "angular-jwplayer-7.2.4jwplayer": "~1.1.5"
+    "ng-jwplayer": "~0.2.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"

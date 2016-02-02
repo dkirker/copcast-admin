@@ -3,7 +3,10 @@
 </div>
 <div class="modal-body text-center" id="remoteVideosContainer">
   <div id="video-wrapper">
-    <jwplayer id="myplayer" setup="jwOptions"></jwplayer>
+    <jwplayer ng-src="{{ streamPath }}"
+              player-options="options"
+              player-id="myplayer">
+    </jwplayer>
   </div>
 </div>
 <div class="modal-footer">
