@@ -65,3 +65,4 @@ gulp.task('pot', function () {
     }))
     .pipe(gulp.dest('src/po/'));
 });
+

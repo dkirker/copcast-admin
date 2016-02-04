@@ -85,5 +85,13 @@ module.exports = function(options) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('build', ['html', 'fonts', 'other']);
+  gulp.task('swf', function() {
+    return gulp.src([
+      'bower_components/**/*.swf'
+    ], {
+      dot: true
+    }).pipe($.flatten()).pipe(gulp.dest(options.dist));
+  });
+
+  gulp.task('build', ['html', 'fonts', 'other', 'swf']);
 };
