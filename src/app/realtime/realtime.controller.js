@@ -304,13 +304,7 @@
         streamService.startStreaming(user.id)
           .then(function (data) {
             if (data.stream){
-              showStream({
-                  status: 'streaming',
-                  id: data.id,
-                  userName: $scope.activeUsers[data.stream.id].userName,
-                  groupId: $scope.activeUsers[data.stream.id].groupId,
-                  streamUrl: $scope.activeUsers[data.stream.id].streamUrl
-              })
+              showStream($scope.activeUsers[data.stream.id])
             } else {
               $scope.streamButtonText = 'awaiting response';
             }
