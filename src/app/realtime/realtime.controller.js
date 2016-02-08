@@ -148,7 +148,8 @@
           timeoutPromisse: null,
           streamUrl: data.streamUrl
         };
-
+        //TODO remove console.log afterwards
+        console.log('loaded user with streamURL: '+data.streamUrl)
         mapService.fitBounds($scope, $scope.activeUsers);
       }
 
@@ -305,10 +306,10 @@
             if (data.stream){
               showStream({
                   status: 'streaming',
-                  id: data.stream.id,
+                  id: data.id,
                   userName: $scope.activeUsers[data.stream.id].userName,
                   groupId: $scope.activeUsers[data.stream.id].groupId,
-                  streamUrl: data.stream.streamUrl
+                  streamUrl: $scope.activeUsers[data.stream.id].streamUrl
               })
             } else {
               $scope.streamButtonText = 'awaiting response';

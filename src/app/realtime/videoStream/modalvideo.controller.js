@@ -25,16 +25,16 @@ angular.module('copcastAdminApp')
         width: "100%",
 
     };
-
+    console.log('starting streaming modal with url: '+streamUrl)
     $scope.streamPath = $sce.trustAsResourceUrl(streamUrl);
 
     // Optional: Catch ng-jwplayer event for when JWPlayer is ready
-    $scope.$on('ng-jwplayer-ready', function(event, args) {
-
-
-      // Get player from service
-      //var player = jwplayerService.myPlayer[args.playerId];
-    });
+    //$scope.$on('ng-jwplayer-ready', function(event, args) {
+    //
+    //
+    //  // Get player from service
+    //  //var player = jwplayerService.myPlayer[args.playerId];
+    //});
 
     $scope.ok = function () {
       $uibModalInstance.close();
