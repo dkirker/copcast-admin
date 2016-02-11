@@ -169,7 +169,7 @@
 
     service.deleteUser = function deleteUser(user){
       var defer = $q.defer();
-      $http.delete(ServerUrl + '/user_destroy/' + user.id)
+      $http.delete(ServerUrl + '/users/' + user.id)
         .success(function(data) {
           defer.resolve(data);
         })
