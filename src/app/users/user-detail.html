@@ -44,11 +44,11 @@
           <div class="panel-body">
             <br>
             <form novalidate="novalidate" class="form-horizontal"  name="frmUpdate">
-              <alert ng-show="serverMessage">
+              <div ng-show="serverMessage" class="alert alert-danger">
                 <p>
-                  {{serverMessage["detail"]}}
+                  {{serverMessage}}
                 </p>
-              </alert>
+              </div>
               <div class="control-group">
                 <label class="control-label" for="inputName" translate>Name:</label>
                 <div class="controls">
