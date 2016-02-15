@@ -82,6 +82,10 @@ angular
         templateUrl: 'app/logreport/logreport-view.html',
         controller: 'LogReportViewCtrl'
       })
+      .when('/reset-password/:token', {
+        templateUrl: 'app/resetPasswords/reset.html',
+        controller: 'ResetPasswordCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
