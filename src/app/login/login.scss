@@ -41,17 +41,20 @@
   }
   form{
     width: 200px;
-    text-align: right;
     position: relative;
     height: auto;
     padding: 10px;
     margin: 0 auto;
-  }
 
+  }
+  .errorMessage::before {
+    content: url('/assets/images/x.png');
+    padding-right: 5px;
+  }
   .errorMessage {
     color: #e8abac;
     font-weight: bold;
-    width: 200px;
+    padding-bottom: 5px;
   }
   .emailMessage::before {
     content: "\2713";
@@ -60,6 +63,7 @@
   .emailMessage{
     color: #afefaf;
     font-weight: bold;
+    padding-bottom: 5px;
   }
 }
 
