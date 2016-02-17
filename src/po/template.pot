@@ -37,6 +37,7 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
+#: app/groups/group-list.html:17
 #: app/views/appheader.html:20
 msgid "Admin"
 msgstr ""
@@ -62,7 +63,7 @@ msgstr ""
 msgid "Arrest?"
 msgstr ""
 
-#: app/realtime/realtime.html:31
+#: app/realtime/realtime.html:25
 msgid "Battery"
 msgstr ""
 
@@ -70,9 +71,9 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:183
-#: app/realtime/realtime.controller.js:222
-#: app/realtime/realtime.controller.js:238
+#: app/realtime/realtime.controller.js:182
+#: app/realtime/realtime.controller.js:221
+#: app/realtime/realtime.controller.js:237
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -131,11 +132,18 @@ msgstr ""
 msgid "Extras:"
 msgstr ""
 
-#: app/logreport/logReport-list.html:8
+#: app/logReport/logreport-list.html:8
+#: app/report/report.html:8
 msgid "Filter"
 msgstr ""
 
-#: app/logreport/logReport-list.html:13
+#: app/incidentForms/incidentForm-view.html:63
+msgid "Fine?"
+msgstr ""
+
+#: app/incidentForms/incidentForm-list.html:15
+#: app/logReport/logreport-list.html:13
+#: app/report/report.html:12
 msgid "From"
 msgstr ""
 
@@ -144,7 +152,7 @@ msgstr ""
 msgid "Gravity"
 msgstr ""
 
-#: app/users/user-list.html:7
+#: app/users/user-list.html:9
 msgid "Group"
 msgstr ""
 
@@ -156,8 +164,7 @@ msgstr ""
 msgid "Group details"
 msgstr ""
 
-#: app/logReport/logreport-list.html:44
-#: app/incidentForms/incidentForm-list.html:13
+#: app/incidentForms/incidentForm-list.html:47
 #: app/logReport/logreport-list.html:44
 #: app/users/user-creation.html:17
 #: app/users/user-destroy.html:20
@@ -178,7 +185,7 @@ msgstr ""
 msgid "Incident Form"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:4
+#: app/incidentForms/incidentForm-list.html:2
 #: app/views/appheader.html:24
 msgid "Incident Forms"
 msgstr ""
@@ -217,7 +224,6 @@ msgid "Livestream"
 msgstr ""
 
 #: app/components/loading/loading.html:2
-#: app/realtime/videoStream/player.html:7
 msgid "Loading..."
 msgstr ""
 
@@ -225,7 +231,7 @@ msgstr ""
 msgid "Log Report"
 msgstr ""
 
-#: app/views/appheader.html:24
+#: app/views/appheader.html:25
 msgid "Log audit report"
 msgstr ""
 
@@ -233,7 +239,7 @@ msgstr ""
 msgid "Log report"
 msgstr ""
 
-#: app/views/appheader.html:31
+#: app/views/appheader.html:32
 msgid "Logout"
 msgstr ""
 
@@ -251,6 +257,7 @@ msgstr ""
 #: app/groups/group-creation.html:11
 #: app/groups/group-destroy.html:10
 #: app/groups/group-detail.html:11
+#: app/incidentForms/incidentForm-list.html:44
 #: app/logReport/logreport-list.html:41
 #: app/users/user-creation.html:11
 #: app/users/user-destroy.html:13
@@ -275,7 +282,7 @@ msgstr ""
 msgid "Next State:"
 msgstr ""
 
-#: app/realtime/realtime.html:34
+#: app/realtime/realtime.html:28
 msgid "No battery information"
 msgstr ""
 
@@ -289,10 +296,6 @@ msgstr ""
 
 #: app/history/history.manager.js:450
 msgid "No location data or videos available for the selected interval"
-msgstr ""
-
-#: app/realtime/realtime.html:43
-msgid "No streaming available"
 msgstr ""
 
 #: app/history/history.manager.js:454
@@ -372,11 +375,11 @@ msgstr ""
 msgid "Repeat your password"
 msgstr ""
 
-#: app/views/appheader.html:25
+#: app/views/appheader.html:26
 msgid "Report"
 msgstr ""
 
-#: app/login/login.html:16
+#: app/login/login.html:18
 #: app/resetPasswords/reset.html:19
 #: app/resetPasswords/reset.html:5
 msgid "Reset Password"
@@ -391,11 +394,11 @@ msgstr ""
 msgid "Role:"
 msgstr ""
 
-#: app/login/login.html:10
+#: app/login/login.html:12
 msgid "SIGN IN"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:5
+#: app/incidentForms/incidentForm-list.html:9
 msgid "Search filter"
 msgstr ""
 
@@ -411,7 +414,7 @@ msgstr ""
 msgid "Selected user:"
 msgstr ""
 
-#: app/views/appheader.html:30
+#: app/views/appheader.html:31
 msgid "Signed in as"
 msgstr ""
 
@@ -427,11 +430,7 @@ msgstr ""
 msgid "The password and its confirmation don't match"
 msgstr ""
 
-#: app/realtime/realtime.html:18
-msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
-msgstr ""
-
-#: app/incidentForms/incidentForm-list.html:29
+#: app/incidentForms/incidentForm-list.html:25
 #: app/logReport/logreport-list.html:23
 #: app/report/report.html:22
 msgid "To"
@@ -469,11 +468,13 @@ msgstr ""
 msgid "Type to filter the users in the map"
 msgstr ""
 
-#: app/login/login.html:15
+#: app/login/login.html:17
 msgid "Type your email"
 msgstr ""
 
-#: app/logreport/logReport-list.html:33
+#: app/incidentForms/incidentForm-list.html:35
+#: app/logReport/logreport-list.html:33
+#: app/report/report.html:32
 msgid "Update"
 msgstr ""
 
@@ -497,7 +498,8 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: app/logreport/logReport-view.html:14
+#: app/incidentForms/incidentForm-view.html:14
+#: app/logReport/logreport-view.html:14
 msgid "User name:"
 msgstr ""
 
@@ -520,7 +522,7 @@ msgstr ""
 msgid "Video URL"
 msgstr ""
 
-#: app/realtime/realtime.html:38
+#: app/realtime/realtime.html:32
 msgid "View history"
 msgstr ""
 
@@ -563,7 +565,7 @@ msgstr ""
 msgid "create new user"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:48
+#: app/incidentForms/incidentForm-list.html:53
 #: app/logReport/logreport-list.html:50
 msgid "date"
 msgstr ""
@@ -586,12 +588,11 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: app/login/login.html:9
+#: app/login/login.html:10
 msgid "forgot password"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:54
-#: app/logReport/logreport-list.html:56
+#: app/incidentForms/incidentForm-list.html:59
 #: app/logReport/logreport-list.html:56
 msgid "group name"
 msgstr ""
@@ -616,7 +617,6 @@ msgstr ""
 msgid "select a period to present related data."
 msgstr ""
 
-#: app/views/groups/group-detail.html:42
 #: app/groups/group-detail.html:42
 msgid "update group"
 msgstr ""
@@ -626,12 +626,12 @@ msgstr ""
 msgid "update user"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:51
+#: app/incidentForms/incidentForm-list.html:56
 #: app/logReport/logreport-list.html:53
 msgid "username"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:66
+#: app/incidentForms/incidentForm-list.html:71
 #: app/logReport/logreport-list.html:76
 msgid "view"
 msgstr ""
