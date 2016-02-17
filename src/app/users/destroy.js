@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDestroyCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
+  .controller('UsersDestroyCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, userService, groupService){
 
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
@@ -19,9 +19,9 @@ angular.module('copcastAdminApp')
       if (confirm('Are you sure to delete ' + $scope.user.username) === true) {
         // confirmation to delete
 
-        $http.delete(ServerUrl + '/user_destroy/' + $scope.user.id, $scope.user).success(function (data) {
+        userService.deleteUser($scope.user).then(function (data) {
           $location.path('/user-list');
-        }).error(function (data) {
+        }, function (data) {
           $scope.serverMessage = data;
         });
 
@@ -34,22 +34,17 @@ angular.module('copcastAdminApp')
     };
 
     //get user by id
-    $http.get(ServerUrl + '/users/'+ $routeParams.id).success(function(data) {
+    userService.getUser($routeParams.id).then(function(data) {
       $scope.user = data;
-      $http.get(ServerUrl + '/users/me').success(function(data) {
-        if(data.length === 0){
-          return;
-        }
-        if($scope.user.profilePicture){
-          $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
-        }
-      });
-    }).error(function(data) {
+
+      if($scope.user.profilePicture){
+        $scope.hasProfilePicture = true;
+        $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
+      }
     });
 
     //list of groups
-    $http.get(ServerUrl + '/groups').success(function(data){
+    groupService.listGroups().then(function(data){
       $scope.groups = data;
     });
 

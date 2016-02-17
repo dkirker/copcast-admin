@@ -38,15 +38,18 @@ msgid "Address:"
 msgstr ""
 
 #: app/views/appheader.html:20
-#: app/views/groups/group-list.html:15
 msgid "Admin"
+msgstr ""
+
+#: app/resetPasswords/reset.controller.js:32
+msgid "All fields are required."
 msgstr ""
 
 #: app/users/user-destroy.html:2
 msgid "Are you sure to delete this user?"
 msgstr ""
 
-#: app/views/groups/group-destroy.html:2
+#: app/groups/group-destroy.html:2
 msgid "Are you sure you want to delete this group?"
 msgstr ""
 
@@ -87,6 +90,10 @@ msgstr ""
 msgid "Click here to send a new image"
 msgstr ""
 
+#: app/resetPasswords/reset.html:16
+msgid "Confirm New Password"
+msgstr ""
+
 #: app/users/user-detail.html:126
 #: app/users/user-detail.html:128
 msgid "Current password"
@@ -115,7 +122,7 @@ msgid "Email sent successfully"
 msgstr ""
 
 #: app/users/user-creation.html:43
-#: app/users/user-destroy.html:30
+#: app/users/user-destroy.html:32
 #: app/users/user-detail.html:86
 msgid "Email:"
 msgstr ""
@@ -124,18 +131,11 @@ msgstr ""
 msgid "Extras:"
 msgstr ""
 
-#: app/logReport/logreport-list.html:8
-#: app/report/report.html:8
+#: app/logreport/logReport-list.html:8
 msgid "Filter"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:63
-msgid "Fine?"
-msgstr ""
-
-#: app/incidentForms/incidentForm-list.html:19
-#: app/logReport/logreport-list.html:13
-#: app/report/report.html:12
+#: app/logreport/logReport-list.html:13
 msgid "From"
 msgstr ""
 
@@ -148,22 +148,24 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: app/views/groups/group-list.html:7
+#: app/groups/group-list.html:9
 msgid "Group Type"
 msgstr ""
 
-#: app/views/groups/group-detail.html:2
+#: app/groups/group-detail.html:2
 msgid "Group details"
 msgstr ""
 
+#: app/logReport/logreport-list.html:44
 #: app/incidentForms/incidentForm-list.html:13
 #: app/logReport/logreport-list.html:44
 #: app/users/user-creation.html:17
-#: app/users/user-destroy.html:18
+#: app/users/user-destroy.html:20
 #: app/users/user-detail.html:59
 msgid "Group:"
 msgstr ""
 
+#: app/groups/group-list.html:2
 #: app/views/appheader.html:23
 msgid "Groups"
 msgstr ""
@@ -195,18 +197,18 @@ msgstr ""
 msgid "Invalid date range."
 msgstr ""
 
+#: app/groups/group-creation.html:32
+#: app/groups/group-destroy.html:31
+#: app/groups/group-detail.html:32
 #: app/users/user-creation.html:24
-#: app/users/user-destroy.html:36
+#: app/users/user-destroy.html:38
 #: app/users/user-detail.html:66
-#: app/views/groups/group-creation.html:32
-#: app/views/groups/group-destroy.html:31
-#: app/views/groups/group-detail.html:32
 msgid "Is Admin?"
 msgstr ""
 
-#: app/views/groups/group-creation.html:18
-#: app/views/groups/group-destroy.html:17
-#: app/views/groups/group-detail.html:18
+#: app/groups/group-creation.html:18
+#: app/groups/group-destroy.html:17
+#: app/groups/group-detail.html:18
 msgid "Latitude:"
 msgstr ""
 
@@ -223,6 +225,10 @@ msgstr ""
 msgid "Log Report"
 msgstr ""
 
+#: app/views/appheader.html:24
+msgid "Log audit report"
+msgstr ""
+
 #: app/logReport/logreport-view.html:4
 msgid "Log report"
 msgstr ""
@@ -231,29 +237,32 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: app/views/groups/group-creation.html:25
-#: app/views/groups/group-destroy.html:24
-#: app/views/groups/group-detail.html:25
+#: app/groups/group-creation.html:25
+#: app/groups/group-destroy.html:24
+#: app/groups/group-detail.html:25
 msgid "Longitude:"
 msgstr ""
 
-#: app/users/user-list.html:6
-#: app/views/groups/group-list.html:6
+#: app/groups/group-list.html:8
+#: app/users/user-list.html:8
 msgid "Name"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:10
+#: app/groups/group-creation.html:11
+#: app/groups/group-destroy.html:10
+#: app/groups/group-detail.html:11
 #: app/logReport/logreport-list.html:41
 #: app/users/user-creation.html:11
-#: app/users/user-destroy.html:11
+#: app/users/user-destroy.html:13
 #: app/users/user-detail.html:53
-#: app/views/groups/group-creation.html:11
-#: app/views/groups/group-destroy.html:10
-#: app/views/groups/group-detail.html:11
 msgid "Name:"
 msgstr ""
 
-#: app/views/groups/group-creation.html:2
+#: app/resetPasswords/reset.html:12
+msgid "New Password"
+msgstr ""
+
+#: app/groups/group-creation.html:2
 msgid "New group"
 msgstr ""
 
@@ -294,7 +303,7 @@ msgstr ""
 msgid "No video found"
 msgstr ""
 
-#: app/views/groups/group-list.html:16
+#: app/groups/group-list.html:18
 msgid "Normal"
 msgstr ""
 
@@ -351,7 +360,7 @@ msgstr ""
 msgid "Previous State:"
 msgstr ""
 
-#: app/users/user-destroy.html:56
+#: app/users/user-destroy.html:58
 msgid "Profile picture"
 msgstr ""
 
@@ -368,6 +377,8 @@ msgid "Report"
 msgstr ""
 
 #: app/login/login.html:16
+#: app/resetPasswords/reset.html:19
+#: app/resetPasswords/reset.html:5
 msgid "Reset Password"
 msgstr ""
 
@@ -410,6 +421,10 @@ msgstr ""
 
 #: app/login/login.controller.js:66
 msgid "The email and password you entered don't match."
+msgstr ""
+
+#: app/resetPasswords/reset.controller.js:36
+msgid "The password and its confirmation don't match"
 msgstr ""
 
 #: app/realtime/realtime.html:18
@@ -458,9 +473,7 @@ msgstr ""
 msgid "Type your email"
 msgstr ""
 
-#: app/incidentForms/incidentForm-list.html:39
-#: app/logReport/logreport-list.html:33
-#: app/report/report.html:32
+#: app/logreport/logReport-list.html:33
 msgid "Update"
 msgstr ""
 
@@ -484,8 +497,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:14
-#: app/logReport/logreport-view.html:14
+#: app/logreport/logReport-view.html:14
 msgid "User name:"
 msgstr ""
 
@@ -494,11 +506,12 @@ msgid "Username"
 msgstr ""
 
 #: app/users/user-creation.html:37
-#: app/users/user-destroy.html:24
+#: app/users/user-destroy.html:26
 #: app/users/user-detail.html:80
 msgid "Username:"
 msgstr ""
 
+#: app/users/user-list.html:2
 #: app/views/appheader.html:22
 msgid "Users"
 msgstr ""
@@ -532,21 +545,21 @@ msgstr ""
 msgid "back"
 msgstr ""
 
-#: app/users/user-destroy.html:46
+#: app/groups/group-destroy.html:41
+#: app/groups/group-detail.html:41
+#: app/users/user-destroy.html:48
 #: app/users/user-detail.html:110
 #: app/users/user-detail.html:142
-#: app/views/groups/group-destroy.html:41
-#: app/views/groups/group-detail.html:41
 msgid "cancel"
 msgstr ""
 
-#: app/views/groups/group-creation.html:41
-#: app/views/groups/group-list.html:2
+#: app/groups/group-creation.html:41
+#: app/groups/group-list.html:4
 msgid "create new group"
 msgstr ""
 
 #: app/users/user-creation.html:73
-#: app/users/user-list.html:2
+#: app/users/user-list.html:4
 msgid "create new user"
 msgstr ""
 
@@ -555,21 +568,21 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: app/users/user-list.html:17
-#: app/views/groups/group-list.html:18
+#: app/groups/group-list.html:20
+#: app/users/user-list.html:19
 msgid "delete"
 msgstr ""
 
-#: app/views/groups/group-destroy.html:42
+#: app/groups/group-destroy.html:42
 msgid "delete group"
 msgstr ""
 
-#: app/users/user-destroy.html:47
+#: app/users/user-destroy.html:49
 msgid "delete user"
 msgstr ""
 
-#: app/users/user-list.html:16
-#: app/views/groups/group-list.html:17
+#: app/groups/group-list.html:19
+#: app/users/user-list.html:18
 msgid "edit"
 msgstr ""
 
@@ -578,6 +591,7 @@ msgid "forgot password"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:54
+#: app/logReport/logreport-list.html:56
 #: app/logReport/logreport-list.html:56
 msgid "group name"
 msgstr ""
@@ -603,6 +617,7 @@ msgid "select a period to present related data."
 msgstr ""
 
 #: app/views/groups/group-detail.html:42
+#: app/groups/group-detail.html:42
 msgid "update group"
 msgstr ""
 

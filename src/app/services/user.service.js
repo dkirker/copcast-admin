@@ -167,6 +167,42 @@
       return defer.promise;
     };
 
+    service.deleteUser = function deleteUser(user){
+      var defer = $q.defer();
+      $http.delete(ServerUrl + '/users/' + user.id)
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
+    service.confirmResetToken = function(token){
+      var defer = $q.defer();
+      $http.get(ServerUrl + '/users/confirmResetToken/' + token)
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
+    service.changePasswordWithToken = function(password, token){
+      var defer = $q.defer();
+      $http.post(ServerUrl + '/users/changePasswordToken/' + token, {password: password})
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
     service.getStreamingUsers = function getStreamingUsers(){
       var defer = $q.defer();
       $http.get(ServerUrl + '/users/streaming')
