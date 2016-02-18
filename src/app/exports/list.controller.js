@@ -11,22 +11,12 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ExportsListCtrl', function ($scope) {
-    $scope.exports = [
-      { exporter: 'bruno',
-        date: new Date(),
-        period: 'xxxx to 4444',
-        user: 'officer 1',
-        status: 'REQUESTED'
+  .controller('ExportsListCtrl', function ($scope, exportService) {
+    $scope.exports = [];
 
-      },
-      { exporter: 'bruno',
-        date: new Date(),
-        period: 'xxxx to 4444',
-        user: 'officer 1',
-        status: 'AVAILABLE'
-      }
-    ];
+    exportService.listExports().then(function(exports){
+      $scope.exports = exports;
+    });
 
     $scope.perPage = 30;
     $scope.totalExports = 0
