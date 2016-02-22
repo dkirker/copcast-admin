@@ -12,22 +12,25 @@
   <hr/>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
   <table class="table table-striped">
+    <thead>
     <tr>
       <th translate>User</th>
       <th translate>Export date</th>
-      <th translate>Period</th>
+      <th translate>Recording Date</th>
       <th translate>Exporter</th>
       <th translate>Status</th>
     </tr>
-
+    </thead>
+    <tbody>
     <tr dir-paginate="export in exports | itemsPerPage: perPage " total-items="totalExports"
         current-page="pagination">
-      <td>{{export.user }}</td>
-      <td>{{export.date | date : 'yyyy-MM-dd HH:mm'}}</td>
-      <td>{{export.period}}</td>
-      <td>{{export.exporter}}</td>
+      <td>{{export.Recorder.name }}</td>
+      <td>{{export.createdAt | date : 'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
+      <td>{{export.Exporter.name}}</td>
       <td ng-show="!isAvailable(export)">{{export.status}}</td>
       <td ng-show="isAvailable(export)"><a ng-href="downloadZip(export)">{{export.status}}</a></td>
     </tr>
+    </tbody>
   </table>
 </div>

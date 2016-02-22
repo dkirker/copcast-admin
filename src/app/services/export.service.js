@@ -12,7 +12,34 @@
     service.listExports = function(){
       var defer = $q.defer();
       $http
-        .get(ServerUrl + '/export')
+        .get(ServerUrl + '/exports')
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
+    service.getExport = function(id){
+      var defer = $q.defer();
+      $http
+        .get(ServerUrl + '/exports/'+id)
+        .success(function(data) {
+          defer.resolve(data);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    };
+
+    service.create = function(exportObj){
+      var defer = $q.defer();
+      $http
+        .post(ServerUrl + '/exports', {initialDate: exportObj.initialDate,
+          finalDate: exportObj.initialDate, recorderId: exportObj.recorderId })
         .success(function(data) {
           defer.resolve(data);
         })

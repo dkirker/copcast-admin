@@ -90,6 +90,10 @@ angular
         templateUrl: 'app/exports/creation.html',
         controller: 'ExportsCreationCtrl'
       })
+      .when('/exports/:id', {
+        templateUrl: 'app/exports/detail.html',
+        controller: 'ExportsDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

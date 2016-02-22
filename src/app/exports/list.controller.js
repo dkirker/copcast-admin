@@ -15,6 +15,7 @@ angular.module('copcastAdminApp')
     $scope.exports = [];
 
     exportService.listExports().then(function(exports){
+      console.log(exports);
       $scope.exports = exports;
     });
 
