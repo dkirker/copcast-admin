@@ -2,11 +2,11 @@
     <h1 translate>User details</h1>
 
     <form novalidate class="form-horizontal" ng-submit="submittted = true" name="frm">
-        <alert ng-show="serverMessage">
+        <div ng-show="serverMessage" class="alert alert-danger">
           <p>
             {{serverMessage}}
           </p>
-        </alert>
+        </div>
         <div class="control-group">
             <label class="control-label" for="inputName" translate>Name:</label>
             <div class="controls">

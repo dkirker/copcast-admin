@@ -43,19 +43,19 @@ angular
         controller: 'HistoryCtrl'
       })
       .when('/group-list', {
-        templateUrl: 'app/views/groups/group-list.html',
+        templateUrl: 'app/groups/group-list.html',
         controller: 'GroupsListCtrl'
       })
       .when('/group-detail/:id', {
-        templateUrl: 'app/views/groups/group-detail.html',
+        templateUrl: 'app/groups/group-detail.html',
         controller: 'GroupsDetailsCtrl'
       })
       .when('/group-creation', {
-        templateUrl: 'app/views/groups/group-creation.html',
+        templateUrl: 'app/groups/group-creation.html',
         controller: 'GroupsCreationCtrl'
       })
       .when('/group-destroy/:id', {
-        templateUrl: 'app/views/groups/group-destroy.html',
+        templateUrl: 'app/groups/group-destroy.html',
         controller: 'GroupsDestroyCtrl'
       })
       .when('/user-list', {
@@ -81,6 +81,10 @@ angular
       .when('/log-report-view/:id', {
         templateUrl: 'app/logreport/logreport-view.html',
         controller: 'LogReportViewCtrl'
+      })
+      .when('/reset-password/:token', {
+        templateUrl: 'app/resetPasswords/reset.html',
+        controller: 'ResetPasswordCtrl'
       })
       .when('/exports', {
         templateUrl: 'app/exports/list.html',

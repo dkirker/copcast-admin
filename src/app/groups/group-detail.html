@@ -1,12 +1,12 @@
 <div class="container-crud">
-  <h1 translate>New group</h1>
+  <h1 translate>Group details</h1>
   <hr/>
   <form novalidate="novalidate" class="form-horizontal">
-    <alert ng-show="serverMessage">
+    <div ng-show="serverMessage" class="alert alert-danger">
       <p>
-        {{serverMessage["detail"]}}
+        {{serverMessage}}
       </p>
-    </alert>
+    </div>
     <div class="control-group">
       <label class="control-label" for="inputName" translate>Name:</label>
       <div class="controls">
@@ -37,8 +37,9 @@
 
     <div class="control-group">
       <div class="controls">
-        <!-- group-creation.html: -->
-        <a ng-click="createGroup()" class="btn btn-small btn-primary" translate>create new group</a>
+        <!-- group-detail.html: -->
+        <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+        <a ng-click="updateGroup()" class="btn btn-small btn-primary" translate>update group</a>
       </div>
     </div>
   </form>
