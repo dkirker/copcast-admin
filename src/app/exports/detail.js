@@ -15,8 +15,12 @@ angular.module('copcastAdminApp')
     exportService.getExport($routeParams.id).then(
       function(exportObj){
         $scope.exportObj = exportObj;
+
+        $scope.downloadFile = function(){
+
+        };
       },
       function(err){
-
+        $scope.errorMessage = err;
       })
   });
