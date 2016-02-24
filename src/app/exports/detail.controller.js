@@ -11,14 +11,12 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ExportsDetailCtrl', function ($scope, $routeParams, exportService) {
+  .controller('ExportsDetailCtrl', function ($scope, $routeParams, exportService, ServerUrl) {
     exportService.getExport($routeParams.id).then(
       function(exportObj){
         $scope.exportObj = exportObj;
 
-        $scope.downloadFile = function(){
-
-        };
+        $scope.downloadUrl = ServerUrl + '/exports/'+exportObj.id+'/download';
       },
       function(err){
         $scope.errorMessage = err;
