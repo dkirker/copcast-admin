@@ -73,7 +73,7 @@
     };
 
     $scope.popModal = function (id) {
-      showModal($scope.activeStreams[id]);
+      showModal($scope.activeUsers[id]);
     }
 
     $scope.goToUser = function (user) {
@@ -196,6 +196,8 @@
               return;
             }
             showStream(user);
+
+            console.log(JSON.stringify($scope.activeStreams));
 
             $scope.popNotification(user);
 
@@ -380,9 +382,10 @@
 
     function showModal(user) {
       mapService.closeBalloon();
-      console.log('showModal with user=[' + user + ']');
+      console.log('showModal with user=[' + user.id + ']');
+      console.log(JSON.stringify($scope.activeStreams[user.id]));
       $scope.activeStreams[user.id].modal = $uibModal.open({
-        templateUrl: 'app/realtime/videoStream/player.html',
+        templateUrl: 'app/realtime/videoStream/player_h264.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
         backdrop: false,
@@ -408,6 +411,7 @@
         streamUrl: user.streamUrl,
         modal: null
       };
+
       user.marker.setIcon(mapService.getGreenMarker(user.userName));
     }
 

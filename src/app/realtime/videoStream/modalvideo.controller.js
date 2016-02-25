@@ -20,24 +20,70 @@ angular.module('copcastAdminApp')
     //};
 
     $scope.options = {
-        height: 300,
-        autostart: true,
-        width: "100%",
+      height: 176,
+      autostart: true,
+      width: 144
 
     };
 
     $scope.streamPath = $sce.trustAsResourceUrl(streamUrl);
 
-    // Optional: Catch ng-jwplayer event for when JWPlayer is ready
-    $scope.$on('ng-jwplayer-ready', function(event, args) {
+    console.log($('#video-wrapper').id);
 
-
-      // Get player from service
-      //var player = jwplayerService.myPlayer[args.playerId];
-    });
+    //// Optional: Catch ng-jwplayer event for when JWPlayer is ready
+    //$scope.$on('ng-jwplayer-ready', function(event, args) {
+    //
+    //
+    //  // Get player from service
+    //  //var player = jwplayerService.myPlayer[args.playerId];
+    //});
 
     $scope.ok = function () {
       $uibModalInstance.close();
       delete $scope.activeStreams[user.id];
     };
-  });
+  }).directive('h264canvas', function() {
+
+    var toUint8Array = function(parStr){
+      var raw = window.atob(parStr);
+      var rawLength = raw.length;
+      var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+      var i;
+      for(i = 0; i < rawLength; i++) {
+        array[i] = raw.charCodeAt(i);
+      }
+      return array;
+    };
+
+    return {
+      restrict: 'E',
+      templateUrl: 'app/realtime/videoStream/h264canvas.html',
+      link: function (scope, iElement, iAttrs) {
+        var p = new Player({
+          useWorker: true,
+          workerFile: "/vendor/Decoder.js"
+        });
+
+        iElement[0].appendChild(p.canvas);
+        scope.player = p;
+
+        var ws = new WebSocket('ws://51.255.96.174:5000');
+
+        ws.onopen = function(err) {
+          console.log('OPENED:'+err);
+        }
+
+        ws.onerror = function(err) {
+          console.log(">>"+err);
+        }
+
+        ws.onmessage = function(data) {
+          var tmp = window.atob(data.data);
+          console.log(tmp.length);
+          var bin = toUint8Array(data.data);
+          p.decode(bin);
+        }
+      }
+    }
+});
