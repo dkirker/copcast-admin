@@ -8,8 +8,9 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope,$sce, $uibModalInstance, user, streamUrl) {
+  .controller('ModalVideoCtrl', function ($scope, $sce, $uibModalInstance, user, streamUrl, ServerUrl) {
     $scope.user = user;
+    $scope.websocketServer = ServerUrl.replace('http', 'ws')+"/ws";
 
     //$scope.jwOptions = {
     //  file: streamUrl,
@@ -68,7 +69,8 @@ angular.module('copcastAdminApp')
         iElement[0].appendChild(p.canvas);
         scope.player = p;
 
-        var ws = new WebSocket('ws://51.255.96.174:5000');
+        console.log(scope.websocketServer+" <<<<<");
+        var ws = new WebSocket(scope.websocketServer+"?id=1");
 
         ws.onopen = function(err) {
           console.log('OPENED:'+err);
@@ -79,7 +81,13 @@ angular.module('copcastAdminApp')
         }
 
         ws.onmessage = function(data) {
-          var tmp = window.atob(data.data);
+          var tmp;
+          try {
+            tmp = window.atob(data.data);
+          } catch(err) {
+            console.log(err);
+            return;
+          }
           console.log(tmp.length);
           var bin = toUint8Array(data.data);
           p.decode(bin);
