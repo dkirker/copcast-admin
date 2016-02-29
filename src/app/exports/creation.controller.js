@@ -35,7 +35,7 @@ angular.module('copcastAdminApp')
         return;
       }
       if (!$scope.exportObj.initialDate){
-        $scope.errorMessage = gettextCatalog.getString('User is required');
+        $scope.errorMessage = gettextCatalog.getString('Date is required');
         return;
       }
       $scope.errorMessage = null;

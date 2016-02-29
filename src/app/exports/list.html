@@ -29,7 +29,7 @@
       <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
       <td>{{export.Exporter.name}}</td>
       <td ng-show="!isAvailable(export)">{{export.status}}</td>
-      <td ng-show="isAvailable(export)"><a ng-href="downloadZip(export)">{{export.status}}</a></td>
+      <td ng-show="isAvailable(export)"><a ng-href="#/exports/{{export.id}}">{{export.status}}</a></td>
     </tr>
     </tbody>
   </table>
