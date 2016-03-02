@@ -48,9 +48,10 @@
       var defer = $q.defer();
       $http
         .get(ServerUrl + '/users/' + userId)
-        .success(function(user) {
-          user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
-          defer.resolve(user);
+        .success(function(data) {
+          data.user.isSelf = data.isSelf;
+          data.user.profilePicture = generateProfilePictureAddress(ServerUrl, data.user);
+          defer.resolve(data.user);
         })
         .error(function(data, status) {
           defer.reject(data, status);
