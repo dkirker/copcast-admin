@@ -76,11 +76,11 @@ angular
         controller: 'UsersDestroyCtrl'
       })
       .when('/log-report-list', {
-        templateUrl: 'app/logreport/logReport-list.html',
+        templateUrl: 'app/logreport/logreport-list.html',
         controller: 'LogReportListCtrl'
       })
       .when('/log-report-view/:id', {
-        templateUrl: 'app/logreport/logReport-view.html',
+        templateUrl: 'app/logreport/logreport-view.html',
         controller: 'LogReportViewCtrl'
       })
       .when('/report', {
