@@ -86,6 +86,18 @@ angular
         templateUrl: 'app/resetPasswords/reset.html',
         controller: 'ResetPasswordCtrl'
       })
+      .when('/exports', {
+        templateUrl: 'app/exports/list.html',
+        controller: 'ExportsListCtrl'
+      })
+      .when('/exports/creation', {
+        templateUrl: 'app/exports/creation.html',
+        controller: 'ExportsCreationCtrl'
+      })
+      .when('/exports/:id', {
+        templateUrl: 'app/exports/detail.html',
+        controller: 'ExportsDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
