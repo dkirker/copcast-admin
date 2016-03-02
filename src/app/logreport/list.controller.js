@@ -13,7 +13,7 @@ angular.module('copcastAdminApp')
     $scope.sortKey = "date";
     $scope.reverse = 1;
     $scope.perPage = 30;
-    $scope.totalHistories = 0
+    $scope.totalHistories = 0;
     $scope.pagination = 1;
 
     $scope.pageChanged = function(newPage) {
@@ -42,7 +42,7 @@ angular.module('copcastAdminApp')
     };
     $scope.hasData = function hasData(){
       return $scope.logreport && $scope.logreport["activeOfficers"] !== undefined;
-    }
+    };
 
     //sort list
     $scope.sort = function(keyname){
@@ -67,7 +67,7 @@ angular.module('copcastAdminApp')
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid date range.')
       }
-    }
+    };
 
     // callback for ng-click 'viewLogReport':
     $scope.viewLog = function (historyId) {

@@ -1,0 +1,32 @@
+<div class="container">
+    <h3 translate>Exported Videos</h3>
+    <hr/>
+  <div ng-hide="noRecord">
+    <div class="form-group">
+      <label translate>User</label>
+      {{exportObj.Recorder.name }}
+    </div>
+    <div class="form-group">
+      <label translate>Export date</label>
+      {{exportObj.createdAt | date : 'yyyy-MM-dd HH:mm'}}
+    </div>
+    <div class="form-group">
+      <label translate>Recording Date</label>
+      {{exportObj.initialDate  | date : 'yyyy-MM-dd'}}
+    </div>
+    <div class="form-group">
+      <label translate>Exporter</label>
+      {{exportObj.Exporter.name}}
+    </div>
+    <div class="form-group">
+      <label translate>Status</label>
+      {{exportObj.status}}
+    </div>
+    <div class="text-center">
+      <a class="btn btn-primary btn-lg" translate ng-href="{{downloadUrl}}">download exported files</a>
+    </div>
+  </div>
+  <div ng-show="noRecord">
+     <div translate class="alert alert-warning">No export found.</div>
+  </div>
+</div>
