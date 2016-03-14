@@ -7,6 +7,7 @@
         <tr>
             <th style="min-width: 80px;" translate>Name</th>
             <th style="min-width: 80px;" translate>Group</th>
+            <th style="min-width: 80px;" translate>Status</th>
             <th style="width:20px;" > </th>
             <th style="width:20px;" > </th>
         </tr>
@@ -15,6 +16,7 @@
         <tr ng-repeat="user in users">
             <td>{{ user.name }}</td>
             <td>{{ user.group }}</td>
+            <td translate>{{ user.isEnabled ? 'Enabled' : 'Disabled'  }}</td>
             <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a></td>
             <td><a ng-click="deleteUser(user.id, user.name )" class="btn btn-small btn-danger" translate>delete</a></td>
         </tr>
