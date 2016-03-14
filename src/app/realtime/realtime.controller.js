@@ -173,19 +173,6 @@
       });
       socket.on('users:heartbeat', loadUser);
 
-      socket.on('streaming:failed', function(data){
-        if ($scope.activeStreams[data.id].modal){
-          $scope.activeStreams[data.id].modal.close();
-        }
-        //show notification error
-        notify({
-          templateUrl: 'app/views/notifications/errorNotification.html',
-          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
-          position: "right",
-          scope: $scope
-        });
-      });
-
       socket.on('streaming:start', function (data) {
 
         var user = $scope.activeUsers[data.id];
@@ -213,7 +200,7 @@
         console.log('Got disconnect!');
       });
       socket.on('streaming:failed', function (data) {
-        if ($scope.activeStreams[data.id].modal){
+        if ($scope.activeStreams[data.id] && $scope.activeStreams[data.id].modal){
           $scope.activeStreams[data.id].modal.close();
         }
         //show notification error
@@ -229,7 +216,7 @@
         if ($scope.currentUser.id === data.id) {
           mapService.showErrorInBallon($scope);
         }
-        if ($scope.activeStreams[$scope.currentUser.id].modal){
+        if ($scope.activeStreams[$scope.currentUser.id] && $scope.activeStreams[$scope.currentUser.id].modal){
           $scope.activeStreams[$scope.currentUser.id].modal.close();
         }
         //show notification error
@@ -313,7 +300,7 @@
     $scope.requestStream = requestStream;
 
     function stopStream(user) {
-      if (!$scope.activeStreams[user.id]) {
+      if (!user || !$scope.activeStreams[user.id]) {
         return;
       }
       if ($scope.activeStreams[user.id].modal != null) {

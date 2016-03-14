@@ -102,7 +102,17 @@
                 </div>
               </div>
 
-              <br><br>
+            <hr/>
+              <div class="row" ng-hide="user.isSelf">
+                <div class="control-group col-md-2" >
+                  <label class="control-label" for="isEnabled" translate>Is Enabled?</label>
+                  <div class="controls">
+                    <input type="checkbox" id="isEnabled" ng-model="user.isEnabled" ng-disabled="!canUpdate()"/>
+                  </div>
+                </div>
+                <div class="alert alert-warning col-md-5" translate>disabling this field will prevent this user from accessing the system.</div>
+              </div>
+              <br>
 
               <div class="control-group">
                 <div class="controls">
