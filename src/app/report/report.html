@@ -64,28 +64,34 @@
       <div class="col-md-4">{{reportData.adminAccess}}</div>
     </div>
     <hr/>
-    <!--<div>-->
-      <!--<h4 translate><strong>Exported videos</strong></h4>-->
+    <div ng-show="reportData.exportList && reportData.exportList.length > 0">
+      <h4 translate><strong>Exported videos</strong></h4>
 
-      <!--<div class="row">-->
-        <!--<div class="col-md-8">-->
-          <!--<table class="table table-condensed table-hover">-->
-            <!--<tr>-->
-              <!--<th translate>Video</th>-->
-              <!--<th translate>User</th>-->
-              <!--<th translate>Video Time</th>-->
-              <!--<th translate>User who exported</th>-->
-            <!--</tr>-->
-            <!--<tr>-->
-              <!--<th>xxxxx.mp4 (replace with player)</th>-->
-              <!--<td>bsiqueira</td>-->
-              <!--<td>2015-07-10 15:04 to 15:10</td>-->
-              <!--<td>admin</td>-->
-            <!--</tr>-->
-          <!--</table>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+              <th translate>User</th>
+              <th translate>Export date</th>
+              <th translate>Recording Date</th>
+              <th translate>Exporter</th>
+              <th translate>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="export in reportData.exportList">
+              <td>{{export.Recorder.name }}</td>
+              <td>{{export.createdAt | date : 'yyyy-MM-dd HH:mm'}}</td>
+              <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
+              <td>{{export.Exporter.name}}</td>
+              <td>{{export.status}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <div class="row" ng-show="reportData.playedVideos.length > 0 ">
       <h4 translate><strong>Videos viewed</strong></h4>
       <table class="table table-condensed table-hover" >
