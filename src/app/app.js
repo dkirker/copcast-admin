@@ -78,10 +78,6 @@ angular
         templateUrl: 'app/logreport/logreport-list.html',
         controller: 'LogReportListCtrl'
       })
-      .when('/log-report-view/:id', {
-        templateUrl: 'app/logreport/logreport-view.html',
-        controller: 'LogReportViewCtrl'
-      })
       .when('/reset-password/:token', {
         templateUrl: 'app/resetPasswords/reset.html',
         controller: 'ResetPasswordCtrl'
