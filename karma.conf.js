@@ -54,10 +54,7 @@ module.exports = function(config) {
       'src/**/*.js': ['browserify']
     },
 
-    browserify: {
-      debug: true,
-      transform: [ 'brfs' ]
-    },
+   
     ngHtml2JsPreprocessor: {
       // strip this from the file path
       stripPrefix: 'src/',
