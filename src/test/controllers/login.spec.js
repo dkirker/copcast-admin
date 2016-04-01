@@ -11,7 +11,7 @@ describe('Controller: LoginCtrl', function () {
 
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$uibModal_) {
+  beforeEach(angular.mock.inject(function ($controller, $rootScope, _$uibModal_) {
     scope = $rootScope.$new();
     modalInstance = _$uibModal_.open({
       templateUrl: 'views/login.html'

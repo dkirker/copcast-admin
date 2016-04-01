@@ -14,7 +14,7 @@ describe('Controller: LogoutCtrl', function () {
 
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, _$location_, _loginService_) {
+  beforeEach(angular.mock.inject(function ($controller, _$location_, _loginService_) {
     location = _$location_;
     loginService = jasmine.createSpyObj("loginService", ["logout"]);
     LogoutCtrl = $controller('LogoutCtrl', {
