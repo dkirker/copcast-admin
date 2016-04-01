@@ -9,7 +9,7 @@ describe('Controller: GroupsCtrl', function () {
     scope, location, serverUrl;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$location_) {
+  beforeEach(angular.mock.inject(function ($controller, $rootScope, _$location_) {
     scope = $rootScope.$new();
     location = _$location_;
     serverUrl = "http://test";

@@ -9,7 +9,7 @@ describe('Service: UserService', function () {
 
   beforeEach(angular.mock.module('copcastAdminApp'));
 
-  beforeEach(inject(function (_streamService_, $httpBackend, _ServerUrl_) {
+  beforeEach(angular.mock.inject(function (_streamService_, $httpBackend, _ServerUrl_) {
     streamService = _streamService_;
     httpBackend = $httpBackend;
     ServerUrl = _ServerUrl_;

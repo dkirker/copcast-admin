@@ -9,7 +9,7 @@ describe('Controller: UsersListCtrl', function () {
     scope, location, serverUrl;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $location) {
+  beforeEach(angular.mock.inject(function ($controller, $rootScope, $location) {
     scope = $rootScope.$new();
     location = $location;
     serverUrl = "http://test";

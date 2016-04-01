@@ -9,7 +9,7 @@ describe('Service: UserService', function () {
 
   beforeEach(angular.mock.module('copcastAdminApp'));
 
-  beforeEach(inject(function (_userService_, $httpBackend, _ServerUrl_) {
+  beforeEach(angular.mock.inject(function (_userService_, $httpBackend, _ServerUrl_) {
     userService = _userService_;
     httpBackend = $httpBackend;
     ServerUrl = _ServerUrl_;
@@ -58,7 +58,7 @@ describe('Service: UserService', function () {
         .then(function(user) {
           expect(user).toEqual(expectedUser1);
         });
-      httpBackend.flush();
+      
 
       var expectedUser2 = angular.copy(data.users[1]);
       expectedUser2.profilePicture = '/assets/images/anonuser.png';
@@ -68,7 +68,7 @@ describe('Service: UserService', function () {
           expect(user).toEqual(expectedUser2);
         });
 
-      httpBackend.flush();
+      
     });
   });
 
