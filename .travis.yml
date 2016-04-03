@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - 0.10.40
 before_script:
+  - "mv src/app/config.tpl src/app/config.js"
   - "npm install"
   - "npm install -g bower"
   - "npm install -g gulp@3.9.0"
