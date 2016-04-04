@@ -8,6 +8,10 @@ msgstr ""
 msgid "<strong>Active officers users</strong>"
 msgstr ""
 
+#: app/report/report.html:68
+msgid "<strong>Exported videos</strong>"
+msgstr ""
+
 #: app/report/report.html:59
 msgid "<strong>Number of flagged incidents</strong>"
 msgstr ""
@@ -24,7 +28,7 @@ msgstr ""
 msgid "<strong>Number of personnel accessing the admin system</strong>"
 msgstr ""
 
-#: app/report/report.html:90
+#: app/report/report.html:96
 msgid "<strong>Videos viewed</strong>"
 msgstr ""
 
@@ -63,6 +67,10 @@ msgstr ""
 msgid "Arrest?"
 msgstr ""
 
+#: app/views/appheader.html:25
+msgid "Audit Report"
+msgstr ""
+
 #: app/realtime/realtime.html:25
 msgid "Battery"
 msgstr ""
@@ -71,9 +79,8 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:183
-#: app/realtime/realtime.controller.js:222
-#: app/realtime/realtime.controller.js:238
+#: app/realtime/realtime.controller.js:208
+#: app/realtime/realtime.controller.js:224
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 
@@ -121,22 +128,21 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/incidentForms/incidentForm-view.html:21
-#: app/incidentForms/incidentForm-view.html:28
-#: app/logReport/logreport-view.html:21
-msgid "Date/Time:"
-msgstr ""
-
 #: app/exports/creation.controller.js:38
 msgid "Date is required"
 msgstr ""
 
-#: app/users/user-list.html:20
-msgid "Disabled"
+#: app/incidentForms/incidentForm-view.html:21
+#: app/incidentForms/incidentForm-view.html:28
+msgid "Date/Time:"
 msgstr ""
 
-#: app/report/report.html:116
+#: app/report/report.html:122
 msgid "Day"
+msgstr ""
+
+#: app/users/user-list.html:20
+msgid "Disabled"
 msgstr ""
 
 #: app/login/login.controller.js:36
@@ -155,6 +161,7 @@ msgstr ""
 
 #: app/exports/detail.html:10
 #: app/exports/list.html:18
+#: app/report/report.html:76
 msgid "Export date"
 msgstr ""
 
@@ -164,6 +171,7 @@ msgstr ""
 
 #: app/exports/detail.html:18
 #: app/exports/list.html:20
+#: app/report/report.html:78
 msgid "Exporter"
 msgstr ""
 
@@ -173,6 +181,7 @@ msgstr ""
 
 #: app/exports/creation.html:4
 #: app/logreport/logreport-list.html:8
+#: app/report/report.html:8
 msgid "Filter"
 msgstr ""
 
@@ -181,20 +190,22 @@ msgid "Fine?"
 msgstr ""
 
 #: app/incidentForms/incidentForm-list.html:15
-#: app/logReport/logreport-list.html:13
+#: app/logreport/logreport-list.html:14
 #: app/report/report.html:12
 msgid "From"
-msgstr ""
-
-#: app/incidentForms/incidentForm-view.html:49
-#: app/report/report.html:142
-msgid "Gravity"
 msgstr ""
 
 #: app/exports/creation.html:37
 msgid "Go back to the export list"
 msgstr ""
 
+#: app/incidentForms/incidentForm-view.html:49
+#: app/report/report.html:148
+msgid "Gravity"
+msgstr ""
+
+#: app/logreport/logreport-list.html:43
+#: app/logreport/logreport-list.html:65
 #: app/users/user-list.html:9
 msgid "Group"
 msgstr ""
@@ -207,7 +218,7 @@ msgstr ""
 msgid "Group details"
 msgstr ""
 
-#: app/logReport/logreport-list.html:44
+#: app/incidentForms/incidentForm-list.html:47
 #: app/users/user-creation.html:17
 #: app/users/user-destroy.html:20
 #: app/users/user-detail.html:59
@@ -232,7 +243,7 @@ msgstr ""
 msgid "Incident Forms"
 msgstr ""
 
-#: app/report/report.html:110
+#: app/report/report.html:116
 msgid ""
 "Information by user<br>\n"
 "        <small translate=\"\">grouped by day</small>"
@@ -242,7 +253,7 @@ msgstr ""
 msgid "Invalid data range."
 msgstr ""
 
-#: app/logReport/list.controller.js:68
+#: app/logreport/list.controller.js:62
 msgid "Invalid date range."
 msgstr ""
 
@@ -277,7 +288,7 @@ msgstr ""
 msgid "Log Report"
 msgstr ""
 
-#: app/views/appheader.html:31
+#: app/views/appheader.html:33
 msgid "Logout"
 msgstr ""
 
@@ -295,7 +306,7 @@ msgstr ""
 #: app/groups/group-creation.html:11
 #: app/groups/group-destroy.html:10
 #: app/groups/group-detail.html:11
-#: app/logReport/logreport-list.html:41
+#: app/incidentForms/incidentForm-list.html:44
 #: app/users/user-creation.html:11
 #: app/users/user-destroy.html:13
 #: app/users/user-detail.html:53
@@ -323,22 +334,17 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/logReport/logreport-view.html:35
-msgid "Next State:"
+#: app/realtime/realtime.html:28
+msgid "No battery information"
 msgstr ""
 
-#: app/realtime/realtime.html:34
-msgid "No battery information"
+#: app/report/report.html:178
+msgid "No data selected"
 msgstr ""
 
 #: app/exports/detail.html:30
 msgid "No export found."
 msgstr ""
-
-#: app/report/report.html:172
-msgid "No data selected"
-msgstr ""
-
 
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
@@ -368,11 +374,11 @@ msgstr ""
 msgid "Number of Injured"
 msgstr ""
 
-#: app/report/report.html:121
+#: app/report/report.html:127
 msgid "Number of times mission was stopped"
 msgstr ""
 
-#: app/report/report.html:136
+#: app/report/report.html:142
 msgid "Number of traffic incidents reported"
 msgstr ""
 
@@ -396,11 +402,11 @@ msgstr ""
 msgid "Period not valid."
 msgstr ""
 
-#: app/report/report.html:94
+#: app/report/report.html:100
 msgid "Played at"
 msgstr ""
 
-#: app/users/user-detail.html:165
+#: app/users/user-detail.html:175
 msgid "Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"
 msgstr ""
 
@@ -423,6 +429,7 @@ msgstr ""
 
 #: app/exports/detail.html:14
 #: app/exports/list.html:19
+#: app/report/report.html:77
 msgid "Recording Date"
 msgstr ""
 
@@ -469,18 +476,19 @@ msgstr ""
 msgid "Selected user:"
 msgstr ""
 
-#: app/views/appheader.html:29
+#: app/views/appheader.html:32
 msgid "Signed in as"
+msgstr ""
+
+#: app/report/report.html:101
+msgid "Started Time"
 msgstr ""
 
 #: app/exports/detail.html:22
 #: app/exports/list.html:21
+#: app/report/report.html:79
 #: app/users/user-list.html:10
 msgid "Status"
-msgstr ""
-
-#: app/report/report.html:95
-msgid "Started Time"
 msgstr ""
 
 #: app/login/login.controller.js:66
@@ -499,27 +507,25 @@ msgstr ""
 msgid "There are no videos for the user and period chosen."
 msgstr ""
 
-#: app/realtime/realtime.html:18
-msgid "This browser does not support live streaming visualization. Use Chrome or Firefox instead."
-msgstr ""
-
+#: app/incidentForms/incidentForm-list.html:25
 #: app/logreport/logreport-list.html:24
+#: app/report/report.html:22
 msgid "To"
 msgstr ""
 
-#: app/report/report.html:120
+#: app/report/report.html:126
 msgid "Total"
 msgstr ""
 
-#: app/report/report.html:119
+#: app/report/report.html:125
 msgid "Total time paused"
 msgstr ""
 
-#: app/report/report.html:117
+#: app/report/report.html:123
 msgid "Total time recording"
 msgstr ""
 
-#: app/report/report.html:118
+#: app/report/report.html:124
 msgid "Total time streaming"
 msgstr ""
 
@@ -543,7 +549,9 @@ msgstr ""
 msgid "Type your email"
 msgstr ""
 
-#: app/logReport/logreport-list.html:33
+#: app/incidentForms/incidentForm-list.html:35
+#: app/logreport/logreport-list.html:52
+#: app/report/report.html:32
 msgid "Update"
 msgstr ""
 
@@ -563,11 +571,24 @@ msgstr ""
 msgid "Use of Copcast - Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
 msgstr ""
 
+#: app/exports/creation.html:9
+#: app/exports/detail.html:6
+#: app/exports/list.html:17
+#: app/logreport/logreport-list.html:35
+#: app/logreport/logreport-list.html:64
+#: app/report/report.html:75
+msgid "User"
+msgstr ""
+
 #: app/users/user-creation.html:2
 msgid "User details"
 msgstr ""
 
-#: app/logReport/logreport-view.html:14
+#: app/exports/creation.controller.js:34
+msgid "User is required"
+msgstr ""
+
+#: app/incidentForms/incidentForm-view.html:14
 msgid "User name:"
 msgstr ""
 
@@ -586,19 +607,31 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/report/report.html:93
+#: app/report/report.html:99
 msgid "Video URL"
+msgstr ""
+
+#: app/logreport/logreport-list.html:84
+msgid "Video Watched:"
+msgstr ""
+
+#: app/views/appheader.html:27
+msgid "Videos Export"
+msgstr ""
+
+#: app/exports/list.html:4
+msgid "Videos Exported"
 msgstr ""
 
 #: app/realtime/realtime.html:32
 msgid "View history"
 msgstr ""
 
-#: app/report/report.html:97
+#: app/report/report.html:103
 msgid "Who recorded it"
 msgstr ""
 
-#: app/report/report.html:96
+#: app/report/report.html:102
 msgid "Who watched it"
 msgstr ""
 
@@ -610,7 +643,11 @@ msgstr ""
 msgid "Your browser does not support videos."
 msgstr ""
 
-#: app/logReport/logreport-view.html:52
+#: app/logreport/logreport-list.html:67
+msgid "action"
+msgstr ""
+
+#: app/incidentForms/incidentForm-view.html:121
 msgid "back"
 msgstr ""
 
@@ -632,7 +669,8 @@ msgstr ""
 msgid "create new user"
 msgstr ""
 
-#: app/logReport/logreport-list.html:50
+#: app/incidentForms/incidentForm-list.html:53
+#: app/logreport/logreport-list.html:66
 msgid "date"
 msgstr ""
 
@@ -666,20 +704,20 @@ msgstr ""
 msgid "forgot password"
 msgstr ""
 
-#: app/logReport/logreport-list.html:56
+#: app/incidentForms/incidentForm-list.html:59
 msgid "group name"
+msgstr ""
+
+#: app/report/report.html:117
+msgid "grouped by day"
 msgstr ""
 
 #: app/realtime/realtime.controller.js:70
 msgid "has flagged an incident"
 msgstr ""
 
-#: app/logReport/logreport-list.html:62
-msgid "next state"
-msgstr ""
-
-#: app/logReport/logreport-list.html:59
-msgid "previous state"
+#: app/report/report.html:180
+msgid "select a period to present related data."
 msgstr ""
 
 #: app/groups/group-detail.html:42
@@ -691,10 +729,10 @@ msgstr ""
 msgid "update user"
 msgstr ""
 
-#: app/logReport/logreport-list.html:53
+#: app/incidentForms/incidentForm-list.html:56
 msgid "username"
 msgstr ""
 
-#: app/logReport/logreport-list.html:76
+#: app/incidentForms/incidentForm-list.html:71
 msgid "view"
 msgstr ""
