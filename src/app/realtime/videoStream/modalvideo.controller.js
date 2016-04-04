@@ -8,9 +8,8 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, $sce, $uibModalInstance, user, streamUrl, ServerUrl) {
+  .controller('ModalVideoCtrl', function ($scope, $rootScope, $sce, $uibModalInstance, user, streamUrl, ServerUrl, socket) {
     $scope.user = user;
-    $scope.websocketServer = ServerUrl.replace('http', 'ws')+"/ws";
 
     //$scope.jwOptions = {
     //  file: streamUrl,
@@ -29,24 +28,16 @@ angular.module('copcastAdminApp')
 
     $scope.streamPath = $sce.trustAsResourceUrl(streamUrl);
 
-    console.log($('#video-wrapper').id);
-
-    //// Optional: Catch ng-jwplayer event for when JWPlayer is ready
-    //$scope.$on('ng-jwplayer-ready', function(event, args) {
-    //
-    //
-    //  // Get player from service
-    //  //var player = jwplayerService.myPlayer[args.playerId];
-    //});
 
     $scope.ok = function () {
       $uibModalInstance.close();
-      delete $scope.activeStreams[user.id];
+      console.log(socket.id+ " is leaving");
+      socket.emit('leave');
     };
-  }).directive('h264canvas', function() {
+  }).directive('h264canvas', function($rootScope) {
 
     var toUint8Array = function(parStr){
-      var raw = window.atob(parStr);
+      var raw = atob(parStr);
       var rawLength = raw.length;
       var array = new Uint8Array(new ArrayBuffer(rawLength));
 
@@ -66,32 +57,28 @@ angular.module('copcastAdminApp')
           workerFile: "/vendor/Decoder.js"
         });
 
+        console.log("DONE");
+
         iElement[0].appendChild(p.canvas);
         scope.player = p;
 
-        console.log(scope.websocketServer+" <<<<<");
-        var ws = new WebSocket(scope.websocketServer+"?id=1");
+        //console.log(scope.websocketServer+" <<<<<");
+        //var ws = new WebSocket(scope.websocketServer+"?id=1");
+        //
+        //ws.onopen = function(err) {
+        //  console.log('OPENED:'+err);
+        //}
+        //
+        //ws.onerror = function(err) {
+        //  console.log(">>"+err);
+        //}
+        //
+        //ws.onmessage = function(data) {
 
-        ws.onopen = function(err) {
-          console.log('OPENED:'+err);
-        }
+        $rootScope.$on('h264Frame', function(event, data) {
+          p.decode(data);
 
-        ws.onerror = function(err) {
-          console.log(">>"+err);
-        }
-
-        ws.onmessage = function(data) {
-          var tmp;
-          try {
-            tmp = window.atob(data.data);
-          } catch(err) {
-            console.log(err);
-            return;
-          }
-          console.log(tmp.length);
-          var bin = toUint8Array(data.data);
-          p.decode(bin);
-        }
+        });
       }
     }
 });

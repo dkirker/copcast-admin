@@ -72,8 +72,8 @@
       });
     };
 
-    $scope.popModal = function (id) {
-      showModal($scope.activeUsers[id]);
+    $scope.popModal = function (user) {
+      showModal(user);
     }
 
     $scope.goToUser = function (user) {
@@ -119,10 +119,18 @@
       user.marker.setIcon(mapService.getGreyMarker(user.userName));
     };
 
+    function removeUser(user) {
+      user.marker.setMap(null);
+      if (user.cityCircle) {
+        user.cityCircle.setMap(null);
+      }
+
+    }
+
     function loadUser(data) {
-      console.log("Socket: Location received!");
+      console.log("Socket: Location received for: "+data.username+ " @ "+data.location.lat+","+data.location.lng);
       var pos = null;
-      if ($scope.activeUsers[data.id]) {
+      if ($scope.activeUsers[data.id] && $scope.activeUsers[data.id] != 'none') {
         pos = new google.maps.LatLng(data.location.lat, data.location.lng);
         $scope.activeUsers[data.id].marker.setPosition(pos);
         $scope.activeUsers[data.id].accuracy = data.location.accuracy;
@@ -131,7 +139,7 @@
         if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
           $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
         }
-      } else {
+      } else if ($scope.activeUsers[data.id] == 'none') {
         pos = new google.maps.LatLng(data.location.lat, data.location.lng);
 
         var marker = mapService.createMarker($scope, pos, data);
@@ -150,25 +158,51 @@
         };
 
         mapService.fitBounds($scope, $scope.activeUsers);
+
+      } else {
+        console.error('retarded heartbeat data');
+        return;
       }
 
       mapService.applyCircle($scope, $scope.activeUsers[data.id]);
 
-      if ($scope.activeUsers[data.id].timeoutPromisse != null) {
-        $timeout.cancel($scope.activeUsers[data.id].timeoutPromisse);
-      }
-      $scope.activeUsers[data.id].timeoutPromisse = $timeout(function () {
-        timeoutUser($scope.activeUsers[data.id]);
-      }, 60000);
+      //if ($scope.activeUsers[data.id].timeoutPromisse != null) {
+      //  $timeout.cancel($scope.activeUsers[data.id].timeoutPromisse);
+      //}
+      //$scope.activeUsers[data.id].timeoutPromisse = $timeout(function () {
+      //  timeoutUser($scope.activeUsers[data.id]);
+      //}, 60000);
     };
 
 
     socket.on('connect', function () {
+
+
+      socket.on('frame', function(frame){
+        var imgArray = new Uint8Array(frame.frame);
+        console.log(imgArray.length);
+        $rootScope.$emit("h264Frame", imgArray);
+      });
+
+      socket.on('userLeft', function(data) {
+        console.log(data);
+        //timeoutUser($scope.activeUsers[data.userLeft]);
+        removeUser($scope.activeUsers[data.userId]);
+        delete $scope.activeUsers[data.userId];
+        mapService.closeBalloon();
+      });
+
+      socket.on('userEntered', function(data) {
+        console.log(data);
+        $scope.activeUsers[data.userId] = 'none';
+      });
+
       socket.on('users:incidentFlag', function(data){
         console.log('incident!!');
         console.log(data);
         $scope.popIncidentFlag(data.username);
       });
+
       socket.on('users:heartbeat', loadUser);
 
       socket.on('streaming:failed', function(data){
@@ -296,28 +330,35 @@
     }
 
     function requestStream(user) {
+
+      socket.emit('watch', user.id);
+
+      $scope.popModal(user);
+
+      console.log('watch: '+user.id);
+
       $scope.waitingStreaming = true;
       if ($scope.isStreaming(user)){
         $scope.streamButtonText = 'streaming';
         showModal($scope.activeUsers[user.id]);
       } else {
         $scope.streamButtonText = 'Sending...';
-        streamService.startStreaming(user.id)
-          .then(function (data) {
-            if (data.stream){
-              showStream({
-                  status: 'streaming',
-                  id: data.stream.id,
-                  userName: $scope.activeUsers[data.stream.id].userName,
-                  groupId: $scope.activeUsers[data.stream.id].groupId,
-                  streamUrl: data.stream.streamUrl
-              })
-            } else {
-              $scope.streamButtonText = 'awaiting response';
-            }
-          }, function (data) {
-            $scope.streamButtonText = data.message;
-          });
+        //streamService.startStreaming(user.id)
+        //  .then(function (data) {
+        //    if (data.stream){
+        //      showStream({
+        //          status: 'streaming',
+        //          id: data.stream.id,
+        //          userName: $scope.activeUsers[data.stream.id].userName,
+        //          groupId: $scope.activeUsers[data.stream.id].groupId,
+        //          streamUrl: data.stream.streamUrl
+        //      })
+        //    } else {
+        //      $scope.streamButtonText = 'awaiting response';
+        //    }
+        //  }, function (data) {
+        //    $scope.streamButtonText = data.message;
+        //  });
       }
     };
     $scope.requestStream = requestStream;
@@ -342,7 +383,7 @@
         }
         var bounds = new google.maps.LatLngBounds();
         angular.forEach(data, function (user) {
-          $scope.loadUser(user);
+          //$scope.loadUser(user);
           var coord = new google.maps.LatLng(user.location.lat, user.location.lng);
           bounds.extend(coord);
         });
@@ -384,7 +425,8 @@
       mapService.closeBalloon();
       console.log('showModal with user=[' + user.id + ']');
       console.log(JSON.stringify($scope.activeStreams[user.id]));
-      $scope.activeStreams[user.id].modal = $uibModal.open({
+      showStream(user);
+      $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player_h264.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',

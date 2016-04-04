@@ -35,12 +35,13 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
     return $rootScope.globals.currentUser.token;
   };
 
-  loginService.setToken = function(userName, role, accessToken) {
+  loginService.setToken = function(userName, role, accessToken, userId) {
     $rootScope.globals = {
       currentUser: {
         username: userName,
         role: role,
-        token: accessToken
+        token: accessToken,
+        userId: userId
       }
     };
 
@@ -89,6 +90,7 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
     } catch (err) {
       $cookies.remove('globals');
     }
+    socket.disconnect();
     loginService.show();
   };
 

@@ -50,7 +50,7 @@ angular.module('copcastAdminApp')
         password : $scope.user.password,
         scope : 'admin'
       },{ignoreAuthModule: true}).success(function(data) {
-        loginService.setToken(data.userName, data.role, data.token);
+        loginService.setToken(data.userName, data.role, data.token, data.userId);
         $uibModalInstance.close();
         //get user information
         userService.getMyData().then(

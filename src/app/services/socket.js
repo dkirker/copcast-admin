@@ -8,7 +8,7 @@
  * Factory in the copcastAdminApp.
  */
 angular.module('copcastAdminApp')
-  .factory('socket',function(ServerUrl) {
+  .factory('socket',function(ServerUrl, userService, $rootScope) {
 
     // Loads the socket from the server
     var body = document.getElementsByTagName('body')[0],
@@ -48,7 +48,8 @@ angular.module('copcastAdminApp')
         return;
       }
 
-      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin' });
+      console.log(">>"+$rootScope.globals.currentUser);
+      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId, forceNew: true });
       socketIo.once('connect', function() {
         connected = true;
         console.log('socket connected!');
@@ -61,6 +62,13 @@ angular.module('copcastAdminApp')
         console.log('Socket Error:', err);
       });
     };
+
+    socket.disconnect = function() {
+      //socketIo.disconnect();
+      console.log('should disconnect');
+      socketIo.disconnect();
+      //console.log(socketIo.close());
+    }
 
     socket.on = function(ev, cb) {
       if ( !connected ) {
