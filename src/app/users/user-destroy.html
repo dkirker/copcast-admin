@@ -1,62 +1,65 @@
 <div class="containerUser">
-    <h1 translate>Are you sure to delete this user?</h1>
+  <h1 translate>Are you sure to delete this user?</h1>
+  <div ng-show="serverMessage" class="alert alert-danger">
+    <p>
+      {{serverMessage}}
+    </p>
+  </div>
+  <div class="row">
     <div class="col-md-4">
-        <form novalidate="novalidate" class="form-horizontal">
-            <alert ng-show="serverMessage">
-              <p>
-                {{serverMessage["detail"]}}
-              </p>
-            </alert>
-          <div class="control-group">
-            <label class="control-label" for="inputName" translate>Name:</label>
-            <div class="controls">
-              {{user.name}}
-            </div>
-          </div>
+      <form novalidate="novalidate" class="form-horizontal">
 
-          <div class="control-group">
-            <label class="control-label" for="inputName" translate>Group:</label>
-            <div class="controls">
-              {{user.groupId}}
-            </div>
+        <div class="control-group">
+          <label class="control-label" for="inputName" translate>Name:</label>
+          <div class="controls">
+            {{user.name}}
           </div>
-          <div class="control-group">
-            <label class="control-label" for="inputUsername" translate>Username:</label>
-            <div class="controls">
-              {{user.username}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputEmail" translate>Email:</label>
-            <div class="controls">
-              {{user.email}}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
-            <div class="controls">
-              {{user.isAdmin}}
-            </div>
-          </div>
+        </div>
 
-            <div class="control-group">
-                <div class="controls">
-                  <br><br>
-                    <!-- user-detail.html: -->
-                    <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                    <a ng-click="deleteUser()" class="btn btn-small btn-danger" translate>delete user</a>
-                  <br><br>
-                </div>
-            </div>
-        </form>
+        <div class="control-group">
+          <label class="control-label" for="inputName" translate>Group:</label>
+          <div class="controls">
+            {{user.groupId}}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputUsername" translate>Username:</label>
+          <div class="controls">
+            {{user.username}}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputEmail" translate>Email:</label>
+          <div class="controls">
+            {{user.email}}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
+          <div class="controls">
+            {{user.isAdmin}}
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <br><br>
+            <!-- user-detail.html: -->
+            <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
+            <a ng-click="deleteUser()" class="btn btn-small btn-danger" translate>delete user</a>
+            <br><br>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="col-md-4">
 
-            <label class="control-label" ng-show="hasProfilePicture" translate>Profile picture</label>
-            <div ng-show="hasProfilePicture">
-                <img ng-src="{{pictureUrl}}" height="250">
-            </div>
+      <label class="control-label" ng-show="hasProfilePicture" translate>Profile picture</label>
+      <div ng-show="hasProfilePicture">
+        <img ng-src="{{pictureUrl}}" height="250">
+      </div>
 
     </div>
+  </div>
 </div>

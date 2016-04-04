@@ -66,7 +66,6 @@ gulp.task('pot', function () {
     .pipe(gulp.dest('src/po/'));
 });
 
-
 gulp.task('vendor_js', function() {
   return gulp.src([
     'src/vendor/*.js'

@@ -110,18 +110,14 @@ angular.module('copcastAdminApp')
     };
 
     //get a user by id
-    $http.get(ServerUrl + '/users/'+ $routeParams.id).success(function(data) {
+    userService.getUser($routeParams.id).then(function(data) {
       $scope.user = data;
-      $http.get(ServerUrl + '/users/me').success(function(data) {
-        if(data.length === 0){
-          return;
-        }
-        if($scope.user.profilePicture){
-          $scope.hasProfilePicture = true;
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
-        }
-      });
-    }).error(function(data) {
+      if($scope.user.profilePicture){
+        $scope.hasProfilePicture = true;
+        $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
+      }
+
+    },function(data) {
     });
 
     //list of groups
