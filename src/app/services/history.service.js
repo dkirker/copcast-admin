@@ -45,12 +45,14 @@
         return defer.promise;
       };
 
-      service.listHistories = function(page, perPage){
+      service.listHistories = function(user, group, page, perPage){
         var defer = $q.defer();
         $http.get(ServerUrl + '/logreports',
           { params : {
             page : page,
-            perPage: perPage
+            perPage: perPage,
+            group: group,
+            user: user
           }
           }
         ).success(function(data) {
@@ -61,12 +63,14 @@
         return defer.promise;
       }
 
-      service.listHistoriesByPeriod = function(fromDate, toDate, page, perPage){
+      service.listHistoriesByParams = function(fromDate, toDate,user, group, page, perPage){
         var defer = $q.defer();
         $http.get(ServerUrl + '/logreports/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD'),
           { params : {
             page : page,
-            perPage: perPage
+            perPage: perPage,
+            group: group,
+            user: user
           }
           }
         ).success(function(data) {

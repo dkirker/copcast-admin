@@ -60,6 +60,10 @@ msgstr "Você tem certeza que deseja excluir este usuário?"
 msgid "Are you sure you want to delete this group?"
 msgstr "Você tem certeza que deseja excluir este grupo?"
 
+#: app/views/appheader.html:25
+msgid "Audit Report"
+msgstr "Relatório de Auditoria"
+
 #: app/incidentForms/incidentForm-view.html:93
 msgid "Argument?"
 msgstr "Discussão?"
@@ -77,23 +81,27 @@ msgstr "Bateria"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/realtime/realtime.controller.js:182
-#: app/realtime/realtime.controller.js:221
-#: app/realtime/realtime.controller.js:237
+#: app/realtime/realtime.controller.js:183
+#: app/realtime/realtime.controller.js:222
+#: app/realtime/realtime.controller.js:238
 msgid "Can not start streaming now. Try again later."
 msgstr ""
 "Não é possível iniciar a transmissão neste momento. Tente novamente mais "
 "tarde."
 
-#: app/users/user-detail.html:120 app/users/user-detail.html:26
+#: app/exports/creation.html:30
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: app/users/user-detail.html:130 app/users/user-detail.html:26
 msgid "Change Password"
 msgstr "Alterar Senha"
 
-#: app/users/user-detail.html:155 app/users/user-detail.html:32
+#: app/users/user-detail.html:165 app/users/user-detail.html:32
 msgid "Change Picture"
 msgstr "Alterar Foto"
 
-#: app/users/user-detail.html:159
+#: app/users/user-detail.html:169
 msgid "Click here to send a new image"
 msgstr "Clique aqui para enviar uma nova imagem"
 
@@ -101,7 +109,11 @@ msgstr "Clique aqui para enviar uma nova imagem"
 msgid "Confirm New Password"
 msgstr "Confirme a Nova Senha"
 
-#: app/users/user-detail.html:126 app/users/user-detail.html:128
+#: app/logreport/logreport-list.html:80
+msgid "Connection:"
+msgstr "Tipo de Conexão:"
+
+#: app/users/user-detail.html:136 app/users/user-detail.html:138
 msgid "Current password"
 msgstr "Senha atual"
 
@@ -109,7 +121,11 @@ msgstr "Senha atual"
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
 
-#: app/history/date_filter/date.filter.html:4
+#: app/logreport/logreport-list.html:81
+msgid "Data in the device:"
+msgstr "Dados no celular:"
+
+#: app/exports/creation.html:18 app/history/date_filter/date.filter.html:4
 msgid "Date"
 msgstr "Data"
 
@@ -118,6 +134,14 @@ msgstr "Data"
 #: app/logReport/logreport-view.html:21
 msgid "Date/Time:"
 msgstr "Data/Hora:"
+
+#: app/exports/creation.controller.js:38
+msgid "Date is required"
+msgstr "Data é obrigatória"
+
+#: app/users/user-list.html:20
+msgid "Disabled"
+msgstr "Desabilitado"
 
 #: app/report/report.html:116
 msgid "Day"
@@ -132,11 +156,27 @@ msgstr "Email enviado com sucesso"
 msgid "Email:"
 msgstr "Email:"
 
-#: app/logReport/logreport-view.html:42
-msgid "Extras:"
-msgstr "Extras:"
+#: app/users/user-list.html:19
+msgid "Enabled"
+msgstr "Habilitado"
 
-#: app/logReport/logreport-list.html:8 app/report/report.html:8
+#: app/exports/detail.html:10 app/exports/list.html:18
+msgid "Export date"
+msgstr "Data de Exportação"
+
+#: app/exports/detail.html:2
+msgid "Exported Videos"
+msgstr "Vídeos Exportados"
+
+#: app/exports/detail.html:18 app/exports/list.html:20
+msgid "Exporter"
+msgstr "Exportado Por"
+
+#: app/logreport/logreport-list.html:68
+msgid "Extra Information"
+msgstr "Informações Adicionais"
+
+#: app/exports/creation.html:4 app/logreport/logreport-list.html:8
 msgid "Filter"
 msgstr "Filtro"
 
@@ -148,6 +188,10 @@ msgstr "Multa?"
 #: app/logReport/logreport-list.html:13 app/report/report.html:12
 msgid "From"
 msgstr "De"
+
+#: app/exports/creation.html:37
+msgid "Go back to the export list"
+msgstr "Voltar para a lista de exportações"
 
 #: app/incidentForms/incidentForm-view.html:49 app/report/report.html:142
 msgid "Gravity"
@@ -165,7 +209,6 @@ msgstr "Tipo do Grupo"
 msgid "Group details"
 msgstr "Detalhes do Grupo"
 
-#: app/incidentForms/incidentForm-list.html:47
 #: app/logReport/logreport-list.html:44 app/users/user-creation.html:17
 #: app/users/user-destroy.html:20 app/users/user-detail.html:59
 msgid "Group:"
@@ -200,6 +243,7 @@ msgid "Invalid data range."
 msgstr "Período Inválido"
 
 #: app/logReport/list.controller.js:68
+#: app/logreport/list.controller.js:62
 msgid "Invalid date range."
 msgstr "Período Inválido."
 
@@ -208,6 +252,10 @@ msgstr "Período Inválido."
 #: app/users/user-destroy.html:38 app/users/user-detail.html:66
 msgid "Is Admin?"
 msgstr "É Admin?"
+
+#: app/users/user-detail.html:108
+msgid "Is Enabled?"
+msgstr "Habilitado?"
 
 #: app/groups/group-creation.html:18 app/groups/group-destroy.html:17
 #: app/groups/group-detail.html:18
@@ -222,19 +270,11 @@ msgstr "Transmissão ao vivo"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: app/logReport/logreport-list.html:2
+#: app/logreport/logreport-list.html:2
 msgid "Log Report"
 msgstr "Relatório de Auditoria"
 
-#: app/views/appheader.html:25
-msgid "Log audit report"
-msgstr "Relatório de auditoria"
-
-#: app/logReport/logreport-view.html:4
-msgid "Log report"
-msgstr "Relatório"
-
-#: app/views/appheader.html:32
+#: app/views/appheader.html:31
 msgid "Logout"
 msgstr "Sair"
 
@@ -248,21 +288,29 @@ msgid "Name"
 msgstr "Nome"
 
 #: app/groups/group-creation.html:11 app/groups/group-destroy.html:10
-#: app/groups/group-detail.html:11 app/incidentForms/incidentForm-list.html:44
-#: app/logReport/logreport-list.html:41 app/users/user-creation.html:11
-#: app/users/user-destroy.html:13 app/users/user-detail.html:53
+#: app/groups/group-detail.html:11 app/logReport/logreport-list.html:41
+#: app/users/user-creation.html:11 app/users/user-destroy.html:13
+#: app/users/user-detail.html:53
 msgid "Name:"
 msgstr "Nome:"
+
+#: app/exports/list.html:8
+msgid "New Export"
+msgstr "Nova Exportação"
 
 #: app/resetPasswords/reset.html:12
 msgid "New Password"
 msgstr "Nova Senha"
 
+#: app/exports/creation.html:2
+msgid "New Videos Export"
+msgstr "Nova Exportação de Vídeos"
+
 #: app/groups/group-creation.html:2
 msgid "New group"
 msgstr "Novo grupo"
 
-#: app/users/user-detail.html:130 app/users/user-detail.html:132
+#: app/users/user-detail.html:140 app/users/user-detail.html:142
 msgid "New password"
 msgstr "Nova senha"
 
@@ -270,14 +318,13 @@ msgstr "Nova senha"
 msgid "Next State:"
 msgstr "Estado seguinte:"
 
-# app/realtime/realtime.html:34
-#: app/realtime/realtime.html:28
+#: app/exports/detail.html:30
+msgid "No export found."
+msgstr "Nenhuma exportação encontrada"
+
+#: app/realtime/realtime.html:34
 msgid "No battery information"
 msgstr "Sem dados da bateria"
-
-#: app/report/report.html:172
-msgid "No data selected"
-msgstr "Nenhuma informação selecionada"
 
 #: app/history/history.manager.js:452
 msgid "No location data available for the selected interval"
@@ -352,10 +399,6 @@ msgstr ""
 msgid "Preferred language:"
 msgstr "Língua preferencial:"
 
-#: app/logReport/logreport-view.html:28
-msgid "Previous State:"
-msgstr "Estado anterior:"
-
 #: app/users/user-destroy.html:58
 msgid "Profile picture"
 msgstr "Foto do perfil"
@@ -364,7 +407,15 @@ msgstr "Foto do perfil"
 msgid "Realtime"
 msgstr "Tempo real"
 
-#: app/users/user-detail.html:133
+#: app/logreport/logreport-list.html:85
+msgid "Recorded By:"
+msgstr ""
+
+#: app/exports/detail.html:14 app/exports/list.html:19
+msgid "Recording Date"
+msgstr "Data de Gravação"
+
+#: app/users/user-detail.html:143
 msgid "Repeat your password"
 msgstr "Repeitir sua senha"
 
@@ -405,13 +456,14 @@ msgstr "Selecione um grupo ou usuário"
 msgid "Selected user:"
 msgstr "Usuário selecionado:"
 
-#: app/views/appheader.html:31
+#: app/views/appheader.html:29
 msgid "Signed in as"
 msgstr "Logado como"
 
-#: app/report/report.html:95
-msgid "Started Time"
-msgstr "Iniciado no momento"
+#: app/exports/detail.html:22 app/exports/list.html:21
+#: app/users/user-list.html:10
+msgid "Status"
+msgstr "Status"
 
 #: app/login/login.controller.js:66
 msgid "The email and password you entered don't match."
@@ -420,9 +472,26 @@ msgstr "Email ou senha inválidos."
 #: app/resetPasswords/reset.controller.js:36
 msgid "The password and its confirmation don't match"
 msgstr "A senha e a confirmação não são iguais"
+msgstr "A senha e sua confirmação não são iguais"
 
-#: app/incidentForms/incidentForm-list.html:25
-#: app/logReport/logreport-list.html:23 app/report/report.html:22
+#: app/exports/creation.html:36
+msgid ""
+"The videos are being generated. We will send you an e-mail when we are done!"
+msgstr "Os vídeos estão sendo gerado. Enviaremos um email quando finalizarmos."
+
+#: app/exports/creation.html:35
+msgid "There are no videos for the user and period chosen."
+msgstr "Não existem vídeos para o usuário e período escolhidos."
+
+#: app/realtime/realtime.html:18
+msgid ""
+"This browser does not support live streaming visualization. Use Chrome or "
+"Firefox instead."
+msgstr ""
+"Este browser não suporta visualização de streaming de vídeo. Favor prefira o "
+"Chrome ou Firefox."
+
+#: app/logreport/logreport-list.html:24
 msgid "To"
 msgstr "Para"
 
@@ -462,10 +531,15 @@ msgstr "Digite para filtrar o mapa"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/incidentForms/incidentForm-list.html:35
-#: app/logReport/logreport-list.html:33 app/report/report.html:32
+#: app/logReport/logreport-list.html:33
 msgid "Update"
 msgstr "Atualizar"
+
+#: app/exports/creation.html:9 app/exports/detail.html:6
+#: app/exports/list.html:17 app/logreport/logreport-list.html:35
+#: app/logreport/logreport-list.html:64
+msgid "User"
+msgstr "Usuário"
 
 #: app/incidentForms/incidentForm-view.html:109
 msgid "Use Lethal Force?"
@@ -491,7 +565,10 @@ msgstr ""
 msgid "User details"
 msgstr "Detalhes do Usuário"
 
-#: app/incidentForms/incidentForm-view.html:14
+#: app/exports/creation.controller.js:34
+msgid "User is required"
+msgstr "Usuário é obrigatório"
+
 #: app/logReport/logreport-view.html:14
 msgid "User name:"
 msgstr "Usuário:"
@@ -513,7 +590,19 @@ msgstr "Usuários"
 msgid "Video URL"
 msgstr "Endereço do Vídeo"
 
-#: app/realtime/realtime.html:32
+#: app/logreport/logreport-list.html:84
+msgid "Video Watched:"
+msgstr "Vídeo Assistido:"
+
+#: app/views/appheader.html:24
+msgid "Videos Export"
+msgstr "Exportação de Vídeos"
+
+#: app/exports/list.html:4
+msgid "Videos Exported"
+msgstr "Videos Exportados"
+
+#: app/realtime/realtime.html:38
 msgid "View history"
 msgstr "Ver histórico"
 
@@ -533,14 +622,18 @@ msgstr "Combinação de senha errada"
 msgid "Your browser does not support videos."
 msgstr "Seu browser não suporta vídeos"
 
-#: app/incidentForms/incidentForm-view.html:121
+
+#: app/logreport/logreport-list.html:67
+msgid "action"
+msgstr "atividade"
+
 #: app/logReport/logreport-view.html:52
 msgid "back"
 msgstr "voltar"
 
 #: app/groups/group-destroy.html:41 app/groups/group-detail.html:41
-#: app/users/user-destroy.html:48 app/users/user-detail.html:110
-#: app/users/user-detail.html:142
+#: app/users/user-destroy.html:48 app/users/user-detail.html:120
+#: app/users/user-detail.html:152
 msgid "cancel"
 msgstr "cancelar"
 
@@ -552,12 +645,11 @@ msgstr "criar novo grupo"
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/incidentForms/incidentForm-list.html:53
 #: app/logReport/logreport-list.html:50
 msgid "date"
 msgstr "data"
 
-#: app/groups/group-list.html:20 app/users/user-list.html:19
+#: app/groups/group-list.html:20 app/users/user-list.html:22
 msgid "delete"
 msgstr "excluir"
 
@@ -569,7 +661,15 @@ msgstr "excluir grupo"
 msgid "delete user"
 msgstr "excluir usuário"
 
-#: app/groups/group-list.html:19 app/users/user-list.html:18
+#: app/users/user-detail.html:113
+msgid "disabling this field will prevent this user from accessing the system."
+msgstr "desabilitando esta opção impedirá que este usuário acesse o sistema."
+
+#: app/exports/detail.html:26
+msgid "download exported files"
+msgstr "download dos vídeos exportados"
+
+#: app/groups/group-list.html:19 app/users/user-list.html:21
 msgid "edit"
 msgstr "editar"
 
@@ -606,92 +706,38 @@ msgstr "selecione um período para apresentar as informações"
 msgid "update group"
 msgstr "atualizar grupo"
 
-#: app/users/user-detail.html:111 app/users/user-detail.html:143
+#: app/users/user-detail.html:121 app/users/user-detail.html:153
 msgid "update user"
 msgstr "atualizar usuário"
 
-#: app/incidentForms/incidentForm-list.html:56
-#: app/logReport/logreport-list.html:53
-msgid "username"
-msgstr "usuário"
+msgid "NOT_LOGGED"
+msgstr "Não conectado"
 
-#: app/incidentForms/incidentForm-list.html:71
-#: app/logReport/logreport-list.html:76
-msgid "view"
-msgstr "visão"
+msgid "PAUSED"
+msgstr "Gravação interrompida"
 
-#~ msgid "No streaming available"
-#~ msgstr "Transmissão ao vivo indisponível"
+msgid "RECORDING_OFFLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
-#~ msgid ""
-#~ "This browser does not support live streaming visualization. Use Chrome or "
-#~ "Firefox instead."
-#~ msgstr ""
-#~ "Este browser não suporta visualização de streaming de vídeo. Favor "
-#~ "prefira o Chrome ou Firefox."
+msgid "RECORDING_ONLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
-#~ msgid ""
-#~ "date\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
-#~ "chevron-down':!reverse}\"> </span>"
-#~ msgstr ""
-#~ "data\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'date'\" ng-class=\"{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-"
-#~ "chevron-down':!reverse}\"> </span>"
+msgid "STREAMING"
+msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
 
-#~ msgid ""
-#~ "group name\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'groupId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "nome do grupo\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
+msgid "UPLOADING"
+msgstr "Enviando dados para o servidor"
 
-#~ msgid ""
-#~ "next state\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'nextstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-"
-#~ "chevron-down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "data\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'date'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"> </span>"
+msgid "LOGGED"
+msgstr "Conectado"
 
-#~ msgid ""
-#~ "previous state\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'previousstate'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-"
-#~ "chevron-down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "nome do grupo\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
+msgid "SEEN_VIDEO"
+msgstr "Usuário viu um vídeo do próprio celular."
 
-#~ msgid ""
-#~ "username\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "usuário\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'userId'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
+msgid "LOGGED_ADMIN"
+msgstr "Usuário se conectou na interface administrativa"
 
-#~ msgid ""
-#~ "group name\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
-#~ msgstr ""
-#~ "nome do grupo\n"
-#~ "            <span class=\"glyphicon sort-icon\" ng-show=\"sortKey == "
-#~ "'address'\" ng-class=\"{'glyphicon-chevron-up':reverse,'glyphicon-chevron-"
-#~ "down':!reverse}\"></span>"
+msgid "PLAYING_VIDEO"
+msgstr "Usuário viu um vídeo pela interface administrativa"
+
+

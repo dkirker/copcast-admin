@@ -9,7 +9,8 @@
     <div class="panel-body">
 
       <form novalidate="novalidate" class="form-inline date filter">
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-md-3">
           <label translate>From</label>
 
           <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
@@ -19,7 +20,7 @@
                  ng-click="filter.fromDateShow()"/>
           <i class="icon calendar"></i>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-3">
           &nbsp;&nbsp;&nbsp;<label translate>To</label>
 
           <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
@@ -29,51 +30,61 @@
                  ng-click="filter.toDateShow()"/>
           <i class="icon calendar"></i>
         </div>
-        <div class="form-group">
+
+        <div class="form-group col-md-2">
+          <label translate>User</label>
+          <select ng-options="user.id as user.name for user in users" ng-required="true"
+                  ng-model="filter.user"
+                  required class="form-control" >
+            <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label translate>Group</label>
+          <select ng-options="group.id as group.name for group in groups" ng-required="true"
+                  ng-model="filter.group"
+                  required class="form-control">
+            <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+
           &nbsp;&nbsp;&nbsp;<a ng-click="searchByDate()" class="btn btn-small btn-primary" translate>Update</a>
         </div>
-
+        </div>
       </form>
     </div>
   </div>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
-  <div class="controls">
-    <label class="control-label" for="user.name" translate> Name:</label>
-    <input type="text" id="inputUser" ng-model="globalSearch.user.name"/>
 
-    <label class="control-label" for="group.name" translate> Group:</label>
-    <input type="text" id="inputGroup" ng-model="globalSearch.user.group.name"/><br><br>
-  </div>
   <table class="table table-striped table-condensed">
     <thead>
     <tr>
-      <th style="min-width: 40px;" ng-click="sort('date')"><span translate>date</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'date'"
-                  ng-class="{'glyphicon glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/> </th>
-      <th style="min-width: 40px;"  ng-click="sort('userId')" ><span translate>username</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'userId'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
-      <th style="min-width: 50px;"  ng-click="sort('groupId')" ><span translate>group name</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'groupId'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
-      <th style="min-width: 80px;"  ng-click="sort('>previousstate')" ><span translate>previous state</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'previousstate'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
-      <th style="min-width: 80px;"  ng-click="sort('nextstate')" ><span translate>next state</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'nextstate'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"/></th>
-      <th style="width:20px;" > </th>
+
+      <th ><span translate>User</span>
+      <th ><span translate>Group</span>
+      <th ><span translate>date</span>
+      <th ><span translate>action</span>
+      <th ><span translate>Extra Information</span>
     </tr>
     </thead>
     <tbody>
     <tr dir-paginate="logreport in logreports | itemsPerPage: perPage | filter: globalSearch " total-items="totalHistories"
         current-page="pagination">
-      <td>{{ logreport.date | date:'yyyy-MM-dd' }}</td>
       <td>{{ logreport.user.name }}</td>
       <td>{{ logreport.user.group.name }}</td>
-      <td>{{ logreport.previousState }}</td>
-      <td>{{ logreport.nextState }}</td>
-      <td><a ng-click="viewLog(logreport.id)" class="btn btn-small btn-primary"  translate>view</a></td>
+      <td>{{ logreport.date | date:'yyyy-MM-dd  HH:mm' }}</td>
+      <td >{{ logreport.nextState | translate }}</td>
+      <td >
+        <div ng-show="logreport.nextState == 'UPLOADING' && logreport.extraJson">
+          <label translate>Connection:</label> {{ logreport.extraJson['connection']}} <br/>
+          <label translate>Data in the device:</label> {{ logreport.extraJson['data']}} bytes
+        </div>
+        <div ng-show="logreport.nextState == 'PLAYING_VIDEO' && logreport.extraJson">
+          <label translate>Video Watched:</label> <a href="{{ logreport.extraJson.videoName}}">{{ logreport.extraJson.videoName}}</a> <br/>
+          <label translate>Recorded By:</label> {{ logreport.extraJson.userName}}
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>

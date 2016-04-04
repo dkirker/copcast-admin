@@ -16,7 +16,8 @@
         <tr ng-repeat="user in users">
             <td>{{ user.name }}</td>
             <td>{{ user.group }}</td>
-            <td translate>{{ user.isEnabled ? 'Enabled' : 'Disabled'  }}</td>
+            <td translate ng-show="user.isEnabled">Enabled</td>
+            <td translate ng-hide="user.isEnabled">Disabled</td>
             <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a></td>
             <td><a ng-click="deleteUser(user.id, user.name )" class="btn btn-small btn-danger" translate>delete</a></td>
         </tr>
