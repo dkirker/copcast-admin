@@ -13,6 +13,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'http://maps.googleapis.com/maps/api/js?sensor=false&language=en',
+      'https://content.jwplatform.com/libraries/TD0AtAf0.js',
       // bower:js
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
@@ -34,6 +35,7 @@ module.exports = function(config) {
       'bower_components/event-signal/dist/event-signal.min.js',
       'bower_components/google-map-infobubble/src/infobubble.js',
       'bower_components/moment/moment.js',
+      'bower_components/ng-jwplayer/jwplayer.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
       'bower_components/angularUtils-pagination/dirPagination.js',
@@ -54,7 +56,7 @@ module.exports = function(config) {
       'src/**/*.js': ['browserify']
     },
 
-   
+
     ngHtml2JsPreprocessor: {
       // strip this from the file path
       stripPrefix: 'src/',
