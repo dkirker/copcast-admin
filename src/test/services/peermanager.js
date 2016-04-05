@@ -7,7 +7,7 @@ describe('Service: peerManager', function () {
 
   // instantiate service
   var peerManager;
-  beforeEach(inject(function (_peerManager_) {
+  beforeEach(angular.mock.inject(function (_peerManager_) {
     peerManager = _peerManager_;
   }));
 

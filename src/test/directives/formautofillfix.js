@@ -8,7 +8,7 @@ describe('Directive: formAutoFillFix', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope) {
+  beforeEach(angular.mock.inject(function ($rootScope) {
     scope = $rootScope.$new();
   }));
 
