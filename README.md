@@ -18,6 +18,7 @@ With node installed, install Bower, Gulp, Karma and PhantomJs (the last two, to 
   npm install -g bower
   npm install -g gulp
   npm install -g karma
+  npm install -g node-gyp
   npm install phantomjs
   
   npm install
