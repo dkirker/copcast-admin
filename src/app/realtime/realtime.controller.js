@@ -160,7 +160,7 @@
       }
       $scope.activeUsers[data.id].timeoutPromisse = $timeout(function () {
         timeoutUser($scope.activeUsers[data.id]);
-      }, 60000);
+      }, 300000);
     };
 
 
