@@ -7,6 +7,7 @@
         <tr>
             <th style="min-width: 80px;" translate>Name</th>
             <th style="min-width: 80px;" translate>Group</th>
+            <th style="min-width: 80px;" translate>Created At</th>
             <th style="min-width: 80px;" translate>Status</th>
             <th style="width:20px;" > </th>
             <th style="width:20px;" > </th>
@@ -16,6 +17,7 @@
         <tr ng-repeat="user in users">
             <td>{{ user.name }}</td>
             <td>{{ user.group }}</td>
+            <td translate>{{ user.createdAt | date:'medium' }}</td>
             <td translate ng-show="user.isEnabled">Enabled</td>
             <td translate ng-hide="user.isEnabled">Disabled</td>
             <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a></td>
