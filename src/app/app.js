@@ -115,7 +115,6 @@ angular
         redirectTo: '/'
       });
   }).run(function($rootScope, $location, loginService ) {
-
     $rootScope.$on('event:auth-loginRequired', function() {
       loginService.show();
     });
@@ -124,4 +123,7 @@ angular
       return viewLocation === $location.path();
     };
 
+    $rootScope.isAuthenticated = function () {
+      return loginService.isAuthenticated();
+    }
   });
