@@ -36,7 +36,14 @@ we user cookie's validation to guarantee that all requests are authenticated (ev
 Now finally run the app:
 
 ```
+  gulp copy-bs-fonts
   gulp serve
+```
+
+or
+
+```
+  gulp server
 ```
 
 

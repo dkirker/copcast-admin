@@ -29,6 +29,10 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
   require('./gulp/' + file)(options);
 });
 
+gulp.task('copy-bs-fonts', function(){
+  return gulp.src(options.wiredep.directory + '/bootstrap-sass/assets/fonts/bootstrap/*.{eot,svg,ttf,woff,woff2}')
+    .pipe(gulp.dest(options.src + '/fonts/'));
+});
 
 gulp.task('test', function (done) {
   new Server({
@@ -37,7 +41,11 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
-gulp.task('default', ['clean'], function () {
+gulp.task('server', ['copy-bs-fonts'], function () {
+  gulp.start('serve');
+});
+
+gulp.task('default', ['clean', 'copy-bs-fonts'], function () {
     gulp.start('build');
 });
 
