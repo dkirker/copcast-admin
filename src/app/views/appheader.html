@@ -27,7 +27,6 @@
               <li ng-class="{active:isActive('/exports')}" ng-show="canExport()"><a class="nav-clickable" ng-href="#/exports" translate>Videos Export</a></li>
             </ul>
           </li>
-
         </ul>
         <p class="navbar-text navbar-right"><translate>Signed in as</translate> &nbsp;<user-name></user-name>
           &nbsp<a ng-href="#/logout" class="nav-clickable" translate>Logout</a>
@@ -41,6 +40,6 @@
 </header>
 <script type="text/javascript">
   $('a.nav-clickable').on('click', function(){
-    $('.collapse').collapse('hide');; //bootstrap 2.x
+    $('.collapse').collapse('hide'); //bootstrap 2.x
   });
 </script>
