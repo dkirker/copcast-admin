@@ -32,7 +32,7 @@ engines:
       - javascript
 ratings:
   paths:
-  - src/**
+  - src/**/*
 exclude_paths:
 - test/**/*
 # Engines can analyze files and report issues on them, but you can separately
