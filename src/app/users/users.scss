@@ -36,15 +36,26 @@ meter::-webkit-meter-bar {
   background-color: rgba(0,0,0,0.1);
 }
 
+/*
+ * Color sequence Worst to Strongest
+ * Red > Orange > Yellow > Green > Blue > Indigo > Violet
+ * Robert Of York Gained Battles In Vain
+ */
+
+meter::-webkit-meter-optimum-value { transition: width .4s linear; }
+meter::-moz-meter-bar { transition: width .4s linear; }
+
 meter[value="1"]::-webkit-meter-optimum-value { background: red; }
-meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
-meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="2"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="3"]::-webkit-meter-optimum-value { background: yellow; }
 meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+meter[value="5"]::-webkit-meter-optimum-value { background: blue; }
 
 meter[value="1"]::-moz-meter-bar { background: red; }
-meter[value="2"]::-moz-meter-bar { background: yellow; }
-meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="2"]::-moz-meter-bar { background: orange; }
+meter[value="3"]::-moz-meter-bar { background: yellow; }
 meter[value="4"]::-moz-meter-bar { background: green; }
+meter[value="5"]::-moz-meter-bar { background: blue; }
 
 .pwdStrong {
   font-size: 15px;

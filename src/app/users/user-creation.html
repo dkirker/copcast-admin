@@ -54,7 +54,7 @@
       <div class="col-md-4">
         <label for="inputPassword" translate>Password:</label>
         <input type="password" class="form-control" id="inputPassword" ng-model="user.password" required ng-minlength="8"/>
-        <meter max="4" id="password-strength-meter"></meter>
+        <meter max="5" id="password-strength-meter"></meter>
         <small translate>- Minimum 8 digits.</small>
         <span id="password-strength-text" class="pwdStrong"></span>
       </div>
@@ -88,11 +88,11 @@
 
 <script type="text/javascript">
   var strength = {
-    0: "Worst",
-    1: "Bad",
-    2: "Weak",
-    3: "Good",
-    4: "Strong"
+    1: "Worst",
+    2: "Bad",
+    3: "Weak",
+    4: "Good",
+    5: "Strong"
   };
 
   var meter = $('#password-strength-meter');
@@ -104,11 +104,11 @@
     var password = $self.val();
     var result = zxcvbn(password);
 
-    meter.val(result.score);
-
     if (password !== "") {
-      text.text(strength[result.score]).fadeIn();
+      meter.val(result.score + 1);
+      text.text(strength[result.score + 1]).fadeIn();
     } else {
+      meter.val(0);
       text.fadeOut();
       setTimeout(function(){
         text.text("");
