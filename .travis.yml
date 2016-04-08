@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - 0.10.40
+addons:
+    code_climate:
+        repo_token: 3b02b0fa0647849c47548a030ec9bf35c704feca75b763af3ccdd180ae8afe88
 before_script:
   - "mv src/app/config.tpl src/app/config.js"
   - "npm install"
