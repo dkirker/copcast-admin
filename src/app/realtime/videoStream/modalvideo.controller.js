@@ -25,9 +25,8 @@ angular.module('copcastAdminApp')
       width: 144
 
     };
-
+    console.log('starting streaming modal with url: '+streamUrl)
     $scope.streamPath = $sce.trustAsResourceUrl(streamUrl);
-
 
     $scope.ok = function () {
       $uibModalInstance.close();

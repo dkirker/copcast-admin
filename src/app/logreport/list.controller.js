@@ -8,12 +8,12 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('LogReportListCtrl', function ($scope, $http, $location, ServerUrl, historyService, gettextCatalog) {
+  .controller('LogReportListCtrl', function ($scope, $http, $location, ServerUrl, historyService,userService, groupService, gettextCatalog) {
 
     $scope.sortKey = "date";
     $scope.reverse = 1;
     $scope.perPage = 30;
-    $scope.totalHistories = 0
+    $scope.totalHistories = 0;
     $scope.pagination = 1;
 
     $scope.pageChanged = function(newPage) {
@@ -42,13 +42,6 @@ angular.module('copcastAdminApp')
     };
     $scope.hasData = function hasData(){
       return $scope.logreport && $scope.logreport["activeOfficers"] !== undefined;
-    }
-
-    //sort list
-    $scope.sort = function(keyname){
-      $scope.sortKey = keyname;
-      $scope.reverse = !$scope.reverse;
-
     };
 
     //sort range date
@@ -57,7 +50,8 @@ angular.module('copcastAdminApp')
       var toDate = moment($scope.filter.toDate);
       if (fromDate.isValid() && toDate.isValid()) {
         $scope.errorMessage = null;
-        historyService.listHistoriesByPeriod(fromDate, toDate, $scope.pagination, $scope.perPage).
+        historyService.listHistoriesByParams(fromDate, toDate, $scope.filter.user, $scope.filter.group,
+          $scope.pagination, $scope.perPage).
           then(function(data){
             $scope.logreports = data.rows;
             $scope.totalHistories = data.count;
@@ -67,17 +61,30 @@ angular.module('copcastAdminApp')
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid date range.')
       }
-    }
-
-    // callback for ng-click 'viewLogReport':
-    $scope.viewLog = function (historyId) {
-      $location.path('/log-report-view/' + historyId);
     };
 
+    $scope.users = [];
+    userService.listUsers().then(function(users){
+      $scope.users = users
+    }, function(err){
+      $scope.errorMessage = err;
+    });
+
+    $scope.groups = [];
+    groupService.listGroups().then(function(groups){
+      $scope.groups = groups
+    }, function(err){
+      $scope.errorMessage = err;
+    });
+
     function loadHistory(){
-      historyService.listHistories($scope.pagination, $scope.perPage).
+      historyService.listHistories($scope.filter.user, $scope.filter.group, $scope.pagination, $scope.perPage).
       then(function(data){
         $scope.logreports = data.rows;
+        for (var i = 0; i < $scope.logreports.length; i++){
+          var logReport = $scope.logreports[i]
+          logReport.extraJson = JSON.parse(logReport.extras)
+        }
         $scope.totalHistories = data.count;
       }, function(error){
         console.error(error);

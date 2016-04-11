@@ -7,3 +7,4 @@ dist/
 *.orig
 *.log
 src/app/config.js
+src/fonts

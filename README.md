@@ -1,5 +1,6 @@
-[![Stories in Ready](https://badge.waffle.io/igarape/copcast-admin.png?label=ready&title=Ready)](https://waffle.io/igarape/copcast-admin)
-[![Build Status](https://travis-ci.org/igarape/copcast-admin.svg?branch=master)](https://travis-ci.org/igarape/copcast-admin)
+<a href="https://zenhub.io"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+
+[![Build Status](https://travis-ci.org/igarape/copcast-admin.svg?branch=develop)](https://travis-ci.org/igarape/copcast-admin)
 [![Code Climate](https://codeclimate.com/github/igarape/copcast-admin/badges/gpa.svg)](https://codeclimate.com/github/igarape/mogi-server)
 # Copcast Admin
 
@@ -15,27 +16,35 @@ With node installed, install Bower, Gulp, Karma and PhantomJs (the last two, to 
 
 ```
   npm install -g bower
-  npm install -g gulp@3.9.0
-  npm install -g karma@0.13.3
-  npm install phantomjs@1.9.17
+  npm install -g gulp
+  npm install -g karma
+  npm install -g node-gyp
+  npm install phantomjs
   
   npm install
   bower install
 ```
 Now you have Copcast Admin installed. To connect it with the server, you must have installed <a href="https://github.com/igarape/mogi-server">Copcast Server</a>. If you did not install it yet, this is the time!
 
-Open the file <b>src/app/app.js</b> and make sure that the constant <b>ServerUrl</b> points to <b>//\<COPCAST_SERVER_ADDRESS\>:\<COPCAST_SERVER_PORT\></b>
+To connect Copcast Admin with the server, you must create a <b>config.js</b> file inside the directory <b>src/app</b> and include the folowing line
 
 ```
-angular.module('copcastAdminApp').constant('ServerUrl', '//localhost:3000');
+angular.module('copcastAdminApp').constant('ServerUrl', '<SERVER URL>');
 ```
-
-Please note that we intentionally omit the schema ("http:") in order to allow the same value to be used with both HTTP and HTTPS.
+<b>IMPORTANT:</b>
+we user cookie's validation to guarantee that all requests are authenticated (even requests straigth from the HTML). The domain of Copcast Server must be the same from Copcast Admin.
 
 Now finally run the app:
 
 ```
+  gulp copy-bs-fonts
   gulp serve
+```
+
+or
+
+```
+  gulp server
 ```
 
 

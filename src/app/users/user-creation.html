@@ -1,78 +1,118 @@
-<div class="containerUser">
-    <h1 translate>User details</h1>
+<!--<div class="containerUser">-->
+<div class="container">
+  <h1 class="page-header" style="border-color: #DDDDDD;" translate>User details</h1>
 
-    <form novalidate class="form-horizontal" ng-submit="submittted = true" name="frm">
-        <alert ng-show="serverMessage">
-          <p>
-            {{serverMessage}}
-          </p>
-        </alert>
-        <div class="control-group">
-            <label class="control-label" for="inputName" translate>Name:</label>
-            <div class="controls">
-                <input type="text" id="inputName" ng-model="user.name" required/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputName" translate>Group:</label>
-            <div class="controls">
-                <select ng-options="group.id as group.name for group in groups" ng-model="user.groupId" required>
-                </select>
-            </div>
-        </div>
-        <div class="control-group" ng-show="canCreateAdmin()">
-          <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
-          <div class="controls">
-            <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin"/>
-          </div>
-        </div>
-        <div class="control-group" ng-show="user.isAdmin">
-          <label class="control-label" for="inputName" translate>Role:</label>
-          <div class="controls">
-            <select ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin">
-            </select>
-          </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputUsername" translate>Username:</label>
-            <div class="controls">
-                <input type="text" id="inputUsername" ng-model="user.username" required/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputEmail" translate>Email:</label>
-            <div class="controls">
-                <input type="text" id="inputEmail" ng-model="user.email" required/>
-            </div>
-        </div>
+  <form novalidate ng-submit="submittted = true" name="frm">
+    <div ng-show="serverMessage" class="alert alert-danger">
+      <p>
+        {{serverMessage}}
+      </p>
+    </div>
 
-        <div class="control-group">
-            <label class="control-label" for="inputPassword" translate>Password:</label>
-            <div class="controls">
-                <input type="password" id="inputPassword" ng-model="user.password" required ng-minlength="6"/>
-            </div>
-        </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="inputName" translate>Name:</label>
+        <input type="text" class="form-control" id="inputName" ng-model="user.name" required/>
+      </div>
 
-        <div class="control-group">
-          <label class="control-label" for="language" translate>Preferred language:</label>
-          <div class="controls">
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
-            </label>
+      <div class="col-md-4">
+        <label for="inputUsername" translate>Username:</label>
+        <input type="text" class="form-control" id="inputUsername" ng-model="user.username" required/>
+      </div>
 
-          </div>
-        </div>
+      <div class="col-md-4">
+        <label for="inputEmail" translate>Email:</label>
+        <input type="text" class="form-control" id="inputEmail" ng-model="user.email" required/>
+      </div>
+    </div>
 
-      <div class="control-group">
-            <div class="controls" >
-              <br><br>
-                <!-- user-creation.html: -->
-              <button ng-disabled="frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</button>
-              <br><br>
-            </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label for="inputName" translate>Group:</label>
+        <select class="form-control" ng-options="group.id as group.name for group in groups" ng-model="user.groupId" required></select>
+      </div>
+
+      <div class="col-md-4" ng-show="canCreateAdmin()">
+        <div class="checkbox">
+          <label translate>
+            <input type="checkbox" ng-model="user.isAdmin"/> Is Admin?
+          </label>
         </div>
-    </form>
+      </div>
+
+      <div class="col-md-4" ng-show="user.isAdmin">
+        <label for="inputName" translate>Role:</label>
+        <select class="form-control" ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin"></select>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label for="inputPassword" translate>Password:</label>
+        <input type="password" class="form-control" id="inputPassword" ng-model="user.password" required ng-minlength="8"/>
+        <meter max="5" id="password-strength-meter"></meter>
+        <small translate>- Minimum 8 digits.</small>
+        <span id="password-strength-text" class="pwdStrong"></span>
+      </div>
+
+      <!--<div class="col-md-4">-->
+        <!--<p id="password-strength-text"></p>-->
+      <!--</div>-->
+
+      <div class="col-md-4">
+        <label for="language" translate>Preferred language:</label>
+        <div class="controls">
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border-color: #DDDDDD;" />
+
+    <div id="actions" class="row">
+      <div class="col-md-12">
+        <button ng-disabled="frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</button>
+      </div>
+    </div>
+  </form>
 </div>
+
+<script type="text/javascript">
+  var strength = {
+    1: "Worst",
+    2: "Bad",
+    3: "Weak",
+    4: "Good",
+    5: "Strong"
+  };
+
+  var meter = $('#password-strength-meter');
+  var text = $('#password-strength-text');
+  text.hide();
+
+  $('#inputPassword').keyup(function(){
+    var $self = $(this);
+    var password = $self.val();
+    var result = zxcvbn(password);
+
+    if (password !== "") {
+      meter.val(result.score + 1);
+      text.text(strength[result.score + 1]).fadeIn();
+    } else {
+      meter.val(0);
+      text.fadeOut();
+      setTimeout(function(){
+        text.text("");
+      }, 500);
+    }
+  });
+</script>

@@ -22,13 +22,13 @@
               <li ng-class="{active:isActive('/user-list')}"><a class="nav-clickable" ng-href="#/user-list" translate>Users</a></li>
               <li ng-class="{active:isActive('/group-list')}"><a class="nav-clickable" ng-href="#/group-list" translate>Groups</a></li>
               <li ng-show="canAccessReports()" ng-class="{active:isActive('/incidentForm-list')}"><a class="nav-clickable" ng-href="#/incidentForm-list" translate>Incident Forms</a></li>
-              <li ng-class="{active:isActive('/log-report-list')}"><a class="nav-clickable" ng-href="#/log-report-list" translate>Log audit report</a></li>
+              <li ng-class="{active:isActive('/log-report-list')}"><a class="nav-clickable" ng-href="#/log-report-list" translate>Audit Report</a></li>
               <li ng-show="canAccessReports()" ng-class="{active:isActive('/report')}"><a class="nav-clickable" ng-href="#/report" translate>Report</a></li>
+              <li ng-class="{active:isActive('/exports')}" ng-show="canExport()"><a class="nav-clickable" ng-href="#/exports" translate>Videos Export</a></li>
             </ul>
           </li>
-
         </ul>
-        <p class="navbar-text navbar-right"><translate>Signed in as</translate> &nbsp;<user-name></user-name>
+        <p class="navbar-text navbar-right" ng-show="isAuthenticated()"><translate>Signed in as</translate> &nbsp;<user-name></user-name>
           &nbsp<a ng-href="#/logout" class="nav-clickable" translate>Logout</a>
           <button type="button" class="btn btn-default btn-xs" ng-click="clickLang()"  ng-controller="TranslateController">
             <img src="{{imgFlag}}">
@@ -40,6 +40,6 @@
 </header>
 <script type="text/javascript">
   $('a.nav-clickable').on('click', function(){
-    $('.collapse').collapse('hide');; //bootstrap 2.x
+    $('.collapse').collapse('hide'); //bootstrap 2.x
   });
 </script>

@@ -38,6 +38,18 @@
         });
       return defer.promise;
     }
+    service.deleteGroup = function deleteGroup(groupId) {
+      var defer = $q.defer();
+      $http
+        .delete(ServerUrl + '/groups/' + groupId)
+        .success(function(group) {
+          defer.resolve(group);
+        })
+        .error(function(data, status) {
+          defer.reject(data, status);
+        });
+      return defer.promise;
+    }
 
     service.getGroupLocations = function getGroupLocations(groupId, fromDate, toDate, accuracy) {
       var defer = $q.defer();

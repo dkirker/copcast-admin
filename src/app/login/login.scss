@@ -41,20 +41,29 @@
   }
   form{
     width: 200px;
-    text-align: right;
     position: relative;
     height: auto;
     padding: 10px;
     margin: 0 auto;
+
+  }
+  .errorMessage::before {
+    content: url('/assets/images/x.png');
+    padding-right: 5px;
   }
   .errorMessage {
-    color: #ec1c24;
-    font-weight: 300;
-    width: 200px;
+    color: #e8abac;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+  .emailMessage::before {
+    content: "\2713";
+    padding-right: 5px;
   }
   .emailMessage{
-    color: green;
-    font-weight: 300;
+    color: #afefaf;
+    font-weight: bold;
+    padding-bottom: 5px;
   }
 }
 

@@ -7,10 +7,14 @@
  * # appHeader
  */
 angular.module('copcastAdminApp')
-  .directive('appHeader', function () {
+  .directive('appHeader', function (userService) {
     return {
       templateUrl: 'app/views/appheader.html',
-      restrict: 'E'
-
+      restrict: 'E',
+      link: function (scope) {
+        scope.canExport = function() {
+          return userService.isAdminTwo() || userService.isAdminThree()
+        };
+      }
     };
   });

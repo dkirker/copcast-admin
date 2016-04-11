@@ -1,128 +1,101 @@
 
-  <div class="container-fluid">
+  <div class="container">
+    <h3 class="page-header" style="border-color: #DDDDDD;" translate>Incident Form</h3>
 
-    <h1 translate>Incident Form</h1>
-    <div class="col-md-4">
-      <form novalidate="novalidate" class="form-horizontal">
-        <alert ng-show="serverMessage">
-          <p>
-            {{serverMessage["detail"]}}
-          </p>
-        </alert>
+    <div class="row">
+      <div class="col-md-2">
+        <p><strong translate>User name:</strong></p>
+        <p>{{incidentForm.user.name }}</p>
+      </div>
 
-        <div class="control-group">
-          <label class="control-label" for="inputName" translate>User name:</label>
-          <div class="controls">
-            {{incidentForm.user.name }}
-          </div>
-        </div>
+      <div class="col-md-2">
+        <p><strong translate>Date/Time:</strong></p>
+        <p>{{incidentForm.date | date:'medium' }}</p>
+      </div>
 
-        <div class="control-group">
-          <label class="control-label" for="inputName" translate>Date/Time:</label>
-          <div class="controls">
-            {{incidentForm.date | date:'medium' }}
-          </div>
-        </div>
+      <div class="col-md-2">
+        <p><strong translate>Lat:</strong></p>
+        <p>{{incidentForm.lat }}</p>
+      </div>
 
-        <div class="control-group">
-          <label class="control-label" for="inputName" translate>Date/Time:</label>
-          <div class="controls">
-            {{incidentForm.lat }} , {{incidentForm.lng}}
-          </div>
-        </div>
+      <div class="col-md-2">
+        <p><strong translate>Long:</strong></p>
+        <p>{{incidentForm.lng}}</p>
+      </div>
 
-        <div class="control-group">
-          <label class="control-label" for="inputName" translate>Address:</label>
-          <div class="controls">
-            {{incidentForm.address }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="arrest" translate>Arrest?</label>
-          <div class="controls">
-            {{incidentForm.arrest }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="gravity" translate>Gravity</label>
-          <div class="controls">
-            {{incidentForm.gravity }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="numInjured" translate>Number of Injured</label>
-          <div class="controls">
-            {{incidentForm.injured }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="fine" translate>Fine?</label>
-          <div class="controls">
-            {{incidentForm.fine }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="fineType" translate>Type of Fine</label>
-          <div class="controls">
-            {{incidentForm.fineType }}
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="arrest" translate>Arrest?</label>
-          <div class="controls">
-            {{incidentForm.arrest }}
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label" for="resistance" translate>Resistance?</label>
-          <div class="controls">
-            {{incidentForm.resistance }}
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label" for="argument" translate>Argument?</label>
-          <div class="controls">
-            {{incidentForm.argument }}
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label" for="useOfForce" translate>Use Of Force?</label>
-          <div class="controls">
-            {{incidentForm.useOfForce }}
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label" for="useLethalForce" translate>Use Lethal Force?</label>
-          <div class="controls">
-            {{incidentForm.useLethalForce }}
-          </div>
-        </div>
-
-
-
-        <div class="control-group">
-          <div class="controls">
-            <br><br>
-            <!-- user-detail.html: -->
-            <a ng-click="back()" class="btn btn-default" translate>back</a>
-            <br><br>
-          </div>
-        </div>
-      </form>
+      <div class="col-md-4">
+        <p><strong translate>Address:</strong></p>
+        <p>{{incidentForm.address }}</p>
+      </div>
     </div>
 
+    <hr style="border-color: #DDDDDD; border-style: dashed;" />
+
+    <div class="row">
+      <div class="col-md-2">
+        <p><strong translate>Accident?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.accident ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.accident">
+        <p><strong translate>Gravity</strong></p>
+        <p>{{incidentForm.gravity }}</p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.accident">
+        <p><strong translate>Number of Injured</strong></p>
+        <p>{{incidentForm.injured }}</p>
+      </div>
+    </div>
+
+    <hr style="border-color: #DDDDDD; border-style: dashed;" />
+
+    <div class="row">
+      <div class="col-md-2">
+        <p><strong translate>Fine?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.fine ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.fine">
+        <p><strong translate>Type of Fine</strong></p>
+        <p>{{ incidentForm.fineType }}</p>
+      </div>
+    </div>
+
+    <hr style="border-color: #DDDDDD; border-style: dashed;" />
+
+    <div class="row">
+      <div class="col-md-2">
+        <p><strong translate>Arrest?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.arrest ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.arrest">
+        <p><strong translate>Resistance?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.resistance ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.resistance">
+        <p><strong translate>Argument?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.argument ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.resistance">
+        <p><strong translate>Use of Force?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.useOfForce ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+
+      <div class="col-md-2" ng-show="incidentForm.resistance">
+        <p><strong translate>Use Lethal Force?</strong></p>
+        <p><span class="glyphicon {{ incidentForm.useLethalForce ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
+      </div>
+    </div>
+
+    <hr style="border-color: #DDDDDD;" />
+
+    <div id="actions" class="row">
+      <div class="col-md-12">
+        <a ng-click="back()" class="btn btn-default" translate>back</a>
+      </div>
+    </div>
   </div>

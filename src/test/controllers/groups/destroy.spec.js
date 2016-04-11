@@ -9,7 +9,7 @@ describe('Controller: GroupsDestroyCtrl', function () {
     scope, location, serverUrl, http;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$location_, _$http_) {
+  beforeEach(angular.mock.inject(function ($controller, $rootScope, _$location_, _$http_) {
     scope = $rootScope.$new();
     http = _$http_
     location = _$location_;
