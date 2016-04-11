@@ -54,7 +54,7 @@ _Gulp_ is not suited for the production environment and you should use a real we
 Once you have configured your web server, you can instruct _gulp_ to build your files with:
 
 ```
-  gulp build
+  gulp
 ```
 
 The generated files will be deployed to the _dist_ directory, which should serve as your web root.
