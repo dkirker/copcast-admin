@@ -45,7 +45,7 @@ gulp.task('server', ['copy-bs-fonts'], function () {
   gulp.start('serve');
 });
 
-gulp.task('default', ['clean', 'copy-bs-fonts'], function () {
+gulp.task('default', ['clean', 'copy-bs-fonts', 'vendor_js'], function () {
     gulp.start('build');
 });
 
