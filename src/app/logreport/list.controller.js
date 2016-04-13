@@ -52,12 +52,12 @@ angular.module('copcastAdminApp')
         $scope.errorMessage = null;
         historyService.listHistoriesByParams(fromDate, toDate, $scope.filter.user, $scope.filter.group,
           $scope.pagination, $scope.perPage).
-          then(function(data){
-            $scope.logreports = data.rows;
-            $scope.totalHistories = data.count;
-          }, function(error){
-            console.error(error);
-          });
+        then(function(data){
+          $scope.logreports = data.rows;
+          $scope.totalHistories = data.count;
+        }, function(error){
+          console.error(error);
+        });
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid date range.')
       }
@@ -65,7 +65,7 @@ angular.module('copcastAdminApp')
 
     $scope.users = [];
     userService.listUsers().then(function(users){
-      $scope.users = users
+      $scope.users = users;
     }, function(err){
       $scope.errorMessage = err;
     });
@@ -82,14 +82,14 @@ angular.module('copcastAdminApp')
       then(function(data){
         $scope.logreports = data.rows;
         for (var i = 0; i < $scope.logreports.length; i++){
-          var logReport = $scope.logreports[i]
-          logReport.extraJson = JSON.parse(logReport.extras)
+          var logReport = $scope.logreports[i];
+          logReport.extraJson = JSON.parse(logReport.extras);
         }
         $scope.totalHistories = data.count;
       }, function(error){
         console.error(error);
-          });
-      }
+      });
+    }
 
     loadHistory();
   });
