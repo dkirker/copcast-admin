@@ -35,4 +35,7 @@ angular.module('copcastAdminApp')
       $scope.groups = data;
     });
 
+    $scope.back = function () {
+      $location.path('/user-list');
+    };
   });

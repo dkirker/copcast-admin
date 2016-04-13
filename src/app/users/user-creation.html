@@ -1,6 +1,6 @@
 <!--<div class="containerUser">-->
 <div class="container">
-  <h1 class="page-header" style="border-color: #DDDDDD;" translate>User details</h1>
+  <h1 class="page-header hrDarker" translate>User details</h1>
 
   <form novalidate ng-submit="submittted = true" name="frm">
     <div ng-show="serverMessage" class="alert alert-danger">
@@ -76,10 +76,11 @@
       </div>
     </div>
 
-    <hr style="border-color: #DDDDDD;" />
+    <hr class="hrDarker" />
 
     <div id="actions" class="row">
       <div class="col-md-12">
+        <a ng-click="back()" class="btn btn-default" translate>back</a>
         <button ng-disabled="frm.$invalid" ng-click="createNewUser()" class="btn btn-small btn-primary" translate>create new user</button>
       </div>
     </div>

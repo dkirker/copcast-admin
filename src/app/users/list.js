@@ -8,7 +8,28 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersListCtrl', function ($scope, $http, $location, ServerUrl) {
+  .controller('UsersListCtrl', function ($scope, $http, $location, ServerUrl, userService) {
+    $scope.page = 1;
+    $scope.perPage = 30;
+    $scope.totalUsers = 0;
+
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+      if ($scope.filter.text){
+        $scope.searchByText();
+      } else {
+        loadUsers();
+      }
+    };
+
+    $scope.filter = {
+      text: null
+    };
+
+    $scope.searchByText = function() {
+      loadUsers();
+    };
+
     // callback for ng-click 'editUser':
     $scope.editUser = function (userId) {
       $location.path('/user-detail/' + userId);
@@ -16,10 +37,8 @@ angular.module('copcastAdminApp')
 
     // callback for ng-click 'deleteUser':
     $scope.deleteUser = function (userId, userName) {
-
       // confirmation to delete
       $location.path('/user-destroy/' + userId);
-
     };
 
     // callback for ng-click 'createUser':
@@ -27,15 +46,24 @@ angular.module('copcastAdminApp')
       $location.path('/user-creation');
     };
 
-    $http.get(ServerUrl + '/users',
-      { params : {
-        page : $scope.page
-      }
-      }
-    ).success(function(data) {
-        $scope.users = data;
-      }).error(function(data) {
-        console.error(data);
-      });
+    function loadUsers(){
+      var params = {
+        page : $scope.page,
+        perPage : $scope.perPage
+      };
 
+      if($scope.filter.text && $scope.filter.text != "") {
+        params['filter'] = $scope.filter.text;
+      }
+
+      userService.paginateUsers(params)
+      .then(function(data){
+        $scope.users = data.rows;
+        $scope.totalUsers = data.count;
+      }, function(error){
+        console.log(error);
+      });
+    }
+
+    loadUsers();
   });
