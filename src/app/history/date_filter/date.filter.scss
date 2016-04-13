@@ -1,17 +1,19 @@
 form.date.filter {
-  .form-control, .control-label {
-    font-size: 12pt;
-    font-weight: 500;
-    color: #4C4C4C;
-  }
+  //.form-control, .control-label {
+  //  font-size: 12pt;
+  //  font-weight: 500;
+  //  color: #4C4C4C;
+  //}
 
-  input[type="date"] {
-    margin-left: 10px;
-  }
-  input[type="checkbox"] {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+  //input[type="date"] {
+  //  margin-left: 10px;
+  //}
+
+  //input[type="checkbox"] {
+  //  margin-left: 10px;
+  //  margin-right: 10px;
+  //}
+
   .icon {
     &.calendar {
       top: 5px;
@@ -31,6 +33,7 @@ form.date.filter {
   input[type="date"]::-webkit-input-placeholder{
     visibility: hidden !important;
   }
+
   ul{
     right: inherit;
   }
