@@ -44,6 +44,23 @@
       return defer.promise;
     };
 
+    service.paginateUsers = function(params) {
+      var defer = $q.defer();
+      $http.get(ServerUrl + '/users-paginated',
+        {
+          params: params
+        }
+      ).success(function(data) {
+        // angular.forEach(data.rows, function(user) {
+        //   user.profilePicture = generateProfilePictureAddress(ServerUrl, user);
+        // });
+        defer.resolve(data);
+      }).error(function(data, status) {
+        defer.reject(data, status);
+      });
+      return defer.promise;
+    };
+
     service.getUser = function getUser(userId) {
       var defer = $q.defer();
       $http
