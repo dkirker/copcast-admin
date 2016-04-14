@@ -23,6 +23,7 @@
     $scope.waitingStreaming = false;
     $scope.searchString = '';
     $scope.alerts = [];
+    $scope.$uibModalInstance = null;
 
     $scope.mapOptions = {
       zoom: 12,
@@ -120,10 +121,13 @@
     };
 
     function removeUser(user) {
-      user.marker.setMap(null);
-      if (user.cityCircle) {
+      user.marker.setIcon(mapService.getGreyMarker(user.userName));
+      if (user.cityCircle)
         user.cityCircle.setMap(null);
-      }
+
+      setTimeout(function() {
+        user.marker.setMap(null);
+      }, 5000);
 
     }
 
@@ -157,7 +161,6 @@
           streamUrl: data.streamUrl
         };
         //TODO remove console.log afterwards
-        console.log('loaded user with streamURL: '+data.streamUrl)
         mapService.fitBounds($scope, $scope.activeUsers);
 
       } else {
@@ -175,19 +178,28 @@
 
       socket.on('frame', function(frame){
         var imgArray = new Uint8Array(frame.frame);
-        console.log(imgArray.length);
+        //console.log(imgArray.length);
         $rootScope.$emit("h264Frame", imgArray);
+      });
+
+      socket.on('streamStopped', function(){
+        $rootScope.$emit("streamStopped");
       });
 
       socket.on('userLeft', function(data) {
         console.log(data);
         //timeoutUser($scope.activeUsers[data.userLeft]);
+        mapService.closeBalloon();
+        if ($scope.$uibModalInstance != null) {
+          $scope.$uibModalInstance.close();
+          $scope.$uibModalInstance = null;
+        }
         removeUser($scope.activeUsers[data.userId]);
         delete $scope.activeUsers[data.userId];
-        mapService.closeBalloon();
       });
 
       socket.on('userEntered', function(data) {
+        console.log('userEntered');
         console.log(data);
         $scope.activeUsers[data.userId] = 'none';
       });
@@ -200,64 +212,14 @@
 
       socket.on('users:heartbeat', loadUser);
 
-      socket.on('streaming:start', function (data) {
-
-        var user = $scope.activeUsers[data.id];
-        if (!user) {
-          return console.log('Unable to find user for streaming');
-        }
-        userService.getMyData().
-          then(function (data) {
-            if (data.length === 0) {
-              return;
-            }
-            showStream(user);
-
-            console.log(JSON.stringify($scope.activeStreams));
-
-            $scope.popNotification(user);
-
-          });
-      });
-
-      socket.on('streaming:stop', function (data) {
-        stopStream($scope.activeUsers[data.id]);
-        notify.closeAll();
-        $scope.$apply();
-      });
       socket.on('disconnect', function (socket) {
+        Object.keys($scope.activeUsers).forEach(function(uid) {
+          removeUser($scope.activeUsers[uid]);
+        });
         console.log('Got disconnect!');
       });
-      socket.on('streaming:failed', function (data) {
-        if ($scope.activeStreams[data.id] && $scope.activeStreams[data.id].modal){
-          $scope.activeStreams[data.id].modal.close();
-        }
-        //show notification error
-        notify({
-          templateUrl: 'app/views/notifications/errorNotification.html',
-          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
-          position: "right",
-          scope: $scope
-        });
-      });
-      socket.on('streaming:alreadyConnected', function (data) {
-        //show message in balloon
-        if ($scope.currentUser.id === data.id) {
-          mapService.showErrorInBallon($scope);
-        }
-        if ($scope.activeStreams[$scope.currentUser.id] && $scope.activeStreams[$scope.currentUser.id].modal){
-          $scope.activeStreams[$scope.currentUser.id].modal.close();
-        }
-        //show notification error
-        notify({
-          templateUrl: 'app/views/notifications/errorNotification.html',
-          message: gettextCatalog.getString('Can not start streaming now. Try again later.'),
-          position: "right",
-          scope: $scope
-        });
-      });
-    });
 
+    });
 
     function filterUsers() {
 
@@ -319,13 +281,13 @@
 
       console.log('watch: '+user.id);
 
-      $scope.waitingStreaming = true;
-      if ($scope.isStreaming(user)){
-        $scope.streamButtonText = 'streaming';
-        showModal($scope.activeUsers[user.id]);
-      } else {
-        $scope.streamButtonText = 'Sending...';
-      }
+      //$scope.waitingStreaming = true;
+      //if ($scope.isStreaming(user)){
+      //  $scope.streamButtonText = 'streaming';
+        //showModal($scope.activeUsers[user.id]);
+      //} else {
+      //  $scope.streamButtonText = 'Sending...';
+      //}
     };
     $scope.requestStream = requestStream;
 
@@ -343,6 +305,8 @@
 
     function refreshUsers() {
       userService.getOnlineUsers().then(function (data) {
+        console.log('getOnlineUsers');
+        console.log(data);
         if (data.length === 0) {
           $scope.refreshMap();
           return;
@@ -391,20 +355,16 @@
       mapService.closeBalloon();
       console.log('showModal with user=[' + user.id + ']');
       console.log(JSON.stringify($scope.activeStreams[user.id]));
-      showStream(user);
-      $uibModal.open({
+      //showStream(user);
+      $scope.$uibModalInstance = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player_h264.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
         backdrop: false,
-        scope: $scope,
+        scope: $rootScope,
         resolve: {
           user: function () {
-            return user;
-          },
-          streamUrl: function(){return user.streamUrl;},
-          ServerUrl: function () {
-            return ServerUrl;
+            return (user);
           }
         }
       });
