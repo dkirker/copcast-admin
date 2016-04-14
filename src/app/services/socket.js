@@ -48,14 +48,22 @@ angular.module('copcastAdminApp')
         return;
       }
 
-      console.log(">>"+$rootScope.globals.currentUser);
-      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId, forceNew: true });
+      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId, forceNew: true, timeout: 5000});
+
       socketIo.once('connect', function() {
         connected = true;
         console.log('socket connected!');
         angular.forEach(onConnect, function(cb) {
           cb();
         });
+      });
+
+      socketIo.once('disconnect', function() {
+        console.log('SOCKET.IO CONNECTION LOST!');
+      });
+
+      socketIo.once('reconnect', function() {
+        console.log('SOCKET.IO Reconnect!');
       });
 
       socketIo.once('error', function(err) {
