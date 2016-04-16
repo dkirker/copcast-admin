@@ -78,7 +78,7 @@
       <td >
         <div ng-show="logreport.nextState == 'UPLOADING' && logreport.extraJson">
           <label translate>Connection:</label> {{ logreport.extraJson['connection']}} <br/>
-          <label translate>Data in the device:</label> {{ logreport.extraJson['data']}} bytes
+          <label translate>Data in the device:</label> {{ logreport.extraJson['data'] | bytes}}
         </div>
         <div ng-show="logreport.nextState == 'PLAYING_VIDEO' && logreport.extraJson">
           <label translate>Video Watched:</label> <a href="{{ logreport.extraJson.videoName}}">{{ logreport.extraJson.videoName}}</a> <br/>

@@ -21,12 +21,12 @@
         <div class="form-group">
           &nbsp;&nbsp;&nbsp;<label translate>To</label>
 
-            <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
-                   ng-model="filter.toDate" ng-model-options="{ debounce: 500 }"
-                   uib-datepicker-popup is-open="filter.toDateVisible"
-                   ng-required="true" show-button-bar="false" show-weeks="false"
-                   ng-click="filter.toDateShow()"/>
-            <i class="icon calendar"></i>
+          <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
+                 ng-model="filter.toDate" ng-model-options="{ debounce: 500 }"
+                 uib-datepicker-popup is-open="filter.toDateVisible"
+                 ng-required="true" show-button-bar="false" show-weeks="false"
+                 ng-click="filter.toDateShow()"/>
+          <i class="icon calendar"></i>
         </div>
         <div class="form-group">
           &nbsp;&nbsp;&nbsp;<a ng-click="updateFilter()" class="btn btn-small btn-primary" translate>Update</a>
@@ -43,9 +43,9 @@
       <div class="col-md-4">{{reportData.activeOfficers}}</div>
     </div>
     <!--<div class="row">-->
-      <!--<div class="col-md-4" translate><strong>Number of missions initiated (missions greater than 30 minutes)</strong>-->
-      <!--</div>-->
-      <!--<div class="col-md-4">{{reportData.missions}}</div>-->
+    <!--<div class="col-md-4" translate><strong>Number of missions initiated (missions greater than 30 minutes)</strong>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">{{reportData.missions}}</div>-->
     <!--</div>-->
     <div class="row">
       <div class="col-md-4" translate><strong>Number of hours of recorded footage</strong></div>
@@ -87,32 +87,32 @@
                   <!--</div>-->
                   <table class="table table-hover">
                     <thead>
-                      <tr>
-                        <th translate>Day</th>
-                        <th translate>Number of times mission was stopped</th>
-                        <th translate>Incidents Reported</th>
-                        <th translate>Total time recording</th>
-                        <th translate>Total time streaming</th>
-                        <th translate>Total time paused</th>
-                        <th translate>Total data uploaded</th>
-                        <th translate>Total</th>
-                      </tr>
+                    <tr>
+                      <th translate>Day</th>
+                      <th translate>Number of times mission was stopped</th>
+                      <th translate>Incidents Reported</th>
+                      <th translate>Total time recording</th>
+                      <th translate>Total time streaming</th>
+                      <th translate>Total time paused</th>
+                      <th translate>Total data uploaded</th>
+                      <th translate>Total</th>
+                    </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="activity in user.activities">
-                        <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
-                        <td>{{activity.totalMissions}}</td>
-                        <td>{{activity.incidents}}</td>
-                        <td>{{activity.recordedTime | minutesToHours}}</td>
-                        <td>{{activity.streamedTime | minutesToHours}}</td>
-                        <td>{{activity.pausedTime | minutesToHours}}</td>
-                        <td>{{activity.filesize | bytes}}</td>
-                        <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
-                      </tr>
+                    <tr ng-repeat="activity in user.activities">
+                      <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
+                      <td>{{activity.totalMissions}}</td>
+                      <td>{{activity.incidents}}</td>
+                      <td>{{activity.recordedTime | minutesToHours}}</td>
+                      <td>{{activity.streamedTime | minutesToHours}}</td>
+                      <td>{{activity.pausedTime | minutesToHours}}</td>
+                      <td>{{activity.filesize | bytes}}</td>
+                      <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
+                    </tr>
 
-                      <tr ng-hide="user.activities.length > 0 ">
-                        <td colspan="6" translate>No data found...</td>
-                      </tr>
+                    <tr ng-hide="user.activities.length > 0 ">
+                      <td colspan="6" translate>No data found...</td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
