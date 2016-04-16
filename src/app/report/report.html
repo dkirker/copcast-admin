@@ -60,8 +60,67 @@
       <div class="col-md-4">{{reportData.incidents}}</div>
     </div>
     <div class="row">
-      <div class="col-md-4" translate><strong>Number of personnel accessing the admin system</strong></div>
-      <div class="col-md-4">{{reportData.adminAccess}}</div>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading" translate>
+            Information by user
+            <span class="label label-default" translate>grouped by day</span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default reportUserList" ng-repeat="user in reportData.users">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title"
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      data-target="#collapse-{{ user.username }}"
+                      aria-controls="collapse-{{ user.username }}">
+                    {{user.username}}
+                  </h4>
+                </div>
+                <div id="collapse-{{ user.username }}"
+                     class="panel-collapse collapse {{{true: 'in', false: ''}[$first]}}"
+                     role="tabpanel"
+                     aria-labelledby="heading-{{ user.username }}">
+                  <!--<div class="panel-body">-->
+                  <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+                  <!--</div>-->
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th translate>Day</th>
+                        <th translate>Number of times mission was stopped</th>
+                        <th translate>Incidents Reported</th>
+                        <th translate>Total time recording</th>
+                        <th translate>Total time streaming</th>
+                        <th translate>Total time paused</th>
+                        <th translate>Total data uploaded</th>
+                        <th translate>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="activity in user.activities">
+                        <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
+                        <td>{{activity.totalMissions}}</td>
+                        <td>{{activity.incidents}}</td>
+                        <td>{{activity.recordedTime | minutesToHours}}</td>
+                        <td>{{activity.streamedTime | minutesToHours}}</td>
+                        <td>{{activity.pausedTime | minutesToHours}}</td>
+                        <td>{{activity.filesize | bytes}}</td>
+                        <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
+                      </tr>
+
+                      <tr ng-hide="user.activities.length > 0 ">
+                        <td colspan="6" translate>No data found...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <hr/>
     <div ng-show="reportData.exportList && reportData.exportList.length > 0">
@@ -120,19 +179,27 @@
         <caption>{{user.username}}</caption>
         <tr>
           <th translate>Day</th>
-          <th translate>Total time recording</th>
-          <th translate>Total time streaming</th>
-          <th translate>Total time paused</th>
-          <th translate>Total</th>
           <th translate>Number of times mission was stopped</th>
+          <th translate>Incidents Reported</th>
+          <th translate>Total estimated recording time</th>
+          <th translate>Total uploaded recording time</th>
+          <th translate>Total streaming time</th>
+          <th translate>Total paused time</th>
+          <th translate>Total uploaded data</th>
+          <th translate>Total</th>
         </tr>
+        </thead>
+        <tbody>
         <tr ng-repeat="activity in user.activities">
           <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
+          <td>{{activity.totalMissions}}</td>
+          <td>{{activity.incidents}}</td>
+          <td>{{activity.estimatedRecordingTime | minutesToHours}}</td>
           <td>{{activity.recordedTime | minutesToHours}}</td>
           <td>{{activity.streamedTime | minutesToHours}}</td>
           <td>{{activity.pausedTime | minutesToHours}}</td>
+          <td>{{activity.filesize | bytes}}</td>
           <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
-          <td>{{activity.totalMissions}}</td>
         </tr>
       </table>
     </div>
