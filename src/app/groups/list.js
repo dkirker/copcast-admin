@@ -9,14 +9,35 @@
  */
 angular.module('copcastAdminApp')
   .controller('GroupsListCtrl', function ($scope, $http, $location, ServerUrl) {
+    $scope.page = 1;
+    $scope.perPage = 30;
+    $scope.totalGroups = 0;
+
     $scope.groups = [];
     $scope.isAdminGroup = false;
-    $http.get(ServerUrl + '/groups').success(function(data) {
-      $scope.groups = data;
 
-    }).error(function(data) {
-      console.error(data);
-    });
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+      loadGroups();
+    };
+
+    function loadGroups(){
+      var params = {
+        page : $scope.page,
+        perPage : $scope.perPage
+      };
+
+      $http.get(ServerUrl + '/groups-paginated', {
+        params: params
+      }).success(function(data) {
+        $scope.groups = data.rows;
+        $scope.totalGroups = data.count;
+      }).error(function(data) {
+        console.error(data);
+      });
+    }
+
+    loadGroups();
 
     $http.get(ServerUrl + '/groups/isadmin').success(function(data) {
       $scope.isAdminGroup = data;
@@ -31,10 +52,8 @@ angular.module('copcastAdminApp')
 
     // callback for ng-click 'deleteGroup':
     $scope.deleteGroup = function (groupId, groupName) {
-
       // confirmation to delete
       $location.path('/group-destroy/' + groupId);
-
     };
 
     // callback for ng-click 'createGroup':
@@ -42,8 +61,6 @@ angular.module('copcastAdminApp')
       $location.path('/group-creation');
     };
   }).controller('GroupCreationCtrl', function($scope, $http, $location, ServerUrl){
-
-
     $scope.createGroup = function () {
       $http.post(ServerUrl + '/groups',
         $scope.group).success(function(data) {
@@ -52,6 +69,4 @@ angular.module('copcastAdminApp')
           $scope.serverMessage = data;
         });
     };
-
-
   });

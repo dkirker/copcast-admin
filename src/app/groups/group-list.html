@@ -6,6 +6,8 @@
 
   <hr class="hrDarker"/>
 
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
   <table class="table table-striped table-condensed">
     <thead>
       <tr>
@@ -17,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="group in groups">
+      <tr dir-paginate="group in groups | itemsPerPage: perPage" total-items="totalGroups" current-page="page">
         <td>{{ group.name }}</td>
         <td ng-show="group.isAdmin" translate>Admin</td>
         <td ng-hide="group.isAdmin" translate>Normal</td>
@@ -28,4 +30,5 @@
     </tbody>
   </table>
 
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>
