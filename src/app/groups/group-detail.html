@@ -1,45 +1,45 @@
-<div class="container-crud">
-  <h1 translate>Group details</h1>
-  <hr/>
-  <form novalidate="novalidate" class="form-horizontal">
+<div class="container">
+  <h2 class="page-header hrDarker" translate>Group details</h2>
+
+  <form novalidate="novalidate" class="form-horizontal" name="frm">
     <div ng-show="serverMessage" class="alert alert-danger">
       <p>
         {{serverMessage}}
       </p>
     </div>
-    <div class="control-group">
-      <label class="control-label" for="inputName" translate>Name:</label>
-      <div class="controls">
-        <input type="text" id="inputName" ng-model="group.name"/>
+
+    <div class="row">
+      <div class="col-md-3">
+        <label for="inputName" translate>Name:</label>
+        <input type="text" id="inputName" class="form-control" ng-model="group.name"/>
+      </div>
+
+      <div class="col-md-3">
+        <label for="inputLatitude" translate>Latitude:</label>
+        <input type="number" id="inputLatitude" class="form-control" ng-model="group.lat"/>
+      </div>
+
+      <div class="col-md-3">
+        <label for="inputLongitude" translate>Longitude:</label>
+        <input type="number" id="inputLongitude" class="form-control" ng-model="group.lng"/>
+      </div>
+
+      <div class="col-md-3">
+        <label>&nbsp;</label>
+        <div class="checkbox">
+          <label translate>
+            <input type="checkbox" ng-model="group.isAdmin" i-check/> Is Admin?
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label" for="inputLatitude" translate>Latitude:</label>
-      <div class="controls">
-        <input type="number" id="inputLatitude" ng-model="group.lat" ng-change="changeMapCenter()"/>
-      </div>
-    </div>
+    <hr class="hrDarker" />
 
-    <div class="control-group">
-      <label class="control-label" for="inputLongitude" translate>Longitude:</label>
-      <div class="controls">
-        <input type="number" id="inputLongitude" ng-model="group.lng" ng-change="changeMapCenter()"/>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
-      <div class="controls">
-        <input type="checkbox" id="inputIsAdmin" ng-model="group.isAdmin"/>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <div class="controls">
-        <!-- group-detail.html: -->
-        <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-        <a ng-click="updateGroup()" class="btn btn-small btn-primary" translate>update group</a>
+    <div class="row">
+      <div class="col-md-12">
+        <a ng-click="back()" class="btn btn-default" translate>back</a>
+        <button ng-disabled="frm.$invalid" ng-click="updateGroup()" class="btn btn-small btn-primary" translate>update group</button>
       </div>
     </div>
   </form>

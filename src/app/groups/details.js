@@ -9,11 +9,11 @@
  */
 angular.module('copcastAdminApp')
   .controller('GroupsDetailsCtrl', function($scope, $routeParams, $http, $location, ServerUrl){
-
     $http.get(ServerUrl + '/groups/'+ $routeParams.id).success(function(data) {
+      console.log(data);
       $scope.group = data;
-
     }).error(function(data) {
+      $scope.serverMessage = data;
     });
 
     $scope.updateGroup = function () {
@@ -24,9 +24,7 @@ angular.module('copcastAdminApp')
       });
     };
 
-    // callback for ng-click 'cancel':
-    $scope.cancel = function () {
+    $scope.back = function () {
       $location.path('/group-list');
     };
-
   });

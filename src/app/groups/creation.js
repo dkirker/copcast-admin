@@ -9,8 +9,6 @@
  */
 angular.module('copcastAdminApp')
   .controller('GroupsCreationCtrl', function($scope, $http, $location, ServerUrl){
-
-
     $scope.createGroup = function () {
       $http.post(ServerUrl + '/groups',
         $scope.group).success(function(data) {
@@ -20,4 +18,7 @@ angular.module('copcastAdminApp')
         });
     };
 
+    $scope.back = function () {
+      $location.path('/group-list');
+    };
   });
