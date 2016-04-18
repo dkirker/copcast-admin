@@ -19,7 +19,17 @@ var options = {
   },
   wiredep: {
     directory: 'bower_components',
-    exclude: [/bootstrap-sass-official\/.*\.js/, /bootstrap\.css/]
+    exclude: [/bootstrap-sass-official\/.*\.js/, /bootstrap\.css/],
+    overrides: {
+      iCheck: {
+        main: [
+          './icheck.js',
+          './skins/square/blue.css',
+          './skins/square/blue.png',
+          './skins/square/blue@2x.png'
+        ]
+      }
+    }
   }
 };
 
