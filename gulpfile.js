@@ -45,10 +45,13 @@ gulp.task('server', ['copy-bs-fonts'], function () {
   gulp.start('serve');
 });
 
-gulp.task('default', ['clean', 'copy-bs-fonts', 'vendor_js'], function () {
+gulp.task('builder', ['clean', 'copy-bs-fonts'], function () {
     gulp.start('build');
 });
 
+gulp.task('default', ['builder'], function () {
+    gulp.start('vendor_js');
+});
 
 //gulp.task('pot', function () {
 //  return gulp.src(['**/*.html'])
