@@ -1,188 +1,198 @@
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <!--Sidebar content-->
-        <div class="center-block">
-          <div ng-show="hasProfilePicture" class="text-center">
-            <img ng-src="{{pictureUrl}}" height="100" class="img-circle">
-          </div>
-
-          <div class="controls">
-            <h4 class="text-center">{{user.name}}</h4>
-          </div>
+<div class="container">
+  <h1 class="page-header hrDarker" translate>User details</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <h4 class="userFormGroupSubHeader">Change picture: <i class="glyphicon glyphicon-info-sign markInfo" data-toggle="tooltip" data-placement="bottom" title="Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"></i></h4>
+      <div class="userPhoto" ngf-select ng-model="files"
+           ngf-multiple="false" ngf-allow-dir="true"
+           ng-disabled="!canUpdate()" ngf-accept="'image/*'">
+        <div class="userPhotoOverlay">
+          <i class="glyphicon glyphicon-camera"></i>
         </div>
-        <div class = "menu-profile">
-          <ul class="nav">
-              <li class="active">
-                <a ng-click="clickTab(1)" >
-                  <i class="glyphicon glyphicon-user"></i>
-                  <translate>Account Settings</translate>
-                  </a>
-              </li>
-            <li>
-              <a ng-click="clickTab(2)">
-                <i class="glyphicon glyphicon-log-in"></i>
-                <translate>Change Password</translate>
-              </a>
-            </li>
-            <li>
-              <a ng-click="clickTab(3)">
-                <i class="glyphicon glyphicon-camera"></i>
-                <translate>Change Picture</translate>
-              </a>
-            </li>
-          </ul>
-        </div>
-
+        <!--<img ng-src="https://market.ionic.io/img/user-default.png">-->
+        <img ng-show="hasProfilePicture" ng-src="{{pictureUrl}}">
       </div>
-      <div class="col-md-10">
-        <!--Body content-->
+    </div>
 
-        <div class="panel panel-primary" ng-show="blnShowTab[0]">
-          <div class="panel-heading" translate>Account Settings</div>
-          <div class="panel-body">
-            <br>
-            <form novalidate="novalidate" class="form-horizontal"  name="frmUpdate">
-              <div ng-show="serverMessage" class="alert alert-danger">
-                <p>
-                  {{serverMessage}}
-                </p>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputName" translate>Name:</label>
-                <div class="controls">
-                  <input type="text" id="inputName" required ng-model="user.name" ng-disabled="!canUpdate()"/>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputName" translate>Group:</label>
-                <div class="controls">
-                  <select required ng-options="group.id as group.name for group in groups" ng-model="user.groupId" ng-disabled="!canUpdate()" >
-                  </select>
-                </div>
-              </div>
-              <div class="control-group" ng-show="canEditAdmin()">
-                <label class="control-label" for="inputIsAdmin" translate>Is Admin?</label>
-                <div class="controls">
-                  <input type="checkbox" id="inputIsAdmin" ng-model="user.isAdmin" ng-disabled="!canUpdate()"/>
-                </div>
-              </div>
-              <div class="control-group" ng-show="user.isAdmin">
-                <label class="control-label" for="inputName" translate>Role:</label>
-                <div class="controls">
-                  <select  ng-options="role  for role in adminRoles" ng-model="user.role" ng-required="user.isAdmin" ng-show="canUpdate()">
-                  </select>
-                  <div ng-show="!canUpdate()">{{user.role}}</div>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputUsername" translate>Username:</label>
-                <div class="controls">
-                  <input type="text" id="inputUsername" required ng-model="user.username" ng-disabled="!canUpdate()"/>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputEmail" translate>Email:</label>
-                <div class="controls">
-                  <input type="text" id="inputEmail" required ng-model="user.email" ng-disabled="!canUpdate()"/>
-                </div>
-              </div>
+    <div class="col-md-8">
+      <h4 class="userFormGroupSubHeader">Account Settings:</h4>
 
-              <div class="control-group">
-                <label class="control-label" for="language" translate>Preferred language:</label>
-                <div class="controls">
-                  <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" ng-disabled="!canUpdate()"><img src="../assets/images/br-icon.png">
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language" ng-disabled="!canUpdate()"><img src="../assets/images/us-icon.png">
-                  </label>
+      <form novalidate name="frmUpdate">
+        <div ng-show="serverMessage" class="alert alert-danger">
+          <p>
+            {{serverMessage}}
+          </p>
+        </div>
 
-                </div>
-              </div>
-
-            <hr/>
-              <div class="row" ng-hide="user.isSelf">
-                <div class="control-group col-md-2" >
-                  <label class="control-label" for="isEnabled" translate>Is Enabled?</label>
-                  <div class="controls">
-                    <input type="checkbox" id="isEnabled" ng-model="user.isEnabled" ng-disabled="!canUpdate()"/>
-                  </div>
-                </div>
-                <div class="alert alert-warning col-md-5" translate>disabling this field will prevent this user from accessing the system.</div>
-              </div>
-              <br>
-
-              <div class="control-group">
-                <div class="controls">
-                  <!-- user-detail.html: -->
-                  <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                  <button ng-disabled="frmUpdate.$invalid || !canUpdate()" ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</button>
-                </div>
-              </div>
-            </form>
-          </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="inputName" translate>Name:</label>
+            <input type="text" class="form-control" id="inputName" ng-model="user.name" required ng-disabled="!canUpdate()"/>
           </div>
 
-      <!-- Tab Password -->
-        <div class="panel panel-primary animate-show" id="pass1" ng-show="blnShowTab[1]">
-          <div class="panel-heading" translate>Change Password</div>
-          <div class="panel-body">
-            <br>
+          <div class="col-md-4">
+            <label for="inputUsername" translate>Username:</label>
+            <input type="text" class="form-control" id="inputUsername" ng-model="user.username" required ng-disabled="!canUpdate()"/>
+          </div>
 
-            <form novalidate="novalidate" class="form-horizontal">
-              <div class="control-group" ng-cloak>
-                <label class="control-label" for="currentpassword" translate>Current password</label>
-                <div class="controlsPassword">
-                  <input type="password" ng-disabled="!canUpdate()" id="currentpassword" ng-model="currentPassword" placeholder="{{'Current password' | translate}}"/></br>
-                </div>
-                <label class="control-label" for="currentpassword" translate>New password</label>
-                <div class="controlsPassword">
-                  <input type="password" ng-disabled="!canUpdate()" id="newpassword" ng-model="newPassword" placeholder="{{'New password'| translate}}"/></br>
-                  <input type="password" ng-disabled="!canUpdate()" id="passwordconfirmation" ng-model="passwordConfirmation" placeholder="{{'Repeat your password'| translate}}"/>
-                </div>
-                <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span></br>
-
-
-                <br><br>
-                <div class="control-group">
-                  <div class="controls">
-                    <!-- user-detail.html: -->
-                    <a ng-click="cancel()" class="btn btn-default" translate>cancel</a>
-                    <a ng-click="changePassword()" ng-disabled="!canUpdate()" class="btn btn-small btn-primary" translate>update user</a>
-                  </div>
-                </div>
-
-              </div>
-            </form>
-
+          <div class="col-md-4">
+            <label for="inputEmail" translate>Email:</label>
+            <input type="text" class="form-control" id="inputEmail" ng-model="user.email" required ng-disabled="!canUpdate()"/>
           </div>
         </div>
 
-        <!-- Change Picture -->
-        <div class="panel panel-primary" id="pass" ng-show="blnShowTab[2]">
-          <div class="panel-heading" translate>Change Picture</div>
-          <div class="panel-body">
-            <br>
+        <br>
 
-            <div ngf-select ng-model="files" class="btn btn-primary"
-                 ngf-multiple="false" ngf-allow-dir="true" ng-disabled="!canUpdate()"
-                 ngf-accept="'image/*'" translate>Click here to send a new image</div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="inputName" translate>Group:</label>
+            <select class="form-control" ng-options="group.id as group.name for group in groups" ng-model="user.groupId" required ng-disabled="!canUpdate()"></select>
+          </div>
 
-            <br/>
-
-            <div class="alert alert-info" role="alert" translate>
-              Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!
+          <div class="col-md-4" ng-show="canEditAdmin()">
+            <label>&nbsp;</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="user.isAdmin" ng-disabled="!canUpdate()" i-check/>
+                <span translate>Is Admin?</span>
+              </label>
             </div>
-              </div>
-            </form>
+          </div>
 
+          <div class="col-md-4" ng-show="user.isAdmin">
+            <label for="inputName" translate>Role:</label>
+            <select class="form-control" ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin" ng-disabled="!canUpdate()"></select>
           </div>
         </div>
 
+        <br>
+
+        <div class="row">
+          <div class="col-md-4" ng-hide="user.isSelf">
+            <div class="checkbox">
+              <label data-toggle="tooltip" data-placement="bottom" title="disabling this field will prevent this user from accessing the system.">
+                <input type="checkbox" ng-model="user.isEnabled" ng-disabled="!canUpdate()" i-check/>
+                <span translate>Is Enabled?</span>
+                <i class="glyphicon glyphicon-exclamation-sign markWarn"></i>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label translate>Preferred language:</label>
+            <div class="radio">
+              <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" required value="pt_BR" ng-model="user.language" ng-disabled="!canUpdate()" i-check>
+                <img src="../assets/images/br-icon.png">
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" required value="en" ng-model="user.language" ng-disabled="!canUpdate()" i-check>
+                <img src="../assets/images/us-icon.png">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="hrDarker" />
+
+        <div class="row">
+          <div class="col-md-12">
+            <button ng-disabled="frmUpdate.$invalid || !canUpdate()" ng-click="updateUser()" class="btn btn-small btn-primary" translate>update user</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-4">
+      <h4 class="userFormGroupSubHeader">Change Password:</h4>
+
+      <div class="row">
+        <form novalidate="novalidate">
+          <div class="col-md-4">
+            <label for="currentPassword" translate>Current Password:</label>
+            <input type="password" class="form-control" id="currentPassword" ng-model="currentPassword" required ng-minlength="8" ng-disabled="!canUpdate()"/>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputPassword" translate>New Password:</label>
+            <input type="password" class="form-control" id="inputPassword" ng-model="newPassword" required ng-minlength="8" ng-disabled="!canUpdate()"/>
+            <meter max="5" id="password-strength-meter"></meter>
+            <small translate>- Minimum 8 digits.</small>
+            <span id="password-strength-text" class="pwdStrong"></span>
+          </div>
+
+          <div class="col-md-4">
+            <label for="passwordConfirmation" translate>Repeat your password:</label>
+            <input type="password" class="form-control" id="passwordConfirmation" ng-model="passwordConfirmation" required ng-minlength="8" ng-disabled="!canUpdate()"/>
+            <span ng-if="passwordMessage" class="errorMessage">{{passwordMessage}}</span>
+          </div>
+        </form>
       </div>
 
+      <hr class="hrDarker" />
+
+      <div class="row">
+        <div class="col-md-12">
+          <a ng-click="changePassword()" ng-disabled="!canUpdate()" class="btn btn-small btn-warning" translate>change password</a>
+        </div>
       </div>
     </div>
   </div>
+
+  <hr class="hrDarker" />
+
+  <div class="row">
+    <div class="col-md-12">
+      <a ng-click="back()" class="btn btn-default" translate>back</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+//  $('input').iCheck({
+//    checkboxClass: 'icheckbox_square-blue',
+//    radioClass: 'iradio_square-blue',
+//    increaseArea: '20%' // optional
+//  });
+//
+//  setTimeout(function(){
+//    $('input').iCheck('update');
+//  }, 500);
+
+  var strength = {
+    1: "Worst",
+    2: "Bad",
+    3: "Weak",
+    4: "Good",
+    5: "Strong"
+  };
+
+  var meter = $('#password-strength-meter');
+  var text = $('#password-strength-text');
+  text.hide();
+
+  $('#inputPassword').keyup(function(){
+    var $self = $(this);
+    var password = $self.val();
+    var result = zxcvbn(password);
+
+    if (password !== "") {
+      meter.val(result.score + 1);
+      text.text(strength[result.score + 1]).fadeIn();
+    } else {
+      meter.val(0);
+      text.fadeOut();
+      setTimeout(function(){
+        text.text("");
+      }, 500);
+    }
+  });
+</script>

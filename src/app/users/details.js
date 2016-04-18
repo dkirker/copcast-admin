@@ -99,7 +99,7 @@ angular.module('copcastAdminApp')
     };
 
     // callback for ng-click 'cancel':
-    $scope.cancel = function () {
+    $scope.back = function () {
       $location.path('/user-list');
     };
 
@@ -124,5 +124,4 @@ angular.module('copcastAdminApp')
     $http.get(ServerUrl + '/groups').success(function(data){
       $scope.groups = data;
     });
-
   });

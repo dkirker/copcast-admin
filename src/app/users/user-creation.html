@@ -1,6 +1,6 @@
 <!--<div class="containerUser">-->
 <div class="container">
-  <h1 class="page-header hrDarker" translate>User details</h1>
+  <h1 class="page-header hrDarker" translate>Create User</h1>
 
   <form novalidate ng-submit="submittted = true" name="frm">
     <div ng-show="serverMessage" class="alert alert-danger">
@@ -35,9 +35,10 @@
       </div>
 
       <div class="col-md-4" ng-show="canCreateAdmin()">
+        <label>&nbsp;</label>
         <div class="checkbox">
           <label translate>
-            <input type="checkbox" ng-model="user.isAdmin"/> Is Admin?
+            <input type="checkbox" ng-model="user.isAdmin" i-check/> Is Admin?
           </label>
         </div>
       </div>
@@ -64,13 +65,15 @@
       <!--</div>-->
 
       <div class="col-md-4">
-        <label for="language" translate>Preferred language:</label>
-        <div class="controls">
+        <label translate>Preferred language:</label>
+        <div class="radio">
           <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" required id="language" value="pt_BR" ng-model="user.language" checked><img src="../assets/images/br-icon.png">
+            <input type="radio" name="inlineRadioOptions" required value="pt_BR" ng-model="user.language" checked i-check>
+            <img src="../assets/images/br-icon.png">
           </label>
           <label class="radio-inline">
-            <input type="radio" name="inlineRadioOptions" required id="language" value="en" ng-model="user.language"><img src="../assets/images/us-icon.png">
+            <input type="radio" name="inlineRadioOptions" required value="en" ng-model="user.language" i-check>
+            <img src="../assets/images/us-icon.png">
           </label>
         </div>
       </div>

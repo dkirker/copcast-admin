@@ -68,3 +68,55 @@ meter[value="5"]::-moz-meter-bar { background: blue; }
   border-left: 1px solid #ccc;
   padding: 5px;
 }
+
+.userFormGroupSubHeader {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #323232;
+}
+
+.markInfo { color: #31708f; }
+.markWarn { color: #8a6d3b; font-size: 16px; }
+
+$squareSize: 250px;
+.userPhoto {
+  width: $squareSize;
+  height: $squareSize;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-top: 15px;
+  position: relative;
+  cursor: pointer;
+
+  .userPhotoOverlay {
+    font-size: 10rem;
+    text-align: center;
+    line-height: $squareSize + 30px;
+    color: #323232;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #DDDDDD;
+    background: rgba(242,242,242,0.5);
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+  }
+
+  img {
+    width: $squareSize;
+    height: $squareSize;
+  }
+
+  &:hover {
+    .userPhotoOverlay {
+      opacity: 1;
+    }
+  }
+}
