@@ -13,22 +13,30 @@
 angular.module('copcastAdminApp')
   .controller('ExportsListCtrl', function ($scope, exportService) {
     $scope.exports = [];
-
-    exportService.listExports().then(function(exports){
-      console.log(exports);
-      $scope.exports = exports;
-    });
-
+    $scope.page = 1;
     $scope.perPage = 30;
-    $scope.totalExports = 0
-    $scope.pagination = 1;
+    $scope.totalExports = 0;
 
     $scope.pageChanged = function(newPage) {
-      $scope.pagination = newPage;
+      $scope.page = newPage;
+      loadExports();
     };
 
     $scope.isAvailable = function(exportVideos){
       return exportVideos.status === 'AVAILABLE';
     };
 
+    function loadExports(){
+      var params = {
+        page: $scope.page,
+        perPage: $scope.perPage
+      };
+
+      exportService.listExports(params).then(function(exports){
+        $scope.totalExports = exports.count;
+        $scope.exports = exports.rows;
+      });
+    }
+
+    loadExports();
   });

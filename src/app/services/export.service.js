@@ -9,11 +9,12 @@
   app.factory('exportService', function($q, $http, ServerUrl) {
     var service = {};
 
-    service.listExports = function(){
+    service.listExports = function(params){
       var defer = $q.defer();
       $http
-        .get(ServerUrl + '/exports')
-        .success(function(data) {
+        .get(ServerUrl + '/exports', {
+          params: params
+        }).success(function(data) {
           defer.resolve(data);
         })
         .error(function(data, status) {
