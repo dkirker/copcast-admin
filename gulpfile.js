@@ -44,6 +44,11 @@ gulp.task('copy-bs-fonts', function(){
     .pipe(gulp.dest(options.src + '/fonts/'));
 });
 
+gulp.task('copy-icheck-images', function(){
+  return gulp.src(options.wiredep.directory + '/iCheck/skins/square/*.png')
+    .pipe(gulp.dest(options.dist + '/styles/'));
+});
+
 gulp.task('test', function (done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
@@ -60,7 +65,9 @@ gulp.task('builder', ['clean', 'copy-bs-fonts'], function () {
 });
 
 gulp.task('default', ['builder'], function () {
-    gulp.start('vendor_js');
+    // gulp.start('vendor_js');
+  gulp.run('vendor_js');
+  gulp.run('copy-icheck-images');
 });
 
 //gulp.task('pot', function () {
