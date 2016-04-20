@@ -15,7 +15,7 @@ angular.module('copcastAdminApp')
     $scope.blnShowTab = [true, false, false] ;
 
     userService.getAdminRoles().then(function(roles){
-      $scope.adminRoles = roles;
+      $scope.roles = roles;
     });
 
     userService.getRoles().then(function(roles){
@@ -23,7 +23,7 @@ angular.module('copcastAdminApp')
     });
 
     $scope.canEditAdmin = function(){
-      return $scope.adminRoles && $scope.adminRoles.length > 0;
+      return $scope.roles && $scope.roles.length > 0;
     };
 
     $scope.canUpdate = function(){
