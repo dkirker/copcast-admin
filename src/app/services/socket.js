@@ -23,8 +23,8 @@ angular.module('copcastAdminApp')
     body.appendChild(tag);
 
     var loadTimes = 0;
-    var maxRetry = 3;
-    var timeBetweenRetries = 500;
+    var maxRetry = 1000;
+    var timeBetweenRetries = 2000;
 
     var getRandomInt = function(min, max) {
       return Math.random() * (max - min) + min;
@@ -48,7 +48,13 @@ angular.module('copcastAdminApp')
         return;
       }
 
-      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId, forceNew: true, timeout: 5000});
+      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId,
+        forceNew: true,
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 1000,
+        timeout: 4000
+      }); // OBS: the time between successive connection attemps will be DelayMax + timeout = 5s (1000ms + 4000ms)
 
       socketIo.once('connect', function() {
         connected = true;
@@ -58,17 +64,14 @@ angular.module('copcastAdminApp')
         });
       });
 
-      socketIo.once('disconnect', function() {
+      socketIo.on('disconnect', function() {
         console.log('SOCKET.IO CONNECTION LOST!');
       });
 
-      socketIo.once('reconnect', function() {
-        console.log('SOCKET.IO Reconnect!');
-      });
-
-      socketIo.once('error', function(err) {
+      socketIo.on('error', function(err) {
         console.log('Socket Error:', err);
       });
+
     };
 
     socket.disconnect = function() {
