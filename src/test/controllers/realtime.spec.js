@@ -25,8 +25,6 @@ describe('Controller:RealtimeCtrl', function () {
       getRedMarker: function (name) {
         return "anyURL";
       },
-      applyCircle: function (scope, user) {
-      },
 
       createMarker: function (scope, pos, user) {
         return new google.maps.Marker({position: new google.maps.LatLng(22, 22)})

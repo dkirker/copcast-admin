@@ -13,8 +13,8 @@
   angular.module('copcastAdminApp').
     controller('RealtimeCtrl', RealtimeCtrl);
 
-  function RealtimeCtrl($scope, peerManager, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
-                        userService, streamService, $location, $timeout, HistoryManager, gettextCatalog) {
+  function RealtimeCtrl($scope, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+                        userService, $location, HistoryManager, gettextCatalog) {
 
     $scope.windowHeight = window.innerHeight;
     $scope.windowWidth = window.innerWidth;
@@ -57,13 +57,6 @@
     $scope.refreshUsers = refreshUsers;
 
     $scope.isStreaming = isStreaming;
-
-    $scope.popNotification = function (user) {
-      notify({
-        messageTemplate: '<a ng-click="popModal(' + user.id + ')">' + user.userName + ' is streaming </a>',
-        position: "right", scope: $scope
-      });
-    };
 
     $scope.popIncidentFlag = function (username) {
       notify({
@@ -113,7 +106,7 @@
     angular.element($window).bind('resize', function () {
       $scope.myStyle.height = window.innerHeight + 'px';
       google.maps.event.trigger($scope.myMap, 'resize');
-      $scope.refreshUsers();
+      // $scope.refreshUsers();
     });
 
     function timeoutUser(user) {
@@ -132,19 +125,12 @@
     }
 
     function loadUser(data) {
+
       console.log("Socket: Location received for: "+data.username+ " @ "+data.location.lat+","+data.location.lng);
-      var pos = null;
-      if ($scope.activeUsers[data.id] && $scope.activeUsers[data.id] != 'none') {
-        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
-        $scope.activeUsers[data.id].marker.setPosition(pos);
-        $scope.activeUsers[data.id].accuracy = data.location.accuracy;
-        if (data.battery)
-          $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
-        if ($scope.activeUsers[data.id].marker.icon === mapService.getGreyMarker($scope.activeUsers[data.id].userName)) {
-          $scope.activeUsers[data.id].marker.setIcon(mapService.getRedMarker($scope.activeUsers[data.id].userName));
-        }
-      } else if ($scope.activeUsers[data.id] == 'none') {
-        pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+
+      var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+
+      if (!(data.id in $scope.activeUsers)) { //user not in list
 
         var marker = mapService.createMarker($scope, pos, data);
 
@@ -152,24 +138,20 @@
           id: data.id,
           userName: data.name,
           login: data.username,
-          deploymentGroup: data.group,
+          group: data.group,
           marker: marker,
           groupId: data.groupId,
           accuracy: data.location.accuracy,
-          picture: ServerUrl + data.profilePicture,
-          timeoutPromisse: null,
-          streamUrl: data.streamUrl
+          picture: ServerUrl + data.profilePicture
         };
-        //TODO remove console.log afterwards
-        mapService.fitBounds($scope, $scope.activeUsers);
 
-      } else {
-        console.error('retarded heartbeat data');
-        return;
+        mapService.fitBounds($scope, $scope.activeUsers);
       }
 
-      mapService.applyCircle($scope, $scope.activeUsers[data.id]);
-
+      $scope.activeUsers[data.id].marker.setPosition(pos);
+      $scope.activeUsers[data.id].accuracy = data.location.accuracy;
+      if (data.battery)
+        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
     }
 
 
@@ -198,11 +180,11 @@
         delete $scope.activeUsers[data.userId];
       });
 
-      socket.on('userEntered', function(data) {
-        console.log('userEntered');
-        console.log(data);
-        $scope.activeUsers[data.userId] = 'none';
-      });
+      // socket.on('userEntered', function(data) {
+        // console.log('userEntered');
+        // console.log(data);
+        // $scope.activeUsers[data.userId] = 'none';
+      // });
 
       socket.on('users:incidentFlag', function(data){
         console.log('incident!!');
