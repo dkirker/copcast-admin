@@ -13,6 +13,15 @@
 </div>
 <div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
 
+<div id="realtimeMapConnectionBar">
+  <div  class="alert alert-danger" role="alert">
+    <strong>
+      <i class="glyphicon glyphicon-exclamation-sign"></i>
+      Connection Lost!
+    </strong>
+    Trying to reconnect...
+  </div>
+</div>
 
 <script type="text/ng-template" id="balloon.html">
   <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
