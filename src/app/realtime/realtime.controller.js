@@ -118,7 +118,7 @@
 
     function timeoutUser(user) {
       user.marker.setIcon(mapService.getGreyMarker(user.userName));
-    };
+    }
 
     function removeUser(user) {
       user.marker.setIcon(mapService.getGreyMarker(user.userName));
@@ -170,7 +170,7 @@
 
       mapService.applyCircle($scope, $scope.activeUsers[data.id]);
 
-    };
+    }
 
 
     socket.on('connect', function () {
@@ -217,7 +217,19 @@
           removeUser($scope.activeUsers[uid]);
         });
         console.log('Got disconnect!');
+        jQuery('#realtimeMapConnectionBar').fadeIn();
       });
+
+      socket.on('reconnect', function (socket) {
+        console.log('Got reconnected!');
+        jQuery('#realtimeMapConnectionBar').fadeOut();
+      });
+
+      socket.on('reconnect_attempt', function (err) {
+
+        console.log('attempt!', err, new Date());
+      });
+
 
     });
 
