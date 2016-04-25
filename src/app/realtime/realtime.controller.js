@@ -48,7 +48,7 @@
 
     $scope.filterUsers = filterUsers;
 
-    $scope.loadUser = loadUser
+    $scope.loadUser = loadUser;
 
     $scope.showUser = showUser;
 
@@ -68,7 +68,7 @@
 
     $scope.popModal = function (user) {
       showModal(user);
-    }
+    };
 
     $scope.goToUser = function (user) {
       HistoryManager.setCurrentUserId(user.id);
@@ -208,7 +208,7 @@
       });
 
       socket.on('reconnect_attempt', function (err) {
-
+        jQuery('#realtimeMapConnectionBarAttempts').text(err);
         console.log('attempt!', err, new Date());
       });
 
@@ -248,7 +248,7 @@
           }
         });
       }
-    };
+    }
 
     function showUser(userId) {
       $scope.currentUser = $scope.activeUsers[userId];
@@ -261,7 +261,7 @@
 
         mapService.showBalloon($scope);
       }
-    };
+    }
 
     function isStreaming(user) {
       return $scope.activeStreams[user.id];
@@ -282,7 +282,8 @@
       //} else {
       //  $scope.streamButtonText = 'Sending...';
       //}
-    };
+    }
+
     $scope.requestStream = requestStream;
 
     function stopStream(user) {
@@ -294,32 +295,43 @@
       }
       delete $scope.activeStreams[user.id];
       user.marker.setIcon(mapService.getRedMarker(user.userName));
-    };
+    }
 
 
     function refreshUsers() {
       userService.getOnlineUsers().then(function (data) {
         console.log('getOnlineUsers');
         console.log(data);
+        var $faLoader = jQuery('#fetchUsers .fa-refresh');
+
+        $faLoader.addClass('fa-spin');
+
         if (data.length === 0) {
           $scope.refreshMap();
+          setTimeout(function(){
+            $faLoader.removeClass('fa-spin');
+          }, 2000);
           return;
         }
+
         var bounds = new google.maps.LatLngBounds();
+
         angular.forEach(data, function (user) {
           //$scope.loadUser(user);
           var coord = new google.maps.LatLng(user.location.lat, user.location.lng);
           bounds.extend(coord);
         });
+
         $scope.myMap.fitBounds(bounds);
 
         userService.getStreamingUsers().then(function (data) {
           angular.forEach(data, function (user) {
             showStream($scope.activeUsers[user.id]);
           });
+          $faLoader.removeClass('fa-spin');
         });
       });
-    };
+    }
 
 
     function refreshMap() {
@@ -336,7 +348,7 @@
             changeMapPos(0, 0);
           }
         });
-    };
+    }
 
 
     function changeMapPos(lat, lng) {
