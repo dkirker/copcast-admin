@@ -1,48 +1,54 @@
 <div class="history">
   <div class="navbar navbar-default navbar-static-top">
     <nav class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse main-nav">
-          <ul class="nav navbar-nav">
-            <li class="pull-left">
-              <user-dropdown
-                ng-model="::manager.store.groups"
-                on-change-user="manager.setCurrentGroup">
-              </user-dropdown>
-            </li>
-          </ul>
-          <date-filter
-            initial-period="initialPeriod"
-            on-change-period="manager.setPeriod"
-            max-period-of-days="20"></date-filter>
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse main-nav">
+        <ul class="nav navbar-nav">
+          <li class="pull-left">
+            <user-dropdown
+              ng-model="::manager.store.groups"
+              on-change-user="manager.setCurrentGroup">
+            </user-dropdown>
+          </li>
+        </ul>
+
+        <date-filter
+          initial-period="initialPeriod"
+          on-change-period="manager.setPeriod"
+          max-period-of-days="20"></date-filter>
+      </div>
     </nav>
   </div>
+
   <loading></loading>
+
   <main map class="map canvas"
-    marker-locations="manager.store.map.markers"
-    heatmap-locations="manager.store.map.locations">
+        marker-locations="manager.store.map.markers"
+        heatmap-locations="manager.store.map.locations">
   </main>
+
   <footer class="navbar navbar-default navbar-static-bottom">
     <timeline
       on-select-date="manager.setCurrentDate"
       user-data="manager.store.userData"
       show-video="showVideo()">
     </timeline>
+
     <player ng-show="showVideo()"
-      users="manager.store.currentGroup.users"
-      src="manager.store.userData.currentVideo.src"
-      on-change-user="manager.setCurrentUser"
-      on-previous-video="manager.previousVideo"
-      on-next-video="manager.nextVideo"
-      has-previous-video="manager.hasPreviousVideo()"
-      has-next-video="manager.hasNextVideo()">
+            users="manager.store.currentGroup.users"
+            src="manager.store.userData.currentVideo.src"
+            on-change-user="manager.setCurrentUser"
+            on-previous-video="manager.previousVideo"
+            on-next-video="manager.nextVideo"
+            has-previous-video="manager.hasPreviousVideo()"
+            has-next-video="manager.hasNextVideo()">
     </player>
   </footer>
 </div>

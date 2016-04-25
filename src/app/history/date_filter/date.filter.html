@@ -1,26 +1,31 @@
 <form class="form-inline navbar-right date filter">
   <div class="form-group">
-    <label for="fromDate" class="control-label">
-      <span translate>Date</span>
-      <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
+    <div class="checkbox">
+      <label translate>
+        Period
+        <input type="checkbox" ng-model="period" i-check>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group divider">
+    <label for="fromDate" class="control-label" translate>Date</label>
+    <div class="input-group">
+      <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+      <input type="date" id="fromDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
              uib-datepicker-popup is-open="fromDate.visible"
              ng-required="true" ng-click="fromDate.show()" show-button-bar="false" show-weeks="false" />
-    </label>
-    <i class="icon calendar"></i>
+    </div>
   </div>
+
   <div class="form-group divider">
-    <label class="control-label" for="period">
-      <span translate>Period</span>
-      <input type="checkbox" ng-model="period" id="period">
-    </label>
-  </div>
-  <div class="form-group">
-    <label class="control-label datepicker-right" for="toDate">
-      <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control to date" ng-model="toDate.value" ng-disabled="!period" ng-model-options="{ debounce: 500 }"
-              uib-datepicker-popup is-open="toDate.visible" min-date="fromDate.value" max-date="toDate.maxValue"
-              date-disabled="!period" ng-required="true" ng-click="toDate.show()" show-button-bar="false" show-weeks="false" />
-    </label>
-    <i class="icon calendar"></i>
+    <label for="toDate" class="control-label datepicker-right">To Date</label>
+    <div class="input-group">
+      <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+      <input type="date" id="toDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control to date" ng-model="toDate.value" ng-disabled="!period" ng-model-options="{ debounce: 500 }"
+             uib-datepicker-popup is-open="toDate.visible" min-date="fromDate.value" max-date="toDate.maxValue"
+             date-disabled="!period" ng-required="true" ng-click="toDate.show()" show-button-bar="false" show-weeks="false" />
+    </div>
   </div>
 </form>
 
