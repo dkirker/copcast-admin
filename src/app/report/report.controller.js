@@ -6,7 +6,7 @@
 
   angular.module('copcastAdminApp').controller('ReportCtrl', ReportCtrl);
 
-  function ReportCtrl($scope, $http, ServerUrl, gettextCatalog) {
+  function ReportCtrl($scope, $http, ServerUrl, gettextCatalog,userService, groupService) {
     $scope.filter = {
       fromDate: null,
       toDate: null,
@@ -46,6 +46,21 @@
     //  ]
     //};
 
+
+    $scope.users = [];
+    userService.listUsers().then(function(users){
+      $scope.users = users;
+    }, function(err){
+      $scope.errorMessage = err;
+    });
+
+    $scope.groups = [];
+    groupService.listGroups().then(function(groups){
+      $scope.groups = groups
+    }, function(err){
+      $scope.errorMessage = err;
+    });
+
     $scope.range = function(count){
       var ratings = [];
 
@@ -61,15 +76,19 @@
       var toDate = moment($scope.filter.toDate);
       if (fromDate.isValid() && toDate.isValid()) {
         $scope.errorMessage = null;
-        $http.get(ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD')).success(function (data) {
+
+        var url = ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" +
+          toDate.format('YYYY-MM-DD')+'?'
+        if ($scope.filter.user){
+          url += '&userId=' + $scope.filter.user;
+        }
+        if ($scope.filter.group){
+          url += '&groupId=' + $scope.filter.group;
+        }
+
+        $http.get(url).success(function (data) {
           $scope.reportData = data;
         });
-        // setTimeout(function(){
-        //   $('.dataTable').DataTable({
-        //     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //     dom: '<"col-sm-6"l><"col-sm-6"f>rt<"col-sm-12"i><"col-sm-8 .col-sm-offset-2"p>'
-        //   });
-        // }, 5000);
       } else {
         $scope.errorMessage = gettextCatalog.getString('Period not valid.')
       }
