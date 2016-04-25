@@ -1,50 +1,54 @@
 <div class="navbar navbar-default navbar-static-top">
-   <nav class="container-fluid">
+  <nav class="container-fluid">
+    <form class="navbar-form navbar-left" role="search">
+      <div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
+        <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control search-realtime"
+               placeholder="{{'Type to filter the users in the map' | translate }}..." aria-describedby="basic-addon1">
+      </div>
+    </form>
 
-       <form class="navbar-form navbar-left" role="search">
-         <div class="input-group">
-         <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
-         <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control search-realtime"
-         placeholder="{{'Type to filter the users in the map' | translate }}..." aria-describedby="basic-addon1">
-         </div>
-       </form>
-
-   </nav>
+    <button id="fetchUsers" class="btn btn-primary left" ng-click="refreshUsers()" translate>
+      <i class="fa fa-refresh fa-lg fa-fw margin-bottom"></i>
+      Refresh map
+    </button>
+  </nav>
 </div>
 <div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
 
-<div id="realtimeMapConnectionBar">
-  <div  class="alert alert-danger" role="alert">
-    <strong>
-      <i class="glyphicon glyphicon-exclamation-sign"></i>
-      Connection Lost!
-    </strong>
-    Trying to reconnect...
-  </div>
+<div id="realtimeMapConnectionBar" class="alert alert-danger text-center" role="alert">
+  <strong>
+    <i class="glyphicon glyphicon-exclamation-sign"></i>
+    Connection Lost!
+  </strong>
+  <div class="barSpacer"></div>
+  Trying to reconnect...
+  <div class="barSpacer"></div>
+  Attempt #<span id="realtimeMapConnectionBarAttempts"></span>
 </div>
 
 <script type="text/ng-template" id="balloon.html">
   <div id="balloonContent" ui-map-info-window="userWindow" ng-show="currentUser">
-<div>
-    <img ng-src="{{currentUser.picture}}" ng-class="{streaming: isStreaming(currentUser)}"/><br/>
+    <div>
+      <img ng-src="{{currentUser.picture}}" ng-class="{streaming: isStreaming(currentUser)}"/><br/>
 
-    <p><strong>{{currentUser.userName}}</strong></p>
-    <p class="battery-info">
-      <span ng-show="currentUser.batteryPercentage">
-        {{currentUser.batteryPercentage}}% <span translate>Battery</span>
-      </span>
-      <span ng-hide="currentUser.batteryPercentage">
-        <span translate>No battery information</span>
-      </span>
-    </p>
-    <div class="btn-group">
-      <a class="btn btn-default btn-block view-history" ng-if="true" ng-click="goToUser(currentUser)" translate>View history</a>
+      <p><strong>{{currentUser.userName}}</strong></p>
 
-      <a class="btn btn-default btn-block"
-         ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser)" ng-click="requestStream(currentUser)"
-         ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
+      <p class="battery-info">
+        <span ng-show="currentUser.batteryPercentage">
+          {{currentUser.batteryPercentage}}% <span translate>Battery</span>
+        </span>
+        <span ng-hide="currentUser.batteryPercentage">
+          <span translate>No battery information</span>
+        </span>
+      </p>
 
+      <div class="btn-group">
+        <a class="btn btn-default btn-block view-history" ng-if="true" ng-click="goToUser(currentUser)" translate>View history</a>
+        <a class="btn btn-default btn-block"
+           ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser)" ng-click="requestStream(currentUser)"
+           ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
+      </div>
     </div>
-  </div>
   </div>
 </script>

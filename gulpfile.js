@@ -44,6 +44,16 @@ gulp.task('copy-bs-fonts', function(){
     .pipe(gulp.dest(options.src + '/fonts/'));
 });
 
+gulp.task('copy-fa-fonts', function(){
+  return gulp.src(options.wiredep.directory + '/font-awesome/fonts/*.{otf,eot,svg,ttf,woff,woff2}')
+    .pipe(gulp.dest(options.src + '/fonts/'));
+});
+
+gulp.task('copy-project-fonts', function(){
+  gulp.run('copy-bs-fonts');
+  gulp.run('copy-fa-fonts');
+});
+
 gulp.task('copy-icheck-images', function(){
   return gulp.src(options.wiredep.directory + '/iCheck/skins/square/*.png')
     .pipe(gulp.dest(options.dist + '/styles/'));
@@ -56,11 +66,11 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
-gulp.task('server', ['copy-bs-fonts'], function () {
+gulp.task('server', ['copy-project-fonts'], function () {
   gulp.start('serve');
 });
 
-gulp.task('builder', ['clean', 'copy-bs-fonts'], function () {
+gulp.task('builder', ['clean', 'copy-project-fonts'], function () {
     gulp.start('build');
 });
 
