@@ -11,7 +11,7 @@
    */
 
   angular.module('copcastAdminApp').
-    controller('RealtimeCtrl', RealtimeCtrl);
+  controller('RealtimeCtrl', RealtimeCtrl);
 
   function RealtimeCtrl($scope, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
                         userService, $location, HistoryManager, gettextCatalog) {
@@ -57,6 +57,13 @@
     $scope.refreshUsers = refreshUsers;
 
     $scope.isStreaming = isStreaming;
+
+    $scope.dmp = function() {
+      console.log('...');
+      console.log($scope.activeUsers);
+      socket.emit("dump");
+    }
+
 
     $scope.popIncidentFlag = function (username) {
       notify({
@@ -124,39 +131,87 @@
 
     }
 
+    function initializeUser(userId) {
+
+      console.log('Initializing: '+userId);
+
+      if (userId == undefined) {
+        console.error("Trying to initialize undefined user.")
+        return;
+      }
+
+      if (userId in $scope.activeUsers) {
+        var user = $scope.activeUsers[userId];
+
+        if (user.cityCircle)
+          user.cityCircle.setMap(null);
+
+        if (user.marker)
+          user.marker.setMap(null);
+      }
+
+      $scope.activeUsers[userId] = {};
+    }
+
     function loadUser(data) {
 
-      console.log("Socket: Location received for: "+data.username+ " @ "+data.location.lat+","+data.location.lng);
-
-      var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+      console.log('loaduser');
+      console.log($scope.activeUsers);
 
       if (!(data.id in $scope.activeUsers)) { //user not in list
 
-        var marker = mapService.createMarker($scope, pos, data);
+        // user not connected via socket. Ignoring
+        console.log('ignored location data');
 
-        $scope.activeUsers[data.id] = {
-          id: data.id,
-          userName: data.name,
-          login: data.username,
-          group: data.group,
-          marker: marker,
-          groupId: data.groupId,
-          accuracy: data.location.accuracy,
-          picture: ServerUrl + data.profilePicture
-        };
+      } else {
 
-        mapService.fitBounds($scope, $scope.activeUsers);
+        console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
+
+        console.log($scope.activeUsers);
+
+        var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+
+        if (Object.keys($scope.activeUsers[data.id]).length == 0) {
+
+          var marker = mapService.createMarker($scope, pos, data);
+
+          console.log(marker);
+
+          $scope.activeUsers[data.id] = {
+            id: data.id,
+            userName: data.name,
+            login: data.username,
+            group: data.group,
+            marker: marker,
+            groupId: data.groupId,
+            accuracy: data.location.accuracy,
+            picture: ServerUrl + data.profilePicture
+          };
+
+          mapService.fitBounds($scope, $scope.activeUsers);
+        }
+
+        $scope.activeUsers[data.id].marker.setPosition(pos);
+        $scope.activeUsers[data.id].accuracy = data.location.accuracy;
+        if (data.battery)
+          $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
       }
 
-      $scope.activeUsers[data.id].marker.setPosition(pos);
-      $scope.activeUsers[data.id].accuracy = data.location.accuracy;
-      if (data.battery)
-        $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
     }
 
 
     socket.on('connect', function () {
 
+      socket.emit('getBroadcasters', function(data) {
+        console.log('XX');
+        console.log($scope.activeUsers);
+        data.broadcasters.forEach(function(e) {
+          console.log(">>>"+e);
+          //$scope.activeUsers[e] = {};
+          initializeUser(e);
+        });
+        console.log($scope.activeUsers);
+      });
 
       socket.on('frame', function(frame){
         var imgArray = new Uint8Array(frame.frame);
@@ -169,7 +224,13 @@
       });
 
       socket.on('userLeft', function(data) {
-        console.log(data);
+        console.log('user left: '+data.userId);
+
+        if (!(data.userId in $scope.activeUsers )) {
+          console.log('out of sync event. Ignoring');
+          return;
+        }
+
         //timeoutUser($scope.activeUsers[data.userLeft]);
         mapService.closeBalloon();
         if ($scope.$uibModalInstance != null) {
@@ -180,11 +241,12 @@
         delete $scope.activeUsers[data.userId];
       });
 
-      // socket.on('userEntered', function(data) {
-        // console.log('userEntered');
-        // console.log(data);
-        // $scope.activeUsers[data.userId] = 'none';
-      // });
+      socket.on('userEntered', function(data) {
+        console.log('userEntered');
+        console.log(data);
+        // $scope.activeUsers[data.userId] = {};
+        initializeUser(data.userId);
+      });
 
       socket.on('users:incidentFlag', function(data){
         console.log('incident!!');
@@ -211,8 +273,6 @@
 
         console.log('attempt!', err, new Date());
       });
-
-
     });
 
     function filterUsers() {
@@ -258,7 +318,6 @@
         google.maps.event.trigger($scope.myMap, "resize");
         $scope.myMap.setCenter($scope.currentUser.marker.getPosition());
 
-
         mapService.showBalloon($scope);
       }
     };
@@ -278,11 +337,12 @@
       //$scope.waitingStreaming = true;
       //if ($scope.isStreaming(user)){
       //  $scope.streamButtonText = 'streaming';
-        //showModal($scope.activeUsers[user.id]);
+      //showModal($scope.activeUsers[user.id]);
       //} else {
       //  $scope.streamButtonText = 'Sending...';
       //}
     };
+
     $scope.requestStream = requestStream;
 
     function stopStream(user) {
@@ -298,6 +358,9 @@
 
 
     function refreshUsers() {
+
+      $scope.refreshMap();
+      return null;
       userService.getOnlineUsers().then(function (data) {
         console.log('getOnlineUsers');
         console.log(data);
@@ -324,18 +387,18 @@
 
     function refreshMap() {
       userService.getMyData().
-        then(function (data) {
-          if (data.length === 0) {
-            return;
-          }
-          if (data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)) {
-            changeMapPos(data.lastPos.lat, data.lastPos.lng);
-          } else if (data.group.lat && data.group.lng && !isNaN(data.group.lat) && !isNaN(data.group.lat)) {
-            changeMapPos(data.group.lat, data.group.lng);
-          } else {
-            changeMapPos(0, 0);
-          }
-        });
+      then(function (data) {
+        if (data.length === 0) {
+          return;
+        }
+        if (data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)) {
+          changeMapPos(data.lastPos.lat, data.lastPos.lng);
+        } else if (data.group.lat && data.group.lng && !isNaN(data.group.lat) && !isNaN(data.group.lat)) {
+          changeMapPos(data.group.lat, data.group.lng);
+        } else {
+          changeMapPos(0, 0);
+        }
+      });
     };
 
 
@@ -378,7 +441,6 @@
     }
 
     $scope.refreshUsers();
-
 
   } //end-RealTimeCtrl
 })();
