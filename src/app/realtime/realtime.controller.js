@@ -46,6 +46,72 @@
       streetViewControl: false
     };
 
+    $scope.currentUsers = {
+
+      userDict: {},
+
+      reset: function() {
+        var self = this;
+        Object.keys(this.userDict).forEach(function(k) {
+          self.exitUser(k);
+        });
+      },
+
+      enterUser: function(userId) {
+
+        if (userId in this.userDict)
+          this.exitUser(userId);
+
+        this.userDict[userId] = {state: 0};
+      },
+
+      exitUser: function(userId) {
+        var user = this.userDict[userId];
+
+        if (!user)
+          return null;
+
+        if (user.marker) {
+          user.marker.setIcon(mapService.getGreyMarker(user.userName));
+          if (user.cityCircle)
+            user.cityCircle.setMap(null);
+
+          setTimeout(function () {
+            user.marker.setMap(null);
+          }, 5000);
+        }
+
+        console.log('clear user: '+userId);
+        delete this.userDict[userId];
+        return true;
+      },
+
+      updateUser: function(userData) {
+
+        console.log('update user: '+userData.id);
+
+        if (!(userData.id in this.userDict))
+          return null;
+
+        var tmp = jQuery.extend({}, userData);
+        tmp.state = 1;
+        this.userDict[userData.id] = tmp;
+        return userData;
+      },
+
+      getUser: function(userId) {
+        if (userId in this.userDict)
+          return this.userDict[userId];
+        else
+          return null;
+      },
+
+      getAllUsers : function() {
+        return this.userDict;
+      }
+    }
+
+
     $scope.filterUsers = filterUsers;
 
     $scope.loadUser = loadUser;
@@ -55,15 +121,6 @@
     $scope.refreshMap = refreshMap;
 
     $scope.refreshUsers = refreshUsers;
-
-    $scope.isStreaming = isStreaming;
-
-    $scope.dmp = function() {
-      console.log('...');
-      console.log($scope.activeUsers);
-      socket.emit("dump");
-    }
-
 
     $scope.popIncidentFlag = function (username) {
       notify({
@@ -83,32 +140,14 @@
       $location.path(path);
     };
 
-    $scope.isOnline = function (currentUser) {
-      return currentUser != null && currentUser.marker.icon !== mapService.getGreyMarker(currentUser.userName);
-    };
-
-
     $scope.myStyle = {
       'height': (window.innerHeight) + 'px',
       'width': '100%'
     };
 
-    $scope.activeUsers = {};
-
-    $scope.activeStreams = {};
+    //$scope.activeUsers = {};
 
     $scope.currentUser = null;
-    //
-    //$scope.$watch('selected', function () {
-    //  window.setTimeout(function(){
-    //    google.maps.event.trigger($scope.myMap, 'resize');
-    //    if($scope.defaultPos){
-    //      $scope.myMap.setCenter($scope.defaultPos);
-    //    }
-    //    $scope.refreshUsers();
-    //  },10);
-    //});
-
 
     angular.element($window).bind('resize', function () {
       $scope.myStyle.height = window.innerHeight + 'px';
@@ -116,68 +155,37 @@
       // $scope.refreshUsers();
     });
 
-    function timeoutUser(user) {
-      user.marker.setIcon(mapService.getGreyMarker(user.userName));
-    }
-
     function removeUser(user) {
-      user.marker.setIcon(mapService.getGreyMarker(user.userName));
-      if (user.cityCircle)
-        user.cityCircle.setMap(null);
 
-      setTimeout(function() {
-        user.marker.setMap(null);
-      }, 5000);
-
-    }
-
-    function initializeUser(userId) {
-
-      console.log('Initializing: '+userId);
-
-      if (userId == undefined) {
-        console.error("Trying to initialize undefined user.")
-        return;
-      }
-
-      if (userId in $scope.activeUsers) {
-        var user = $scope.activeUsers[userId];
-
-        if (user.cityCircle)
-          user.cityCircle.setMap(null);
-
-        if (user.marker)
-          user.marker.setMap(null);
-      }
-
-      $scope.activeUsers[userId] = {};
     }
 
     function loadUser(data) {
 
       console.log('loaduser');
-      console.log($scope.activeUsers);
+      console.log($scope.currentUsers.getUser(3));
 
-      if (!(data.id in $scope.activeUsers)) { //user not in list
+      var user = $scope.currentUsers.getUser(data.id);
+
+      if (user == null) { //user not in list
 
         // user not connected via socket. Ignoring
         console.log('ignored location data');
 
       } else {
 
-        console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
+        user = jQuery.extend({}, user);
 
-        console.log($scope.activeUsers);
+        console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
 
         var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
 
-        if (Object.keys($scope.activeUsers[data.id]).length == 0) {
+        if (user.state == 0) {
+
+          console.log("It's new brand new user");
 
           var marker = mapService.createMarker($scope, pos, data);
 
-          console.log(marker);
-
-          $scope.activeUsers[data.id] = {
+          var newUser = {
             id: data.id,
             userName: data.name,
             login: data.username,
@@ -188,30 +196,37 @@
             picture: ServerUrl + data.profilePicture
           };
 
-          mapService.fitBounds($scope, $scope.activeUsers);
+          user = newUser;
         }
 
-        $scope.activeUsers[data.id].marker.setPosition(pos);
-        $scope.activeUsers[data.id].accuracy = data.location.accuracy;
+        user.marker.setPosition(pos);
+        user.accuracy = data.location.accuracy;
         if (data.battery)
-          $scope.activeUsers[data.id].batteryPercentage = data.battery.batteryPercentage;
-      }
+          user.batteryPercentage = data.battery.batteryPercentage;
 
+        user = $scope.currentUsers.updateUser(user);
+        mapService.fitBounds($scope, $scope.currentUsers.getAllUsers());
+
+      }
     }
 
-
-    socket.on('connect', function () {
-
-      socket.emit('getBroadcasters', function(data) {
-        console.log('XX');
-        console.log($scope.activeUsers);
-        data.broadcasters.forEach(function(e) {
-          console.log(">>>"+e);
-          //$scope.activeUsers[e] = {};
-          initializeUser(e);
-        });
-        console.log($scope.activeUsers);
+    var receiveBroadcastersList = function(data) {
+      console.log($scope.currentUsers.userDict);
+      $scope.currentUsers.reset();
+      console.log(data);
+      console.log($scope.currentUsers.getUser(3));
+      data.broadcasters.forEach(function (e) {
+        $scope.currentUsers.enterUser(e);
       });
+
+      console.log("=====");
+      console.log($scope.currentUsers.userDict);
+    }
+
+    var prepareSocket = function(socket) {
+      console.log("PREPARING !!!! <<<<<<<<<<-----");
+
+      socket.emit('getBroadcasters', receiveBroadcastersList);
 
       socket.on('frame', function(frame){
         var imgArray = new Uint8Array(frame.frame);
@@ -226,7 +241,7 @@
       socket.on('userLeft', function(data) {
         console.log('user left: '+data.userId);
 
-        if (!(data.userId in $scope.activeUsers )) {
+        if (! $scope.currentUsers.exitUser(data.userId)) {
           console.log('out of sync event. Ignoring');
           return;
         }
@@ -237,15 +252,14 @@
           $scope.$uibModalInstance.close();
           $scope.$uibModalInstance = null;
         }
-        removeUser($scope.activeUsers[data.userId]);
-        delete $scope.activeUsers[data.userId];
+        $scope.currentUsers.exitUser(data.userId);
       });
 
       socket.on('userEntered', function(data) {
         console.log('userEntered');
         console.log(data);
         // $scope.activeUsers[data.userId] = {};
-        initializeUser(data.userId);
+        $scope.currentUsers.enterUser(data.userId);
       });
 
       socket.on('users:incidentFlag', function(data){
@@ -257,9 +271,8 @@
       socket.on('users:heartbeat', loadUser);
 
       socket.on('disconnect', function (socket) {
-        Object.keys($scope.activeUsers).forEach(function(uid) {
-          removeUser($scope.activeUsers[uid]);
-        });
+
+        $scope.currentUsers.reset();
         console.log('Got disconnect!');
         jQuery('#realtimeMapConnectionBar').fadeIn();
       });
@@ -273,7 +286,7 @@
         jQuery('#realtimeMapConnectionBarAttempts').text(err);
         console.log('attempt!', err, new Date());
       });
-    });
+    }
 
     function filterUsers() {
 
@@ -311,7 +324,7 @@
     }
 
     function showUser(userId) {
-      $scope.currentUser = $scope.activeUsers[userId];
+      $scope.currentUser = $scope.currentUsers.getUser(userId);
       $scope.streamButtonText = 'Begin stream';
       $scope.waitingStreaming = false;
       if ( $scope.currentUser ) {
@@ -320,10 +333,6 @@
 
         mapService.showBalloon($scope);
       }
-    }
-
-    function isStreaming(user) {
-      return $scope.activeStreams[user.id];
     }
 
     function requestStream(user) {
@@ -345,17 +354,17 @@
 
     $scope.requestStream = requestStream;
 
-    function stopStream(user) {
-      if (!user || !$scope.activeStreams[user.id]) {
-        return;
-      }
-      if ($scope.activeStreams[user.id] && $scope.activeStreams[user.id].modal != null) {
-        $scope.activeStreams[user.id].modal.close();
-      }
-      delete $scope.activeStreams[user.id];
-      user.marker.setIcon(mapService.getRedMarker(user.userName));
-    }
-
+    // function stopStream(user) {
+    //   if (!user) {
+    //     return;
+    //   }
+    //   if ($scope.activeStreams[user.id] && $scope.activeStreams[user.id].modal != null) {
+    //     $scope.activeStreams[user.id].modal.close();
+    //   }
+    //   delete $scope.activeStreams[user.id];
+    //   user.marker.setIcon(mapService.getRedMarker(user.userName));
+    // }
+    //
 
     function refreshUsers() {
 
@@ -417,7 +426,6 @@
     function showModal(user) {
       mapService.closeBalloon();
       console.log('showModal with user=[' + user.id + ']');
-      console.log(JSON.stringify($scope.activeStreams[user.id]));
       //showStream(user);
       $scope.$uibModalInstance = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player_h264.html',
@@ -433,20 +441,30 @@
       });
     }
 
-    function showStream(user) {
-      $scope.activeStreams[user.id] = {
-        status: 'streaming',
-        streamId: user.id,
-        userName: user.userName,
-        groupId: user.groupId,
-        streamUrl: user.streamUrl,
-        modal: null
-      };
-
-      user.marker.setIcon(mapService.getGreenMarker(user.userName));
-    }
+    // function showStream(user) {
+    //   $scope.activeStreams[user.id] = {
+    //     status: 'streaming',
+    //     streamId: user.id,
+    //     userName: user.userName,
+    //     groupId: user.groupId,
+    //     streamUrl: user.streamUrl,
+    //     modal: null
+    //   };
+    //
+    //   user.marker.setIcon(mapService.getGreenMarker(user.userName));
+    // }
 
     $scope.refreshUsers();
+
+    console.log('before');
+    if (socket.isConnected()) {
+      prepareSocket(socket);
+      // socket.emit('getBroadcasters', receiveBroadcastersList);
+    } else {
+      socket.on('connect', function () {
+        prepareSocket(socket);
+      });
+    }
 
   } //end-RealTimeCtrl
 })();

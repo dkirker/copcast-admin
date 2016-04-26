@@ -67,6 +67,7 @@ angular.module('copcastAdminApp')
 
       socketIo.on('disconnect', function() {
         console.log('SOCKET.IO CONNECTION LOST!');
+        socket.connect(token);
       });
 
       socketIo.on('error', function(err) {
@@ -107,6 +108,10 @@ angular.module('copcastAdminApp')
     socket.emit = function(action, data){
       socketIo.emit(action, data);
     };
+
+    socket.isConnected = function() {
+      return connected;
+    }
 
     return socket;
   });
