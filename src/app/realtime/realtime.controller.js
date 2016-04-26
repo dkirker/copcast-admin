@@ -162,8 +162,6 @@
     function loadUser(data) {
 
       console.log('loaduser');
-      console.log($scope.currentUsers.getUser(3));
-
       var user = $scope.currentUsers.getUser(data.id);
 
       if (user == null) { //user not in list
@@ -178,10 +176,9 @@
         console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
 
         var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+        var isNew = (user.state == 0);
 
-        if (user.state == 0) {
-
-          console.log("It's new brand new user");
+        if (isNew) {
 
           var marker = mapService.createMarker($scope, pos, data);
 
@@ -197,6 +194,7 @@
           };
 
           user = newUser;
+          isNew = true;
         }
 
         user.marker.setPosition(pos);
@@ -205,7 +203,8 @@
           user.batteryPercentage = data.battery.batteryPercentage;
 
         user = $scope.currentUsers.updateUser(user);
-        mapService.fitBounds($scope, $scope.currentUsers.getAllUsers());
+        if (isNew)
+          mapService.fitBounds($scope, $scope.currentUsers.getAllUsers());
 
       }
     }
@@ -214,7 +213,6 @@
       console.log($scope.currentUsers.userDict);
       $scope.currentUsers.reset();
       console.log(data);
-      console.log($scope.currentUsers.getUser(3));
       data.broadcasters.forEach(function (e) {
         $scope.currentUsers.enterUser(e);
       });
