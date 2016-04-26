@@ -12,6 +12,18 @@ angular.module('copcastAdminApp')
 
     $scope.sortKey = "date";
     $scope.reverse = 1;
+    $scope.perPage = 1;
+    $scope.totalIncidents = 0;
+    $scope.page = 1;
+
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+      if ($scope.filter.fromDate && $scope.filter.toDate){
+        $scope.searchByDate();
+      } else {
+        loadIncident();
+      }
+    };
 
     //filter to catch data range behavior
     $scope.filter = {
@@ -27,9 +39,10 @@ angular.module('copcastAdminApp')
       }
 
     };
+
     $scope.hasData = function hasData(){
       return $scope.incidentForms && $scope.incidentForms["activeOfficers"] !== undefined;
-    }
+    };
 
     //sort list
     $scope.sort = function(keyname){
@@ -44,30 +57,46 @@ angular.module('copcastAdminApp')
       var toDate = moment($scope.filter.toDate);
       if (fromDate.isValid() && toDate.isValid()) {
         $scope.errorMessage = null;
-        $http.get(ServerUrl + "/incidentForms/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD'))
-          .success(function (data) {
-          $scope.incidentForms = data;
-        });
+
+        loadIncident(fromDate, toDate);
+        // $http.get(ServerUrl + "/incidentForms/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD'))
+        //   .success(function (data) {
+        //     $scope.incidentForms = data;
+        //   });
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid data range.')
       }
-    }
+    };
 
     // callback for ng-click 'viewIncidentForm':
     $scope.viewIncident = function (incidentId) {
       $location.path('/incidentForm-view/' + incidentId);
     };
 
-    $http.get(ServerUrl + '/incidentForms',
-      { params : {
-        page : $scope.page
+    function loadIncident(fromDate, toDate){
+      fromDate = typeof fromDate !== 'undefined' ? fromDate : null;
+      toDate = typeof toDate !== 'undefined' ? toDate : null;
+
+      var stringDate = '';
+
+      if (fromDate && toDate) {
+        stringDate = '/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD');
       }
-      }
-    ).success(function(data) {
-        $scope.incidentForms = data;
-        console.log("IncidentForm==" , data);
+
+      $http.get(ServerUrl + '/incidentForms' + stringDate,
+        {
+          params: {
+            page: $scope.page,
+            perPage: $scope.perPage
+          }
+        }
+      ).success(function(data) {
+        $scope.incidentForms = data.rows;
+        $scope.totalIncidents = data.count;
       }).error(function(data) {
         console.error(data);
       });
+    }
 
+    loadIncident();
   });
