@@ -53,6 +53,7 @@ angular.module('copcastAdminApp')
         reconnection: true,
         reconnectionDelay: 1000,
         reconnectionDelayMax: 1000,
+        transports : ['websocket'],
         timeout: 4000
       }); // OBS: the time between successive connection attemps will be DelayMax + timeout = 5s (1000ms + 4000ms)
 
