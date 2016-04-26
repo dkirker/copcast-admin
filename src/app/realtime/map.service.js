@@ -92,7 +92,8 @@
            service.fitBounds = function(scope, activeUsers){
              var bounds = new google.maps.LatLngBounds();
              for (var key in activeUsers){
-               bounds.extend(activeUsers[key].marker.getPosition());
+               if (activeUsers[key].state == 1)
+                bounds.extend(activeUsers[key].marker.getPosition());
              }
              scope.myMap.fitBounds(bounds);
            };

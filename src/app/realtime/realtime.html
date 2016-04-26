@@ -46,7 +46,7 @@
       <div class="btn-group">
         <a class="btn btn-default btn-block view-history" ng-if="true" ng-click="goToUser(currentUser)" translate>View history</a>
         <a class="btn btn-default btn-block"
-           ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-show="isOnline(currentUser)" ng-click="requestStream(currentUser)"
+           ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-click="requestStream(currentUser)"
            ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
       </div>
     </div>
