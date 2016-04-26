@@ -69,30 +69,45 @@
     </div>
   </div>
 
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
   <table class="table table-striped table-condensed">
     <thead>
-    <tr>
-      <th style="min-width: 80px;" ng-click="sort('date')"><span translate>date</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'date'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      <th style="min-width: 80px;" ng-click="sort('userId')"><span translate>username</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'userId'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      <th style="min-width: 80px;" ng-click="sort('address')"><span translate>group name</span>
-            <span class="glyphicon sort-icon" ng-show="sortKey == 'address'"
-                  ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      <th style="width:20px;"></th>
-      <th style="width:20px;"></th>
-    </tr>
+      <tr>
+        <th style="min-width: 80px;" ng-click="sort('date')">
+          <span translate>date</span>
+          <span class="glyphicon sort-icon" ng-show="sortKey == 'date'"
+                ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+        </th>
+
+        <th style="min-width: 80px;" ng-click="sort('userId')">
+          <span translate>username</span>
+          <span class="glyphicon sort-icon" ng-show="sortKey == 'userId'"
+                ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+        </th>
+
+        <th style="min-width: 80px;" ng-click="sort('address')">
+          <span translate>group name</span>
+          <span class="glyphicon sort-icon" ng-show="sortKey == 'address'"
+                ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+        </th>
+
+        <th style="width:20px;"></th>
+        <th style="width:20px;"></th>
+      </tr>
     </thead>
+
     <tbody>
-    <tr ng-repeat="incident in incidentForms  | filter: globalSearch | orderBy:sortKey:reverse">
-      <td>{{ incident.date | date:'yyyy-MM-dd' }}</td>
-      <td>{{ incident.user.name }}</td>
-      <td>{{ incident.user.group.name }}</td>
-      <td><a ng-click="viewIncident(incident.id)" class="btn btn-small btn-primary" translate>view</a></td>
-    </tr>
+      <tr dir-paginate="incident in incidentForms | itemsPerPage: perPage | filter: globalSearch | orderBy:sortKey:reverse"
+          total-items="totalIncidents"
+          current-page="page">
+        <td>{{ incident.date | date:'yyyy-MM-dd' }}</td>
+        <td>{{ incident.user.name }}</td>
+        <td>{{ incident.user.group.name }}</td>
+        <td><a ng-click="viewIncident(incident.id)" class="btn btn-small btn-primary" translate>view</a></td>
+      </tr>
     </tbody>
   </table>
 
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>
