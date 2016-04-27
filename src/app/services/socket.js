@@ -59,7 +59,9 @@ angular.module('copcastAdminApp')
 
       socketIo.once('connect', function() {
         connected = true;
+        //onConnect.length = 0;
         console.log('socket connected!');
+        console.error('CallBack length: '+onConnect.length);
         angular.forEach(onConnect, function(cb) {
           cb();
         });
@@ -111,6 +113,10 @@ angular.module('copcastAdminApp')
 
     socket.isConnected = function() {
       return connected;
+    }
+    
+    socket.off = function(evt) {
+      socketIo.off(evt);
     }
 
     return socket;

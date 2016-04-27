@@ -111,10 +111,16 @@
       }
     }
 
+    if ($scope.getCurrentUsers == undefined)
+      $scope.getCurrentUsers = function() {
+
+        // console.warn($scope.currentUsers.userDict);
+        return $scope.currentUsers;
+      }
 
     $scope.filterUsers = filterUsers;
 
-    $scope.loadUser = loadUser;
+    // $scope.loadUser = loadUser;
 
     $scope.showUser = showUser;
 
@@ -145,26 +151,20 @@
       'width': '100%'
     };
 
-    //$scope.activeUsers = {};
-
-    $scope.currentUser = null;
-
     angular.element($window).bind('resize', function () {
       $scope.myStyle.height = window.innerHeight + 'px';
       google.maps.event.trigger($scope.myMap, 'resize');
       // $scope.refreshUsers();
     });
 
-    function removeUser(user) {
-
-    }
-
-    function loadUser(data) {
+    var loadUser = function(data) {
 
       console.log('loaduser');
-      console.log($scope.currentUsers.getUser(3));
+      console.log($scope.getCurrentUsers().userDict[data.id] );
 
-      var user = $scope.currentUsers.getUser(data.id);
+      var user = $scope.getCurrentUsers().getUser(data.id);
+
+      console.log(user);
 
       if (user == null) { //user not in list
 
@@ -204,23 +204,23 @@
         if (data.battery)
           user.batteryPercentage = data.battery.batteryPercentage;
 
-        user = $scope.currentUsers.updateUser(user);
-        mapService.fitBounds($scope, $scope.currentUsers.getAllUsers());
+        user = $scope.getCurrentUsers().updateUser(user);
+        mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
 
       }
     }
 
     var receiveBroadcastersList = function(data) {
-      console.log($scope.currentUsers.userDict);
-      $scope.currentUsers.reset();
+      console.log('listing');
+      console.log($scope.getCurrentUsers().userDict);
+      $scope.getCurrentUsers().reset();
       console.log(data);
-      console.log($scope.currentUsers.getUser(3));
       data.broadcasters.forEach(function (e) {
-        $scope.currentUsers.enterUser(e);
+        $scope.getCurrentUsers().enterUser(e);
       });
 
       console.log("=====");
-      console.log($scope.currentUsers.userDict);
+      console.log($scope.getCurrentUsers().userDict);
     }
 
     var prepareSocket = function(socket) {
@@ -241,7 +241,7 @@
       socket.on('userLeft', function(data) {
         console.log('user left: '+data.userId);
 
-        if (! $scope.currentUsers.exitUser(data.userId)) {
+        if (! $scope.getCurrentUsers().exitUser(data.userId)) {
           console.log('out of sync event. Ignoring');
           return;
         }
@@ -252,14 +252,14 @@
           $scope.$uibModalInstance.close();
           $scope.$uibModalInstance = null;
         }
-        $scope.currentUsers.exitUser(data.userId);
+        $scope.getCurrentUsers().exitUser(data.userId);
       });
 
       socket.on('userEntered', function(data) {
         console.log('userEntered');
         console.log(data);
         // $scope.activeUsers[data.userId] = {};
-        $scope.currentUsers.enterUser(data.userId);
+        $scope.getCurrentUsers().enterUser(data.userId);
       });
 
       socket.on('users:incidentFlag', function(data){
@@ -268,11 +268,13 @@
         $scope.popIncidentFlag(data.username);
       });
 
-      socket.on('users:heartbeat', loadUser);
+      socket.on('users:heartbeat', function(data) {
+        loadUser(data);
+      });
 
       socket.on('disconnect', function (socket) {
 
-        $scope.currentUsers.reset();
+        $scope.getCurrentUsers().reset();
         console.log('Got disconnect!');
         jQuery('#realtimeMapConnectionBar').fadeIn();
       });
@@ -324,7 +326,7 @@
     }
 
     function showUser(userId) {
-      $scope.currentUser = $scope.currentUsers.getUser(userId);
+      $scope.currentUser = $scope.getCurrentUsers().getUser(userId);
       $scope.streamButtonText = 'Begin stream';
       $scope.waitingStreaming = false;
       if ( $scope.currentUser ) {
@@ -456,15 +458,12 @@
 
     $scope.refreshUsers();
 
-    console.log('before');
-    if (socket.isConnected()) {
-      prepareSocket(socket);
-      // socket.emit('getBroadcasters', receiveBroadcastersList);
-    } else {
-      socket.on('connect', function () {
-        prepareSocket(socket);
-      });
-    }
+    socket.on('connect', function() { prepareSocket(socket); });
 
+    if (socket.isConnected()) {
+      socket.off('users:heartbeat');
+      socket.on('users:heartbeat', loadUser);
+      socket.emit('getBroadcasters', receiveBroadcastersList);
+    }
   } //end-RealTimeCtrl
 })();
