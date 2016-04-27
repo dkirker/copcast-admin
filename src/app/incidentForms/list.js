@@ -12,7 +12,7 @@ angular.module('copcastAdminApp')
 
     $scope.sortKey = "date";
     $scope.reverse = 1;
-    $scope.perPage = 1;
+    $scope.perPage = 30;
     $scope.totalIncidents = 0;
     $scope.page = 1;
 
