@@ -12,10 +12,10 @@
         return "00:00"
       }
 
-      var hours = Math.floor(parseInt(minutes) / 60);
+      var hours = Math.floor(parseInt(minutes) / 60).toString();
       var min = parseInt(minutes) - hours * 60;
 
-      return ("0" + hours).slice(-2) + ':'+("0" + min).slice(-2);
+      return (hours.length > 1 ? hours : "0" + hours ) + ':'+("0" + min).slice(-2);
 
     }
 
