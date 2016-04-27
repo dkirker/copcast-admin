@@ -48,7 +48,12 @@
             <div class="form-group">
               <label class="col-sm-2 control-label" translate>Name:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="globalSearch.user.name"/>
+                <!--<input type="text" class="form-control" ng-model="globalSearch.user.name"/>-->
+                <select ng-options="user.id as user.name for user in users" ng-required="true"
+                        ng-model="filter.user"
+                        required class="form-control" >
+                  <option value=""></option>
+                </select>
               </div>
             </div>
           </div>
@@ -57,7 +62,12 @@
             <div class="form-group">
               <label class="col-sm-2 control-label" translate>Group:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="globalSearch.user.group.name"/>
+                <!--<input type="text" class="form-control" ng-model="globalSearch.user.group.name"/>-->
+                <select ng-options="group.id as group.name for group in groups" ng-required="true"
+                        ng-model="filter.group"
+                        required class="form-control">
+                  <option value=""></option>
+                </select>
               </div>
             </div>
           </div>

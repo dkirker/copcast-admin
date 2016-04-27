@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl, gettextCatalog) {
+  .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl, userService, groupService, gettextCatalog) {
 
     $scope.sortKey = "date";
     $scope.reverse = 1;
@@ -55,18 +55,31 @@ angular.module('copcastAdminApp')
     $scope.searchByDate = function updateFilter(){
       var fromDate = moment($scope.filter.fromDate);
       var toDate = moment($scope.filter.toDate);
-      if (fromDate.isValid() && toDate.isValid()) {
-        $scope.errorMessage = null;
 
+      if ($scope.filter.fromDate == null && $scope.filter.toDate == null) {
+        $scope.errorMessage = null;
+        loadIncident();
+      } else if (fromDate.isValid() && toDate.isValid()) {
+        $scope.errorMessage = null;
         loadIncident(fromDate, toDate);
-        // $http.get(ServerUrl + "/incidentForms/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD'))
-        //   .success(function (data) {
-        //     $scope.incidentForms = data;
-        //   });
       } else {
         $scope.errorMessage = gettextCatalog.getString('Invalid data range.')
       }
     };
+
+    $scope.users = [];
+    userService.listUsers().then(function(users){
+      $scope.users = users;
+    }, function(err){
+      $scope.errorMessage = err;
+    });
+
+    $scope.groups = [];
+    groupService.listGroups().then(function(groups){
+      $scope.groups = groups
+    }, function(err){
+      $scope.errorMessage = err;
+    });
 
     // callback for ng-click 'viewIncidentForm':
     $scope.viewIncident = function (incidentId) {
@@ -87,7 +100,9 @@ angular.module('copcastAdminApp')
         {
           params: {
             page: $scope.page,
-            perPage: $scope.perPage
+            perPage: $scope.perPage,
+            group: $scope.filter.group,
+            user: $scope.filter.user
           }
         }
       ).success(function(data) {
