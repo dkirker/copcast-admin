@@ -50,8 +50,7 @@ gulp.task('copy-fa-fonts', function(){
 });
 
 gulp.task('copy-project-fonts', function(){
-  gulp.run('copy-bs-fonts');
-  gulp.run('copy-fa-fonts');
+  gulp.start('copy-bs-fonts', 'copy-fa-fonts');
 });
 
 gulp.task('copy-icheck-images', function(){
@@ -75,9 +74,7 @@ gulp.task('builder', ['clean', 'copy-project-fonts'], function () {
 });
 
 gulp.task('default', ['builder'], function () {
-    // gulp.start('vendor_js');
-  gulp.run('vendor_js');
-  gulp.run('copy-icheck-images');
+    gulp.start('vendor_js', 'copy-icheck-images');
 });
 
 //gulp.task('pot', function () {

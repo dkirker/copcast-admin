@@ -8,12 +8,13 @@
       </div>
     </form>
 
-    <button id="fetchUsers" class="btn btn-primary left" ng-click="refreshUsers()" translate>
-      <i class="fa fa-refresh fa-lg fa-fw margin-bottom"></i>
-      Refresh map
-    </button>
   </nav>
 </div>
+
+<button id="fetchUsers" ng-click="refreshUsers()" title="Show all connected officers" translate>
+  All Officers
+</button>
+
 <div ui-map="myMap" ui-options="mapOptions" class="map-container"></div>
 
 <div id="realtimeMapConnectionBar" class="alert alert-danger text-center" role="alert">

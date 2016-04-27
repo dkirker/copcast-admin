@@ -160,11 +160,8 @@
     var loadUser = function(data) {
 
       console.log('loaduser');
-      console.log($scope.getCurrentUsers().userDict[data.id] );
 
       var user = $scope.getCurrentUsers().getUser(data.id);
-
-      console.log(user);
 
       if (user == null) { //user not in list
 
@@ -178,10 +175,9 @@
         console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
 
         var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+        var isNew = (user.state == 0);
 
-        if (user.state == 0) {
-
-          console.log("It's new brand new user");
+        if (isNew) {
 
           var marker = mapService.createMarker($scope, pos, data);
 
@@ -197,6 +193,7 @@
           };
 
           user = newUser;
+          isNew = true;
         }
 
         user.marker.setPosition(pos);
@@ -205,7 +202,8 @@
           user.batteryPercentage = data.battery.batteryPercentage;
 
         user = $scope.getCurrentUsers().updateUser(user);
-        mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
+        if (isNew)
+          mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
 
       }
     }
@@ -370,11 +368,11 @@
 
     function refreshUsers() {
 
-      var $faLoader = jQuery('#fetchUsers .fa-refresh');
-      $faLoader.addClass('fa-spin');
+      var $faLoader = jQuery('#fetchUsers');
+      $faLoader.addClass('active');
       $scope.refreshMap();
       setTimeout(function() {
-        $faLoader.removeClass('fa-spin');
+        $faLoader.removeClass('active');
       }, 1000);
 
       return null;
