@@ -106,5 +106,37 @@ footer{
 }
 
 #fetchUsers {
-  margin-top: 8px;
+  direction: ltr;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 11px;
+  text-align: center;
+  color: rgb(86, 86, 86);
+  line-height: 1.42857;
+  -webkit-user-select: none;
+  position: absolute;
+  top: 12.4%;
+  left: 110px;
+  z-index: 1;
+  min-width: 96px;
+  padding: 8px;
+  border: 0;
+  border-radius: 2px;
+  background-color: rgb(255, 255, 255);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  overflow: hidden;
+  outline: 0;
+
+  transition: font-weight .5s;
+
+  &:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(235, 235, 235);
+  }
+
+  &.active {
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+  }
 }

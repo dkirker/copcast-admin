@@ -368,11 +368,11 @@
 
     function refreshUsers() {
 
-      var $faLoader = jQuery('#fetchUsers .fa-refresh');
-      $faLoader.addClass('fa-spin');
+      var $faLoader = jQuery('#fetchUsers');
+      $faLoader.addClass('active');
       $scope.refreshMap();
       setTimeout(function() {
-        $faLoader.removeClass('fa-spin');
+        $faLoader.removeClass('active');
       }, 1000);
 
       return null;
