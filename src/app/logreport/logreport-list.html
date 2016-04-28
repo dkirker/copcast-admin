@@ -98,7 +98,11 @@
       <td>{{ logreport.user.group.name }}</td>
       <td>{{ logreport.date | date:'yyyy-MM-dd  HH:mm' }}</td>
       <td >{{ logreport.nextState | translate }}</td>
-      <td >
+      <td>
+        <div ng-show="logreport.nextState == 'SEEN_VIDEO' && logreport.extraJson">
+          <label translate>Seen at:</label> {{ logreport.extraJson['extras'] }}
+        </div>
+
         <div ng-show="logreport.nextState == 'UPLOADING' && logreport.extraJson">
           <label translate>Connection:</label> {{ logreport.extraJson['connection']}} <br/>
           <label translate>Data in the device:</label> {{ logreport.extraJson['data'] | bytes}}
