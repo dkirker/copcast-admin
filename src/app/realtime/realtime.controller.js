@@ -181,6 +181,11 @@
 
           var marker = mapService.createMarker($scope, pos, data);
 
+          var userPicture = "/assets/images/anonuser.png";
+          if (data.profilePicture) {
+            userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
+          }
+
           var newUser = {
             id: data.id,
             userName: data.name,
@@ -189,7 +194,7 @@
             marker: marker,
             groupId: data.groupId,
             accuracy: data.location.accuracy,
-            picture: ServerUrl + data.profilePicture
+            picture: userPicture
           };
 
           user = newUser;
