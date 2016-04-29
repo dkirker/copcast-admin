@@ -1,3 +1,4 @@
+;(function(angular, moment) {
 /**
  * Created by brunosiqueira on 21/01/16.
  */
@@ -38,9 +39,13 @@ angular.module('copcastAdminApp')
         $scope.errorMessage = gettextCatalog.getString('Date is required');
         return;
       }
-      $scope.exportObj.finalDate = $scope.exportObj.initialDate;
+
       $scope.errorMessage = null;
-      exportService.create($scope.exportObj).then(
+      exportService.create({
+        recorderId: $scope.exportObj.recorderId,
+        initialDate: moment($scope.exportObj.initialDate).format('YYYY-MM-DD'),
+        finalDate: moment($scope.exportObj.initialDate).format('YYYY-MM-DD')
+      }).then(
         function(result){
           console.log(result)
           if (result.length > 0 ) {
@@ -61,3 +66,4 @@ angular.module('copcastAdminApp')
     }
 
   });
+})(window.angular, window.moment);
