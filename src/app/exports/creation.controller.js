@@ -38,6 +38,7 @@ angular.module('copcastAdminApp')
         $scope.errorMessage = gettextCatalog.getString('Date is required');
         return;
       }
+      $scope.exportObj.finalDate = $scope.exportObj.initialDate;
       $scope.errorMessage = null;
       exportService.create($scope.exportObj).then(
         function(result){
