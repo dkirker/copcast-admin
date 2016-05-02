@@ -33,7 +33,7 @@
     <div>
       <img ng-src="{{currentUser.picture}}" ng-class="{streaming: isStreaming(currentUser)}"/><br/>
 
-      <p><strong>{{currentUser.userName}}</strong></p>
+      <p class="userName" data-toggle="tooltip" data-placement="bottom" title="{{currentUser.userName}}">{{currentUser.userName}}</p>
 
       <p class="battery-info">
         <span ng-show="currentUser.batteryPercentage">

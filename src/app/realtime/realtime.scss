@@ -16,7 +16,15 @@
     }
   }
 
-  strong { font-size: 1.5em; }
+  .userName {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+  }
 
   a {
     color: #ffffff;
