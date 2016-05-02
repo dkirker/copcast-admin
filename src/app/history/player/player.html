@@ -22,7 +22,8 @@
       </div>
       <div class="middle">
         <span ng-if="!selectedUser"><translate>Select a user of group</translate></span>
-        <span ng-if="selectedUser"><translate>Selected user:</translate> <strong>{{selectedUser.name}}</strong></span>
+        <span ng-if="selectedUser" translate>Selected user:</span>
+        <strong ng-if="selectedUser">{{selectedUser.name}}</strong>
       </div>
       <div class="next" ng-click="nextVideo()" ng-class="{'enabled': hasNextVideo}">
       </div>

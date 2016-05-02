@@ -108,8 +108,9 @@
         }
       }
       .middle {
-        width: 300px;
-        max-width: 350px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 320px;
         vertical-align: top;
         overflow: hidden;
       }
