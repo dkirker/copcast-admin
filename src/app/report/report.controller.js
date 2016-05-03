@@ -59,19 +59,24 @@
     function updateFilter(){
       var fromDate = moment($scope.filter.fromDate);
       var toDate = moment($scope.filter.toDate);
+
       if (fromDate.isValid() && toDate.isValid()) {
-        $scope.errorMessage = null;
-        $http.get(ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD')).success(function (data) {
-          $scope.reportData = data;
-        });
-        // setTimeout(function(){
-        //   $('.dataTable').DataTable({
-        //     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //     dom: '<"col-sm-6"l><"col-sm-6"f>rt<"col-sm-12"i><"col-sm-8 .col-sm-offset-2"p>'
-        //   });
-        // }, 5000);
+        if (fromDate <= toDate) {
+          $scope.errorMessage = null;
+          $http.get(ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" + toDate.format('YYYY-MM-DD')).success(function (data) {
+            $scope.reportData = data;
+          });
+          // setTimeout(function(){
+          //   $('.dataTable').DataTable({
+          //     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          //     dom: '<"col-sm-6"l><"col-sm-6"f>rt<"col-sm-12"i><"col-sm-8 .col-sm-offset-2"p>'
+          //   });
+          // }, 5000);
+        } else {
+          $scope.errorMessage = gettextCatalog.getString('Invalid interval. Please check the date range.')
+        }
       } else {
-        $scope.errorMessage = gettextCatalog.getString('Period not valid.')
+        $scope.errorMessage = gettextCatalog.getString('Invalid date.')
       }
     }
 
