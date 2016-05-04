@@ -31,8 +31,8 @@ angular.module('copcastAdminApp')
     };
 
     socket.connect = function(token) {
-      if(!token){
-        console.log('socket.connect without token. returning.');
+      if(!token || !$rootScope.globals || !$rootScope.globals.currentUser){
+        console.log('socket.connect without token or user. returning.');
         return;
       }
       if ( typeof io === 'undefined' ) {
@@ -114,7 +114,7 @@ angular.module('copcastAdminApp')
     socket.isConnected = function() {
       return connected;
     }
-    
+
     socket.off = function(evt) {
       socketIo.off(evt);
     }
