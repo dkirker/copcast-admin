@@ -833,6 +833,9 @@ msgstr ""
  msgid "LOGGED"
  msgstr "Conectado"
 
+ msgid "IDLE"
+ msgstr "Conectado"
+
  msgid "SEEN_VIDEO"
  msgstr "Usuário viu um vídeo do próprio celular."
 

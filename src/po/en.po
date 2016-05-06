@@ -545,6 +545,9 @@ msgstr "Uploading data to the server"
 msgid "LOGGED"
 msgstr "Logged in the Copcast app"
 
+msgid "IDLE"
+msgstr "Logged in the Copcast app"
+
 msgid "SEEN_VIDEO"
 msgstr "Playing recorded videos"
 
