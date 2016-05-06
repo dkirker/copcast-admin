@@ -533,6 +533,9 @@ msgstr "In mission - Recording videos"
 msgid "RECORDING_ONLINE"
 msgstr "In mission - Recording videos"
 
+msgid "RECORDING"
+msgstr "In mission - Recording videos"
+
 msgid "STREAMING"
 msgstr "In mission - Live streaming"
 
