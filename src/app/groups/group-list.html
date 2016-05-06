@@ -23,7 +23,7 @@
         <td>{{ group.name }}</td>
         <td ng-show="group.isAdmin" translate>Admin</td>
         <td ng-hide="group.isAdmin" translate>Normal</td>
-        <td translate>{{ group.createdAt | date:'medium' }}</td>
+        <td>{{ group.createdAt | date:'medium' }}</td>
         <td><a ng-click="editGroup(group.id)" class="btn btn-small btn-primary" translate>edit</a></td>
         <td><a ng-click="deleteGroup(group.id)" class="btn btn-small btn-danger" ng-show="isAdminGroup" translate>delete</a></td>
       </tr>

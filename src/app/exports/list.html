@@ -25,7 +25,7 @@
         <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
         <td>{{export.Exporter.name}}</td>
         <td ng-show="!isAvailable(export)">{{export.status | translate}}</td>
-        <td ng-show="isAvailable(export)"><a ng-href="#/exports/{{export.id}}" translate>{{export.status}}</a></td>
+        <td ng-show="isAvailable(export)"><a ng-href="#/exports/{{export.id}}">{{export.status | translate}}</a></td>
       </tr>
     </tbody>
   </table>
