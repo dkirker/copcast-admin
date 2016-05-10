@@ -11,7 +11,7 @@ angular.module('copcastAdminApp')
   .controller('GroupsCreationCtrl', function($scope, $http, $location, ServerUrl){
     $scope.createGroup = function () {
       $http.post(ServerUrl + '/groups', $scope.group)
-      .success(function(data) {
+      .success(function() {
         $location.path('/group-list');
       }).error(function(data) {
         if (data && data.errors){
