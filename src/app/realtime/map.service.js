@@ -9,15 +9,16 @@
  * Factory in the copcastAdminApp.
  */
 angular.module('copcastAdminApp')
-  .factory('mapService',function($compile,gettextCatalog, $templateCache) {
+  .factory('mapService',function($window, $compile,gettextCatalog, $templateCache) {
     var service = {}, infoWindow =null;
 
     service.showBalloon = function (scope) {
       if (infoWindow){
         infoWindow.close();
       }
+
       scope.balloonErrorMessage = '';
-      infoWindow = new InfoBubble({
+      infoWindow = new $window.InfoBubble({
         minWidth: 250,
         minHeight: 262,
         arrowSize: 20,
@@ -26,15 +27,14 @@ angular.module('copcastAdminApp')
         shadowStyle: 0,
         closeSrc: 'https://maps.gstatic.com/intl/en_us/mapfiles/close.gif'
       });
+
       infoWindow.setContent($compile($templateCache.get('balloon.html'))(scope)[0]);
       infoWindow.open(scope.myMap,scope.currentUser.marker);
 
-      setTimeout(function(){
-        console.log(jQuery('[data-toggle="tooltip"]'));
-        jQuery('[data-toggle="tooltip"]').tooltip();
+      $window.setTimeout(function(){
+        $window.console.log(angular.element('[data-toggle="tooltip"]'));
+        angular.element('[data-toggle="tooltip"]').tooltip();
       }, 100);
-
-
     };
 
     service.showErrorInBallon = function(scope) {
@@ -42,20 +42,20 @@ angular.module('copcastAdminApp')
         scope.balloonErrorMessage = gettextCatalog.getString('Not able to start streaming now. Try again later.');
       }
     };
+
     service.closeBalloon = function () {
       if (infoWindow){
         infoWindow.close();
       }
     };
+
     service.getRedMarker = function(user){
       return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
     };
 
-
     service.getGreenMarker = function(user){
       return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|009c00|000000';
     };
-
 
     service.getGreyMarker = function(user){
       return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
@@ -78,7 +78,7 @@ angular.module('copcastAdminApp')
             radius: user.accuracy
           };
           // Add the circle for this city to the map.
-          user.cityCircle = new google.maps.Circle(circleOptions);
+          user.cityCircle = new $window.google.maps.Circle(circleOptions);
         }
       } else if (user.cityCircle){
         user.cityCircle.setMap(null);
@@ -87,13 +87,13 @@ angular.module('copcastAdminApp')
     };
 
     service.createMarker = function(scope, pos, user){
-      var marker = new google.maps.Marker({
+      var marker = new $window.google.maps.Marker({
         map: scope.myMap,
         position: pos,
         icon: service.getRedMarker(user.name)
       });
 
-      google.maps.event.addListener(marker, 'click', function() {
+      $window.google.maps.event.addListener(marker, 'click', function() {
         scope.showUser(user.id);
         scope.$digest();
       });
@@ -102,10 +102,11 @@ angular.module('copcastAdminApp')
     };
 
     service.fitBounds = function(scope, activeUsers){
-      var bounds = new google.maps.LatLngBounds();
+      var bounds = new $window.google.maps.LatLngBounds();
       for (var key in activeUsers){
-        if (activeUsers[key].state == 1)
+        if (activeUsers[key].state === 1) {
           bounds.extend(activeUsers[key].marker.getPosition());
+        }
       }
       scope.myMap.fitBounds(bounds);
     };
