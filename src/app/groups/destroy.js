@@ -8,15 +8,15 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('GroupsDestroyCtrl', function($scope, $routeParams, $http, $location, ServerUrl, groupService){
+  .controller('GroupsDestroyCtrl', function($scope, $window, $routeParams, $http, $location, ServerUrl, groupService){
 
     // callback for ng-click 'updateGroup':
     $scope.deleteGroup = function () {
 
-      if (confirm('Are you sure to delete ' + $scope.group.name) === true) {
+      if ($window.confirm('Are you sure to delete ' + $scope.group.name) === true) {
         // confirmation to delete
 
-        groupService.deleteGroup($scope.group.id).then(function (data) {
+        groupService.deleteGroup($scope.group.id).then(function () {
           $location.path('/group-list');
         }, function (data) {
           $scope.serverMessage = data;
