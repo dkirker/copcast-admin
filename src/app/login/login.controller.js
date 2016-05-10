@@ -32,7 +32,7 @@ angular.module('copcastAdminApp')
       $scope.emailMessage = gettext('Trying to send email...');
       $http.post(ServerUrl + '/users/'+$scope.email+'/reset_password', {
         email:$scope.email
-      }).success(function(data) {
+      }).success(function() {
         $scope.emailMessage = gettext('Email sent successfully');
         $scope.selected = 'login';
         $scope.email='';
@@ -62,7 +62,7 @@ angular.module('copcastAdminApp')
         });
         historyService.registerLoggedIn();
 
-      }).error(function (data, status, headers, config) {
+      }).error(function (/*data, status, headers, config*/) {
         $scope.errorMessage = gettext('The email and password you entered don\'t match.');
         $scope.emailMessage = '';
       });
