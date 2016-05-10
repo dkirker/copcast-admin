@@ -1,23 +1,20 @@
-(function () {
-  'use strict';
-  /* global google */
+'use strict';
+/* global google */
 
-  /**
-   * @ngdoc function
-   * @name copcastAdminApp.controller:RealtimeCtrl
-   * @description
-   * # RealtimeCtrl
-   * Controller of the copcastAdminApp
-   */
+/**
+ * @ngdoc function
+ * @name copcastAdminApp.controller:RealtimeCtrl
+ * @description
+ * # RealtimeCtrl
+ * Controller of the copcastAdminApp
+ */
 
-  angular.module('copcastAdminApp').
-  controller('RealtimeCtrl', RealtimeCtrl);
+angular.module('copcastAdminApp').
+  controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+                                      userService, $location, HistoryManager, gettextCatalog) {
 
-  function RealtimeCtrl($scope, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
-                        userService, $location, HistoryManager, gettextCatalog) {
-
-    $scope.windowHeight = window.innerHeight;
-    $scope.windowWidth = window.innerWidth;
+    $scope.windowHeight = $window.innerHeight;
+    $scope.windowWidth = $window.innerWidth;
     $rootScope.selected = 'realtime';
     $scope.streamButtonText = gettextCatalog.getString('Livestream');
     $scope.waitingStreaming = false;
@@ -59,8 +56,9 @@
 
       enterUser: function(userId) {
 
-        if (userId in this.userDict)
+        if (userId in this.userDict) {
           this.exitUser(userId);
+        }
 
         this.userDict[userId] = {state: 0};
       },
@@ -68,27 +66,29 @@
       exitUser: function(userId) {
         var user = this.userDict[userId];
 
-        if (!user)
+        if (!user) {
           return null;
+        }
 
         if (user.marker) {
           user.marker.setIcon(mapService.getGreyMarker(user.userName));
-          if (user.cityCircle)
+          if (user.cityCircle) {
             user.cityCircle.setMap(null);
+          }
 
-          setTimeout(function () {
+          $window.setTimeout(function () {
             user.marker.setMap(null);
           }, 5000);
         }
 
-        console.log('clear user: '+userId);
+        $window.console.log('clear user: '+userId);
         delete this.userDict[userId];
         return true;
       },
 
       updateUser: function(userData) {
 
-        console.log('update user: '+userData.id);
+        $window.console.log('update user: '+userData.id);
 
         if (!(userData.id in this.userDict))
           return null;
@@ -109,14 +109,14 @@
       getAllUsers : function() {
         return this.userDict;
       }
-    }
+    };
 
     if ($scope.getCurrentUsers == undefined)
       $scope.getCurrentUsers = function() {
 
-        // console.warn($scope.currentUsers.userDict);
+        // $window.console.warn($scope.currentUsers.userDict);
         return $scope.currentUsers;
-      }
+      };
 
     $scope.filterUsers = filterUsers;
 
@@ -147,32 +147,32 @@
     };
 
     $scope.myStyle = {
-      'height': (window.innerHeight) + 'px',
+      'height': ($window.innerHeight) + 'px',
       'width': '100%'
     };
 
     angular.element($window).bind('resize', function () {
-      $scope.myStyle.height = window.innerHeight + 'px';
+      $scope.myStyle.height = $window.innerHeight + 'px';
       google.maps.event.trigger($scope.myMap, 'resize');
       // $scope.refreshUsers();
     });
 
     var loadUser = function(data) {
 
-      console.log('loaduser');
+      $window.console.log('loaduser');
 
       var user = $scope.getCurrentUsers().getUser(data.id);
 
       if (user == null) { //user not in list
 
         // user not connected via socket. Ignoring
-        console.log('ignored location data');
+        $window.console.log('ignored location data');
 
       } else {
 
         user = jQuery.extend({}, user);
 
-        console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
+        $window.console.log("Socket: Location received for: " + data.username + " @ " + data.location.lat + "," + data.location.lng);
 
         var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
         var isNew = (user.state == 0);
@@ -182,6 +182,7 @@
           var marker = mapService.createMarker($scope, pos, data);
 
           var userPicture = "/assets/images/anonuser.png";
+
           if (data.profilePicture) {
             userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
           }
@@ -203,37 +204,39 @@
 
         user.marker.setPosition(pos);
         user.accuracy = data.location.accuracy;
-        if (data.battery)
+
+        if (data.battery) {
           user.batteryPercentage = data.battery.batteryPercentage;
+        }
 
         user = $scope.getCurrentUsers().updateUser(user);
-        if (isNew)
+        if (isNew) {
           mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
-
+        }
       }
-    }
+    };
 
     var receiveBroadcastersList = function(data) {
-      console.log('listing');
-      console.log($scope.getCurrentUsers().userDict);
+      $window.console.log('listing');
+      $window.console.log($scope.getCurrentUsers().userDict);
       $scope.getCurrentUsers().reset();
-      console.log(data);
+      $window.console.log(data);
       data.broadcasters.forEach(function (e) {
         $scope.getCurrentUsers().enterUser(e);
       });
 
-      console.log("=====");
-      console.log($scope.getCurrentUsers().userDict);
-    }
+      $window.console.log("=====");
+      $window.console.log($scope.getCurrentUsers().userDict);
+    };
 
     var prepareSocket = function(socket) {
-      console.log("PREPARING !!!! <<<<<<<<<<-----");
+      $window.console.log("PREPARING !!!! <<<<<<<<<<-----");
 
       socket.emit('getBroadcasters', receiveBroadcastersList);
 
       socket.on('frame', function(frame){
         var imgArray = new Uint8Array(frame.frame);
-        //console.log(imgArray.length);
+        //$window.console.log(imgArray.length);
         $rootScope.$emit("h264Frame", imgArray);
       });
 
@@ -242,10 +245,10 @@
       });
 
       socket.on('userLeft', function(data) {
-        console.log('user left: '+data.userId);
+        $window.console.log('user left: '+data.userId);
 
         if (! $scope.getCurrentUsers().exitUser(data.userId)) {
-          console.log('out of sync event. Ignoring');
+          $window.console.log('out of sync event. Ignoring');
           return;
         }
 
@@ -255,19 +258,20 @@
           $scope.$uibModalInstance.close();
           $scope.$uibModalInstance = null;
         }
+
         $scope.getCurrentUsers().exitUser(data.userId);
       });
 
       socket.on('userEntered', function(data) {
-        console.log('userEntered');
-        console.log(data);
+        $window.console.log('userEntered');
+        $window.console.log(data);
         // $scope.activeUsers[data.userId] = {};
         $scope.getCurrentUsers().enterUser(data.userId);
       });
 
       socket.on('users:incidentFlag', function(data){
-        console.log('incident!!');
-        console.log(data);
+        $window.console.log('incident!!');
+        $window.console.log(data);
         $scope.popIncidentFlag(data.username);
       });
 
@@ -278,20 +282,20 @@
       socket.on('disconnect', function (socket) {
 
         $scope.getCurrentUsers().reset();
-        console.log('Got disconnect!');
-        jQuery('#realtimeMapConnectionBar').fadeIn();
+        $window.console.log('Got disconnect!');
+        angular.element('#realtimeMapConnectionBar').fadeIn();
       });
 
       socket.on('reconnect', function (socket) {
-        console.log('Got reconnected!');
-        jQuery('#realtimeMapConnectionBar').fadeOut();
+        $window.console.log('Got reconnected!');
+        angular.element('#realtimeMapConnectionBar').fadeOut();
       });
 
       socket.on('reconnect_attempt', function (err) {
-        jQuery('#realtimeMapConnectionBarAttempts').text(err);
-        console.log('attempt!', err, new Date());
+        angular.element('#realtimeMapConnectionBarAttempts').text(err);
+        $window.console.log('attempt!', err, new Date());
       });
-    }
+    };
 
     function filterUsers() {
 
@@ -346,7 +350,7 @@
 
       $scope.popModal(user);
 
-      console.log('watch: '+user.id);
+      $window.console.log('watch: '+user.id);
 
       //$scope.waitingStreaming = true;
       //if ($scope.isStreaming(user)){
@@ -373,18 +377,18 @@
 
     function refreshUsers() {
 
-      var $faLoader = jQuery('#fetchUsers');
+      var $faLoader = angular.element('#fetchUsers');
       $faLoader.addClass('active');
       $scope.refreshMap();
-      setTimeout(function() {
+      $window.setTimeout(function() {
         $faLoader.removeClass('active');
       }, 1000);
 
       return null;
 
       // userService.getOnlineUsers().then(function (data) {
-      //   console.log('getOnlineUsers');
-      //   console.log(data);
+      //   $window.console.log('getOnlineUsers');
+      //   $window.console.log(data);
       //
       //   var bounds = new google.maps.LatLngBounds();
       //
@@ -430,7 +434,7 @@
 
     function showModal(user) {
       mapService.closeBalloon();
-      console.log('showModal with user=[' + user.id + ']');
+      $window.console.log('showModal with user=[' + user.id + ']');
       //showStream(user);
       $scope.$uibModalInstance = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player_h264.html',
@@ -468,5 +472,4 @@
       socket.on('users:heartbeat', loadUser);
       socket.emit('getBroadcasters', receiveBroadcastersList);
     }
-  } //end-RealTimeCtrl
-})();
+  }); //end-RealTimeCtrl
