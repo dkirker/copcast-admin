@@ -25,5 +25,5 @@ angular.module('copcastAdminApp')
       function(err){
         $scope.errorMessage = err;
         $scope.noRecord = true;
-      })
+      });
   });
