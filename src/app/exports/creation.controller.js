@@ -1,7 +1,3 @@
-;(function(angular, moment) {
-/**
- * Created by brunosiqueira on 21/01/16.
- */
 'use strict';
 
 /**
@@ -12,19 +8,20 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ExportsCreationCtrl', function ($scope, userService, exportService, gettextCatalog) {
+  .controller('ExportsCreationCtrl', function ($scope, $window, userService, exportService, gettextCatalog) {
     $scope.exportObj = {
       recorderId: null,
       initialDate: null,
       initialDateVisible: false,
       initialDateShow: function () {
-        $scope.exportObj.initialDateVisible = true
+        $scope.exportObj.initialDateVisible = true;
       }
     };
+
     $scope.resultSuccess = false;
     $scope.users = [];
     userService.listUsers().then(function(users){
-      $scope.users = users
+      $scope.users = users;
     }, function(err){
       $scope.errorMessage = err;
     });
@@ -43,11 +40,11 @@ angular.module('copcastAdminApp')
       $scope.errorMessage = null;
       exportService.create({
         recorderId: $scope.exportObj.recorderId,
-        initialDate: moment($scope.exportObj.initialDate).format('YYYY-MM-DD'),
-        finalDate: moment($scope.exportObj.initialDate).format('YYYY-MM-DD')
+        initialDate: $window.moment($scope.exportObj.initialDate).format('YYYY-MM-DD'),
+        finalDate: $window.moment($scope.exportObj.initialDate).format('YYYY-MM-DD')
       }).then(
         function(result){
-          console.log(result)
+          // console.log(result);
           if (result.length > 0 ) {
             $scope.resultSuccess = true;
             $scope.resultEmpty = false;
@@ -62,8 +59,7 @@ angular.module('copcastAdminApp')
             $scope.resultSuccess = false;
             $scope.errorMessage = err;
           }
-        })
-    }
-
+        }
+      );
+    };
   });
-})(window.angular, window.moment);
