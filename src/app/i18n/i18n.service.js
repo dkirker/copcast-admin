@@ -14,14 +14,14 @@ app.service('TranslateService',function($rootScope, gettextCatalog){
     //method to set the flags regarding the actual language
     this.setLanguage = function()
     {
-      if(gettextCatalog.currentLanguage == 'pt_BR')
+      if(gettextCatalog.currentLanguage === 'pt_BR')
       {
-        $rootScope.imgFlag = "assets/images/us-icon.png";
+        $rootScope.imgFlag = 'assets/images/us-icon.png';
         gettextCatalog.setCurrentLanguage('pt_BR');
       }
       else
       {
-        $rootScope.imgFlag = "assets/images/br-icon.png";
+        $rootScope.imgFlag = 'assets/images/br-icon.png';
         gettextCatalog.setCurrentLanguage('en');
 
       }
