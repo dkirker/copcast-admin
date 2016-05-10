@@ -8,7 +8,7 @@
  * Factory in the copcastAdminApp.
  */
 var app = angular.module('copcastAdminApp');
-app.service('loginService', function($rootScope, $cookies, $uibModal, $http, authService, socket, ServerUrl) {
+app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $http, authService, socket, ServerUrl) {
 
   var loginService = { isOpen: false};
 
@@ -26,10 +26,10 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
   };
 
   loginService.getToken = function() {
-    if ($rootScope.globals == null && !$cookies.getObject('globals')){
+    if ($rootScope.globals === null && !$cookies.getObject('globals')){
       return null;
     }
-    if ($rootScope.globals == null){
+    if ($rootScope.globals === null){
       $rootScope.globals = $cookies.getObject('globals');
     }
     return $rootScope.globals.currentUser.token;
@@ -46,37 +46,41 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
     };
 
     // hack to let the browser parse the ServerUrl.
-    var apiserver = document.createElement('a');
+    var apiserver = $window.document.createElement('a');
     apiserver.href = ServerUrl;
 
-    if (apiserver.hostname != window.location.hostname) {
-      var common_domain = [];
-      var adminTokens = window.location.hostname.split('.');
+    if (apiserver.hostname !== $window.location.hostname) {
+      var commonDomain = [];
+      var adminTokens = $window.location.hostname.split('.');
       var apiTokens = apiserver.hostname.split('.');
       adminTokens.reverse();
       apiTokens.reverse();
-      console.log(adminTokens);
-      console.log(apiTokens);
-      for(var i=0; apiTokens[i]==adminTokens[i]; i++)
-        common_domain.push(apiTokens[i]);
 
-      common_domain.reverse();
-      var cookie_dom = '.'+common_domain.join('.');
-      console.log('Cookie domain: '+cookie_dom);
-      $rootScope.cookie_domain = cookie_dom;
-      $cookies.putObject('globals', $rootScope.globals, {domain: cookie_dom});
+      $window.console.log(adminTokens);
+      $window.console.log(apiTokens);
+
+      for(var i=0; apiTokens[i] === adminTokens[i]; i++) {
+        commonDomain.push(apiTokens[i]);
+      }
+
+      commonDomain.reverse();
+      var cookieDom = '.'+commonDomain.join('.');
+      $window.console.log('Cookie domain: '+cookieDom);
+      $rootScope.cookieDomain = cookieDom;
+      $cookies.putObject('globals', $rootScope.globals, {domain: cookieDom});
     } else {
-        console.log('cookies not mangled');
-      $rootScope.cookie_domain = null;
-        $cookies.putObject('globals', $rootScope.globals);
+      $window.console.log('cookies not mangled');
+      $rootScope.cookieDomain = null;
+      $cookies.putObject('globals', $rootScope.globals);
     }
+
     authService.loginConfirmed();
     socket.connect(accessToken);
     loginService.isOpen = false;
   };
 
   loginService.isAuthenticated = function() {
-    return loginService.getToken() != null && loginService.getToken().length > 0;
+    return loginService.getToken() !== null && loginService.getToken().length > 0;
   };
 
   loginService.getUserName = function(){
@@ -85,15 +89,16 @@ app.service('loginService', function($rootScope, $cookies, $uibModal, $http, aut
 
   loginService.logout = function(){
     $rootScope.globals = null;
+
     try {
-      $cookies.remove('globals', {domain: $rootScope.cookie_domain});
+      $cookies.remove('globals', {domain: $rootScope.cookieDomain});
     } catch (err) {
       $cookies.remove('globals');
     }
+
     socket.disconnect();
     loginService.show();
   };
-
 
   return loginService;
 });
