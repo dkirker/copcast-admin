@@ -8,13 +8,40 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('IncidentsListCtrl', function ($scope, $http, $location, ServerUrl, userService, groupService, gettextCatalog) {
+  .controller('IncidentsListCtrl', function ($scope, $window, $http, $location, ServerUrl, userService, groupService, gettextCatalog) {
 
-    $scope.sortKey = "date";
+    $scope.sortKey = 'date';
     $scope.reverse = 1;
     $scope.perPage = 30;
     $scope.totalIncidents = 0;
     $scope.page = 1;
+
+    function loadIncident(fromDate, toDate){
+      fromDate = typeof fromDate !== 'undefined' ? fromDate : null;
+      toDate = typeof toDate !== 'undefined' ? toDate : null;
+
+      var stringDate = '';
+
+      if (fromDate && toDate) {
+        stringDate = '/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD');
+      }
+
+      $http.get(ServerUrl + '/incidentForms' + stringDate,
+        {
+          params: {
+            page: $scope.page,
+            perPage: $scope.perPage,
+            group: $scope.filter.group,
+            user: $scope.filter.user
+          }
+        }
+      ).success(function(data) {
+        $scope.incidentForms = data.rows;
+        $scope.totalIncidents = data.count;
+      }).error(function(data) {
+        $window.console.error(data);
+      });
+    }
 
     $scope.pageChanged = function(newPage) {
       $scope.page = newPage;
@@ -41,7 +68,7 @@ angular.module('copcastAdminApp')
     };
 
     $scope.hasData = function hasData(){
-      return $scope.incidentForms && $scope.incidentForms["activeOfficers"] !== undefined;
+      return $scope.incidentForms && $scope.incidentForms.activeOfficers !== undefined;
     };
 
     //sort list
@@ -53,17 +80,17 @@ angular.module('copcastAdminApp')
 
     //sort range date
     $scope.searchByDate = function updateFilter(){
-      var fromDate = moment($scope.filter.fromDate);
-      var toDate = moment($scope.filter.toDate);
+      var fromDate = $window.moment($scope.filter.fromDate);
+      var toDate = $window.moment($scope.filter.toDate);
 
-      if ($scope.filter.fromDate == null && $scope.filter.toDate == null) {
+      if ($scope.filter.fromDate === null && $scope.filter.toDate === null) {
         $scope.errorMessage = null;
         loadIncident();
       } else if (fromDate.isValid() && toDate.isValid()) {
         $scope.errorMessage = null;
         loadIncident(fromDate, toDate);
       } else {
-        $scope.errorMessage = gettextCatalog.getString('Invalid data range.')
+        $scope.errorMessage = gettextCatalog.getString('Invalid data range.');
       }
     };
 
@@ -76,7 +103,7 @@ angular.module('copcastAdminApp')
 
     $scope.groups = [];
     groupService.listGroups().then(function(groups){
-      $scope.groups = groups
+      $scope.groups = groups;
     }, function(err){
       $scope.errorMessage = err;
     });
@@ -85,33 +112,6 @@ angular.module('copcastAdminApp')
     $scope.viewIncident = function (incidentId) {
       $location.path('/incidentForm-view/' + incidentId);
     };
-
-    function loadIncident(fromDate, toDate){
-      fromDate = typeof fromDate !== 'undefined' ? fromDate : null;
-      toDate = typeof toDate !== 'undefined' ? toDate : null;
-
-      var stringDate = '';
-
-      if (fromDate && toDate) {
-        stringDate = '/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD');
-      }
-
-      $http.get(ServerUrl + '/incidentForms' + stringDate,
-        {
-          params: {
-            page: $scope.page,
-            perPage: $scope.perPage,
-            group: $scope.filter.group,
-            user: $scope.filter.user
-          }
-        }
-      ).success(function(data) {
-        $scope.incidentForms = data.rows;
-        $scope.totalIncidents = data.count;
-      }).error(function(data) {
-        console.error(data);
-      });
-    }
 
     loadIncident();
   });
