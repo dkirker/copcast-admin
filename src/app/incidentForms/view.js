@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('IncidentsViewCtrl', function ($scope, $routeParams, $http, $location, ServerUrl){
+  .controller('IncidentsViewCtrl', function ($scope, $window, $routeParams, $http, $location, ServerUrl){
 
     // callback for ng-click 'back':
     $scope.back = function () {
@@ -20,7 +20,7 @@ angular.module('copcastAdminApp')
       $scope.incidentForm = data;
 
     }).error(function(data) {
-      console.log("Error: " + data);
+      $window.console.log('Error: ' + data);
     });
 
   });
