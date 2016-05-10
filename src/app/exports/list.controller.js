@@ -17,15 +17,6 @@ angular.module('copcastAdminApp')
     $scope.perPage = 30;
     $scope.totalExports = 0;
 
-    $scope.pageChanged = function(newPage) {
-      $scope.page = newPage;
-      loadExports();
-    };
-
-    $scope.isAvailable = function(exportVideos){
-      return exportVideos.status === 'AVAILABLE';
-    };
-
     function loadExports(){
       var params = {
         page: $scope.page,
@@ -37,6 +28,15 @@ angular.module('copcastAdminApp')
         $scope.exports = exports.rows;
       });
     }
+
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+      loadExports();
+    };
+
+    $scope.isAvailable = function(exportVideos){
+      return exportVideos.status === 'AVAILABLE';
+    };
 
     loadExports();
   });
