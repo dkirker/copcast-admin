@@ -7,13 +7,13 @@
  * # iCheck
  */
 angular.module('copcastAdminApp')
-  .directive('iCheck', ['$timeout', '$parse', function ($timeout, $parse) {
+  .directive('iCheck', ['$timeout', '$parse', function ($timeout) {
     return {
       require: 'ngModel',
       link: function ($scope, element, $attrs, ngModel) {
         return $timeout(function () {
           var value = $attrs.value;
-          var $element = $(element);
+          var $element = angular.element(element);
 
           // Instantiate the iCheck control.
           $element.iCheck({
@@ -23,7 +23,7 @@ angular.module('copcastAdminApp')
           });
 
           // If the model changes, update the iCheck control.
-          $scope.$watch($attrs.ngModel, function (newValue) {
+          $scope.$watch($attrs.ngModel, function () {
             $element.iCheck('update');
           });
 
