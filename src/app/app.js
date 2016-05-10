@@ -125,5 +125,5 @@ angular
 
     $rootScope.isAuthenticated = function () {
       return loginService.isAuthenticated();
-    }
+    };
   });
