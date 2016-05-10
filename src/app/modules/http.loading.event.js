@@ -1,4 +1,4 @@
-;(function(angular, $) {
+// ;(function(angular, $) {
     'use strict';
 
     var app = angular.module('copcastAdminApp');
@@ -8,13 +8,13 @@
             return {
                 request: function (config) {
                     if (config.method === 'GET') {
-                        $(document).trigger('http-get-started');
+                        angular.element('document').trigger('http-get-started');
                     }
                     return config || $q.when(config);
                 },
                 response: function (response) {
                     if (response.config.method === 'GET') {
-                        $(document).trigger('http-get-finished');
+                        angular.element('document').trigger('http-get-finished');
                     }
                     return response;
                 }
@@ -27,5 +27,4 @@
             $httpProvider.interceptors.push('loadingEventHttpInterceptor');
         }
     ]);
-
-})(window.angular, window.jQuery);
+// })(window.angular, window.jQuery);
