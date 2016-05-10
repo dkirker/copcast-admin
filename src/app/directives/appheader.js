@@ -13,7 +13,7 @@ angular.module('copcastAdminApp')
       restrict: 'E',
       link: function (scope) {
         scope.canExport = function() {
-          return userService.isAdminTwo() || userService.isAdminThree()
+          return userService.isAdminTwo() || userService.isAdminThree();
         };
       }
     };
