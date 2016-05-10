@@ -189,6 +189,11 @@ header > .navbar ul.navbar-nav > li > a {
     margin-bottom: 0 !important;
   }
 }
+
+/* Customize bootstrap .row to break really long words */
+.row {
+  word-wrap: break-word;
+}
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector
