@@ -8,16 +8,16 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('GroupsDetailsCtrl', function($scope, $routeParams, $http, $location, ServerUrl){
+  .controller('GroupsDetailsCtrl', function($scope, $window, $routeParams, $http, $location, ServerUrl){
     $http.get(ServerUrl + '/groups/'+ $routeParams.id).success(function(data) {
-      console.log(data);
+      $window.console.log(data);
       $scope.group = data;
     }).error(function(data) {
       $scope.serverMessage = data;
     });
 
     $scope.updateGroup = function () {
-      $http.post(ServerUrl + '/groups/' + $scope.group.id, $scope.group).success(function(data){
+      $http.post(ServerUrl + '/groups/' + $scope.group.id, $scope.group).success(function(){
         $location.path('/group-list');
       }).error(function(data) {
         $scope.serverMessage = data;
