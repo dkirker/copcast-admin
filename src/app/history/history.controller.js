@@ -1,24 +1,20 @@
-;(function(angular, moment) {
-  'use strict';
+'use strict';
 
-  var app = angular.module('copcastAdminApp');
+var app = angular.module('copcastAdminApp');
 
+app.controller('HistoryCtrl', function ($scope, $window, $q, $timeout, HistoryManager, userService) {
 
-  app.controller('HistoryCtrl', function ($scope, $q, $timeout, HistoryManager, userService, $routeParams) {
+  $scope.manager = HistoryManager;
 
-    $scope.manager = HistoryManager;
+  HistoryManager.loadUsersAndGroups();
 
-    HistoryManager.loadUsersAndGroups();
+  $scope.initialPeriod = {
+    fromDate: $window.moment().add(-7, 'days').toDate(),
+    toDate: $window.moment().toDate(),
+    period: true
+  };
 
-    $scope.initialPeriod = {
-      fromDate: moment().add(-7, 'days').toDate(),
-      toDate: moment().toDate(),
-      period: true
-    };
-
-    $scope.showVideo = function(){
-      return userService.isAdminTwo() || userService.isAdminThree();
-    };
-  });
-
-})(window.angular, window.moment);
+  $scope.showVideo = function(){
+    return userService.isAdminTwo() || userService.isAdminThree();
+  };
+});
