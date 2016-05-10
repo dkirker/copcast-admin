@@ -14,13 +14,11 @@ angular.module('copcastAdminApp')
 
       // Fix autofill issues where Angular doesn't know about autofilled inputs
       if(attrs.ngSubmit) {
-        setTimeout(function() {
-          elem.unbind('submit').submit(function(e) {
-            e.preventDefault();
-            elem.find('input, textarea, select').trigger('input').trigger('change').trigger('keydown');
-            scope.$apply(attrs.ngSubmit);
-          });
-        }, 0);
+        elem.unbind('submit').submit(function(e) {
+          e.preventDefault();
+          elem.find('input, textarea, select').trigger('input').trigger('change').trigger('keydown');
+          scope.$apply(attrs.ngSubmit);
+        });
       }
     };
   });
