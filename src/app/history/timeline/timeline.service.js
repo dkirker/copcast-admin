@@ -1,16 +1,14 @@
 'use strict';
-;(function(EventSignal) {
-  var app = angular.module('copcastAdminApp');
+var app = angular.module('copcastAdminApp');
 
-  app.service('timelineService', function TimelineService() {
-    var self = this;
+app.service('timelineService', function TimelineService($window) {
+  var self = this;
 
-    // Events
-    self.currentLocationChanged = new EventSignal();
+  // Events
+  self.currentLocationChanged = new $window.EventSignal();
 
-    // API
-    self.setCurrentLocation = function setCurrentLocation(location) {
-      self.currentLocationChanged.emit(location);
-    };
-  });
-})(window.EventSignal);
+  // API
+  self.setCurrentLocation = function setCurrentLocation(location) {
+    self.currentLocationChanged.emit(location);
+  };
+});
