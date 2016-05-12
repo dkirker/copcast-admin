@@ -8,15 +8,14 @@
  * Factory in the copcastAdminApp.
  */
 angular.module('copcastAdminApp')
-  .factory('socket',function(ServerUrl, userService, $rootScope) {
-
+  .factory('socket',function(ServerUrl, userService, $rootScope, $window) {
     // Loads the socket from the server
-    var body = document.getElementsByTagName('body')[0],
+    var body = $window.document.getElementsByTagName('body')[0],
       socket = {},
       socketIo = null,
       connected = false,
       onConnect = [],
-      tag = document.createElement('script');
+      tag = $window.document.createElement('script');
 
     tag.src = ServerUrl + '/socket.io/socket.io.js';
     tag.id = 'socket-io';
@@ -31,24 +30,28 @@ angular.module('copcastAdminApp')
     };
 
     socket.connect = function(token) {
+      var timeUsed = 0;
+
       if(!token || !$rootScope.globals || !$rootScope.globals.currentUser){
-        console.log('socket.connect without token or user. returning.');
+        $window.console.log('socket.connect without token or user. returning.');
         return;
       }
+
       if ( typeof io === 'undefined' ) {
         if(loadTimes < maxRetry){
           loadTimes++;
-          var timeUsed = timeBetweenRetries * getRandomInt(1, 3);
-          setTimeout(function() {
+          timeUsed = timeBetweenRetries * getRandomInt(1, 3);
+          $window.setTimeout(function() {
             socket.connect(token);
-          }, timeUsed)
+          }, timeUsed);
         }
-        console.log('socket.connect without io. retry.number=['+loadTimes+'], timeUsed=['+timeUsed+']');
+
+        $window.console.log('socket.connect without io. retry.number=['+loadTimes+'], timeUsed=['+timeUsed+']');
         //TODO maybe raise a 401 error to show modal
         return;
       }
 
-      socketIo = io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId,
+      socketIo = $window.io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId,
         forceNew: true,
         reconnection: true,
         reconnectionDelay: 1000,
@@ -60,30 +63,30 @@ angular.module('copcastAdminApp')
       socketIo.once('connect', function() {
         connected = true;
         //onConnect.length = 0;
-        console.log('socket connected!');
-        console.error('CallBack length: '+onConnect.length);
+        $window.console.log('socket connected!');
+        $window.console.error('CallBack length: '+onConnect.length);
         angular.forEach(onConnect, function(cb) {
           cb();
         });
       });
 
       socketIo.on('disconnect', function() {
-        console.log('SOCKET.IO CONNECTION LOST!');
+        $window.console.log('SOCKET.IO CONNECTION LOST!');
         socket.connect(token);
       });
 
       socketIo.on('error', function(err) {
-        console.log('Socket Error:', err);
+        $window.console.log('Socket Error:', err);
       });
 
     };
 
     socket.disconnect = function() {
       //socketIo.disconnect();
-      console.log('should disconnect');
+      $window.console.log('should disconnect');
       socketIo.disconnect();
-      //console.log(socketIo.close());
-    }
+      //$window.console.log(socketIo.close());
+    };
 
     socket.on = function(ev, cb) {
       if ( !connected ) {
@@ -96,6 +99,7 @@ angular.module('copcastAdminApp')
 
       socketIo.on(ev,cb);
     };
+
     socket.once = function(ev, cb) {
       if ( !connected ) {
         if ( ev !== 'connect' ) {
@@ -107,17 +111,18 @@ angular.module('copcastAdminApp')
 
       socketIo.once(ev,cb);
     };
+
     socket.emit = function(action, data){
       socketIo.emit(action, data);
     };
 
     socket.isConnected = function() {
       return connected;
-    }
+    };
 
     socket.off = function(evt) {
       socketIo.off(evt);
-    }
+    };
 
     return socket;
   });
