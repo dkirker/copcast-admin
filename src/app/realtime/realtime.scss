@@ -99,17 +99,30 @@ footer{
 
 #realtimeMapConnectionBar {
   display: none;
-  width: 90%;
+  color: #FFFFFF;
+  //width: 90%;
+  width: 100%;
+  padding: 10px 0;
   position: absolute;
-  top: 13%;
-  left: 50%;
-  transform: translate(-50%,0);
-  border-color: #843534;
+  //top: 13%;
+  top: 110px;
+  //left: 50%;
+  //transform: translate(-50%,0);
+  //border-color: #843534;
+  border: none;
+  border-radius: 0;
+  background: #B71C1C;
+  z-index: 9;
+
+  strong {
+    text-transform: uppercase;
+  }
 
   .barSpacer {
     display: inline-block;
-    height: 1px;
-    margin: 0 15px;
+    //height: 1px;
+    margin: 0 5px;
+    color: rgba(255,255,255,0.5);
   }
 }
 
