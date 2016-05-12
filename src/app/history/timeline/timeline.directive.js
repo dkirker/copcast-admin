@@ -1,5 +1,5 @@
 'use strict';
-;(function(angular, moment) {
+// ;(function(angular, moment) {
 
   var app = angular.module('copcastAdminApp');
   var hours = [];
@@ -26,5 +26,4 @@
       }
     };
   });
-
-})(window.angular, window.moment);
+// })(window.angular, window.moment);
