@@ -1,12 +1,11 @@
 /**
  * Created by brunosiqueira on 27/10/15.
  */
-(function(angular, moment) {
-  'use strict';
 
-  angular.module('copcastAdminApp').controller('ReportCtrl', ReportCtrl);
+'use strict';
 
-  function ReportCtrl($scope, $http, ServerUrl, gettextCatalog,userService, groupService) {
+angular.module('copcastAdminApp')
+  .controller('ReportCtrl', function($scope, $window, $http, ServerUrl, gettextCatalog,userService, groupService) {
     $scope.filter = {
       fromDate: null,
       toDate: null,
@@ -18,8 +17,41 @@
       toDateShow: function(){
         $scope.filter.toDateVisible = true;
       }
-
     };
+
+    function updateFilter(){
+      var fromDate = $window.moment($scope.filter.fromDate);
+      var toDate = $window.moment($scope.filter.toDate);
+
+      if (fromDate.isValid() && toDate.isValid()) {
+        if (fromDate <= toDate) {
+          $scope.errorMessage = null;
+
+          var url = ServerUrl + '/report/use/' + fromDate.format('YYYY-MM-DD') + '/' + toDate.format('YYYY-MM-DD') + '?';
+
+          if ($scope.filter.user) {
+            url += '&userId=' + $scope.filter.user;
+          }
+
+          if ($scope.filter.group) {
+            url += '&groupId=' + $scope.filter.group;
+          }
+
+          $http.get(url).success(function (data) {
+            $scope.reportData = data;
+          });
+        } else {
+          $scope.errorMessage = gettextCatalog.getString('Invalid interval. Please check the date range.');
+        }
+      } else {
+        $scope.errorMessage = gettextCatalog.getString('Invalid date.');
+      }
+    }
+
+    function hasData(){
+      return $scope.reportData && $scope.reportData.activeOfficers !== undefined;
+    }
+
     $scope.hasData = hasData;
     $scope.updateFilter = updateFilter;
 
@@ -56,7 +88,7 @@
 
     $scope.groups = [];
     groupService.listGroups().then(function(groups){
-      $scope.groups = groups
+      $scope.groups = groups;
     }, function(err){
       $scope.errorMessage = err;
     });
@@ -65,43 +97,9 @@
       var ratings = [];
 
       for (var i = 0; i < count; i++) {
-        ratings.push(i)
+        ratings.push(i);
       }
 
       return ratings;
     };
-
-    function updateFilter(){
-      var fromDate = moment($scope.filter.fromDate);
-      var toDate = moment($scope.filter.toDate);
-
-      if (fromDate.isValid() && toDate.isValid()) {
-        if (fromDate <= toDate) {
-          $scope.errorMessage = null;
-
-          var url = ServerUrl + "/report/use/" + fromDate.format('YYYY-MM-DD') + "/" +
-            toDate.format('YYYY-MM-DD')+'?'
-          if ($scope.filter.user){
-            url += '&userId=' + $scope.filter.user;
-          }
-          if ($scope.filter.group){
-            url += '&groupId=' + $scope.filter.group;
-          }
-
-          $http.get(url).success(function (data) {
-            $scope.reportData = data;
-          });
-        } else {
-          $scope.errorMessage = gettextCatalog.getString('Invalid interval. Please check the date range.')
-        }
-      } else {
-        $scope.errorMessage = gettextCatalog.getString('Invalid date.')
-      }
-    }
-
-    function hasData(){
-      return $scope.reportData && $scope.reportData["activeOfficers"] !== undefined;
-    }
-
-  }
-})(window.angular, window.moment);
+  });
