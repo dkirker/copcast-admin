@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDestroyCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, userService, groupService){
+  .controller('UsersDestroyCtrl', function ($scope, $window, $routeParams, $http, $location, ServerUrl, userService, groupService){
 
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
@@ -16,10 +16,10 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'updateUser':
     $scope.deleteUser = function () {
 
-      if (confirm('Are you sure to delete ' + $scope.user.username) === true) {
+      if ($window.confirm('Are you sure to delete ' + $scope.user.username) === true) {
         // confirmation to delete
 
-        userService.deleteUser($scope.user).then(function (data) {
+        userService.deleteUser($scope.user).then(function() {
           $location.path('/user-list');
         }, function (data) {
           $scope.serverMessage = data;
