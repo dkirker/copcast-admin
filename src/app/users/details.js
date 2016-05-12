@@ -8,11 +8,11 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('UsersDetailsCtrl', function ($scope, $routeParams, $http, $location, ServerUrl, Upload, gettext, userService) {
-    var $upload = Upload;
+  .controller('UsersDetailsCtrl', function ($scope, $window, $routeParams, $http, $location, ServerUrl, Upload, gettext, userService) {
+    // var $upload = Upload;
     $scope.hasProfilePicture = false;
     $scope.userPicture = '';
-    $scope.blnShowTab = [true, false, false] ;
+    $scope.blnShowTab = [true, false, false];
 
     userService.getAdminRoles().then(function(roles){
       $scope.roles = roles;
@@ -28,7 +28,7 @@ angular.module('copcastAdminApp')
 
     $scope.canUpdate = function(){
       return $scope.user && $scope.allRoles.indexOf($scope.user.role) > -1;
-    }
+    };
 
     //load the picture
     $scope.$watch('files', function () {
@@ -36,24 +36,27 @@ angular.module('copcastAdminApp')
     });
 
     $scope.upload = function (files) {
+      function doUpload(files){
+        Upload.upload({
+          url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
+          method: 'POST',
+          data: {userPicture: $scope.userPicture},
+          file: files[0]
+        }).progress(function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          $window.console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+        }).success(function (data, status, headers, config) {
+          $window.console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+          $scope.hasProfilePicture = true;
+          $scope.pictureUrl = '';
+          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
+        });
+      }
+
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          Upload.upload({
-            url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
-            method: 'POST',
-            data: {userPicture: $scope.userPicture},
-            file: files[0]
-          }).progress(function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-          }).success(function (data, status, headers, config) {
-            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-            $scope.hasProfilePicture = true;
-            $scope.pictureUrl = '';
-            $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
-
-          });
+          // var file = files[i];
+          doUpload(files);
         }
       }
     };
@@ -75,7 +78,7 @@ angular.module('copcastAdminApp')
         return;
       }
       $http.post(ServerUrl + '/users/' + $scope.user.id+'/change-password',
-        { password: { oldPassword:$scope.currentPassword, newPassword: $scope.newPassword } }).success(function(data){
+        { password: { oldPassword:$scope.currentPassword, newPassword: $scope.newPassword } }).success(function(){
           $location.path('/user-list');
         }).error(function(data) {
           $scope.passwordMessage = data;
@@ -87,7 +90,7 @@ angular.module('copcastAdminApp')
 
     // callback for ng-click 'updateUser':
     $scope.updateUser = function () {
-      $http.post(ServerUrl + '/users/' + $scope.user.id, $scope.user).success(function(data){
+      $http.post(ServerUrl + '/users/' + $scope.user.id, $scope.user).success(function(){
         $location.path('/user-list');
       }).error(function(data) {
         if (data.errors){
@@ -116,8 +119,8 @@ angular.module('copcastAdminApp')
         $scope.hasProfilePicture = true;
         $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show';
       }
-
     },function(data) {
+      $window.console.log(data);
     });
 
     //list of groups
