@@ -1,12 +1,15 @@
 /**
  * Created by Leonardo Nicolas
  */
-;(function(angular, moment) {
   'use strict';
+
+  function generateProfilePictureAddress() {
+    return '/assets/images/anongroup.png';
+  }
 
   var app = angular.module('copcastAdminApp');
 
-  app.factory('groupService', function($q, $http, ServerUrl) {
+  app.factory('groupService', function($q, $http, $window, ServerUrl) {
     var service = {};
 
     service.listGroups = function listGroups() {
@@ -37,7 +40,8 @@
           defer.reject(data, status);
         });
       return defer.promise;
-    }
+    };
+
     service.deleteGroup = function deleteGroup(groupId) {
       var defer = $q.defer();
       $http
@@ -49,13 +53,13 @@
           defer.reject(data, status);
         });
       return defer.promise;
-    }
+    };
 
     service.getGroupLocations = function getGroupLocations(groupId, fromDate, toDate, accuracy) {
       var defer = $q.defer();
 
-      fromDate = moment(fromDate).format('YYYY-MM-DD');
-      toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+      fromDate = $window.moment(fromDate).format('YYYY-MM-DD');
+      toDate = toDate ? '/' + $window.moment(toDate).format('YYYY-MM-DD') : '';
       accuracy = accuracy ? '/' + accuracy : '';
 
       var endPoint = ServerUrl + '/groups/' + groupId + '/locations/' + fromDate + toDate + accuracy;
@@ -73,8 +77,8 @@
     service.getGroupIncidents = function getGroupIncidents(groupId, fromDate, toDate) {
       var defer = $q.defer();
 
-      fromDate = moment(fromDate).format('YYYY-MM-DD');
-      toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+      fromDate = $window.moment(fromDate).format('YYYY-MM-DD');
+      toDate = toDate ? '/' + $window.moment(toDate).format('YYYY-MM-DD') : '';
 
       var endPoint = ServerUrl + '/groups/' + groupId + '/incidents/' + fromDate + toDate;
       $http
@@ -91,8 +95,8 @@
     service.getGroupVideos = function getGroupVideos(groupId, fromDate, toDate) {
       var defer = $q.defer();
 
-      fromDate = moment(fromDate).format('YYYY-MM-DD');
-      toDate = toDate ? '/' + moment(toDate).format('YYYY-MM-DD') : '';
+      fromDate = $window.moment(fromDate).format('YYYY-MM-DD');
+      toDate = toDate ? '/' + $window.moment(toDate).format('YYYY-MM-DD') : '';
 
       $http
         .get(ServerUrl + '/groups/' + groupId + '/videos/from/' + fromDate + toDate )
@@ -102,7 +106,7 @@
           });
           defer.resolve(data);
         })
-        .error(function(data, status) {
+        .error(function(/*data, status*/) {
           defer.resolve([]);
         });
       return defer.promise;
@@ -110,9 +114,3 @@
 
     return service;
   });
-
-  function generateProfilePictureAddress() {
-    return '/assets/images/anongroup.png';
-  }
-
-})(window.angular, window.moment);
