@@ -1,5 +1,7 @@
+/*jslint browser: true*/
+
 'use strict';
-;(function() {
+(function() {
   /*
    * Google Maps util functions
    */
@@ -7,13 +9,13 @@
 
   GoogleMaps.createMarker = function createMarker(user, location) {
     var latLngPoints = GoogleMaps.transformLocationsToLatLngPoints([ location ]);
-    return new google.maps.Marker({
+    return new window.google.maps.Marker({
       userId: user.id,
       position: latLngPoints[0],
       icon: {
         url: user.profilePicture,
         //url: 'assets/images/head_icon_black.png',
-        scaledSize: new google.maps.Size(24, 24)
+        scaledSize: new window.google.maps.Size(24, 24)
       }
     });
   };
@@ -23,7 +25,7 @@
     for(var i = 0, length = locations.length; i < length; i++) {
       var location = locations[i];
       if(GoogleMaps.isValidlocation(location)) {
-        latLngPoints.push(new google.maps.LatLng(location.lat, location.lng));
+        latLngPoints.push(new window.google.maps.LatLng(location.lat, location.lng));
       }
     }
     return latLngPoints;
