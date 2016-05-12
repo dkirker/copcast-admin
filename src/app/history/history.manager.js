@@ -1,131 +1,17 @@
 'use strict';
-(function(angular, moment, EventSignal, utils) {
-  var app = angular.module('copcastAdminApp');
 
-  app.service('HistoryManager', function($q, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
-    var self = this;
-    this.store = {};
-    this.paramUserId = null;
+var app = angular.module('copcastAdminApp');
 
-    // Objects
-    var groups = new Groups($q, userService, groupService);
-    var groupsDataManager = new GroupsDataManager($q, $timeout, userService, groupService, notify, gettextCatalog);
-    var googleMapsHelper = new GoogleMapsHelper($timeout);
-
-    // Manager API
-    this.loadUsersAndGroups = groups.load.bind(groups);
-
-    this.setCurrentGroup = groupsDataManager.setCurrentGroup.bind(groupsDataManager);
-    this.setCurrentUser = groupsDataManager.setCurrentUser.bind(groupsDataManager);
-    this.setPeriod = groupsDataManager.setPeriod.bind(groupsDataManager);
-    this.setCurrentDate = function setCurrentDate(currentDate) {
-      console.log('currentDate', currentDate);
-      groupsDataManager.setCurrentDate(currentDate);
-    };
-
-    this.previousVideo = function previousVideo() {
-      var userData = self.store.userData;
-      if(userData && userData.previousVideo) {
-        groupsDataManager.setCurrentVideo(userData.previousVideo);
-      }
-    };
-    this.nextVideo = function nextVideo() {
-      var userData = self.store.userData;
-      if(userData && userData.nextVideo) {
-        groupsDataManager.setCurrentVideo(userData.nextVideo);
-      }
-    };
-    this.hasPreviousVideo = function hasPreviousVideo() {
-      var userData = self.store.userData;
-      return userData && userData.previousVideo;
-    };
-    this.hasNextVideo = function hasNextVideo() {
-      var userData = self.store.userData;
-      return userData && userData.nextVideo;
-    };
-
-    // User and Groups Events
-    groups.usersIndexed.addListener(function(indexedUsers) {
-      console.log('indexedUsers', indexedUsers);
-      groupsDataManager.setUsers(indexedUsers);
-    });
-    groups.groupsChanged.addListener(function(groups) {
-      self.store.groups = groups;
-      if (self.paramUserId)
-        for (var i=0; i<Object.keys(self.store.groups).length; i++) {
-          if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId) && !self.store.groups[i].isGroup) {
-            self.setCurrentGroup(self.store.groups[i]);
-            self.paramUserId = null;
-            return;
-          }
-        }
-    });
-
-    this.setCurrentUserId = function(userId) {
-      if (userId) {
-        //this.store.currentGroup = null;
-        this.paramUserId = userId;
-      }
-    }
-
-    // Group Locations and Videos Events
-    groupsDataManager.currentGroupChanged.addListener(function(group) {
-      console.log('currentGroup', group);
-      self.store.currentUser = undefined;
-      self.store.currentGroup = group;
-    });
-
-    groupsDataManager.currentUserChanged.addListener(function(user) {
-      console.log('currentUser', user);
-      self.store.currentUser = user;
-    });
-
-    groupsDataManager.groupDataChanged.addListener(function(groupData) {
-      self.store.groupData = groupData;
-      console.log('groupData', groupData);
-    });
-
-    groupsDataManager.userDataChanged.addListener(function(userData) {
-      console.log('userData', userData);
-      self.store.userData = userData;
-      googleMapsHelper.updateUserLocations(userData);
-    });
-
-    groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
-      console.log('currentGroupLocations changed', groupData);
-      googleMapsHelper.updateCurrentGroupLocationsMarkers(groupData, notify, gettextCatalog);
-    });
-
-    groupsDataManager.currentUserLocationChanged.addListener(function(userData) {
-      console.log('currentUserLocationChanged changed', userData);
-      timelineService.setCurrentLocation(userData.currentLocation);
-    });
-    groupsDataManager.currentVideoChanged.addListener(function(videoData) {
-      console.log('currentVideoChanged', videoData);
-    });
-
-    /* Google Maps Data */
-    googleMapsHelper.userLocationsChanged.addListener(function(userMapLocations) {
-      if(!self.store.map) {
-        self.store.map = {};
-      }
-      self.store.map.locations = userMapLocations;
-      console.log('map locations updated', self.store.map);
-    });
-
-    googleMapsHelper.groupLocationsMarkersChanged.addListener(function(groupLocationsMarkers) {
-      if(!self.store.map) {
-        self.store.map = {};
-      }
-      self.store.map.markers = groupLocationsMarkers;
-      console.log('map markers updated', self.store.map);
-    });
-
-
-  });
+app.service('HistoryManager', function($q, $window, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
+  /****************************************************************
+   * Aux functions
+   ****************************************************************/
+  function getObjectKeys(object) {
+    return object ? Object.keys(object) : [];
+  }
 
   function error(error) {
-    console.log('error', error);
+    $window.console.log('error', error);
   }
 
   /****************************************************************
@@ -134,24 +20,27 @@
   function GoogleMapsHelper($timeout) {
     this.$timeout = $timeout;
     // Events
-    this.userLocationsChanged = new EventSignal();
-    this.groupLocationsMarkersChanged = new EventSignal();
+    this.userLocationsChanged = new $window.EventSignal();
+    this.groupLocationsMarkersChanged = new $window.EventSignal();
   }
+
   GoogleMapsHelper.prototype = {
     updateUserLocations: function updateUserLocations(userData) {
       var self = this;
       this.$timeout(function() {
         var locations = userData.locations || [];
-        self.userMapLocations = utils.GoogleMaps.transformLocationsToLatLngPoints(locations);
+        self.userMapLocations = $window.utils.GoogleMaps.transformLocationsToLatLngPoints(locations);
         self.userLocationsChanged.emit(self.userMapLocations);
       }, 600);
     },
 
-    updateCurrentGroupLocationsMarkers: function updateCurrentGroupLocationsMarkers(groupData, notify, gettextCatalog) {
+    updateCurrentGroupLocationsMarkers: function updateCurrentGroupLocationsMarkers(groupData/*, notify, gettextCatalog*/) {
       var self = this;
+
       if(!groupData) {
         return;
       }
+
       this.$timeout(function() {
         var userKeys = getObjectKeys(groupData);
         var markers = [];
@@ -159,13 +48,14 @@
           var userId = userKeys[i];
           var userData = groupData[userId];
           if(userData.currentLocation) {
-            var marker = utils.GoogleMaps.createMarker(userData.user, userData.currentLocation.location);
+            var marker = $window.utils.GoogleMaps.createMarker(userData.user, userData.currentLocation.location);
             markers.push(marker);
           }
         }
         self.groupLocationsMarkers = markers;
-        if (self.groupLocationsMarkers.length > 0)
+        if (self.groupLocationsMarkers.length > 0) {
           self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
+        }
         //else {
         //  notify({
         //    templateUrl: 'app/views/notifications/errorNotification.html',
@@ -174,6 +64,189 @@
         //  });
         //}
       }, 600);
+    }
+  };
+
+  /****************************************************************
+   * Location Wrapper
+   ****************************************************************/
+  function Location(location) {
+    this.location = angular.copy(location);
+    this.date = $window.moment(location.date).clone();
+  }
+
+  Location.prototype = {
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    },
+    unwrap: function unwrap() {
+      return this.location;
+    }
+  };
+
+  /****************************************************************
+   * LocationsByHour
+   ****************************************************************/
+  function LocationsByHour(date, previousLocationsByHour) {
+    this.previousLocationsByHour = previousLocationsByHour;
+    this.date = date;
+    this.data = new $window.utils.ListMap();
+    this._verifyGap();
+  }
+
+  LocationsByHour.prototype = {
+    _verifyGap: function _verifyGap() {
+      this.hasGap = false;
+      if(this.previousLocationsByHour) {
+        var previousDate = this.previousLocationsByHour.getDate();
+        var nextDate = previousDate.clone().add(1, 'days');
+        this.hasGap = !previousDate.isSame(this.date, 'day') &&
+          !nextDate.isSame(this.date, 'day');
+      }
+    },
+
+    addLocation: function addLocation(location) {
+      var key = location.getDate('HH');
+      this.data.put(key, location);
+    },
+
+    getMap: function getMap() {
+      return this.data;
+    },
+
+    get: function get(hour) {
+      return this.data.get(hour);
+    },
+
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    },
+
+    getPreviousDate: function getPreviousDate(pattern) {
+      if(this.previousLocationsByHour) {
+        return this.previousLocationsByHour.getDate(pattern);
+      }
+    },
+
+    hasGap: function hasGap() {
+      return this.hasGap;
+    }
+  };
+
+  /****************************************************************
+   * LocationsByDay
+   ****************************************************************/
+  function LocationsByDay(locations) {
+    this.data = new $window.utils.Map();
+    this.groupLocationsByDay(locations);
+  }
+
+  LocationsByDay.prototype = {
+    groupLocationsByDay: function groupLocationsByDay(locations) {
+      var previousLocationsByHour;
+      for(var i = 0, len = locations.length; i < len; i++) {
+        var location = locations[i];
+        previousLocationsByHour = this.addLocation(location, previousLocationsByHour);
+      }
+    },
+
+    addLocation: function addLocation(location, previousLocationsByHour) {
+      var loc = new Location(location);
+      var key = loc.getDate('YYYY-MM-DD');
+      var locationsByHour = this.data.get(key);
+      if(!locationsByHour) {
+        locationsByHour = new LocationsByHour(loc.getDate(), previousLocationsByHour);
+        this.data.put(key, locationsByHour);
+      }
+      locationsByHour.addLocation(loc);
+      return locationsByHour;
+    },
+
+    getMap: function getMap() {
+      return this.data;
+    },
+
+    get: function get(key) {
+      return this.data.get(key);
+    },
+
+    getFirstLocation: function getFirstLocation() {
+      var dayLocations = this.data.first();
+      return dayLocations && dayLocations.locationsByHour.first()[0];
+    }
+  };
+
+  /****************************************************************
+   * Incident Wrapper
+   ****************************************************************/
+  function Incident(incident) {
+    this.incident = angular.copy(incident);
+    this.date = $window.moment(incident.date).clone();
+  }
+
+  Incident.prototype = {
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    },
+    unwrap: function unwrap() {
+      return this.incident;
+    }
+  };
+
+  /****************************************************************
+   * IncidentsByHour
+   ****************************************************************/
+  function IncidentsByHour(date) {
+    this.date = date;
+    this.data = new $window.utils.ListMap();
+  }
+
+  IncidentsByHour.prototype = {
+    addIncident: function addIncident(incident) {
+      var key = incident.getDate('HH');
+      this.data.put(key, incident);
+    },
+
+    getMap: function getMap() {
+      return this.data;
+    },
+
+    get: function get(hour) {
+      return this.data.get(hour);
+    },
+
+    getDate: function getDate(pattern) {
+      return pattern ? this.date.format(pattern) : this.date;
+    }
+  };
+
+  /****************************************************************
+   * IncidentsByDay
+   ****************************************************************/
+  function IncidentsByDay(incidents) {
+    this.data = new $window.utils.Map();
+    this.groupIncidentsByDay(incidents);
+  }
+
+  IncidentsByDay.prototype = {
+    groupIncidentsByDay: function groupIncidentsByDay(incidents) {
+      for(var i = 0, len = incidents.length; i < len; i++) {
+        this.addIncident(incidents[i]);
+      }
+    },
+    addIncident: function addIncident(incident) {
+      var inc = new Incident(incident);
+      var key = inc.getDate('YYYY-MM-DD');
+      var incidentsByHour = this.data.get(key);
+      if(!incidentsByHour) {
+        incidentsByHour = new IncidentsByHour(inc.getDate());
+        this.data.put(key, incidentsByHour);
+      }
+      incidentsByHour.addIncident(inc);
+      return incidentsByHour;
+    },
+    getMap: function getMap() {
+      return this.data;
     }
   };
 
@@ -190,15 +263,16 @@
     this._gettextCatalog = gettextCatalog;
 
     // Events
-    this.groupDataChanged = new EventSignal();
-    this.userDataChanged = new EventSignal();
-    this.currentGroupChanged = new EventSignal();
-    this.currentUserChanged = new EventSignal();
-    this.periodChanged = new EventSignal();
-    this.currentGroupLocationsChanged = new EventSignal();
-    this.currentUserLocationChanged = new EventSignal();
-    this.currentVideoChanged = new EventSignal();
+    this.groupDataChanged = new $window.EventSignal();
+    this.userDataChanged = new $window.EventSignal();
+    this.currentGroupChanged = new $window.EventSignal();
+    this.currentUserChanged = new $window.EventSignal();
+    this.periodChanged = new $window.EventSignal();
+    this.currentGroupLocationsChanged = new $window.EventSignal();
+    this.currentUserLocationChanged = new $window.EventSignal();
+    this.currentVideoChanged = new $window.EventSignal();
   }
+
   GroupsDataManager.prototype = {
     setUsers: function setUsers(users) {
       this._users = users;
@@ -225,15 +299,13 @@
     },
 
     setCurrentDate: function setCurrentDate(date) {
-      this.currentDate = typeof date === 'string'
-        ? moment(date)
-        : date;
+      this.currentDate = typeof date === 'string' ? $window.moment(date) : date;
       this._calculateClosestGroupLocations();
       this._updateCurrentDateVideo();
     },
 
     setCurrentVideo: function setCurrentVideo(video) {
-      this.currentDate = moment(video.from);
+      this.currentDate = $window.moment(video.from);
       this._calculateClosestGroupLocations();
       this._setVideoData(video.index);
     },
@@ -253,8 +325,8 @@
       var cDate = this.currentDate;
       for(var i = 0, len = videos.length; i < len; i++) {
         var video = videos[i];
-        var fromDate = moment(video.from);
-        var toDate = moment(video.to);
+        var fromDate = $window.moment(video.from);
+        var toDate = $window.moment(video.to);
         if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
           (cDate.isBetween(fromDate, toDate, 'minute'))) {
           videoIndex = i;
@@ -268,14 +340,10 @@
       var videos = this.userData.videos || [];
       if(videos.length > 0) {
         var userData = this.userData;
-        userData.previousVideo = videoIndex > 0
-          ? videos[videoIndex - 1]
-          : undefined;
+        userData.previousVideo = videoIndex > 0 ? videos[videoIndex - 1] : undefined;
         userData.currentVideo = videos[videoIndex];
         if(videoIndex >= 0) {
-          userData.nextVideo = videos.length > videoIndex + 1
-            ? videos[videoIndex + 1]
-            : undefined;
+          userData.nextVideo = videos.length > videoIndex + 1 ? videos[videoIndex + 1] : undefined;
         } else {
           userData.nextVideo = videos[0];
         }
@@ -289,7 +357,7 @@
     },
 
     _calculateClosestGroupLocations: function _calculateClosestGroupLocations() {
-      var currentGroupLocations = new utils.Map();
+      // var currentGroupLocations = new $window.utils.Map();
       var date = this.currentDate.format('YYYY-MM-DD');
       var hour = this.currentDate.format('HH');
       var userIds = getObjectKeys(this.locationsByUser);
@@ -315,15 +383,18 @@
       for(var i = 0, len = locations.length; i < len; i++) {
         var location = locations[i];
         var locationMinute = parseInt(location.getDate().format('mm'));
+
         if(locationMinute > selectedMinute || i + 1 === len) {
           if(last && selectedMinute - this.MAX_MINUTES_TO_CLOSEST_LOCATION <= last.minute) {
             return last.location;
           }
+
           if(selectedMinute + this.MAX_MINUTES_TO_CLOSEST_LOCATION >= locationMinute) {
             return location;
           }
           break;
         }
+
         last = {
           location: location,
           minute: locationMinute
@@ -338,6 +409,7 @@
         this._loadGroupLocationsVideosAndIncidents();
       }
     },
+
     _updateUserData: function _userData() {
       var userId = this.currentUser && this.currentUser.id;
       this.userData = userId ? this.groupData[userId] : {};
@@ -359,7 +431,7 @@
         users.push(this.currentGroup);
       }
       this.currentGroup.users = users;
-      console.log('currentGroup.users updated', this.currentGroup);
+      $window.console.log('currentGroup.users updated', this.currentGroup);
     },
 
     _updateCurrentUser: function _updateCurrentUser() {
@@ -391,10 +463,11 @@
         var userId = userIds[i];
         var incidents = this.incidentsByUser[userId];
         var userData = this.groupData[userId];
-        userData["incidents"] = incidents;
-        userData["incidentsByDay"] = new IncidentsByDay(incidents);
+        userData.incidents = incidents;
+        userData.incidentsByDay = new IncidentsByDay(incidents);
       }
     },
+
     _indexVideos: function _indexVideos() {
       for(var i = 0, len = this.videos.length; i < len; i++) {
         var video = this.videos[i];
@@ -432,26 +505,25 @@
     },
 
     _loadGroupLocationsVideosAndIncidents: function _loadGroupLocationsVideosAndIncidents() {
-      var promisses = this.currentGroup.isGroup
-        ? this._getGroupLocationsVideosAndIncidents()
-        : this._getUserLocationsVideosAndIncidents();
+      var promisses = this.currentGroup.isGroup ? this._getGroupLocationsVideosAndIncidents() : this._getUserLocationsVideosAndIncidents();
 
       var self = this;
       this.$q.all(promisses)
         .then(function(data) {
 
-          if (Object.keys(data[0]).length == 0 || Object.keys(data[1]).length==0) { // no user location on this interval
+          if (Object.keys(data[0]).length === 0 || Object.keys(data[1]).length === 0) { // no user location on this interval
 
             var message;
 
             var gettextCatalog = self._gettextCatalog; // needed to make 'gulp pot' work
 
-            if (Object.keys(data[0]).length == 0 && Object.keys(data[1]).length == 0 )
+            if (Object.keys(data[0]).length === 0 && Object.keys(data[1]).length === 0 ) {
               message = gettextCatalog.getString('No location data or videos available for the selected interval');
-            else if (Object.keys(data[0]).length == 0)
+            } else if (Object.keys(data[0]).length === 0) {
               message = gettextCatalog.getString('No location data available for the selected interval');
-            else
+            } else {
               message = gettextCatalog.getString('No video available for the selected interval');
+            }
 
             self._notify({
               templateUrl: 'app/views/notifications/warningNotification.html',
@@ -459,7 +531,6 @@
               message: message,
               duration: 3500
             });
-
           }
 
           self._setLocationsByUser(data[0]);
@@ -506,9 +577,10 @@
     this._indexedUsers = [];
 
     // Events
-    this.usersIndexed = new EventSignal();
-    this.groupsChanged = new EventSignal();
+    this.usersIndexed = new $window.EventSignal();
+    this.groupsChanged = new $window.EventSignal();
   }
+
   Groups.prototype = {
     load: function load() {
       var promises = [
@@ -519,8 +591,8 @@
       var self = this;
       this.$q.all(promises).then(function updateUsersAndGroups(groups) {
         var users = groups[0];
-        var groups = groups[1];
-        self._update(users, groups);
+        var ngroups = groups[1];
+        self._update(users, ngroups);
       }, error);
     },
 
@@ -554,192 +626,125 @@
     }
   };
 
-  /****************************************************************
-   * LocationsByDay
-   ****************************************************************/
-  function LocationsByDay(locations) {
-    this.data = new utils.Map();
-    this.groupLocationsByDay(locations);
-  }
-  LocationsByDay.prototype = {
-    groupLocationsByDay: function groupLocationsByDay(locations) {
-      var previousLocationsByHour;
-      for(var i = 0, len = locations.length; i < len; i++) {
-        var location = locations[i];
-        previousLocationsByHour = this.addLocation(location, previousLocationsByHour);
-      };
-    },
+  /****************************************************************/
 
-    addLocation: function addLocation(location, previousLocationsByHour) {
-      var loc = new Location(location);
-      var key = loc.getDate('YYYY-MM-DD');
-      var locationsByHour = this.data.get(key);
-      if(!locationsByHour) {
-        locationsByHour = new LocationsByHour(loc.getDate(), previousLocationsByHour);
-        this.data.put(key, locationsByHour);
+  var self = this;
+  this.store = {};
+  this.paramUserId = null;
+
+  // Objects
+  var groups = new Groups($q, userService, groupService);
+  var groupsDataManager = new GroupsDataManager($q, $timeout, userService, groupService, notify, gettextCatalog);
+  var googleMapsHelper = new GoogleMapsHelper($timeout);
+
+  // Manager API
+  this.loadUsersAndGroups = groups.load.bind(groups);
+
+  this.setCurrentGroup = groupsDataManager.setCurrentGroup.bind(groupsDataManager);
+  this.setCurrentUser = groupsDataManager.setCurrentUser.bind(groupsDataManager);
+  this.setPeriod = groupsDataManager.setPeriod.bind(groupsDataManager);
+  this.setCurrentDate = function setCurrentDate(currentDate) {
+    $window.console.log('currentDate', currentDate);
+    groupsDataManager.setCurrentDate(currentDate);
+  };
+
+  this.previousVideo = function previousVideo() {
+    var userData = self.store.userData;
+    if(userData && userData.previousVideo) {
+      groupsDataManager.setCurrentVideo(userData.previousVideo);
+    }
+  };
+  this.nextVideo = function nextVideo() {
+    var userData = self.store.userData;
+    if(userData && userData.nextVideo) {
+      groupsDataManager.setCurrentVideo(userData.nextVideo);
+    }
+  };
+  this.hasPreviousVideo = function hasPreviousVideo() {
+    var userData = self.store.userData;
+    return userData && userData.previousVideo;
+  };
+  this.hasNextVideo = function hasNextVideo() {
+    var userData = self.store.userData;
+    return userData && userData.nextVideo;
+  };
+
+  // User and Groups Events
+  groups.usersIndexed.addListener(function(indexedUsers) {
+    $window.console.log('indexedUsers', indexedUsers);
+    groupsDataManager.setUsers(indexedUsers);
+  });
+
+  groups.groupsChanged.addListener(function(groups) {
+    self.store.groups = groups;
+    if (self.paramUserId) {
+      for (var i = 0; i < Object.keys(self.store.groups).length; i++) {
+        if (parseInt(self.store.groups[i].id) === parseInt(self.paramUserId) && !self.store.groups[i].isGroup) {
+          self.setCurrentGroup(self.store.groups[i]);
+          self.paramUserId = null;
+          return;
+        }
       }
-      locationsByHour.addLocation(loc);
-      return locationsByHour;
-    },
+    }
+  });
 
-    getMap: function getMap() {
-      return this.data;
-    },
-
-    get: function get(key) {
-      return this.data.get(key);
-    },
-
-    getFirstLocation: function getFirstLocation() {
-      var dayLocations = this.data.first();
-      return dayLocations && dayLocations.locationsByHour.first()[0];
+  this.setCurrentUserId = function(userId) {
+    if (userId) {
+      //this.store.currentGroup = null;
+      this.paramUserId = userId;
     }
   };
 
-  /****************************************************************
-   * LocationsByHour
-   ****************************************************************/
-  function LocationsByHour(date, previousLocationsByHour) {
-    this.previousLocationsByHour = previousLocationsByHour;
-    this.date = date;
-    this.data = new utils.ListMap();
-    this._verifyGap();
-  }
-  LocationsByHour.prototype = {
-    _verifyGap: function _verifyGap() {
-      this.hasGap = false;
-      if(this.previousLocationsByHour) {
-        var previousDate = this.previousLocationsByHour.getDate();
-        var nextDate = previousDate.clone().add(1, 'days');
-        this.hasGap = !previousDate.isSame(this.date, 'day') &&
-          !nextDate.isSame(this.date, 'day');
-      }
-    },
+  // Group Locations and Videos Events
+  groupsDataManager.currentGroupChanged.addListener(function(group) {
+    $window.console.log('currentGroup', group);
+    self.store.currentUser = undefined;
+    self.store.currentGroup = group;
+  });
 
-    addLocation: function addLocation(location) {
-      var key = location.getDate('HH');
-      this.data.put(key, location);
-    },
+  groupsDataManager.currentUserChanged.addListener(function(user) {
+    $window.console.log('currentUser', user);
+    self.store.currentUser = user;
+  });
 
-    getMap: function getMap() {
-      return this.data;
-    },
+  groupsDataManager.groupDataChanged.addListener(function(groupData) {
+    self.store.groupData = groupData;
+    $window.console.log('groupData', groupData);
+  });
 
-    get: function get(hour) {
-      return this.data.get(hour);
-    },
+  groupsDataManager.userDataChanged.addListener(function(userData) {
+    $window.console.log('userData', userData);
+    self.store.userData = userData;
+    googleMapsHelper.updateUserLocations(userData);
+  });
 
-    getDate: function getDate(pattern) {
-      return pattern ? this.date.format(pattern) : this.date;
-    },
+  groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
+    $window.console.log('currentGroupLocations changed', groupData);
+    googleMapsHelper.updateCurrentGroupLocationsMarkers(groupData, notify, gettextCatalog);
+  });
 
-    getPreviousDate: function getPreviousDate(pattern) {
-      if(this.previousLocationsByHour) {
-        return this.previousLocationsByHour.getDate(pattern);
-      }
-    },
+  groupsDataManager.currentUserLocationChanged.addListener(function(userData) {
+    $window.console.log('currentUserLocationChanged changed', userData);
+    timelineService.setCurrentLocation(userData.currentLocation);
+  });
+  groupsDataManager.currentVideoChanged.addListener(function(videoData) {
+    $window.console.log('currentVideoChanged', videoData);
+  });
 
-    hasGap: function hasGap() {
-      return this.hasGap;
+  /* Google Maps Data */
+  googleMapsHelper.userLocationsChanged.addListener(function(userMapLocations) {
+    if(!self.store.map) {
+      self.store.map = {};
     }
+    self.store.map.locations = userMapLocations;
+    $window.console.log('map locations updated', self.store.map);
+  });
 
-  };
-
-  /****************************************************************
-   * Location Wrapper
-   ****************************************************************/
-  function Location(location) {
-    this.location = angular.copy(location);
-    this.date = moment(location.date).clone();
-  }
-  Location.prototype = {
-    getDate: function getDate(pattern) {
-      return pattern ? this.date.format(pattern) : this.date;
-    },
-    unwrap: function unwrap() {
-      return this.location;
+  googleMapsHelper.groupLocationsMarkersChanged.addListener(function(groupLocationsMarkers) {
+    if(!self.store.map) {
+      self.store.map = {};
     }
-  };
-
-  /****************************************************************
-   * IncidentsByDay
-   ****************************************************************/
-  function IncidentsByDay(incidents) {
-    this.data = new utils.Map();
-    this.groupIncidentsByDay(incidents);
-  }
-  IncidentsByDay.prototype = {
-    groupIncidentsByDay: function groupIncidentsByDay(incidents) {
-      for(var i = 0, len = incidents.length; i < len; i++) {
-        this.addIncident(incidents[i]);
-      };
-    },
-    addIncident: function addIncident(incident) {
-      var inc = new Incident(incident);
-      var key = inc.getDate('YYYY-MM-DD');
-      var incidentsByHour = this.data.get(key);
-      if(!incidentsByHour) {
-        incidentsByHour = new IncidentsByHour(inc.getDate());
-        this.data.put(key, incidentsByHour);
-      }
-      incidentsByHour.addIncident(inc);
-      return incidentsByHour;
-    },
-
-    getMap: function getMap() {
-      return this.data;
-    },
-
-  };
-
-  /****************************************************************
-   * IncidentsByHour
-   ****************************************************************/
-  function IncidentsByHour(date) {
-    this.date = date;
-    this.data = new utils.ListMap();
-  }
-  IncidentsByHour.prototype = {
-    addIncident: function addIncident(incident) {
-      var key = incident.getDate('HH');
-      this.data.put(key, incident);
-    },
-
-    getMap: function getMap() {
-      return this.data;
-    },
-
-    get: function get(hour) {
-      return this.data.get(hour);
-    },
-
-    getDate: function getDate(pattern) {
-      return pattern ? this.date.format(pattern) : this.date;
-    },
-
-  };
-
-  /****************************************************************
-   * Incident Wrapper
-   ****************************************************************/
-  function Incident(incident) {
-    this.incident = angular.copy(incident);
-    this.date = moment(incident.date).clone();
-  }
-  Incident.prototype = {
-    getDate: function getDate(pattern) {
-      return pattern ? this.date.format(pattern) : this.date;
-    },
-    unwrap: function unwrap() {
-      return this.incident;
-    }
-  };
-  /****************************************************************
-   * Aux functions
-   ****************************************************************/
-  function getObjectKeys(object) {
-    return object ? Object.keys(object) : [];
-  }
-
-
-})(window.angular, window.moment, window.EventSignal, window.utils);
+    self.store.map.markers = groupLocationsMarkers;
+    $window.console.log('map markers updated', self.store.map);
+  });
+});
