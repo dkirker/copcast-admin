@@ -1,11 +1,32 @@
+/*jslint browser: true*/
+
 'use strict';
-;(function() {
+(function() {
+  function isArray(value) {
+    return value && value instanceof Array;
+  }
+
+  function getFirstArrayElement(array) {
+    if(isArray(array) && array.length > 0) {
+      return array[0];
+    }
+  }
+
+  function getLastArrayElement(array) {
+    if(isArray(array) && array.length > 0) {
+      return array[array.length - 1];
+    }
+  }
+
+  var utils = window.utils || {};
+
   /*
    * Map
    */
   function ListMap() {
     this._map = new utils.Map();
   }
+
   ListMap.prototype = {
     put: function put(key, value) {
       if(!this.containsKey(key)) {
@@ -27,45 +48,22 @@
     },
 
     containsKey: function containsKey(key) {
-      return this._map.containsKey(key)
+      return this._map.containsKey(key);
     },
 
     first: function first(key) {
-      return key
-        ? getFirstArrayElement(this.get(key))
-        : this._map.first();
+      return key ? getFirstArrayElement(this.get(key)) : this._map.first();
     },
 
     last: function last(key) {
-      return key
-        ? getLastArrayElement(this.get(key))
-        : this._map.last();
+      return key ? getLastArrayElement(this.get(key)) : this._map.last();
     },
 
     getMap: function getMap() {
       return this._map.getMap();
     }
-
   };
 
-  function getFirstArrayElement(array) {
-    if(isArray(array) && array.length > 0) {
-      return array[0];
-    }
-  }
-
-  function getLastArrayElement(array) {
-    if(isArray(array) && array.length > 0) {
-      return array[array.length - 1];
-    }
-  }
-
-  function isArray(value) {
-    return value && value instanceof Array;
-  }
-
-  var utils = window.utils || {};
   utils.ListMap = ListMap;
-
   window.utils = utils;
 })();
