@@ -1,11 +1,14 @@
+/*jslint browser: true*/
+
 'use strict';
-;(function() {
+(function() {
   /*
    * Map
    */
   function Map() {
     this._map = {};
   }
+
   Map.prototype = {
     put: function put(key, value) {
       this._map[key] = value;
@@ -36,7 +39,7 @@
     },
 
     last: function last() {
-      var size = this.size()
+      var size = this.size();
       if(size > 0) {
         return this.get(this.keys()[size - 1]);
       }
