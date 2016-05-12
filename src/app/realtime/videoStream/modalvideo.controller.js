@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, $rootScope, $sce, $uibModalInstance, user, socket) {
+  .controller('ModalVideoCtrl', function ($scope, $window, $rootScope, $sce, $uibModalInstance, user, socket) {
     $scope.user = user;
 
     $scope.options = {
@@ -19,24 +19,24 @@ angular.module('copcastAdminApp')
     };
 
     $scope.dismiss = function () {
-      console.log(user);
+      $window.console.log(user);
       $uibModalInstance.close();
       $rootScope.deregFrame();
       $rootScope.deregStoppedStream();
 
-      console.log(user.userName+ " is leaving watch list");
+      $window.console.log(user.userName+ ' is leaving watch list');
       socket.emit('unwatch');
     };
 
-  }).directive('h264canvas', function($rootScope) {
+  }).directive('h264canvas', function($rootScope, $window) {
 
     return {
       restrict: 'E',
       templateUrl: 'app/realtime/videoStream/h264canvas.html',
-      link: function (scope, iElement, iAttrs) {
-        var p = new Player({
+      link: function (scope, iElement/*, iAttrs*/) {
+        var p = new $window.Player({
           useWorker: true,
-          workerFile: "/vendor/Decoder.js"
+          workerFile: '/vendor/Decoder.js'
         });
 
         iElement[0].appendChild(p.canvas);
@@ -46,10 +46,10 @@ angular.module('copcastAdminApp')
           p.decode(data);
         });
 
-        $rootScope.deregStoppedStream = $rootScope.$on('streamStopped', function(event) {
-          console.log('no stream');
+        $rootScope.deregStoppedStream = $rootScope.$on('streamStopped', function(/*event*/) {
+          $window.console.log('no stream');
           scope.dismiss();
         });
       }
-    }
+    };
 });
