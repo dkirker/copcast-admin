@@ -124,6 +124,12 @@ footer{
     margin: 0 5px;
     color: rgba(255,255,255,0.5);
   }
+
+  @media screen
+  and (device-width: 360px)
+  and (device-height: 640px) {
+    top: 106px;
+  }
 }
 
 #fetchUsers {
@@ -159,5 +165,15 @@ footer{
   &.active {
     color: rgb(0, 0, 0);
     font-weight: 500;
+  }
+
+  @media screen
+  and (device-width: 360px)
+  and (device-height: 640px) {
+    line-height: 1.37;
+    top: 116px;
+    left: 122px;
+    min-width: 76px;
+    padding: 11px;
   }
 }
