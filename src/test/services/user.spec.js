@@ -5,14 +5,17 @@ var data = require('./user.mock.js');
 describe('Service: UserService', function () {
   var ServerUrl;
   var httpBackend;
+  var rootScope;
   var userService;
 
   beforeEach(angular.mock.module('copcastAdminApp'));
 
-  beforeEach(angular.mock.inject(function (_userService_, $httpBackend, _ServerUrl_) {
+  beforeEach(angular.mock.inject(function (_userService_, $httpBackend, _ServerUrl_, $rootScope) {
     userService = _userService_;
     httpBackend = $httpBackend;
     ServerUrl = _ServerUrl_;
+    rootScope = $rootScope;
+    rootScope.globals = {currentUser: { username: 'admin', role: 'admin_3 '}};
   }));
 
   describe('when get the active users from backend', function () {
@@ -58,7 +61,7 @@ describe('Service: UserService', function () {
         .then(function(user) {
           expect(user).toEqual(expectedUser1);
         });
-      
+
 
       var expectedUser2 = angular.copy(data.users[1]);
       expectedUser2.profilePicture = '/assets/images/anonuser.png';
@@ -68,7 +71,7 @@ describe('Service: UserService', function () {
           expect(user).toEqual(expectedUser2);
         });
 
-      
+
     });
   });
 

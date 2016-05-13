@@ -44,7 +44,7 @@ describe('Controller: GroupsDetailCtrl', function () {
   it('cancels editing', function(){
     spyOn(location, "path");
 
-    scope.cancel();
+    scope.back();
 
     expect(location.path).toHaveBeenCalledWith("/group-list");
   });
