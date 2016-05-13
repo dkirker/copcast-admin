@@ -240,7 +240,7 @@ app.factory('userService', function($compile, $templateCache, $q, $http, ServerU
   };
 
   service.getCurrentRole = function(){
-    if ($rootScope.globals) {
+    if ($rootScope.globals && $rootScope.globals.currentUser) {
       return $rootScope.globals.currentUser.role;
     } else {
       return null;

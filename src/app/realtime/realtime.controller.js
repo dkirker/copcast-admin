@@ -257,7 +257,7 @@ angular.module('copcastAdminApp').
 
     $scope.filterUsers = filterUsers;
 
-    // $scope.loadUser = loadUser;
+    $scope.loadUser = loadUser;
 
     $scope.showUser = showUser;
 
