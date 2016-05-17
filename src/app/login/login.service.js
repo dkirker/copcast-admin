@@ -26,10 +26,10 @@ app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $
   };
 
   loginService.getToken = function() {
-    if ($rootScope.globals === null && !$cookies.getObject('globals')){
+    if (!$rootScope.globals && !$cookies.getObject('globals')){
       return null;
     }
-    if ($rootScope.globals === null){
+    if (!$rootScope.globals){
       $rootScope.globals = $cookies.getObject('globals');
     }
     return $rootScope.globals.currentUser.token;
