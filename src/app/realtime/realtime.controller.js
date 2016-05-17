@@ -180,6 +180,65 @@ angular.module('copcastAdminApp').
       });
     }
 
+    var loadUser = function(data) {
+
+    $window.console.log('loaduser');
+
+    var user = $scope.getCurrentUsers().getUser(data.id);
+
+    if (user === null) { //user not in list
+
+      // user not connected via socket. Ignoring
+      $window.console.log('ignored location data');
+
+    } else {
+
+      user = angular.extend({}, user);
+
+      $window.console.log('Socket: Location received for: ' + data.username + ' @ ' + data.location.lat + ',' + data.location.lng);
+
+      var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
+      var isNew = (user.state === 0);
+
+      if (isNew) {
+
+        var marker = mapService.createMarker($scope, pos, data);
+
+        var userPicture = '/assets/images/anonuser.png';
+
+        if (data.profilePicture) {
+          userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
+        }
+
+        var newUser = {
+          id: data.id,
+          userName: data.name,
+          login: data.username,
+          group: data.group,
+          marker: marker,
+          groupId: data.groupId,
+          accuracy: data.location.accuracy,
+          picture: userPicture
+        };
+
+        user = newUser;
+        isNew = true;
+      }
+
+      user.marker.setPosition(pos);
+      user.accuracy = data.location.accuracy;
+
+      if (data.battery) {
+        user.batteryPercentage = data.battery.batteryPercentage;
+      }
+
+      user = $scope.getCurrentUsers().updateUser(user);
+      if (isNew) {
+        mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
+      }
+    }
+  };
+
     $scope.currentUsers = {
       userDict: {},
 
@@ -293,65 +352,6 @@ angular.module('copcastAdminApp').
       google.maps.event.trigger($scope.myMap, 'resize');
       // $scope.refreshUsers();
     });
-
-    var loadUser = function(data) {
-
-      $window.console.log('loaduser');
-
-      var user = $scope.getCurrentUsers().getUser(data.id);
-
-      if (user === null) { //user not in list
-
-        // user not connected via socket. Ignoring
-        $window.console.log('ignored location data');
-
-      } else {
-
-        user = angular.extend({}, user);
-
-        $window.console.log('Socket: Location received for: ' + data.username + ' @ ' + data.location.lat + ',' + data.location.lng);
-
-        var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
-        var isNew = (user.state === 0);
-
-        if (isNew) {
-
-          var marker = mapService.createMarker($scope, pos, data);
-
-          var userPicture = '/assets/images/anonuser.png';
-
-          if (data.profilePicture) {
-            userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
-          }
-
-          var newUser = {
-            id: data.id,
-            userName: data.name,
-            login: data.username,
-            group: data.group,
-            marker: marker,
-            groupId: data.groupId,
-            accuracy: data.location.accuracy,
-            picture: userPicture
-          };
-
-          user = newUser;
-          isNew = true;
-        }
-
-        user.marker.setPosition(pos);
-        user.accuracy = data.location.accuracy;
-
-        if (data.battery) {
-          user.batteryPercentage = data.battery.batteryPercentage;
-        }
-
-        user = $scope.getCurrentUsers().updateUser(user);
-        if (isNew) {
-          mapService.fitBounds($scope, $scope.getCurrentUsers().getAllUsers());
-        }
-      }
-    };
 
     var receiveBroadcastersList = function(data) {
       $window.console.log('listing');
