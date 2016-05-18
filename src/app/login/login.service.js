@@ -41,7 +41,8 @@ app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $
         username: userName,
         role: role,
         token: accessToken,
-        userId: userId
+        userId: userId,
+        hideHistoryAlert: false
       }
     };
 

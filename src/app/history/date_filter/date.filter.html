@@ -13,7 +13,7 @@
     <div class="input-group">
       <span class="input-group-addon glyphicon glyphicon-calendar"></span>
       <input type="date" id="fromDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
-             uib-datepicker-popup is-open="fromDate.visible"
+             uib-datepicker-popup is-open="fromDate.visible" max-date="toDate.maxValue"
              ng-required="true" ng-click="fromDate.show()" show-button-bar="false" show-weeks="false" />
     </div>
   </div>
@@ -25,6 +25,16 @@
       <input type="date" id="toDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control to date" ng-model="toDate.value" ng-disabled="!period" ng-model-options="{ debounce: 500 }"
              uib-datepicker-popup is-open="toDate.visible" min-date="fromDate.value" max-date="toDate.maxValue"
              date-disabled="!period" ng-required="true" ng-click="toDate.show()" show-button-bar="false" show-weeks="false" />
+    </div>
+  </div>
+
+  <div class="calendarAlert">
+    <i class="icon fa fa-info-circle"></i>
+    <div class="content">
+      <span class="message">The maximum date range is 20 days.</span>
+      <label>
+        <input type="checkbox" ng-model="hideHistoryAlert" i-check> Don't see again in this session
+      </label>
     </div>
   </div>
 </form>

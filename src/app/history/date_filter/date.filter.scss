@@ -45,4 +45,83 @@ form.date.filter {
   tbody td{
     border: 1px solid #eeeeee;
   }
+
+  .calendarAlert {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    top: 52px;
+    right: 10px;
+    background: #f8f8f9;
+    padding: 1em 1.5em;
+    line-height: 1.4285em;
+    color: rgba(0,0,0,.87);
+    border-radius: .28571429rem;
+    //box-shadow: 0 0 0 1px rgba(34,36,38,.22) inset,0 0 0 0 transparent;
+    border: solid 1px rgba(34,36,38,.22);
+
+    &:after, &:before {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      border-color: transparent transparent rgba(248, 248, 249, 1) transparent;
+      //border-bottom-color: #f8f8f9;
+      border-width: 10px;
+      margin-left: -10px;
+    }
+
+    &:before {
+      border-color: transparent transparent rgba(34, 36, 38, .22) transparent;
+      //border-bottom-color: #222426;
+      border-width: 11px;
+      margin-left: -11px;
+    }
+
+    .icon:not(.close) {
+      display: block;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      width: auto;
+      line-height: 1;
+      vertical-align: middle;
+      font-size: 3em;
+      opacity: .8;
+      margin-right: .3em;
+    }
+
+    .content {
+      display: block;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      vertical-align: middle;
+
+      .message, label {
+        display: block;
+      }
+
+      .message {
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: .4em;
+      }
+
+      label {
+        font-size: .9em;
+      }
+    }
+  }
 }

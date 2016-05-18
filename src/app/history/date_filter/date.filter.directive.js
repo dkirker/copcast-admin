@@ -1,10 +1,12 @@
+/*jslint browser: true*/
+
 'use strict';
 
 var app = angular.module('copcastAdminApp');
 
 var MAX_PERIOD_OF_DAYS = 30;
 
-app.directive('dateFilter', function($window) {
+app.directive('dateFilter', function($window, $rootScope, $cookies) {
   var toDate;
   return {
     restrict: 'E',
@@ -29,6 +31,10 @@ app.directive('dateFilter', function($window) {
         };
       }
 
+      if(!scope.hideHistoryAlert) {
+        scope.hideHistoryAlert = $rootScope.globals.currentUser.hideHistoryAlert;
+      }
+
       // Aux functions
       function hasPeriodChanged(newPeriod) {
         return !angular.equals(newPeriod, scope.lastPeriod);
@@ -48,19 +54,37 @@ app.directive('dateFilter', function($window) {
         var minDate = scope.fromDate.value;
         var maxDate = calculateMaxDateFrom(minDate);
         var date = $window.moment(scope.toDate.value);
+        var newDate = {};
+
+        // $window.console.warn('START calculateToDate()');
+        // $window.console.info('minDate: ', minDate);
+        // $window.console.info('maxDate: ', maxDate);
+        // $window.console.info('date: ', date);
+        // $window.console.warn('END calculateToDate()');
+        // $window.console.log('');
+
+        if($window.moment(maxDate).isAfter(new Date(), 'day')) {
+          newDate.maxValue = new Date();
+        } else {
+          newDate.maxValue = maxDate;
+        }
 
         if(date.isAfter(maxDate, 'day')) {
-          return maxDate;
-        } else
-        if (date.isBefore(minDate, 'day')) {
-          return minDate;
+          newDate.value = maxDate;
+          newDate.alert = true;
+        // } else if (date.isBefore(minDate, 'day')) {
+        //   newDate.value = minDate;
+        } else {
+          newDate.value = date;
         }
-        return date;
+
+        return newDate;
       }
 
       function updateDates() {
         var toDate = calculateToDate();
-        if($window.moment(toDate).isSame(scope.toDate.value, 'day')) {
+
+        if($window.moment(toDate.value).isSame(scope.toDate.value, 'day')) {
           var newPeriod = {
             fromDate: scope.fromDate.value,
             toDate: scope.toDate.value,
@@ -70,9 +94,15 @@ app.directive('dateFilter', function($window) {
           if(hasPeriodChanged(newPeriod)) {
             scope.lastPeriod = newPeriod;
             onChangePeriod(newPeriod);
+            scope.toDate.maxValue = toDate.maxValue;
           }
         } else {
-          scope.toDate.value = toDate;
+          scope.toDate.value = toDate.value;
+          scope.toDate.maxValue = toDate.maxValue;
+        }
+
+        if(toDate.alert && !scope.hideHistoryAlert) {
+          angular.element('.calendarAlert').fadeIn();
         }
       }
 
@@ -96,12 +126,30 @@ app.directive('dateFilter', function($window) {
         updateDates();
       }, true);
 
+      scope.$watch('hideHistoryAlert', function() {
+        $rootScope.globals.currentUser.hideHistoryAlert = scope.period;
+        var cookies = $cookies.getObject('globals');
+        cookies.currentUser.hideHistoryAlert = scope.period;
+        $cookies.putObject('globals', cookies);
+      }, true);
+
 
       // Scope initialization
+
+      var historyAlert = angular.element('.calendarAlert');
+      angular.element(document).on('click', function(e){
+        if(!historyAlert.is(e.target) && historyAlert.has(e.target).length === 0){
+          historyAlert.fadeOut();
+        }
+      });
+
+      historyAlert.hide();
+
       scope.period = scope.initialPeriod.period;
 
       scope.toDate = {
         value: scope.initialPeriod.toDate || new Date(),
+        maxValue: new Date(),
         visible: false,
         show: function(){
           scope.toDate.visible = true;
@@ -120,7 +168,7 @@ app.directive('dateFilter', function($window) {
 
       scope.fromDate = {
         value: scope.initialPeriod.fromDate || new Date(),
-        maxDate: '',
+        maxValue: new Date(),
         visible: false,
         show: function(){
           scope.fromDate.visible = true;
