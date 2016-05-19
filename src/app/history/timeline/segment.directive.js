@@ -36,7 +36,7 @@ app.directive('timelineSegment', function($timeout, $window, timelineService) {
     require: '^timelineSegments',
     templateUrl: 'app/history/timeline/segment.html',
     scope: {
-      timeLabel: '=',
+      hour: '=',
       last: '=',
       day: '=',
       activities: '=',
@@ -114,15 +114,22 @@ app.directive('timelineSegment', function($timeout, $window, timelineService) {
 
       function getIncidentsInThisHour(){
         try {
-          return scope.incidentsByDay.getMap().get(scope.day).getMap().get(scope.timeLabel);
+          return scope.incidentsByDay.getMap().get(scope.day).getMap().get(scope.hour);
         } catch (err) {
           return [];
         }
       }
       scope.getIncidentsInThisHour = getIncidentsInThisHour;
 
+      function hourToTimeLabel(hourNum) {
+        var hourString = hourNum < 10 ? '0' + hourNum : hourNum.toString();
+        return hourString + 'h';
+      }
+      scope.timeLabel = function timeLabel() {
+        return hourToTimeLabel(parseInt(scope.hour, 10));
+      };
       scope.nextTimeLabel = function nextTimeLabel() {
-        return parseInt(scope.timeLabel) + 1;
+        return hourToTimeLabel(parseInt(scope.hour, 10) + 1);
       };
 
       scope.selectPosition = function selectPosition(event, firstSectionLocation) {
