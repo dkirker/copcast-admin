@@ -2,22 +2,35 @@
   <h2 class="page-header hrDarker" translate>New Videos Export</h2>
 
   <form novalidate="novalidate" id="videoExportForm" class="form-horizontal" name="frm">
-    <div ng-show="serverMessage" class="alert alert-danger">
+    <div ng-show="errorMessage" class="alert alert-danger">
       <p>
-        {{serverMessage}}
+        {{errorMessage}}
       </p>
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label translate>Name:</label>
         <select ng-options="user.id as user.name for user in users" ng-required="true"
                 ng-model="exportObj.recorderId"
                 required class="form-control"></select>
       </div>
+      </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="exportObj.period" i-check>
+            <span translate>Period?</span>
+          </label>
+        </div>
+      </div>
+    </div>
+      <div class="row">
 
-      <div class="col-md-6">
-        <label translate>Date:</label>
+      <div class="col-md-3">
+        <label translate ng-hide="exportObj.period">Date:</label>
+        <label translate ng-show="exportObj.period">Initial Date:</label>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-calendar"></span>
           <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
@@ -27,7 +40,35 @@
                  ng-click="exportObj.initialDateShow()"/>
         </div>
       </div>
+      <div class="col-md-3" ng-show="exportObj.period">
+        <label translate>to</label>
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+          <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
+                 ng-model="exportObj.endDate" ng-model-options="{ debounce: 500 }"
+                 uib-datepicker-popup is-open="exportObj.endDateVisible"
+                 show-button-bar="false" show-weeks="false"
+                 ng-click="exportObj.endDateShow()"/>
+        </div>
+      </div>
+      <div class="col-md-3" ng-hide="exportObj.period">
+        <label translate>Initial Time:</label>
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-time"></span>
+          <input type="time" class="form-control" class="time" placeholder="HH:mm"
+                 ng-model="exportObj.initialTime"/>
+        </div>
+      </div>
+      <div class="col-md-3" ng-hide="exportObj.period">
+        <label translate>End Time:</label>
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-time"></span>
+          <input type="time" class="form-control" class="time" placeholder="HH:mm"
+                 ng-model="exportObj.endTime"/>
+        </div>
+      </div>
     </div>
+
 
     <hr class="hrDarker" />
 

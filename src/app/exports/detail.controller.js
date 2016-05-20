@@ -13,6 +13,9 @@
 angular.module('copcastAdminApp')
   .controller('ExportsDetailCtrl', function ($scope, $routeParams, exportService, ServerUrl) {
     $scope.noRecord = false;
+    $scope.isPeriod = function(){
+      return !moment($scope.exportObj.initialDate).isSame(moment($scope.exportObj.finalDate), 'day');
+    };
     exportService.getExport($routeParams.id).then(
       function(exportObj){
         if (exportObj) {

@@ -98,28 +98,6 @@ describe('Controller:RealtimeCtrl', function () {
       expect(mapService.fitBounds).not.toHaveBeenCalled();
     });
 
-    it('load new user', function () {
-      //expect(loginService.logout).toHaveBeenCalled();
-      spyOn(marker, "getPosition").and.callFake(function () {
-        return {
-          lat: function () {
-            return 22;
-          }, lng: function () {
-            return 22;
-          }
-        };
-      });
-      user.accuracy = 50
-
-      scope.loadUser({
-        id: 1, name: "Test Name 2",
-        location: {lat: 23, lng: 23, groupId: 1, accuracy: 10}
-      });
-
-      expect(scope.activeUsers.length).toBe(2);
-      expect(mapService.createMarker).toHaveBeenCalled();
-      expect(mapService.fitBounds).toHaveBeenCalled();
-    });
   });
   describe("Test refresh user", function(){
 

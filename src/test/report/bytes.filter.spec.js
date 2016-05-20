@@ -1,7 +1,7 @@
 /**
  * Created by brunosiqueira on 28/04/16.
  */
-describe('Test bytes filter', function () {
+describe('Filter: BytesFilter', function () {
   'use strict';
 
   var $filter;
