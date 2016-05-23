@@ -38,8 +38,7 @@ app.factory('exportService', function($q, $http, ServerUrl) {
   service.create = function(exportObj){
     var defer = $q.defer();
     $http
-      .post(ServerUrl + '/exports', {initialDate: exportObj.initialDate,
-        finalDate: exportObj.initialDate, recorderId: exportObj.recorderId })
+      .post(ServerUrl + '/exports', exportObj)
       .success(function(data) {
         defer.resolve(data);
       })

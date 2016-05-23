@@ -32,7 +32,8 @@
     "iCheck": "^1.0.2",
     "font-awesome": "Font-Awesome#^4.6.1",
     "js-info-bubble": "googlemaps/js-info-bubble#gh-pages",
-    "perfect-scrollbar": "^0.6.11"
+    "perfect-scrollbar": "^0.6.11",
+    "jquery-mask-plugin": "~1.14.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"

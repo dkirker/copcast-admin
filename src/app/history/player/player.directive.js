@@ -10,6 +10,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
     scope: {
       collection: '=',
       users: '=',
+      incidents: '=',
       src: '=',
       currentVideo: '=?',
       onChangeUser: '&',
