@@ -31,7 +31,8 @@
     "datatables.net-responsive-bs": "^2.0.2",
     "iCheck": "^1.0.2",
     "font-awesome": "Font-Awesome#^4.6.1",
-    "js-info-bubble": "googlemaps/js-info-bubble#gh-pages"
+    "js-info-bubble": "googlemaps/js-info-bubble#gh-pages",
+    "perfect-scrollbar": "^0.6.11"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"
