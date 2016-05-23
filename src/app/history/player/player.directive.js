@@ -9,6 +9,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
     replace: true,
     scope: {
       users: '=',
+      incidents: '=',
       src: '=',
       currentVideo: '=?',
       onChangeUser: '&',

@@ -559,10 +559,12 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     _setIncidentsByUser: function _setIncidentsByUser(incidents) {
       if(this.currentGroup.isGroup) {
         this.incidentsByUser = incidents || {};
+        self.store.incidentsByUser = this.incidentsByUser;
       } else {
         var userId = this.currentGroup.id;
         this.incidentsByUser = {};
         this.incidentsByUser[userId] = incidents || {};
+        self.store.incidentsByUser = this.incidentsByUser;
       }
     }
   };
