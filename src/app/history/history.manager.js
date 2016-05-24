@@ -3,6 +3,10 @@
 var app = angular.module('copcastAdminApp');
 
 app.service('HistoryManager', function($q, $window, $timeout, userService, groupService, timelineService, notify, gettextCatalog) {
+  var self = this;
+  this.store = {};
+  this.paramUserId = null;
+
   /****************************************************************
    * Aux functions
    ****************************************************************/
@@ -629,10 +633,6 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
   };
 
   /****************************************************************/
-
-  var self = this;
-  this.store = {};
-  this.paramUserId = null;
 
   // Objects
   var groups = new Groups($q, userService, groupService);
