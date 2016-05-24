@@ -13,7 +13,7 @@
     <div class="input-group">
       <span class="input-group-addon glyphicon glyphicon-calendar"></span>
       <input type="date" id="fromDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
-             uib-datepicker-popup is-open="fromDate.visible" max-date="toDate.maxValue"
+             uib-datepicker-popup is-open="fromDate.visible" max-date="fromDate.maxValue"
              ng-required="true" ng-click="fromDate.show()" show-button-bar="false" show-weeks="false" />
     </div>
   </div>
