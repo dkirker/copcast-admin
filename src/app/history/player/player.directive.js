@@ -11,6 +11,8 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       collection: '=',
       users: '=',
       incidents: '=',
+      nowVideo: '=',
+      cover: '=',
       src: '=',
       currentVideo: '=?',
       onChangeUser: '&',
@@ -24,11 +26,10 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       var onPreviousVideo = scope.onPreviousVideo(); // Unwrap
       var onNextVideo = scope.onNextVideo(); // Unwrap
 
-      // var $video = el.find('video');
-      // var video = $video[0];
-
       var $video = angular.element('#copcastVideo');
       var video = $video[0];
+
+      scope.wantSee =  false;
 
       var lastSrc;
 
@@ -233,84 +234,102 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
 
       videoPlayer($video);
 
-      function rightPad(str, padStr, size) {
-        var strPad = padStr + str;
-        return strPad.substr(strPad.length - size, size);
-      }
-
-      function formatTime(time) {
-        var seconds = rightPad((time % 60) || 0, '00', 2);
-        var minutes = rightPad(time / 60 || 0, '00', 2);
-        var hours = rightPad(time / 60 / 60 || 0, '00', 2);
-        return '<strong>' + hours + ':' + minutes + '</strong>:' + seconds;
-      }
-
-      // function onTrackedVideoFrame(currentTime/*, duration*/){
-      //   $timeout(function() {
-      //     scope.time = formatTime(currentTime);
-      //   });
-      // }
-
-      function resetVideoTime() {
-        scope.time = formatTime(0);
-      }
-
-      angular.element(video).on('play',function(){
-        historyService.registerVideoPlay(video.src, video.currentTime, scope.selectedUser).then(function(){
+      $video.on('play',function(){
+        historyService.registerVideoPlay($video[0].src, $video[0].currentTime, scope.selectedUser).then(function(){
           $window.console.log('registered video watching');
         });
       });
-
-      resetVideoTime();
 
       /*
        * Watchers
        */
       scope.$watchCollection('collection', function() {
 
-        $window.console.log('');
-        $window.console.warn('======================');
-        $window.console.info('Scope: ', scope);
-        $window.console.info('Current users: ', scope.users);
-        $window.console.info('Collection: ', scope.collection);
-        $window.console.warn('======================');
-        $window.console.log('');
+        // $window.console.log('');
+        // $window.console.warn('======================');
+        // $window.console.info('Scope: ', scope);
+        // $window.console.info('Current users: ', scope.users);
+        // $window.console.info('Collection: ', scope.collection);
+        // $window.console.info('Incidents: ', scope.incidents);
+        // $window.console.warn('======================');
+        // $window.console.log('');
 
         scope.isNone = typeof scope.collection === 'undefined';
         scope.isGroup = scope.collection && scope.collection.isGroup && !scope.collection.username ? true : false;
-        var user = scope.isGroup && scope.collection.users.length > 0 ? scope.collection.users[0] : null;
+
+        scope.totalIncidents = 0;
+
+        var user = null;
+        if (scope.isGroup && (scope.collection.users && scope.collection.users.length > 0)) {
+          user =  scope.collection.users[0];
+
+          $window.$.each(scope.incidents, function(index, item){
+            scope.totalIncidents += item.length;
+
+            $window.$.each(scope.collection.users, function(uindex, user){
+              if (user.id === index) { user.incidents = item.length; }
+            });
+          });
+        }
 
         angular.element('.officersList').perfectScrollbar();
 
         scope.setUser(user);
-        scope.playing = false;
-        video.src = undefined;
+        $video[0].src = undefined;
+
+        $window.setTimeout(function(){
+          var largest = 0;
+          angular.element('.officerChest').each(function(index, item){
+            var width = 0;
+
+            angular.element(item).children().each(function(cindex, citem){
+              width += angular.element(citem).outerWidth(true);
+            });
+
+            largest = (width > largest) ? width : largest;
+          }).css({ width: largest + 10 });
+        }, 100);
       });
 
       scope.$watchCollection('users', function() {
         var hasUsers = scope.users && scope.users.length > 0;
         var user = hasUsers ? scope.users[0] : null;
         scope.setUser(user);
-        scope.playing = false;
-        video.src = undefined;
+        $video[0].src = undefined;
       });
 
       scope.$watch('src', function() {
-        if(lastSrc === scope.src) {
+        // $window.console.log('NOW VIDEO: ', scope.nowVideo);
+        // $window.console.log('COVER: ', scope.cover);
+        // $window.console.log('SRC: ', scope.src);
+
+        scope.wantSee = false;
+        $video[0].src = undefined;
+      });
+
+      scope.$watch('wantSee', function() {
+        if(lastSrc === scope.src || !scope.wantSee) {
           return;
         }
 
-        resetVideoTime();
-
         lastSrc = scope.src;
-        video.src = scope.src ? scope.src : '';
-        scope.playing = false;
-        video.load();
+        $video[0].src = scope.src ? scope.src : '';
+
+        angular.element('.timeBar').css('width','0%');
+        angular.element('.current').text(0);
+        angular.element('.dragger-timer').text('0:00');
+        $video[0].currentTime = 0;
+
+        $video[0].play();
       });
 
       /*
        * Scope functions
        */
+      scope.wantSeeAction = function wantSee(){
+        scope.wantSee = true;
+      };
+
       scope.closeMuteAlert = function closeMuteAlert() {
         angular.element('.closeMe').parent().slideUp();
       };
@@ -320,24 +339,20 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         onChangeUser(user);
       };
 
-      scope.playVideo = function playVideo() {
-        if(video.src) {
-          if(scope.playing) {
-            scope.playing = false;
-            video.pause();
-          } else {
-            scope.playing = true;
-            video.play();
-          }
+      scope.previousVideo = function previousVideo() {
+        if (! angular.element('.button.previous').hasClass('disabled')) {
+          scope.wantSee = false;
+          $video[0].src = undefined;
+          onPreviousVideo();
         }
       };
 
-      scope.previousVideo = function previousVideo() {
-        onPreviousVideo();
-      };
-
       scope.nextVideo = function nextVideo() {
-        onNextVideo();
+        if (! angular.element('.button.next').hasClass('disabled')) {
+          scope.wantSee = false;
+          $video[0].src = undefined;
+          onNextVideo();
+        }
       };
 
       scope.hasVideo = function() {
@@ -350,22 +365,6 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       scope.trustSrc = function trustSrc(src) {
         return $sce.trustAsResourceUrl(src);
       };
-
-      // $video.on('timeupdate', function(/*event*/){
-      //   onTrackedVideoFrame(this.currentTime, this.duration);
-      // });
-      //
-      // $video.on('play', function(/*event*/){
-      //   scope.playing = true;
-      // });
-      //
-      // $video.on('pause', function(/*event*/){
-      //   scope.playing = false;
-      // });
-      //
-      // $video.on('ended', function(/*event*/){
-      //   scope.playing = false;
-      // });
     }
   };
 });

@@ -1,21 +1,23 @@
 <section class="copcastHistoryVideoPlayer" ng-class="{'isClosed': !selectedUser && !src}">
   <header>
     <div class="activeFeed">
-      <p ng-if="isNone">Select a group or user</p>
-      <p ng-if="!isNone">
-        Seen by <strong>{{ collection.name }}</strong>
+      <p ng-show="isNone">Select a group or user</p>
+      <p ng-show="!isNone">
+        <strong>{{ collection.name }}</strong>
         <span class="groupOfficers" ng-if="isGroup">{{ collection.users.length }} Officers</span>
-        <span class="groupIncidents" ng-if="isGroup">10 Incidents</span>
+        <span class="groupIncidents" ng-if="isGroup">{{ totalIncidents }} Incidents</span>
       </p>
     </div>
 
-    <ul class="officersList" ng-if="isGroup">
+    <ul class="officersList" ng-show="isGroup">
       <li ng-repeat="(key, user) in collection.users"
           ng-class="{'active': user.id === selectedUser.id}"
           ng-click="setUser(user)">
-        <span class="officerKey">{{ key + 1 }}</span>
-        <span class="officerName">{{ user.name }}</span>
-        <span class="officerIncidents">4</span>
+        <div class="officerChest">
+          <span class="officerKey">{{ key + 1 }}</span>
+          <span class="officerName">{{ user.name }}</span>
+          <span class="officerIncidents" ng-show="user.incidents">{{ user.incidents }}</span>
+        </div>
       </li>
     </ul>
   </header>
@@ -23,19 +25,24 @@
   <div class="videoContainer">
     <div class="noVideo" ng-show="!src"><i class="glyphicon glyphicon-facetime-video"></i></div>
 
-    <div class="muteAlert" ng-show="src">
+    <div class="cover" ng-show="!wantSee && src" ng-click="wantSeeAction()">
+      <div class="wantSee">
+        <i class="glyphicon glyphicon-play"></i>
+      </div>
+      <!--<img src="/assets/images/policia.png" alt="scope.nowVideo.id">-->
+    </div>
+
+    <div class="muteAlert" ng-show="wantSee && src">
       Audio is automatically disabled and available only on export.
       <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i class="glyphicon glyphicon-remove"></i></a>
     </div>
 
     <div class="scene">
-      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="src">
+      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="wantSee && src">
         <translate>Your browser does not support videos.</translate>
       </video>
 
-      <div class="controls" ng-show="src">
-        <!--<div class="btnPlay btn" title="Play/Pause video"><span class="icon-play"></span></div>-->
-
+      <div class="controls" ng-show="wantSee && src">
         <span class="clock"></span>
 
         <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>
