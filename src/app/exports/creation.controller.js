@@ -16,8 +16,8 @@ angular.module('copcastAdminApp')
       endDate: null,
       endDateVisible: false,
       period: true,
-      initialTime: moment().startOf('day').toDate(),
-      endTime: moment().endOf('day').seconds(0).millisecond(0).toDate(),
+      initialTime: $window.moment().startOf('day').toDate(),
+      endTime: $window.moment().endOf('day').seconds(0).millisecond(0).toDate(),
       initialDateShow: function () {
         $scope.exportObj.initialDateVisible = true;
       },
@@ -55,9 +55,9 @@ angular.module('copcastAdminApp')
         initialDate = $window.moment($scope.exportObj.initialDate).startOf('day');
         endDate = $window.moment($scope.exportObj.endDate).endOf('day');
       } else {
-        var initialTimeAux = moment.utc($scope.exportObj.initialTime);
+        var initialTimeAux = $window.moment.utc($scope.exportObj.initialTime);
         initialDate = $window.moment($scope.exportObj.initialDate).hour(initialTimeAux.hour()).minutes(initialTimeAux.minutes());
-        var endTimeAux = moment.utc($scope.exportObj.endTime);
+        var endTimeAux = $window.moment.utc($scope.exportObj.endTime);
         endDate = $window.moment($scope.exportObj.initialDate).hour(endTimeAux.hour()).minutes(endTimeAux.minutes());
       }
       if (!initialDate.isValid()) {
