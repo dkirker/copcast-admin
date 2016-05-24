@@ -32,7 +32,11 @@ app.directive('dateFilter', function($window, $rootScope, $cookies) {
       }
 
       if(!scope.hideHistoryAlert) {
-        scope.hideHistoryAlert = $rootScope.globals.currentUser.hideHistoryAlert;
+        if ($rootScope.globals && $rootScope.globals.currentUser) {
+          scope.hideHistoryAlert = $rootScope.globals.currentUser.hideHistoryAlert;
+        } else {
+          scope.hideHistoryAlert = false;
+        }
       }
 
       // Aux functions
@@ -127,10 +131,12 @@ app.directive('dateFilter', function($window, $rootScope, $cookies) {
       }, true);
 
       scope.$watch('hideHistoryAlert', function() {
-        $rootScope.globals.currentUser.hideHistoryAlert = scope.period;
-        var cookies = $cookies.getObject('globals');
-        cookies.currentUser.hideHistoryAlert = scope.period;
-        $cookies.putObject('globals', cookies);
+        if ($rootScope.globals && $rootScope.globals.currentUser) {
+          $rootScope.globals.currentUser.hideHistoryAlert = scope.period;
+          var cookies = $cookies.getObject('globals');
+          cookies.currentUser.hideHistoryAlert = scope.period;
+          $cookies.putObject('globals', cookies);
+        }
       }, true);
 
 
