@@ -46,7 +46,7 @@
       <tr dir-paginate="user in users | itemsPerPage: perPage" total-items="totalUsers" current-page="page">
         <td>{{ user.name }}</td>
         <td>{{ user.group.name }}</td>
-        <td>{{ user.createdAt | date:'medium' }}</td>
+        <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
         <td translate ng-show="user.isEnabled">Enabled</td>
         <td translate ng-hide="user.isEnabled">Disabled</td>
         <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a></td>

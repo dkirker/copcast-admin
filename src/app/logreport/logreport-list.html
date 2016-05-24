@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 translate>Log Report</h2>
+  <h2 translate>Audit Log</h2>
   <hr class="hrDarker" />
 
   <div class="alert alert-danger" role="alert" ng-show="errorMessage">
@@ -96,7 +96,7 @@
         current-page="pagination">
       <td>{{ logreport.user.name }}</td>
       <td>{{ logreport.user.group.name }}</td>
-      <td>{{ logreport.date | date:'yyyy-MM-dd  HH:mm' }}</td>
+      <td>{{ logreport.date | date:'yyyy/MM/dd  HH:mm' }}</td>
       <td >{{ logreport.nextState | translate }}</td>
       <td>
         <div ng-show="logreport.nextState == 'SEEN_VIDEO' && logreport.extraJson">

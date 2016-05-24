@@ -21,8 +21,8 @@
     <tbody>
       <tr dir-paginate="export in exports | itemsPerPage: perPage" total-items="totalExports" current-page="page">
         <td>{{export.Recorder.name }}</td>
-        <td>{{export.createdAt | date : 'yyyy-MM-dd HH:mm'}}</td>
-        <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
+        <td>{{export.createdAt | date : 'yyyy/MM/dd HH:mm'}}</td>
+        <td>{{export.initialDate  | date : 'yyyy/MM/dd'}}</td>
         <td>{{export.Exporter.name}}</td>
         <td ng-show="!isAvailable(export)">{{export.status | translate}}</td>
         <td ng-show="isAvailable(export)"><a ng-href="#/exports/{{export.id}}">{{export.status | translate}}</a></td>

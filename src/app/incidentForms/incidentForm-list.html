@@ -111,7 +111,7 @@
       <tr dir-paginate="incident in incidentForms | itemsPerPage: perPage | filter: globalSearch | orderBy:sortKey:reverse"
           total-items="totalIncidents"
           current-page="page">
-        <td>{{ incident.date | date:'yyyy-MM-dd' }}</td>
+        <td>{{ incident.date | date:'yyyy/MM/dd' }}</td>
         <td>{{ incident.user.name }}</td>
         <td>{{ incident.user.group.name }}</td>
         <td><a ng-click="viewIncident(incident.id)" class="btn btn-small btn-primary" translate>view</a></td>
