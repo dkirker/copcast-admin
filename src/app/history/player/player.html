@@ -1,11 +1,11 @@
 <section class="copcastHistoryVideoPlayer" ng-class="{'isClosed': !selectedUser && !src}">
   <header>
     <div class="activeFeed">
-      <p ng-show="isNone" translate>Select a group or user</p>
+      <p ng-show="isNone">Select a group or user</p>
       <p ng-show="!isNone">
         <strong>{{ collection.name }}</strong>
-        <span class="groupOfficers" ng-if="isGroup" translate>{{ collection.users.length }} Officers</span>
-        <span class="groupIncidents" ng-if="isGroup" translate>{{ totalIncidents }} Incidents</span>
+        <span class="groupOfficers" ng-if="isGroup">{{ collection.users.length }} Officers</span>
+        <span class="groupIncidents" ng-if="isGroup">{{ totalIncidents }} Incidents</span>
       </p>
     </div>
 
@@ -32,7 +32,7 @@
       <!--<img src="/assets/images/policia.png" alt="scope.nowVideo.id">-->
     </div>
 
-    <div class="muteAlert" ng-show="wantSee && src" translate>
+    <div class="muteAlert" ng-show="wantSee && src">
       Audio is automatically disabled and available only on export.
       <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i class="glyphicon glyphicon-remove"></i></a>
     </div>
@@ -63,11 +63,11 @@
   </div>
 
   <footer>
-    <div class="button previous" ng-click="previousVideo()" ng-class="{'disabled': !hasPreviousVideo}" translate>
+    <div class="button previous" ng-click="previousVideo()" ng-class="{'disabled': !hasPreviousVideo}">
       <i class="glyphicon glyphicon-triangle-left"></i>
       Previous
     </div>
-    <div class="button next" ng-click="nextVideo()" ng-class="{'disabled': !hasNextVideo}" translate>
+    <div class="button next" ng-click="nextVideo()" ng-class="{'disabled': !hasNextVideo}">
       Next
       <i class="glyphicon glyphicon-triangle-right"></i>
     </div>
