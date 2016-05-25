@@ -8,7 +8,7 @@
 
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 
-  <table class="table table-striped table-condensed">
+  <table class="table table-striped table-condensed table-word-wrap">
     <thead>
       <tr>
         <th style="min-width: 80px;" translate>Name</th>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <tr dir-paginate="group in groups | itemsPerPage: perPage" total-items="totalGroups" current-page="page">
-        <td>{{ group.name }}</td>
+        <td class="word-wrap">{{ group.name }}</td>
         <td ng-show="group.isAdmin" translate>Admin</td>
         <td ng-hide="group.isAdmin" translate>Normal</td>
         <td>{{ group.createdAt | date:'yyyy/MM/dd' }}</td>

@@ -171,7 +171,7 @@
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <div class="panel panel-default reportUserList" ng-repeat="user in reportData.users">
                 <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title"
+                  <h4 class="panel-title word-wrap"
                       data-toggle="collapse"
                       data-parent="#accordion"
                       data-target="#collapse-{{ user.username }}"
@@ -230,7 +230,7 @@
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading" translate>Exported videos</div>
-          <table class="table table-hover">
+          <table class="table table-hover table-word-wrap">
             <thead>
             <tr>
               <th translate>User</th>
@@ -242,10 +242,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="export in reportData.exportList">
-              <td>{{export.Recorder.name }}</td>
+              <td class="word-wrap">{{export.Recorder.name }}</td>
               <td>{{export.createdAt | date : 'yyyy-MM-dd HH:mm'}}</td>
               <td>{{export.initialDate  | date : 'yyyy-MM-dd'}}</td>
-              <td>{{export.Exporter.name}}</td>
+              <td class="word-wrap">{{export.Exporter.name}}</td>
               <td>{{export.status}}</td>
             </tr>
 

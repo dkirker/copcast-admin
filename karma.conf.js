@@ -35,7 +35,6 @@ module.exports = function(config) {
       'bower_components/event-signal/dist/event-signal.min.js',
       'bower_components/google-map-infobubble/src/infobubble.js',
       'bower_components/moment/moment.js',
-      'bower_components/ng-jwplayer/jwplayer.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
       'bower_components/angularUtils-pagination/dirPagination.js',

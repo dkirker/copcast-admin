@@ -31,7 +31,7 @@
 
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 
-  <table class="table table-striped table-condensed">
+  <table class="table table-striped table-condensed table-word-wrap">
     <thead>
       <tr>
         <th style="min-width: 80px;" translate>Name</th>
@@ -44,7 +44,7 @@
     </thead>
     <tbody>
       <tr dir-paginate="user in users | itemsPerPage: perPage" total-items="totalUsers" current-page="page">
-        <td>{{ user.name }}</td>
+        <td class="word-wrap">{{ user.name }}</td>
         <td>{{ user.group.name }}</td>
         <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
         <td translate ng-show="user.isEnabled">Enabled</td>
