@@ -198,7 +198,7 @@ angular.module('copcastAdminApp').
       $window.console.log('Socket: Location received for: ' + data.username + ' @ ' + data.location.lat + ',' + data.location.lng);
 
       var pos = new google.maps.LatLng(data.location.lat, data.location.lng);
-      var isNew = (user.state == 0);
+      var isNew = (parseInt(user.state) === 0);
 
       if (isNew) {
 

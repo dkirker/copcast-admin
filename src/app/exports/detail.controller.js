@@ -11,10 +11,10 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ExportsDetailCtrl', function ($scope, $routeParams, exportService, ServerUrl) {
+  .controller('ExportsDetailCtrl', function ($scope, $routeParams, $window, exportService, ServerUrl) {
     $scope.noRecord = false;
     $scope.isPeriod = function(){
-      return !moment($scope.exportObj.initialDate).isSame(moment($scope.exportObj.finalDate), 'day');
+      return !$window.moment($scope.exportObj.initialDate).isSame($window.moment($scope.exportObj.finalDate), 'day');
     };
     exportService.getExport($routeParams.id).then(
       function(exportObj){
