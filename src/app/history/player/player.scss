@@ -1,314 +1,188 @@
-/*
- * Copcast - Video Player
- * 19/05/2016
- * Arthur Vasconcelos <vasconcelos.arthur@gmail.com>
- */
 
 @mixin transition($transition) {
   -webkit-transition: $transition;
-  -moz-transition: $transition;
-  -ms-transition: $transition;
-  -o-transition: $transition;
-  transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
 }
 
-.copcastHistoryVideoPlayer {
-  text-align: center;
-  color: #fff;
-  width: 400px;
-  //height: 370px;
-  max-height: 524px;
-  //background-color: #182A40;
-  background-color: #000;
+
+.history.player.window {
   position: fixed;
-  right: 0;
-  bottom: 130px;
-  //margin-bottom: 130px;
+  right: 0px;
+  bottom: 0px;
+  height: 370px;
+  margin-bottom: 130px;
+  width: 400px;
   padding: 0 0;
   z-index: 3;
-  @include transition(all 0.8s);
-  overflow: hidden;
+  color: #fff;
+  background-color: #182A40;
+  text-align: center;
+  @include transition(height 0.8s);
 
-  &.isClosed {
-    max-height: 40px;
+  .users.group {
+    display: inline-block;
+    background-color: #284766;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 62px;
+    padding-top: 4px;
+    @include transition(height 0.8s);
   }
 
-  header {
-    width: 100%;
-    overflow: hidden;
-    @include transition(height 0.8s);
+  .avatar {
+    display: inline-block;
+    margin: 0 3px;
 
-    .activeFeed {
-      width: 100%;
-      height: 40px;
-      background: #172a40;
-
-      p {
-        font-size: 16px;
-        line-height: 40px;
-        padding: 0;
-        margin: 0;
-
-        .groupOfficers, .groupIncidents {
-          font-size: 12px;
-        }
-
-        .groupOfficers { color: #959da7; margin-left: 5px; }
-        .groupIncidents { color: #e26055; }
-      }
+    & > img {
+      width: 54px;
+      height: 54px;
+      opacity: 0.3;
+      border: 1px solid #eee;
+      cursor: pointer;
     }
 
-    .officersList {
-      list-style: none;
-      position: relative;
-      width: 100%;
-      max-height: 122px;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
+    & > img.active {
+      opacity: 1;
+    }
+  }
 
-      li {
-        font-size: 14px;
-        line-height: 40px;
-        width: 100%;
-        height: 40px;
-        background: #1d3951;
-        border-bottom: 1px solid #172a40;
+  .selected.user {
+    display: inline-block;
+    margin: 8px;
+    height: 30px;
+  }
+
+  .scene {
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: black;
+    height: 260px;
+    @include transition(height 0.8s);
+
+    .no.video {
+      text-align: center;
+      position: relative;
+      width: 400px;
+      height: 260px;
+      color: white;
+      line-height: 260px;
+    }
+  }
+
+  .time {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 1.5em;
+    background-color: #284766;
+    z-index: 1;
+  }
+
+  .controls {
+    display: inline-block;
+    height: 50px;
+    vertical-align: middle;
+    z-index: 1;
+
+    & > div {
+      padding-top: 9px;
+
+      .previous, .next, .middle {
+        height: 33px;
+        width: 20px;
+        display: inline-block;
         cursor: pointer;
+        //margin-bottom: 19px;
 
-        .officerKey { color: #9caab9; margin-right: 7px; }
-        .officerName { font-weight: bold; }
-        .officerIncidents {
-          font-size: 9px;
-          text-align: center;
-          line-height: 16px;
-          display: inline-block;
-          width: 16px;
-          height: 16px;
-          background: #e26055;
-          border-radius: 50%;
-          margin-left: 7px;
-        }
-
-        &:last-child { border: none; }
-
-        &.active {
-          background: #274866;
+        & > div {
+          margin-top: 7px;
+          height: 20px;
+          width: 18px;
+          @include transition(border 0.3s);
+          border-color: #0082CF;
         }
       }
-    }
-  }
+      .middle {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 320px;
+        vertical-align: top;
+        overflow: hidden;
+      }
+      .previous {
+        background: url('/assets/images/video_player_sm.png') no-repeat -12px -10px;
+        width: 20px;
+        height: 23px;
+        opacity: 0.3;
+        &.enabled {
+          opacity: 1;
+        }
+      }
 
-  .videoContainer {
-    width: 100%;
-    @include transition(height 0.8s);
+      .next {
+        background: url('/assets/images/video_player_sm.png') no-repeat -261px -10px;
+        width: 20px;
+        height: 23px;
+        opacity: 0.3;
+        &.enabled {
+          opacity: 1;
+        }
+      }
 
-    .noVideo {
-      font-size: 80px;
-      color: rgba(255,255,255,.4);
-      position: relative;
-      width: 100%;
-      height: 300px;
+      .play {
+        background: url('/assets/images/video_player_sm.png') no-repeat -70px 0px;
+        width: 23px;
+        height: 45px;
+        padding: 30px;
+        display: inline-block;
+        margin: 0px 12px;
+        border: solid 2px #0c5d8d;
+        cursor: pointer;
+        opacity: 0.3;
+        @include transition(border 0.3s);
 
-      i {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+        &.playing {
+          background: url('/assets/images/video_player_sm.png') no-repeat -155px -0px;
+          width: 18px;
+          height: 32px;
+        }
+
+        &.enabled {
+          opacity: 1;
+
+          &:hover {
+            border-color: #0082CF;
+          }
+        }
       }
     }
+  } /* End controls */
 
-    .muteAlert {
-      font-size: 11px;
-      color: #8d8d8d;
-      line-height: 22px;
-      position: relative;
-      width: 100%;
-      height: 22px;
-      background: #121213;
-
-      a {
-        color: #8d8d8d;
-        position: absolute;
-        top: 1px;
-        right: 5px;
-      }
-    }
+  &.novideo {
+    height: 110px;
+    margin-bottom: 130px;
 
     .scene {
-      font-size: 0;
-      line-height: initial;
-      position: relative;
+      height: 0;
 
-      .controls {
-        width: 0;
-        height: 0;
-
-        .clock {
-          position: absolute;
-          font-size: 17px;
-          letter-spacing: 0;
-          top: 10px;
-          left: 10px;
-
-          user-select: none;
-          -moz-user-select: none;
-          -khtml-user-select: none;
-          -webkit-user-select: none;
-          -o-user-select: none;
-        }
-
-        .icons {
-          position: absolute;
-          cursor: pointer;
-
-          &.fullscreen {
-            top: 10px;
-            right: 10px;
-            font-size: 17px;
-          }
-        }
-
-        .player-progress-bar {
-          position: absolute;
-          bottom: 15px;
-          left: 10px;
-
-          .play-pause {
-            font-size: 15px;
-            width: auto;
-            height: auto;
-            display: inline-block;
-            margin-right: 10px;
-            position: relative;
-            top: 2px;
-            cursor: pointer;
-          }
-
-          .player-progress {
-            width: 350px;
-            height: 7px;
-            display: inline-block;
-            position: relative;
-            cursor: pointer;
-            //background: rgba(23,42,64,1); /* fallback */
-            background: #172A40; /* fallback */
-            //box-shadow: 0 1px 0 rgba(255,255,255,0.1), inset 0 1px 1px rgba(0,0,0,1);
-            border-radius: 10px;
-
-            span:not(.dragger) {
-              height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
-              display: block;
-              border-radius: 10px;
-
-              &.timeBar{
-                z-index: 10;
-                width: 0;
-                //background: -webkit-linear-gradient(top, rgba(107,204,226,1) 0%, rgba(29,163,208,1) 100%);
-                background: #2487C9;
-                box-shadow: 0 0 7px rgba(107,204,226,.5);
-              }
-
-              &.bufferBar{
-                z-index: 5;
-                width: 0;
-                //background: rgba(255,255,255,0.2);
-                background: #1D3951;
-              }
-            }
-
-            .dragger {
-              display: block;
-              width: 12px;
-              height: 12px;
-              background: #FFF;
-              border-radius: 50%;
-              position: relative;
-              top: -2.5px;
-              left: 97%;
-
-              .dragger-timer {
-                font-size: 10px;
-                text-align: center;
-                line-height: 30px;
-                width: 0;
-                height: 0;
-                background: #FFFFFF;
-                border-radius: 50%;
-                overflow: hidden;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
-                @include transition(all 0.8s);
-
-                user-select: none;
-                -moz-user-select: none;
-                -khtml-user-select: none;
-                -webkit-user-select: none;
-                -o-user-select: none;
-              }
-            }
-
-            &:hover {
-              .dragger {
-                .dragger-timer {
-                  width: 30px;
-                  height: 30px;
-                  background: #172a40;
-                  transform: translate(-50%,-150%);
-                }
-              }
-            }
-          }
-        }
+      .no.video {
+        display: none;
       }
     }
   }
 
-  footer {
-    position: static;
-    width: 100%;
-    height: 40px;
-    border: none;
-    background: transparent;
+  &.nousers {
+    height: 50px;
+    margin-bottom: 130px;
 
-    .button {
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      line-height: 40px;
-      width: 50%;
-      height: 40px;
-      background: #1d3951;
-      float: left;
-      cursor: pointer;
-      @include transition(background 0.8s);
-
-      &.previous {
-        i { margin-right: 14px; }
-      }
-
-      &.next {
-        i { margin-left: 14px; }
-      }
-
-      &.disabled {
-        //background: #DDDDDD;
-        cursor: not-allowed;
-        color: rgba(255,255,255,.4);
-      }
-
-      &:active {
-        background: #274866;
-      }
-
-      &:hover:not(.disabled) {
-        background: #274866;
-      }
+    .users.group {
+      padding-top: 0px;
+      height: 0px;
     }
   }
-}
+} /* End history.player.window */
