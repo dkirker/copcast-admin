@@ -11,7 +11,7 @@ describe('Controller: GroupsCreationCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(angular.mock.inject(function ($controller, $rootScope, _$location_, _$http_) {
     scope = $rootScope.$new();
-    http = _$http_
+    http = _$http_;
     location = _$location_;
     serverUrl = "http://test";
     GroupsCreationCtrl = $controller('GroupsCreationCtrl', {
