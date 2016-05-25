@@ -25,24 +25,19 @@
   <div class="videoContainer">
     <div class="noVideo" ng-show="!src"><i class="glyphicon glyphicon-facetime-video"></i></div>
 
-    <div class="cover" ng-show="!wantSee && src" ng-click="wantSeeAction()">
-      <div class="wantSee">
-        <i class="glyphicon glyphicon-play"></i>
-      </div>
-      <img src="/assets/images/policia.png" alt="scope.nowVideo.id">
-    </div>
-
-    <div class="muteAlert" ng-show="wantSee && src">
+    <div class="muteAlert" ng-show="src">
       Audio is automatically disabled and available only on export.
       <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i class="glyphicon glyphicon-remove"></i></a>
     </div>
 
     <div class="scene">
-      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="wantSee && src">
+      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="src">
         <translate>Your browser does not support videos.</translate>
       </video>
 
-      <div class="controls" ng-show="wantSee && src">
+      <div class="controls" ng-show="src">
+        <!--<div class="btnPlay btn" title="Play/Pause video"><span class="icon-play"></span></div>-->
+
         <span class="clock"></span>
 
         <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>

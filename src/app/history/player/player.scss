@@ -36,7 +36,7 @@
   header {
     width: 100%;
     overflow: hidden;
-    @include transition(all 0.8s);
+    @include transition(height 0.8s);
 
     .activeFeed {
       width: 100%;
@@ -107,7 +107,7 @@
 
   .videoContainer {
     width: 100%;
-    @include transition(all 0.8s);
+    @include transition(height 0.8s);
 
     .noVideo {
       font-size: 80px;
@@ -121,41 +121,6 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-      }
-    }
-
-    .cover {
-      text-align: center;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-
-      img {
-        height: 300px;
-      }
-
-      .wantSee {
-        font-size: 35px;
-        text-align: center;
-        line-height: 80px;
-        width: 80px;
-        height: 80px;
-        border: 4px solid #FFFFFF;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        opacity: .5;
-        @include transition(opacity 0.8s);
-      }
-
-      &:hover {
-        .wantSee {
-          opacity: 1;
-        }
       }
     }
 
