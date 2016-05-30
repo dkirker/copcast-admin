@@ -1,20 +1,21 @@
 <div class="container">
   <h2 class="page-header hrDarker" translate>User details</h2>
   <div class="row">
-    <div class="col-md-4">
-      <h4 class="userFormGroupSubHeader">Change picture: <i class="glyphicon glyphicon-info-sign markInfo" data-toggle="tooltip" data-placement="bottom" title="Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"></i></h4>
-      <div class="userPhoto" ngf-select ng-model="files"
-           ngf-multiple="false" ngf-allow-dir="true"
-           ng-disabled="!canUpdate()" ngf-accept="'image/*'">
-        <div class="userPhotoOverlay">
-          <i class="glyphicon glyphicon-camera"></i>
-        </div>
-        <!--<img ng-src="https://market.ionic.io/img/user-default.png">-->
-        <img ng-show="hasProfilePicture" ng-src="{{pictureUrl}}">
-      </div>
-    </div>
 
-    <div class="col-md-8">
+    <!--<div class="col-md-4">-->
+      <!--<h4 class="userFormGroupSubHeader">Change picture: <i class="glyphicon glyphicon-info-sign markInfo" data-toggle="tooltip" data-placement="bottom" title="Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"></i></h4>-->
+      <!--<div class="userPhoto" ngf-select ng-model="files"-->
+           <!--ngf-multiple="false" ngf-allow-dir="true"-->
+           <!--ng-disabled="!canUpdate()" ngf-accept="'image/*'">-->
+        <!--<div class="userPhotoOverlay">-->
+          <!--<i class="glyphicon glyphicon-camera"></i>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<img ng-src="https://market.ionic.io/img/user-default.png">&ndash;&gt;-->
+        <!--<img ng-show="hasProfilePicture" ng-src="{{pictureUrl}}">-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="col-md-12">
       <h4 class="userFormGroupSubHeader">Account Settings:</h4>
 
       <form novalidate name="frmUpdate">
@@ -115,7 +116,7 @@
   <br><br>
 
   <div class="row">
-    <div class="col-md-8 col-md-offset-4">
+    <div class="col-md-12">
       <h4 class="userFormGroupSubHeader">Change Password:</h4>
 
       <div class="row">
