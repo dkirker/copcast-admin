@@ -244,22 +244,13 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
        * Watchers
        */
       scope.$watchCollection('collection', function() {
-
-        // $window.console.log('');
-        // $window.console.warn('======================');
-        // $window.console.info('Scope: ', scope);
-        // $window.console.info('Current users: ', scope.users);
-        // $window.console.info('Collection: ', scope.collection);
-        // $window.console.info('Incidents: ', scope.incidents);
-        // $window.console.warn('======================');
-        // $window.console.log('');
-
         scope.isNone = typeof scope.collection === 'undefined';
         scope.isGroup = scope.collection && scope.collection.isGroup && !scope.collection.username ? true : false;
 
         scope.totalIncidents = 0;
 
         var user = null;
+
         if (scope.isGroup && (scope.collection.users && scope.collection.users.length > 0)) {
           user =  scope.collection.users[0];
 
@@ -270,6 +261,9 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
               if (user.id === index) { user.incidents = item.length; }
             });
           });
+        } else {
+          var hasUsers = scope.users && scope.users.length > 0;
+          user = hasUsers ? scope.users[0] : null;
         }
 
         angular.element('.officersList').perfectScrollbar();
@@ -289,13 +283,6 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
             largest = (width > largest) ? width : largest;
           }).css({ width: largest + 10 });
         }, 100);
-      });
-
-      scope.$watchCollection('users', function() {
-        var hasUsers = scope.users && scope.users.length > 0;
-        var user = hasUsers ? scope.users[0] : null;
-        scope.setUser(user);
-        $video[0].src = undefined;
       });
 
       scope.$watch('src', function() {
