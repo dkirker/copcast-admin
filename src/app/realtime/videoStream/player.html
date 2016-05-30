@@ -1,10 +1,15 @@
 <div class="modal-header">
-  <img alt="Brand" src="assets/images/logo.png" >  <h3>{{user.userName}}</h3>
+  <img alt="Brand" src="assets/images/logo.png">  <h3>{{user.userName}}</h3>
+  <a href="javascript:;">
+    <i class="glyphicon glyphicon-remove"></i>
+  </a>
 </div>
+
 <div class="modal-body text-center" id="remoteVideosContainer">
   <h264canvas></h264canvas>
 </div>
-<div class="modal-footer">
-  <loading></loading>
-  <button class="btn btn-primary" ng-click="dismiss()">OK</button>
-</div>
+
+<!--<div class="modal-footer">-->
+  <!--<loading></loading>-->
+  <!--<button class="btn btn-primary" ng-click="dismiss()">OK</button>-->
+<!--</div>-->

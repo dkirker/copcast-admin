@@ -167,7 +167,7 @@ angular.module('copcastAdminApp').
       $window.console.log('showModal with user=[' + user.id + ']');
       //showStream(user);
       $scope.$uibModalInstance = $uibModal.open({
-        templateUrl: 'app/realtime/videoStream/player_h264.html',
+        templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
         windowClass: 'modal-stream',
         backdrop: false,
