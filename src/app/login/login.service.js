@@ -98,7 +98,9 @@ app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $
     }
 
     socket.disconnect();
-    loginService.show();
+    loginService.isOpen = true;
+    $window.location.reload(false);
+    // loginService.show();
   };
 
   return loginService;
