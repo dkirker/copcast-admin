@@ -169,7 +169,7 @@ angular.module('copcastAdminApp').
       $scope.$uibModalInstance = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
-        windowClass: 'modal-stream',
+        windowClass: 'realtimePlayer',
         backdrop: false,
         scope: $rootScope,
         resolve: {

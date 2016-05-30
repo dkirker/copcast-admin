@@ -1,6 +1,8 @@
 <div class="modal-header">
-  <img alt="Brand" src="assets/images/logo.png">  <h3>{{user.userName}}</h3>
-  <a href="javascript:;">
+  <!--<img alt="Brand" src="assets/images/logo.png">-->
+  <span class="status"></span>
+  {{user.userName}}
+  <a href="javascript:;" ng-click="dismiss()" title="Stop livestream">
     <i class="glyphicon glyphicon-remove"></i>
   </a>
 </div>
