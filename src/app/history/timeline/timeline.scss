@@ -181,11 +181,11 @@ $line-color: #d7d7d7;
                 //content: ' \25CF';
                 //font-size: 27px;
                 //color: $active-line-color;
-                width: 13px;
-                height: 13px;
+                width: 12px;
+                height: 12px;
                 border-radius: 50%;
                 background: $active-line-color;
-                transform: translate(0%,-40%);
+                transform: translate(0%,-35%);
               }
 
               &::before {
