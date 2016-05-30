@@ -189,8 +189,8 @@ angular.module('copcastAdminApp').
     if (user === null) { //user not in list
 
       // user not connected via socket. Ignoring
-      $window.console.log('ignored location data');
-
+      $window.console.log('User not active yet. Registering now.');
+      $scope.getCurrentUsers().enterUser(data.id);
     } else {
 
       user = angular.extend({}, user);

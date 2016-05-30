@@ -81,7 +81,7 @@
 
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 
-  <table class="table table-striped table-condensed">
+  <table class="table table-striped table-condensed table-word-wrap">
     <thead>
       <tr>
         <th style="min-width: 80px;" ng-click="sort('date')">
@@ -112,7 +112,7 @@
           total-items="totalIncidents"
           current-page="page">
         <td>{{ incident.date | date:'yyyy/MM/dd' }}</td>
-        <td>{{ incident.user.name }}</td>
+        <td class="word-wrap">{{ incident.user.name }}</td>
         <td>{{ incident.user.group.name }}</td>
         <td><a ng-click="viewIncident(incident.id)" class="btn btn-small btn-primary" translate>view</a></td>
       </tr>

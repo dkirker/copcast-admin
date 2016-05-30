@@ -37,6 +37,12 @@ body {
   padding-right: 15px;
 }
 
+.word-wrap{
+  word-wrap: break-word;
+}
+.table-word-wrap{
+  table-layout: fixed;
+}
 /* Custom page header
 .header {
   border-bottom: 1px solid #e5e5e5;
