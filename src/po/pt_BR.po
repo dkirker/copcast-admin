@@ -853,3 +853,6 @@ msgstr ""
 
  msgid "PENDING"
  msgstr "PENDENTE"
+
+ msgid "ROLE_TIP"
+ msgstr "<b>Level 1 users have permission to:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Register new devices in the system;</li> <li>View realtime locations of officers;</li> <li>View history locations of officers and heatmaps;</li> <li>View realtime footage (no audio, only video);</li> </ol> <b>Level 2 users have permission to all of the above, plus:</b> <ol style=\"list-style-type: upper-roman;\"> <li>View history footage (no audio, only video);</li> <li>Export redacted footage (no audio, only video; faces and vehicle licence plates are automatically blurred);</li> <li>Access to the CopCast Log Report;</li> <li>Create Level 1 users;</li> </ol> <b>Level 3 users also have permission to all of the above, plus:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Export of raw video footage;</li> <li>Create Level 2 users;</li> <li>Change data retention periods.</li> </ol>"

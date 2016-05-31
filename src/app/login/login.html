@@ -6,15 +6,18 @@
   <div ng-if="emailMessage" class="emailMessage text-center" >{{emailMessage | translate }}</div>
   <input type="text" placeholder="{{'Username'| translate }}" ng-model="user.username" autofocus>
   <input type="password"  placeholder="{{'Password' | translate}}" ng-model="user.password">
-  <div class="text-right">
-    <a ng-click="forgotPass()" class="forgot-password"><small translate>forgot password</small></a>
-  </div>
   <button class="btn btn-block btn-primary" type="submit" ng-click="login()" translate>SIGN IN</button>
+  <div class="text-center forgotBtn">
+    <a ng-click="forgotPass()" class="forgot-password"><small translate>Forgot Password?</small></a>
+  </div>
 </form>
 <form ng-show="selected == 'forgotPass'">
   <div ng-if="errorMessage" class="errorMessage">{{errorMessage | translate }}</div>
   <div ng-if="emailMessage" class="emailMessage">{{emailMessage | translate }}</div>
   <input type="email" name="email"  placeholder="{{'Type your email'| translate}}" ng-model="email">
   <button class="btn btn-block btn-primary" type="submit" ng-click="sendEmail()" translate>Reset Password</button>
+  <div class="text-center forgotBtn">
+    <a ng-click="backLogin()" class="forgot-password"><small translate>Go Back</small></a>
+  </div>
 </form>
 </div>

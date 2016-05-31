@@ -22,6 +22,12 @@ angular.module('copcastAdminApp')
       $scope.emailMessage = '';
     };
 
+    $scope.backLogin = function(){
+      $scope.selected = 'login';
+      $scope.errorMessage = '';
+      $scope.emailMessage = '';
+    };
+
     $scope.sendEmail = function(){
       $scope.errorMessage = '';
       $scope.emailMessage = '';

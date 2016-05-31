@@ -1,20 +1,21 @@
 <div class="container">
   <h2 class="page-header hrDarker" translate>User details</h2>
   <div class="row">
-    <div class="col-md-4">
-      <h4 class="userFormGroupSubHeader">Change picture: <i class="glyphicon glyphicon-info-sign markInfo" data-toggle="tooltip" data-placement="bottom" title="Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"></i></h4>
-      <div class="userPhoto" ngf-select ng-model="files"
-           ngf-multiple="false" ngf-allow-dir="true"
-           ng-disabled="!canUpdate()" ngf-accept="'image/*'">
-        <div class="userPhotoOverlay">
-          <i class="glyphicon glyphicon-camera"></i>
-        </div>
-        <!--<img ng-src="https://market.ionic.io/img/user-default.png">-->
-        <img ng-show="hasProfilePicture" ng-src="{{pictureUrl}}">
-      </div>
-    </div>
 
-    <div class="col-md-8">
+    <!--<div class="col-md-4">-->
+      <!--<h4 class="userFormGroupSubHeader">Change picture: <i class="glyphicon glyphicon-info-sign markInfo" data-toggle="tooltip" data-placement="bottom" title="Please, give preference to PNG, GIF of TIF files, so we can make it more beautiful and rounded!"></i></h4>-->
+      <!--<div class="userPhoto" ngf-select ng-model="files"-->
+           <!--ngf-multiple="false" ngf-allow-dir="true"-->
+           <!--ng-disabled="!canUpdate()" ngf-accept="'image/*'">-->
+        <!--<div class="userPhotoOverlay">-->
+          <!--<i class="glyphicon glyphicon-camera"></i>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<img ng-src="https://market.ionic.io/img/user-default.png">&ndash;&gt;-->
+        <!--<img ng-show="hasProfilePicture" ng-src="{{pictureUrl}}">-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="col-md-12">
       <h4 class="userFormGroupSubHeader">Account Settings:</h4>
 
       <form novalidate name="frmUpdate">
@@ -67,7 +68,7 @@
                  data-placement="{{ isMobile ? 'top' : 'left'}}"
                  data-trigger="click"
                  title="Roles explanation"
-                 data-content='<b>Level 1 users have permission to:</b> <ol style="list-style-type: upper-roman;"> <li>Register new devices in the system;</li> <li>View realtime locations of officers;</li> <li>View history locations of officers and heatmaps;</li> <li>View realtime footage (no audio, only video);</li> </ol> <b>Level 2 users have permission to all of the above, plus:</b> <ol style="list-style-type: upper-roman;"> <li>View history footage (no audio, only video);</li> <li>Export redacted footage (no audio, only video; faces and vehicle licence plates are automatically blurred);</li> <li>Access to the CopCast Log Report;</li> <li>Create Level 1 users;</li> </ol> <b>Level 3 users also have permission to all of the above, plus:</b> <ol style="list-style-type: upper-roman;"> <li>Export of raw video footage;</li> <li>Create Level 2 users;</li> <li>Change data retention periods.</li> </ol>'></i>
+                 data-content="{{ 'ROLE_TIP' | translate }}"></i>
             </label>
             <select class="form-control" ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin" ng-disabled="!canUpdate()"></select>
           </div>
@@ -115,7 +116,7 @@
   <br><br>
 
   <div class="row">
-    <div class="col-md-8 col-md-offset-4">
+    <div class="col-md-12">
       <h4 class="userFormGroupSubHeader">Change Password:</h4>
 
       <div class="row">

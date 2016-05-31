@@ -32,7 +32,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     updateUserLocations: function updateUserLocations(userData) {
       var self = this;
       this.$timeout(function() {
-        var locations = userData.locations || [];
+        var locations = (userData && userData.locations) ? userData.locations : [];
         self.userMapLocations = $window.utils.GoogleMaps.transformLocationsToLatLngPoints(locations);
         self.userLocationsChanged.emit(self.userMapLocations);
       }, 600);

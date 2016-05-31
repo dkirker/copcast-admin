@@ -188,6 +188,10 @@ header > .navbar ul.navbar-nav a {
 header > .navbar ul.navbar-nav > li > a {
   font-size: 16px;
   padding: 20px 20px;
+
+  .caret {
+    margin-left: 4px;
+  }
 }
 
 /*@import "users.css";*/
@@ -214,6 +218,11 @@ header > .navbar ul.navbar-nav > li > a {
     margin-bottom: 0 !important;
   }
 }
+
+.gmnoprint {
+  margin-left: 22px !important;
+}
+
 
 /* Customize bootstrap to break really long words */
 

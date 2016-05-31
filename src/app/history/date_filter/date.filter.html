@@ -2,14 +2,14 @@
   <div class="form-group">
     <div class="checkbox">
       <label translate>
-        Period
         <input type="checkbox" ng-model="period" i-check>
+        Period?
       </label>
     </div>
   </div>
 
   <div class="form-group divider">
-    <label for="fromDate" class="control-label" translate>Date</label>
+    <label for="fromDate" class="control-label" translate>From:</label>&nbsp;
     <div class="input-group">
       <span class="input-group-addon glyphicon glyphicon-calendar"></span>
       <input type="date" id="fromDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control" ng-model="fromDate.value" ng-model-options="{ debounce: 500 }"
@@ -19,7 +19,7 @@
   </div>
 
   <div class="form-group divider">
-    <label for="toDate" class="control-label datepicker-right">To Date</label>
+    <label for="toDate" class="control-label datepicker-right">To:</label>&nbsp;
     <div class="input-group">
       <span class="input-group-addon glyphicon glyphicon-calendar"></span>
       <input type="date" id="toDate" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control to date" ng-model="toDate.value" ng-disabled="!period" ng-model-options="{ debounce: 500 }"
