@@ -331,6 +331,13 @@ angular.module('copcastAdminApp').
         position: 'right'
       });
     };
+    $scope.popStreamingDenied = function (username) {
+      notify({
+        templateUrl: 'app/views/notifications/errorNotification.html',
+        message: username + ' ' + gettextCatalog.getString('can not stream right now.'),
+        position: 'right'
+      });
+    };
 
     $scope.popModal = function (user) {
       showModal(user);
@@ -380,6 +387,17 @@ angular.module('copcastAdminApp').
 
       socket.on('streamStopped', function(){
         $rootScope.$emit('streamStopped');
+      });
+
+      socket.on('streamDenied', function(data){
+        if ($scope.currentUser && $scope.currentUser.id == data.id) {
+          mapService.closeBalloon();
+          if ($scope.$uibModalInstance !== null) {
+            $scope.$uibModalInstance.close();
+            $scope.$uibModalInstance = null;
+          }
+          $scope.popStreamingDenied(data.name);
+        }
       });
 
       socket.on('userLeft', function(data) {
