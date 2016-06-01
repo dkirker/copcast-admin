@@ -61,6 +61,10 @@
 
     getMap: function getMap() {
       return this._map.getMap();
+    },
+
+    getSortedArray: function getSortedArray() {
+      return this._map.getSortedArray();
     }
   };
 
