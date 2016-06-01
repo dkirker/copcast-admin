@@ -7,7 +7,7 @@
     style="left: {{getLocationPosition(activityLocations[0])}}px;
            width: {{getLocationPosition(activityLocations[1]) - getLocationPosition(activityLocations[0])}}px;"
     ng-click="selectPosition($event, activityLocations[0]);"
-    ng-repeat="(key, activityLocations) in activities.getMap()">
+    ng-repeat="activityLocations in activities.getSortedArray()">
     <div class="line">
     </div>
   </div>
