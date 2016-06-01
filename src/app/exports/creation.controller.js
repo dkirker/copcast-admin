@@ -15,6 +15,7 @@ angular.module('copcastAdminApp')
       initialDateVisible: false,
       endDate: null,
       endDateVisible: false,
+      range: 'date',
       period: true,
       initialTime: $window.moment().startOf('day').toDate(),
       endTime: $window.moment().endOf('day').seconds(0).millisecond(0).toDate(),
@@ -34,6 +35,16 @@ angular.module('copcastAdminApp')
       $scope.errorMessage = err;
     });
 
+    $scope.$watch('exportObj.range', function() {
+      switch($scope.exportObj.range){
+        case 'date':
+          $scope.exportObj.period = true;
+          break;
+        case 'time':
+          $scope.exportObj.period = false;
+          break;
+      }
+    }, true);
 
     $scope.createExport = function () {
       if (!$scope.exportObj.recorderId) {
