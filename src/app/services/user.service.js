@@ -82,14 +82,13 @@ app.factory('userService', function($compile, $templateCache, $q, $http, ServerU
     return defer.promise;
   };
 
-  service.getUserLocations = function getUserLocations(userId, fromDate, toDate, accuracy) {
+  service.getUserLocations = function getUserLocations(userId, fromDate, toDate) {
     var defer = $q.defer();
 
     fromDate = $window.moment(fromDate).format('YYYY-MM-DD');
     toDate = toDate ? '/' + $window.moment(toDate).format('YYYY-MM-DD') : '';
-    accuracy = accuracy ? '/' + accuracy : '';
 
-    var endPoint = ServerUrl + '/users/' + userId + '/locations/' + fromDate + toDate + accuracy;
+    var endPoint = ServerUrl + '/users/' + userId + '/locations/' + fromDate + toDate;
     $http
       .get(endPoint)
       .success(function(data) {
