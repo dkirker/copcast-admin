@@ -65,6 +65,14 @@
  */
 
 .realtimePlayer {
+  width: 0;
+  height: 0;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  overflow: visible !important;
+
   .modal-dialog {
     width: 400px;
     margin: 0 auto;
