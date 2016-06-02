@@ -201,32 +201,26 @@ angular.module('copcastAdminApp').
       var isNew = (parseInt(user.state) === 0);
 
       if (isNew) {
-
-        var marker = mapService.createMarker($scope, pos, data);
-
         var userPicture = '/assets/images/anonuser.png';
-
         if (data.profilePicture) {
           userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
         }
 
-        var newUser = {
+        user = {
           id: data.id,
           userName: data.name,
           login: data.username,
           group: data.group,
-          marker: marker,
+          marker: mapService.createMarker($scope, pos, data),
           groupId: data.groupId,
           accuracy: data.location.accuracy,
           picture: userPicture
         };
-
-        user = newUser;
-        isNew = true;
       }
 
       user.marker.setPosition(pos);
       user.accuracy = data.location.accuracy;
+      mapService.applyCircle($scope, user);
 
       if (data.battery) {
         user.batteryPercentage = data.battery.batteryPercentage;

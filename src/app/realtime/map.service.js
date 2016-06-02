@@ -62,7 +62,7 @@ angular.module('copcastAdminApp')
     };
 
     service.applyCircle = function(scope, user){
-      if (user.accuracy > 25) {
+      if (user.accuracy > 20) {
         if (user.cityCircle){
           user.cityCircle.setRadius(user.accuracy);
           user.cityCircle.setCenter(user.marker.getPosition());
@@ -106,6 +106,11 @@ angular.module('copcastAdminApp')
       for (var key in activeUsers){
         if (activeUsers[key].state === 1) {
           bounds.extend(activeUsers[key].marker.getPosition());
+          if (activeUsers[key].cityCircle) {
+            var circleBounds = activeUsers[key].cityCircle.getBounds();
+            bounds.extend(circleBounds.getNorthEast());
+            bounds.extend(circleBounds.getSouthWest());
+          }
         }
       }
       scope.myMap.fitBounds(bounds);
