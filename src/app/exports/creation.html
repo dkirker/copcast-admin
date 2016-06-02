@@ -16,12 +16,16 @@
                 required class="form-control"></select>
       </div>
 
-      <div class="col-md-2">
-        <label>&nbsp;</label>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="exportObj.period" i-check>
-            <span translate>Period?</span>
+      <div class="col-md-4">
+        <label>Period:</label>
+        <div class="radio">
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required value="date" ng-model="exportObj.range" checked i-check>
+            <span translate>Date range</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required value="time" ng-model="exportObj.range" i-check>
+            <span translate>Time range</span>
           </label>
         </div>
       </div>
