@@ -20,6 +20,21 @@
     });
   };
 
+  GoogleMaps.createAccuracyCircle = function createMarker(user, location) {
+    var latLngPoints = GoogleMaps.transformLocationsToLatLngPoints([ location ]);
+    var circleOptions = {
+      strokeColor: '#4068ff',
+      strokeOpacity: 0.5,
+      strokeWeight: 1,
+      fillColor: '#66bfe0',
+      fillOpacity: 0.35,
+      // map: scope.myMap,
+      center: latLngPoints[0],
+      radius: location.accuracy
+    };
+    return new window.google.maps.Circle(circleOptions);
+  };
+
   GoogleMaps.transformLocationsToLatLngPoints = function transformLocationsToLatLngPoints(locations) {
     var latLngPoints = [];
     for(var i = 0, length = locations.length; i < length; i++) {

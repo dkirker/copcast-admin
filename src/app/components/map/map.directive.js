@@ -95,7 +95,15 @@
               // var makerClone = angular.copy(marker);
               marker.setMap(map);
               markers.push(marker);
-              positions.push(marker.position);
+              if (marker.getBounds) {
+                // marker is an object like a circle, need to use getBounds
+                // to include the whole marker, not just it's center position.
+                var bounds = marker.getBounds();
+                positions.push(bounds.getNorthEast());
+                positions.push(bounds.getSouthWest());
+              } else {
+                positions.push(marker.position);
+              }
             }
 
             fitBounds(positions);
