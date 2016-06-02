@@ -13,9 +13,10 @@
       userId: user.id,
       position: latLngPoints[0],
       icon: {
-        url: user.profilePicture,
+        url: '/assets/images/pins/user_online.png',
+        // url: user.profilePicture,
         //url: 'assets/images/head_icon_black.png',
-        scaledSize: new window.google.maps.Size(24, 24)
+        scaledSize: new window.google.maps.Size(24, 43)
       }
     });
   };
