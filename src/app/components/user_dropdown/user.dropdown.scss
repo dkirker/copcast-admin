@@ -1,3 +1,45 @@
+@mixin user-avatar(
+  $width: 42px,
+  $height: 42px,
+  $float: left,
+  $borderSize: 2px,
+  $borderType: solid,
+  $borderColor: #FFFFFF,
+  $borderRadius: 50%,
+  $marginTop: 3px,
+  $marginRight: 10px,
+  $marginBottom: auto,
+  $marginLeft: auto
+) {
+  width: $width;
+  height: $height;
+  float: $float;
+  border: #{$borderSize} #{$borderType} #{$borderColor};
+  border-radius: $borderRadius;
+  background: url(/assets/images/badges_square/user.png) center/contain no-repeat;
+  margin: #{$marginTop} #{$marginRight} #{$marginBottom} #{$marginLeft};
+
+  &.group {
+    background-image: url(/assets/images/badges_square/users_group.png);
+  }
+
+  &.online {
+    background-image: url(/assets/images/badges_square/user_online.png);
+  }
+
+  &.incident {
+    background-image: url(/assets/images/badges_square/user_incident.png);
+  }
+
+  &.liveRequesting {
+    background-image: url(/assets/images/badges_square/user_live_requesting.png);
+  }
+
+  &.liveStreaming {
+    background: url(/assets/images/badges_square/user_live_streaming.png) center center no-repeat;
+  }
+}
+
 .user.dropdown {
   & > .bootstrap-select {
 
@@ -11,13 +53,20 @@
         height: 24px;
 
         .avatar {
-          float: left;
-          margin-right: 5px;
-          & > img {
-            width: 24px;
-            height: 24px;
-            border: 1px solid #eee;
-          }
+          @include user-avatar(
+            $width:24px,
+            $height:24px,
+            $borderSize:1px,
+            $marginTop:0,
+            $marginRight:5px
+          );
+          //float: left;
+          //margin-right: 5px;
+          //& > img {
+          //  width: 24px;
+          //  height: 24px;
+          //  border: 1px solid #eee;
+          //}
         }
 
         .info {
@@ -40,16 +89,7 @@
 
       .user {
         & > .avatar {
-          width: 48px;
-          height: 48px;
-          float: left;
-          margin-right: 10px;
-
-          & > img {
-            width: 48px;
-            height: 48px;
-            border: 2px solid #eee;
-          }
+          @include user-avatar();
         }
 
         & > .info {
