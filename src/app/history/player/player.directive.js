@@ -340,15 +340,19 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       };
 
       scope.previousVideo = function previousVideo() {
-        scope.wantSee = false;
-        $video[0].src = undefined;
-        onPreviousVideo();
+        if (! angular.element('.button.previous').hasClass('disabled')) {
+          scope.wantSee = false;
+          $video[0].src = undefined;
+          onPreviousVideo();
+        }
       };
 
       scope.nextVideo = function nextVideo() {
-        scope.wantSee = false;
-        $video[0].src = undefined;
-        onNextVideo();
+        if (! angular.element('.button.next').hasClass('disabled')) {
+          scope.wantSee = false;
+          $video[0].src = undefined;
+          onNextVideo();
+        }
       };
 
       scope.hasVideo = function() {
