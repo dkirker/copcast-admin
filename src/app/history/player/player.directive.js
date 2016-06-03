@@ -269,7 +269,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         angular.element('.officersList').perfectScrollbar();
 
         scope.setUser(user);
-        $video[0].src = undefined;
+        $video[0].removeAttribute('src');
 
         $window.setTimeout(function(){
           var largest = 0;
@@ -291,7 +291,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         // $window.console.log('SRC: ', scope.src);
 
         scope.wantSee = false;
-        $video[0].src = undefined;
+        $video[0].removeAttribute('src');
       });
 
       scope.$watch('wantSee', function() {
@@ -329,7 +329,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       scope.previousVideo = function previousVideo() {
         if (! angular.element('.button.previous').hasClass('disabled')) {
           scope.wantSee = false;
-          $video[0].src = undefined;
+          $video[0].removeAttribute('src');
           onPreviousVideo();
         }
       };
@@ -337,7 +337,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       scope.nextVideo = function nextVideo() {
         if (! angular.element('.button.next').hasClass('disabled')) {
           scope.wantSee = false;
-          $video[0].src = undefined;
+          $video[0].removeAttribute('src');
           onNextVideo();
         }
       };
