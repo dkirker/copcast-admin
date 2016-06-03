@@ -430,8 +430,15 @@ angular.module('copcastAdminApp').
       });
 
       socket.on('disconnect', function (/*socket*/) {
-
         $scope.getCurrentUsers().reset();
+
+        // start dismiss livestream modal
+        $scope.$uibModalInstance.close();
+        $rootScope.deregFrame();
+        $rootScope.deregStoppedStream();
+        socket.emit('unwatch');
+        // end dismiss livestream modal
+
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
       });
