@@ -64,7 +64,7 @@ angular.module('copcastAdminApp')
         connected = true;
         //onConnect.length = 0;
         $window.console.log('socket connected!');
-        $window.console.error('CallBack length: '+onConnect.length);
+        $window.console.log('CallBack length: '+onConnect.length);
         angular.forEach(onConnect, function(cb) {
           cb();
         });

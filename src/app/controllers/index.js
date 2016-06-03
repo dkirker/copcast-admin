@@ -10,7 +10,7 @@
 
 var app = angular.module('copcastAdminApp');
 
-app.controller('IndexCtrl', function ($scope, $window, userService ) {
+app.controller('IndexCtrl', function ($scope, $window, userService, $uibModalStack, socket, $rootScope) {
 
   // $scope.isMobile =('ontouchstart' in $window);
 
@@ -33,6 +33,27 @@ app.controller('IndexCtrl', function ($scope, $window, userService ) {
   };
 
 
-  //$window.alert($scope.isMobile)
+  function locationHashChanged() {
+    if (location.hash !== null) {
+      console.log('closing modals');
+      $uibModalStack.dismissAll();
+
+
+      if (location.hash !== '#/') {
+        if($rootScope.deregFrame) {
+          $rootScope.deregFrame();
+        }
+
+        if($rootScope.deregStoppedStream) {
+          $rootScope.deregStoppedStream();
+        }
+      }
+
+      socket.emit('unwatch');
+    }
+  }
+
+  window.addEventListener('load', locationHashChanged);
+  window.addEventListener('hashchange', locationHashChanged);
 
 }); //end-IndexCtrl

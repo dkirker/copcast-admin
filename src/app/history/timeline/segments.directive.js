@@ -198,7 +198,6 @@ app.directive('timelineSegments', function TimelineSegments($timeout, $window) {
 
       scope.$watch('userData', function() {
         if(scope.userData) {
-          $window.console.log('ASIUHASIUAHSIAUSHAISUHAIUHS');
           loadTimelineData();
           initPosition();
         }

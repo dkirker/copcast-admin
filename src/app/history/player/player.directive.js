@@ -36,6 +36,11 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       function videoPlayer($video) {
         /** Video Settings */
 
+        var checkTime = function(i) {
+          if (i < 10) { i = '0' + i; }
+          return i;
+        };
+
         //Time format converter - 00:00
         var timeFormat = function(seconds, withZero){
           withZero = typeof withZero !== 'undefined' ? withZero : true;
@@ -45,16 +50,22 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
           if(withZero) {
             m = Math.floor(seconds/60)<10 ? '0'+Math.floor(seconds/60) : Math.floor(seconds/60);
           } else {
-            m = Math.floor(seconds/60)<10 ? Math.floor(seconds/60) : Math.floor(seconds/60);
+            m = Math.floor(seconds/60);
           }
 
           var s = Math.floor(seconds-(m*60))<10 ? '0'+Math.floor(seconds-(m*60)) : Math.floor(seconds-(m*60));
           return m + ':' + s;
         };
 
-        var checkTime = function(i) {
-          if (i < 10) { i = '0' + i; }
-          return i;
+        var controlClock = function(date, currentTime){
+          var d = new Date(date);
+          var m = Math.floor(currentTime/60);
+          var s = Math.floor(currentTime-(m*60));
+
+          d.setMinutes(d.getMinutes() + m);
+          d.setSeconds(d.getSeconds() + s);
+
+          return checkTime(d.getHours()) + ':' + checkTime(d.getMinutes()) + ':' + checkTime(d.getSeconds());
         };
 
         //display video buffering bar
@@ -77,6 +88,9 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
           angular.element('.timeBar').css('width',perc+'%');
           angular.element('.current').text(timeFormat(currentPos));
           angular.element('.dragger-timer').text(timeFormat(currentPos, false));
+
+          angular.element('.clock')
+            .text(controlClock(angular.element('.clock').attr('data-video-time'), currentPos));
         });
 
         var startTime = function() {
@@ -104,7 +118,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         };
 
         $video[0].removeAttribute('controls');
-        startTime();
+        // startTime();
 
         $video.on('loadedmetadata', function() {
           //set video properties
@@ -165,7 +179,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         //video ended event
         $video.on('ended', function() {
           angular.element('.play-pause').find('.glyphicon').addClass('glyphicon-play').removeClass('glyphicon-pause');
-          video[0].pause();
+          $video[0].pause();
         });
 
         //video seeking event
@@ -301,6 +315,13 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
 
         lastSrc = scope.src;
         $video[0].src = scope.src ? scope.src : '';
+
+        console.warn('NOW VIDEO: ', scope.nowVideo);
+
+        var clock = new Date(scope.nowVideo.from);
+        angular.element('.clock')
+          .text(clock.getHours() + ':' + clock.getMinutes() + ':' + clock.getSeconds())
+          .attr('data-video-time', scope.nowVideo.from);
 
         angular.element('.timeBar').css('width','0%');
         angular.element('.current').text(0);
