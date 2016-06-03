@@ -8,7 +8,7 @@
  * Factory in the copcastAdminApp.
  */
 var app = angular.module('copcastAdminApp');
-app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $http, authService, socket, ServerUrl) {
+app.service('loginService', function($rootScope, $window, $cookies,gettextCatalog, TranslateService, $uibModal, $http, authService, socket, ServerUrl) {
 
   var loginService = { isOpen: false};
 
@@ -26,22 +26,36 @@ app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $
   };
 
   loginService.getToken = function() {
+    if (loginService.getUser() == null){
+      return null;
+    }
+    return loginService.getUser().token;
+  };
+
+  loginService.getUser = function() {
     if (!$rootScope.globals && !$cookies.getObject('globals')){
       return null;
     }
     if (!$rootScope.globals){
       $rootScope.globals = $cookies.getObject('globals');
     }
-    return $rootScope.globals.currentUser.token;
+    if ($rootScope.globals && $rootScope.globals.currentUser &&
+      gettextCatalog.getCurrentLanguage() != $rootScope.globals.currentUser.language) {
+      //change the flag
+      gettextCatalog.setCurrentLanguage($rootScope.globals.currentUser.language);
+      TranslateService.setLanguage();
+    }
+    return $rootScope.globals.currentUser;
   };
 
-  loginService.setToken = function(userName, role, accessToken, userId) {
+  loginService.setToken = function(user) {
     $rootScope.globals = {
       currentUser: {
-        username: userName,
-        role: role,
-        token: accessToken,
-        userId: userId,
+        username: user.userName,
+        role: user.role,
+        userId: user.userId,
+        token: user.token,
+        language: user.language,
         hideHistoryAlert: false
       }
     };
@@ -76,12 +90,12 @@ app.service('loginService', function($rootScope, $window, $cookies, $uibModal, $
     }
 
     authService.loginConfirmed();
-    socket.connect(accessToken);
+    socket.connect(user.token);
     loginService.isOpen = false;
   };
 
   loginService.isAuthenticated = function() {
-    return loginService.getToken() !== null && loginService.getToken().length > 0;
+    return loginService.getToken() && loginService.getToken().length > 0;
   };
 
   loginService.getUserName = function(){
