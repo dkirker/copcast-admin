@@ -1,13 +1,19 @@
-<div class="user dropdown">
+<div class="user dropdown" style="padding-left: 7px;">
   <select class="selectpicker" data-live-search="true" title='{{"Select a user or group" | translate}}'>
-    <option ng-repeat="user in users" value="{{ [user.id, user.isGroup]}}" ng-selected="currentUser && user.id == currentUser.id && user.isGroup == currentUser.isGroup" data-content="
-      <div class='user'>
-        <div class='avatar'><img src='{{user.profilePicture}}' class='img-circle'></div>
-        <div class='info'>
-          <span>{{user.name}}</span>
-          <small><br>{{user.group}}</small>
-        </div>
-      </div>">
+    <option ng-repeat="user in users"
+            value="{{ [user.id, user.isGroup]}}"
+            ng-selected="currentUser && user.id == currentUser.id && user.isGroup == currentUser.isGroup"
+            data-content="
+              <div class='user'>
+                <div class='avatar {{ (user.isGroup) ? 'group' : null }}'></div>
+                <div class='info'>
+                  <span>{{user.name}}</span>
+                  <small><br>{{user.group}}</small>
+                </div>
+              </div>"
+    >
     </option>
   </select>
 </div>
+
+<!--<img src='{{user.profilePicture}}' class='img-circle'>-->

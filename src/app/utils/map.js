@@ -19,7 +19,7 @@
     },
 
     keys: function keys() {
-      return Object.keys(this._map);
+      return Object.keys(this._map).sort();
     },
 
     size: function size() {
@@ -47,6 +47,16 @@
 
     getMap: function getMap() {
       return this._map;
+    },
+
+    getSortedArray: function getSortedArray() {
+      var map = this.getMap();
+      var sortedKeys = Object.keys(map).sort();
+      var sortedValues = [];
+      for (var i = 0; i < sortedKeys.length; ++i) {
+        sortedValues.push(map[sortedKeys[i]]);
+      }
+      return sortedValues;
     }
   };
 

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/users/user-creation.html:58 app/users/user-detail.html:124
@@ -17,18 +17,12 @@ msgid "- Minimum 8 digits."
 msgstr ""
 
 #: app/groups/group-creation.html:30 app/groups/group-detail.html:30
-msgid ""
-"<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> Is Admin?"
-msgstr ""
-"<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> É "
-"administrador?"
+msgid "<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> Is Admin?"
+msgstr "<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> É administrador?"
 
 #: app/users/user-creation.html:39
-msgid ""
-"<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> Is Admin?"
-msgstr ""
-"<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> É "
-"Administrador?"
+msgid "<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> Is Admin?"
+msgstr "<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> É Administrador?"
 
 #: app/incidentForms/incidentForm-view.html:35
 msgid "Accident?"
@@ -146,8 +140,7 @@ msgstr "Desabilitado"
 msgid "Email sent successfully"
 msgstr "Email enviado com sucesso"
 
-#: app/users/user-creation.html:23 app/users/user-destroy.html:32
-#: app/users/user-detail.html:39
+#: app/users/user-creation.html:23 app/users/user-destroy.html:32 app/users/user-detail.html:39
 msgid "Email:"
 msgstr "Email:"
 
@@ -183,9 +176,7 @@ msgstr "Usuário que Exportou:"
 msgid "Extra Information"
 msgstr "Informações Adicionais"
 
-#: app/incidentForms/incidentForm-list.html:10
-#: app/logreport/logreport-list.html:10 app/report/report.html:10
-#: app/users/user-list.html:10
+#: app/incidentForms/incidentForm-list.html:10 app/logreport/logreport-list.html:10 app/report/report.html:10 app/users/user-list.html:10
 msgid "Filter"
 msgstr "Filtro"
 
@@ -193,8 +184,7 @@ msgstr "Filtro"
 msgid "Fine?"
 msgstr "Multa?"
 
-#: app/incidentForms/incidentForm-list.html:16
-#: app/logreport/logreport-list.html:16 app/report/report.html:16
+#: app/incidentForms/incidentForm-list.html:16 app/logreport/logreport-list.html:16 app/report/report.html:16
 msgid "From:"
 msgstr "De:"
 
@@ -218,10 +208,7 @@ msgstr "Tipo do Grupo"
 msgid "Group details"
 msgstr "Detalhes do Grupo"
 
-#: app/incidentForms/incidentForm-list.html:63
-#: app/logreport/logreport-list.html:63 app/report/report.html:63
-#: app/users/user-creation.html:32 app/users/user-destroy.html:20
-#: app/users/user-detail.html:48
+#: app/incidentForms/incidentForm-list.html:63 app/logreport/logreport-list.html:63 app/report/report.html:63 app/users/user-creation.html:32 app/users/user-destroy.html:20 app/users/user-detail.html:48
 msgid "Group:"
 msgstr "Grupo:"
 
@@ -248,12 +235,10 @@ msgstr "Incidentes Marcados"
 #: app/report/report.html:166
 msgid ""
 "Information by user\n"
-"            <span class=\"label label-default\" translate=\"\">grouped by "
-"day</span>"
+"            <span class=\"label label-default\" translate=\"\">grouped by day</span>"
 msgstr ""
 "Informações de usuários\n"
-"            <span class=\"label label-default\" translate=\"\">agrupadas por "
-"dia</span>"
+"            <span class=\"label label-default\" translate=\"\">agrupadas por dia</span>"
 
 #: app/incidentForms/list.js:66
 msgid "Invalid data range."
@@ -271,8 +256,7 @@ msgstr "Data inválida."
 msgid "Invalid interval. Please check the date range."
 msgstr "Período inválido. Verifique as datas selecionadas."
 
-#: app/groups/group-destroy.html:31 app/users/user-destroy.html:38
-#: app/users/user-detail.html:57
+#: app/groups/group-destroy.html:31 app/users/user-destroy.html:38 app/users/user-detail.html:57
 msgid "Is Admin?"
 msgstr "É Admin?"
 
@@ -284,8 +268,7 @@ msgstr "Habilitado?"
 msgid "Lat:"
 msgstr "Lat:"
 
-#: app/groups/group-creation.html:18 app/groups/group-destroy.html:17
-#: app/groups/group-detail.html:18
+#: app/groups/group-creation.html:18 app/groups/group-destroy.html:17 app/groups/group-detail.html:18
 msgid "Latitude:"
 msgstr "Latitude:"
 
@@ -309,8 +292,7 @@ msgstr "Sair"
 msgid "Long:"
 msgstr "Long:"
 
-#: app/groups/group-creation.html:23 app/groups/group-destroy.html:24
-#: app/groups/group-detail.html:23
+#: app/groups/group-creation.html:23 app/groups/group-destroy.html:24 app/groups/group-detail.html:23
 msgid "Longitude:"
 msgstr "Longitude:"
 
@@ -318,10 +300,7 @@ msgstr "Longitude:"
 msgid "Name"
 msgstr "Nome"
 
-#: app/exports/creation.html:13 app/groups/group-creation.html:13
-#: app/groups/group-destroy.html:10 app/groups/group-detail.html:13
-#: app/incidentForms/incidentForm-list.html:49 app/users/user-creation.html:13
-#: app/users/user-destroy.html:13 app/users/user-detail.html:29
+#: app/exports/creation.html:13 app/groups/group-creation.html:13 app/groups/group-destroy.html:10 app/groups/group-detail.html:13 app/incidentForms/incidentForm-list.html:49 app/users/user-creation.html:13 app/users/user-destroy.html:13 app/users/user-detail.html:29
 msgid "Name:"
 msgstr "Nome:"
 
@@ -349,8 +328,7 @@ msgstr "Novo grupo"
 msgid "No battery information"
 msgstr "Sem dados da bateria"
 
-#: app/report/report.html:217 app/report/report.html:253
-#: app/report/report.html:283
+#: app/report/report.html:217 app/report/report.html:253 app/report/report.html:283
 msgid "No data found..."
 msgstr "Nenhuma informação encontrada…"
 
@@ -384,8 +362,7 @@ msgstr "Normal"
 
 #: app/realtime/map.service.js:42
 msgid "Not able to start streaming now. Try again later."
-msgstr ""
-"Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
+msgstr "Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
 
 #: app/incidentForms/incidentForm-view.html:45
 msgid "Number of Injured"
@@ -480,15 +457,10 @@ msgid "Repeat your password:"
 msgstr "Repita sua senha:"
 
 #: app/report/report.html:85
-msgid ""
-"Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | "
-"date:\"dd/MM/yyyy\"}}"
-msgstr ""
-"Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  "
-"| date:\"dd/MM/yyyy\"}}"
+msgid "Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
+msgstr "Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
 
-#: app/login/login.html:18 app/resetPasswords/reset.html:19
-#: app/resetPasswords/reset.html:5
+#: app/login/login.html:18 app/resetPasswords/reset.html:19 app/resetPasswords/reset.html:5
 msgid "Reset Password"
 msgstr "Redefinir senha"
 
@@ -532,8 +504,7 @@ msgstr "Logado como"
 msgid "Started Time"
 msgstr "Tempo de Início"
 
-#: app/exports/list.html:18 app/report/report.html:240
-#: app/users/user-list.html:40
+#: app/exports/list.html:18 app/report/report.html:240 app/users/user-list.html:40
 msgid "Status"
 msgstr "Status"
 
@@ -550,16 +521,14 @@ msgid "The password and its confirmation don't match"
 msgstr "A senha e a confirmação não são iguais"
 
 #: app/exports/creation.html:36
-msgid ""
-"The videos are being generated. We will send you an e-mail when we are done!"
+msgid "The videos are being generated. We will send you an e-mail when we are done!"
 msgstr "Os vídeos estão sendo gerado. Enviaremos um email quando finalizarmos."
 
 #: app/exports/creation.html:34
 msgid "There are no videos for the user and period chosen."
 msgstr "Não existem vídeos para o usuário e período escolhidos."
 
-#: app/incidentForms/incidentForm-list.html:31
-#: app/logreport/logreport-list.html:32 app/report/report.html:32
+#: app/incidentForms/incidentForm-list.html:31 app/logreport/logreport-list.html:32 app/report/report.html:32
 msgid "To:"
 msgstr "Até:"
 
@@ -603,9 +572,7 @@ msgstr "Digite para filtrar o mapa"
 msgid "Type your email"
 msgstr "Digite seu email"
 
-#: app/incidentForms/incidentForm-list.html:75
-#: app/logreport/logreport-list.html:74 app/report/report.html:74
-#: app/users/user-list.html:25
+#: app/incidentForms/incidentForm-list.html:75 app/logreport/logreport-list.html:74 app/report/report.html:74 app/users/user-list.html:25
 msgid "Update"
 msgstr "Atualizar"
 
@@ -620,19 +587,16 @@ msgstr "Uso de Força Letal?"
 #: app/report/report.html:83
 msgid ""
 "Use of Copcast\n"
-"        <small translate=\"\">Report from {{filter.fromDate  | date:\"dd/MM/"
-"yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
+"        <small translate=\"\">Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
 msgstr ""
 "Uso do Copcast\n"
-"        <small translate=\"\">Relatório de {{filter.fromDate  | date:\"dd/MM/"
-"yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
+"        <small translate=\"\">Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
 
 #: app/incidentForms/incidentForm-view.html:83
 msgid "Use of Force?"
 msgstr "Uso da Força?"
 
-#: app/exports/list.html:14 app/logreport/logreport-list.html:87
-#: app/report/report.html:236
+#: app/exports/list.html:14 app/logreport/logreport-list.html:87 app/report/report.html:236
 msgid "User"
 msgstr "Usuário"
 
@@ -648,8 +612,7 @@ msgstr "Usuário é obrigatório"
 msgid "User name:"
 msgstr "Usuário:"
 
-#: app/exports/detail.html:6 app/logreport/logreport-list.html:50
-#: app/report/report.html:50
+#: app/exports/detail.html:6 app/logreport/logreport-list.html:50 app/report/report.html:50
 msgid "User:"
 msgstr "Usuário:"
 
@@ -657,8 +620,7 @@ msgstr "Usuário:"
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: app/users/user-creation.html:18 app/users/user-destroy.html:26
-#: app/users/user-detail.html:34
+#: app/users/user-creation.html:18 app/users/user-destroy.html:26 app/users/user-detail.html:34
 msgid "Username:"
 msgstr "Nome de usuário:"
 
@@ -714,9 +676,7 @@ msgstr "Seu browser não suporta vídeos"
 msgid "action"
 msgstr "atividade"
 
-#: app/exports/detail.html:44 app/groups/group-creation.html:41
-#: app/groups/group-detail.html:41 app/incidentForms/incidentForm-view.html:97
-#: app/users/user-creation.html:85 app/users/user-detail.html:150
+#: app/exports/detail.html:44 app/groups/group-creation.html:41 app/groups/group-detail.html:41 app/incidentForms/incidentForm-view.html:97 app/users/user-creation.html:85 app/users/user-detail.html:150
 msgid "back"
 msgstr "voltar"
 
@@ -736,8 +696,7 @@ msgstr "criar novo grupo"
 msgid "create new user"
 msgstr "criar novo usuário"
 
-#: app/incidentForms/incidentForm-list.html:88
-#: app/logreport/logreport-list.html:89
+#: app/incidentForms/incidentForm-list.html:88 app/logreport/logreport-list.html:89
 msgid "date"
 msgstr "data"
 
@@ -809,47 +768,50 @@ msgstr ""
 msgid "{{export.status}}"
 msgstr ""
 
- msgid "NOT_LOGGED"
- msgstr "Não conectado"
+msgid "NOT_LOGGED"
+msgstr "Não conectado"
 
- msgid "PAUSED"
- msgstr "Gravação interrompida"
+msgid "PAUSED"
+msgstr "Gravação interrompida"
 
- msgid "RECORDING_OFFLINE"
- msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING_OFFLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
- msgid "RECORDING_ONLINE"
- msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING_ONLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
- msgid "RECORDING"
- msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
- msgid "STREAMING"
- msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
+msgid "STREAMING"
+msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
 
- msgid "UPLOADING"
- msgstr "Enviando dados para o servidor"
+msgid "UPLOADING"
+msgstr "Enviando dados para o servidor"
 
- msgid "LOGGED"
- msgstr "Conectado"
+msgid "LOGGED"
+msgstr "Conectado"
 
- msgid "IDLE"
- msgstr "Conectado"
+msgid "IDLE"
+msgstr "Conectado"
 
- msgid "SEEN_VIDEO"
- msgstr "Usuário viu um vídeo do próprio celular."
+msgid "SEEN_VIDEO"
+msgstr "Usuário viu um vídeo do próprio celular."
 
- msgid "LOGGED_ADMIN"
- msgstr "Usuário se conectou na interface administrativa"
+msgid "LOGGED_ADMIN"
+msgstr "Usuário se conectou na interface administrativa"
 
- msgid "PLAYING_VIDEO"
- msgstr "Usuário viu um vídeo pela interface administrativa"
+msgid "PLAYING_VIDEO"
+msgstr "Usuário viu um vídeo pela interface administrativa"
 
- msgid "AVAILABLE"
- msgstr "DISPONÍVEL"
+msgid "AVAILABLE"
+msgstr "DISPONÍVEL"
 
- msgid "EXPIRED"
- msgstr "EXPIRADO"
+msgid "EXPIRED"
+msgstr "EXPIRADO"
 
- msgid "PENDING"
- msgstr "PENDENTE"
+msgid "PENDING"
+msgstr "PENDENTE"
+
+msgid "ROLE_TIP"
+msgstr "<b>Usuários nível 1 possuem permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Registrar novos aparelhos no sistema;</li> <li>Ver localizações em tempo real;</li> <li>Ver localizações e mapas de calor no histórico;</li> <li>Ver transmissões de vídeos em tempo real (sem áudio, somente vídeo);</li> </ol> <b>Usuários nível 2 possuem também permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Ver gravações no histórico (sem áudio, somente vídeo);</li>  <li>Acessar o relatório de auditoria;</li> <li>Criar usuários nível 1;</li> </ol> <b> Usuários nível 2 possuem também permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Exportar gravações originais;</li> <li> Criar usuários nível 2;</li> </ol>"

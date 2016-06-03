@@ -32,7 +32,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     updateUserLocations: function updateUserLocations(userData) {
       var self = this;
       this.$timeout(function() {
-        var locations = userData.locations || [];
+        var locations = (userData && userData.locations) ? userData.locations : [];
         self.userMapLocations = $window.utils.GoogleMaps.transformLocationsToLatLngPoints(locations);
         self.userLocationsChanged.emit(self.userMapLocations);
       }, 600);
@@ -54,6 +54,10 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
           if(userData.currentLocation) {
             var marker = $window.utils.GoogleMaps.createMarker(userData.user, userData.currentLocation.location);
             markers.push(marker);
+            if (userData.currentLocation.location.accuracy && userData.currentLocation.location.accuracy > 20) {
+              var circle = $window.utils.GoogleMaps.createAccuracyCircle(userData.user, userData.currentLocation.location);
+              markers.push(circle);
+            }
           }
         }
         self.groupLocationsMarkers = markers;
@@ -260,7 +264,6 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
   function GroupsDataManager($q, $timeout, userService, groupService, notify, gettextCatalog) {
     this.$q = $q;
     this.$timeout = $timeout;
-    this.DEFAULT_ACCURACY = 20;
     this._userService = userService;
     this._groupService = groupService;
     this._notify = notify;
@@ -492,7 +495,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       var toDate = this.period.period ? this.period.toDate : null;
       var groupId = this.currentGroup.id;
       return [
-        this._groupService.getGroupLocations(groupId, this.period.fromDate, toDate, this.DEFAULT_ACCURACY),
+        this._groupService.getGroupLocations(groupId, this.period.fromDate, toDate),
         this._groupService.getGroupVideos(groupId, this.period.fromDate, toDate),
         this._groupService.getGroupIncidents(groupId, this.period.fromDate, toDate)
       ];
@@ -502,7 +505,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       var toDate = this.period.period ? this.period.toDate : null;
       var userId = this.currentGroup.id;
       return [
-        this._userService.getUserLocations(userId, this.period.fromDate, toDate, this.DEFAULT_ACCURACY),
+        this._userService.getUserLocations(userId, this.period.fromDate, toDate),
         this._userService.getUserVideos(userId, this.period.fromDate, toDate),
         this._userService.getUserIncidents(userId, this.period.fromDate, toDate)
       ];

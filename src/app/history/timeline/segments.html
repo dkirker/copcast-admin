@@ -2,7 +2,7 @@
   <div class="selected line" style="left: {{selectedPosition}}px;">
     <img src="assets/images/scrubber.png">
   </div>
-  <div class="date segments" ng-repeat="(key, activitiesByHour) in activitiesByDay.getMap()">
+  <div class="date segments" ng-repeat="activitiesByHour in activitiesByDay.getSortedArray()">
     <!--
     <div class="start segment" ng-if="$first">
       <div class="line"></div>
@@ -10,19 +10,19 @@
     -->
 
     <div class="gap segment">
-      <div class="first date" ng-bind-html="$first ? '' : getPreviousDateLabel(key)"></div>
-      <div class="last date" ng-bind-html="getCurrentDateLabel(key)"></div>
+      <div class="first date" ng-bind-html="$first ? '' : getPreviousDateLabel(activitiesByHour.day)"></div>
+      <div class="last date" ng-bind-html="getCurrentDateLabel(activitiesByHour.day)"></div>
       <div class="line"></div>
       <div class="box"></div>
     </div>
 
     <timeline-segment
       activities="activities"
-      hour="hour"
-      day="key"
+      hour="activities.hour"
+      day="activitiesByHour.day"
       incidents-by-day="userData.incidentsByDay"
       last="$last"
-      ng-repeat="(hour, activities) in activitiesByHour.getMap()">
+      ng-repeat="activities in activitiesByHour.getSortedArray()">
     </timeline-segment>
 
     <div class="end segment" ng-if="$last">

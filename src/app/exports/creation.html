@@ -9,28 +9,34 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label translate>Name:</label>
         <select ng-options="user.id as user.name for user in users" ng-required="true"
                 ng-model="exportObj.recorderId"
                 required class="form-control"></select>
       </div>
-      </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="exportObj.period" i-check>
-            <span translate>Period?</span>
+
+      <div class="col-md-4">
+        <label>Period:</label>
+        <div class="radio">
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required value="date" ng-model="exportObj.range" checked i-check>
+            <span translate>Date range</span>
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" required value="time" ng-model="exportObj.range" i-check>
+            <span translate>Time range</span>
           </label>
         </div>
       </div>
     </div>
-      <div class="row">
 
-      <div class="col-md-3">
+    <br>
+
+    <div class="row">
+      <div class="col-md-4">
         <label translate ng-hide="exportObj.period">Date:</label>
-        <label translate ng-show="exportObj.period">Initial Date:</label>
+        <label translate ng-show="exportObj.period">From:</label>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-calendar"></span>
           <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
@@ -40,8 +46,9 @@
                  ng-click="exportObj.initialDateShow()"/>
         </div>
       </div>
-      <div class="col-md-3" ng-show="exportObj.period">
-        <label translate>to</label>
+
+      <div class="col-md-4" ng-show="exportObj.period">
+        <label translate>To:</label>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-calendar"></span>
           <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
@@ -51,7 +58,8 @@
                  ng-click="exportObj.endDateShow()"/>
         </div>
       </div>
-      <div class="col-md-3" ng-hide="exportObj.period">
+
+      <div class="col-md-4" ng-hide="exportObj.period">
         <label translate>Initial Time:</label>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-time"></span>
@@ -59,7 +67,8 @@
                  ng-model="exportObj.initialTime"/>
         </div>
       </div>
-      <div class="col-md-3" ng-hide="exportObj.period">
+
+      <div class="col-md-4" ng-hide="exportObj.period">
         <label translate>End Time:</label>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-time"></span>
@@ -68,7 +77,6 @@
         </div>
       </div>
     </div>
-
 
     <hr class="hrDarker" />
 

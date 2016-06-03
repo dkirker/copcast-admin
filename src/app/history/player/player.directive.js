@@ -36,6 +36,11 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       function videoPlayer($video) {
         /** Video Settings */
 
+        var checkTime = function(i) {
+          if (i < 10) { i = '0' + i; }
+          return i;
+        };
+
         //Time format converter - 00:00
         var timeFormat = function(seconds, withZero){
           withZero = typeof withZero !== 'undefined' ? withZero : true;
@@ -45,16 +50,22 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
           if(withZero) {
             m = Math.floor(seconds/60)<10 ? '0'+Math.floor(seconds/60) : Math.floor(seconds/60);
           } else {
-            m = Math.floor(seconds/60)<10 ? Math.floor(seconds/60) : Math.floor(seconds/60);
+            m = Math.floor(seconds/60);
           }
 
           var s = Math.floor(seconds-(m*60))<10 ? '0'+Math.floor(seconds-(m*60)) : Math.floor(seconds-(m*60));
           return m + ':' + s;
         };
 
-        var checkTime = function(i) {
-          if (i < 10) { i = '0' + i; }
-          return i;
+        var controlClock = function(date, currentTime){
+          var d = new Date(date);
+          var m = Math.floor(currentTime/60);
+          var s = Math.floor(currentTime-(m*60));
+
+          d.setMinutes(d.getMinutes() + m);
+          d.setSeconds(d.getSeconds() + s);
+
+          return checkTime(d.getHours()) + ':' + checkTime(d.getMinutes()) + ':' + checkTime(d.getSeconds());
         };
 
         //display video buffering bar
@@ -77,6 +88,9 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
           angular.element('.timeBar').css('width',perc+'%');
           angular.element('.current').text(timeFormat(currentPos));
           angular.element('.dragger-timer').text(timeFormat(currentPos, false));
+
+          angular.element('.clock')
+            .text(controlClock(angular.element('.clock').attr('data-video-time'), currentPos));
         });
 
         var startTime = function() {
@@ -104,7 +118,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         };
 
         $video[0].removeAttribute('controls');
-        startTime();
+        // startTime();
 
         $video.on('loadedmetadata', function() {
           //set video properties
@@ -165,7 +179,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         //video ended event
         $video.on('ended', function() {
           angular.element('.play-pause').find('.glyphicon').addClass('glyphicon-play').removeClass('glyphicon-pause');
-          video[0].pause();
+          $video[0].pause();
         });
 
         //video seeking event
@@ -244,22 +258,13 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
        * Watchers
        */
       scope.$watchCollection('collection', function() {
-
-        // $window.console.log('');
-        // $window.console.warn('======================');
-        // $window.console.info('Scope: ', scope);
-        // $window.console.info('Current users: ', scope.users);
-        // $window.console.info('Collection: ', scope.collection);
-        // $window.console.info('Incidents: ', scope.incidents);
-        // $window.console.warn('======================');
-        // $window.console.log('');
-
         scope.isNone = typeof scope.collection === 'undefined';
         scope.isGroup = scope.collection && scope.collection.isGroup && !scope.collection.username ? true : false;
 
         scope.totalIncidents = 0;
 
         var user = null;
+
         if (scope.isGroup && (scope.collection.users && scope.collection.users.length > 0)) {
           user =  scope.collection.users[0];
 
@@ -270,12 +275,15 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
               if (user.id === index) { user.incidents = item.length; }
             });
           });
+        } else {
+          var hasUsers = scope.users && scope.users.length > 0;
+          user = hasUsers ? scope.users[0] : null;
         }
 
         angular.element('.officersList').perfectScrollbar();
 
         scope.setUser(user);
-        $video[0].src = undefined;
+        $video[0].removeAttribute('src');
 
         $window.setTimeout(function(){
           var largest = 0;
@@ -291,20 +299,13 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
         }, 100);
       });
 
-      scope.$watchCollection('users', function() {
-        var hasUsers = scope.users && scope.users.length > 0;
-        var user = hasUsers ? scope.users[0] : null;
-        scope.setUser(user);
-        $video[0].src = undefined;
-      });
-
       scope.$watch('src', function() {
         // $window.console.log('NOW VIDEO: ', scope.nowVideo);
         // $window.console.log('COVER: ', scope.cover);
         // $window.console.log('SRC: ', scope.src);
 
         scope.wantSee = false;
-        $video[0].src = undefined;
+        $video[0].removeAttribute('src');
       });
 
       scope.$watch('wantSee', function() {
@@ -314,6 +315,13 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
 
         lastSrc = scope.src;
         $video[0].src = scope.src ? scope.src : '';
+
+        console.warn('NOW VIDEO: ', scope.nowVideo);
+
+        var clock = new Date(scope.nowVideo.from);
+        angular.element('.clock')
+          .text(clock.getHours() + ':' + clock.getMinutes() + ':' + clock.getSeconds())
+          .attr('data-video-time', scope.nowVideo.from);
 
         angular.element('.timeBar').css('width','0%');
         angular.element('.current').text(0);
@@ -342,7 +350,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       scope.previousVideo = function previousVideo() {
         if (! angular.element('.button.previous').hasClass('disabled')) {
           scope.wantSee = false;
-          $video[0].src = undefined;
+          $video[0].removeAttribute('src');
           onPreviousVideo();
         }
       };
@@ -350,7 +358,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       scope.nextVideo = function nextVideo() {
         if (! angular.element('.button.next').hasClass('disabled')) {
           scope.wantSee = false;
-          $video[0].src = undefined;
+          $video[0].removeAttribute('src');
           onNextVideo();
         }
       };

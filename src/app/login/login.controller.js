@@ -22,6 +22,12 @@ angular.module('copcastAdminApp')
       $scope.emailMessage = '';
     };
 
+    $scope.backLogin = function(){
+      $scope.selected = 'login';
+      $scope.errorMessage = '';
+      $scope.emailMessage = '';
+    };
+
     $scope.sendEmail = function(){
       $scope.errorMessage = '';
       $scope.emailMessage = '';
@@ -50,7 +56,7 @@ angular.module('copcastAdminApp')
         password : $scope.user.password,
         scope : 'admin'
       },{ignoreAuthModule: true}).success(function(data) {
-        loginService.setToken(data.userName, data.role, data.token, data.userId);
+        loginService.setToken(data);
         $uibModalInstance.close();
         //get user information
         userService.getMyData().then(

@@ -76,8 +76,8 @@ app.directive('dateFilter', function($window, $rootScope, $cookies) {
         if(date.isAfter(maxDate, 'day')) {
           newDate.value = maxDate;
           newDate.alert = true;
-        // } else if (date.isBefore(minDate, 'day')) {
-        //   newDate.value = minDate;
+        } else if (date.isBefore(minDate, 'day')) {
+          newDate.value = minDate;
         } else {
           newDate.value = date;
         }

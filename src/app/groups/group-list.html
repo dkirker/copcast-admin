@@ -14,8 +14,7 @@
         <th style="min-width: 80px;" translate>Name</th>
         <th style="min-width: 80px;" translate>Group Type</th>
         <th style="min-width: 80px;" translate>Created At</th>
-        <th style="width:20px;"> </th>
-        <th style="width:20px;"> </th>
+        <th style="width: 130px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,8 +23,10 @@
         <td ng-show="group.isAdmin" translate>Admin</td>
         <td ng-hide="group.isAdmin" translate>Normal</td>
         <td>{{ group.createdAt | date:'yyyy/MM/dd' }}</td>
-        <td><a ng-click="editGroup(group.id)" class="btn btn-small btn-primary" translate>edit</a></td>
-        <td><a ng-click="deleteGroup(group.id)" class="btn btn-small btn-danger" ng-show="isAdminGroup" translate>delete</a></td>
+        <td>
+          <a ng-click="editGroup(group.id)" class="btn btn-small btn-primary" translate>edit</a>
+          <a ng-click="deleteGroup(group.id)" class="btn btn-small btn-danger" ng-show="isAdminGroup" translate>delete</a>
+        </td>
       </tr>
     </tbody>
   </table>

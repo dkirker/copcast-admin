@@ -50,19 +50,22 @@ angular.module('copcastAdminApp')
     };
 
     service.getRedMarker = function(user){
-      return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
+      // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
+      return '/assets/images/pins/user_online.png';
     };
 
     service.getGreenMarker = function(user){
-      return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|009c00|000000';
+      // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|009c00|000000';
+      return '/assets/images/pins/user_live_streaming.png';
     };
 
     service.getGreyMarker = function(user){
-      return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
+      // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
+      return '/assets/images/pins/user.png';
     };
 
     service.applyCircle = function(scope, user){
-      if (user.accuracy > 25) {
+      if (user.accuracy > 20) {
         if (user.cityCircle){
           user.cityCircle.setRadius(user.accuracy);
           user.cityCircle.setCenter(user.marker.getPosition());
@@ -106,6 +109,11 @@ angular.module('copcastAdminApp')
       for (var key in activeUsers){
         if (activeUsers[key].state === 1) {
           bounds.extend(activeUsers[key].marker.getPosition());
+          if (activeUsers[key].cityCircle) {
+            var circleBounds = activeUsers[key].cityCircle.getBounds();
+            bounds.extend(circleBounds.getNorthEast());
+            bounds.extend(circleBounds.getSouthWest());
+          }
         }
       }
       scope.myMap.fitBounds(bounds);

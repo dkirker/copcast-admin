@@ -1,6 +1,6 @@
 <div class="navbar navbar-default navbar-static-top">
-  <nav class="container-fluid">
-    <form class="navbar-form navbar-left" role="search">
+  <nav class="container-fluid" style="padding-top: 1px;">
+    <form class="navbar-form navbar-left" style="padding-left: 7px;" role="search">
       <div class="input-group">
         <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1">  </span>
         <input type="text" ng-model="searchString" ng-change="filterUsers()" class="form-control search-realtime"
@@ -49,6 +49,8 @@
            ng-class="{waiting: waitingStreaming, stream: !waitingStreaming}" ng-click="requestStream(currentUser)"
            ng-if="!activeStreams[currentUser.userId]" ng-bind="streamButtonText"></a>
       </div>
+      <div class="clearfix"></div>
     </div>
+    <div class="clearfix"></div>
   </div>
 </script>

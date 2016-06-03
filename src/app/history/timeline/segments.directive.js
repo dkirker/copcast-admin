@@ -109,6 +109,7 @@ app.directive('timelineSegments', function TimelineSegments($timeout, $window) {
           var hour = hours[i];
           var locations = locationsByHour.get(hour);
           var activities = createActivities(locations);
+          activities.hour = hour;
           activitiesByHour.put(hour, activities);
         }
         return activitiesByHour;
@@ -124,6 +125,7 @@ app.directive('timelineSegments', function TimelineSegments($timeout, $window) {
             var date = dates[i];
             var locationsByHour = locationsByDay.get(date);
             var activitiesByHour = createActivitiesByHour(locationsByHour.getMap());
+            activitiesByHour.day = date;
             activitiesByDay.put(date, activitiesByHour);
           }
           scope.userData.timeline.activitiesByDay = activitiesByDay;
@@ -196,7 +198,6 @@ app.directive('timelineSegments', function TimelineSegments($timeout, $window) {
 
       scope.$watch('userData', function() {
         if(scope.userData) {
-          $window.console.log('ASIUHASIUAHSIAUSHAISUHAIUHS');
           loadTimelineData();
           initPosition();
         }

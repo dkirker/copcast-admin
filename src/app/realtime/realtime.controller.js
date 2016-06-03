@@ -167,9 +167,9 @@ angular.module('copcastAdminApp').
       $window.console.log('showModal with user=[' + user.id + ']');
       //showStream(user);
       $scope.$uibModalInstance = $uibModal.open({
-        templateUrl: 'app/realtime/videoStream/player_h264.html',
+        templateUrl: 'app/realtime/videoStream/player.html',
         controller: 'ModalVideoCtrl',
-        windowClass: 'modal-stream',
+        windowClass: 'realtimePlayer',
         backdrop: false,
         scope: $rootScope,
         resolve: {
@@ -201,32 +201,26 @@ angular.module('copcastAdminApp').
       var isNew = (parseInt(user.state) === 0);
 
       if (isNew) {
-
-        var marker = mapService.createMarker($scope, pos, data);
-
         var userPicture = '/assets/images/anonuser.png';
-
         if (data.profilePicture) {
           userPicture = [ServerUrl, 'pictures', data.id, 'small', 'show'].join('/');
         }
 
-        var newUser = {
+        user = {
           id: data.id,
           userName: data.name,
           login: data.username,
           group: data.group,
-          marker: marker,
+          marker: mapService.createMarker($scope, pos, data),
           groupId: data.groupId,
           accuracy: data.location.accuracy,
           picture: userPicture
         };
-
-        user = newUser;
-        isNew = true;
       }
 
       user.marker.setPosition(pos);
       user.accuracy = data.location.accuracy;
+      mapService.applyCircle($scope, user);
 
       if (data.battery) {
         user.batteryPercentage = data.battery.batteryPercentage;
@@ -331,6 +325,13 @@ angular.module('copcastAdminApp').
         position: 'right'
       });
     };
+    $scope.popStreamingDenied = function (username) {
+      notify({
+        templateUrl: 'app/views/notifications/errorNotification.html',
+        message: username + ' ' + gettextCatalog.getString('can not stream right now.'),
+        position: 'right'
+      });
+    };
 
     $scope.popModal = function (user) {
       showModal(user);
@@ -382,6 +383,17 @@ angular.module('copcastAdminApp').
         $rootScope.$emit('streamStopped');
       });
 
+      socket.on('streamDenied', function(data){
+        if ($scope.currentUser && $scope.currentUser.id == data.id) {
+          mapService.closeBalloon();
+          if ($scope.$uibModalInstance !== null) {
+            $scope.$uibModalInstance.close();
+            $scope.$uibModalInstance = null;
+          }
+          $scope.popStreamingDenied(data.name);
+        }
+      });
+
       socket.on('userLeft', function(data) {
         $window.console.log('user left: '+data.userId);
 
@@ -418,8 +430,15 @@ angular.module('copcastAdminApp').
       });
 
       socket.on('disconnect', function (/*socket*/) {
-
         $scope.getCurrentUsers().reset();
+
+        // start dismiss livestream modal
+        $scope.$uibModalInstance.close();
+        $rootScope.deregFrame();
+        $rootScope.deregStoppedStream();
+        socket.emit('unwatch');
+        // end dismiss livestream modal
+
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
       });

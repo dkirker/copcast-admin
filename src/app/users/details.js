@@ -35,31 +35,31 @@ angular.module('copcastAdminApp')
       $scope.upload($scope.files);
     });
 
-    $scope.upload = function (files) {
-      function doUpload(files){
-        Upload.upload({
-          url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
-          method: 'POST',
-          data: {userPicture: $scope.userPicture},
-          file: files[0]
-        }).progress(function (evt) {
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          $window.console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-        }).success(function (data, status, headers, config) {
-          $window.console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-          $scope.hasProfilePicture = true;
-          $scope.pictureUrl = '';
-          $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
-        });
-      }
-
-      if (files && files.length) {
-        for (var i = 0; i < files.length; i++) {
-          // var file = files[i];
-          doUpload(files);
-        }
-      }
-    };
+    // $scope.upload = function (files) {
+    //   function doUpload(files){
+    //     Upload.upload({
+    //       url: ServerUrl + '/users/'+$scope.user.id+'/upload-picture',
+    //       method: 'POST',
+    //       data: {userPicture: $scope.userPicture},
+    //       file: files[0]
+    //     }).progress(function (evt) {
+    //       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //       $window.console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+    //     }).success(function (data, status, headers, config) {
+    //       $window.console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+    //       $scope.hasProfilePicture = true;
+    //       $scope.pictureUrl = '';
+    //       $scope.pictureUrl = ServerUrl + '/pictures/'+$scope.user.id+'/medium/show?t=' + new Date().getTime();
+    //     });
+    //   }
+    //
+    //   if (files && files.length) {
+    //     for (var i = 0; i < files.length; i++) {
+    //       // var file = files[i];
+    //       doUpload(files);
+    //     }
+    //   }
+    // };
 
 
     //callback to change password
@@ -104,12 +104,6 @@ angular.module('copcastAdminApp')
     // callback for ng-click 'cancel':
     $scope.back = function () {
       $location.path('/user-list');
-    };
-
-    // callback for ng-click 'cancel':
-    $scope.clickTab = function (nTab) {
-      $scope.blnShowTab = [false, false, false];
-      $scope.blnShowTab[nTab-1] = true;
     };
 
     //get a user by id

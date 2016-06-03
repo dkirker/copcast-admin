@@ -55,14 +55,13 @@
       return defer.promise;
     };
 
-    service.getGroupLocations = function getGroupLocations(groupId, fromDate, toDate, accuracy) {
+    service.getGroupLocations = function getGroupLocations(groupId, fromDate, toDate) {
       var defer = $q.defer();
 
       fromDate = $window.moment(fromDate).format('YYYY-MM-DD');
       toDate = toDate ? '/' + $window.moment(toDate).format('YYYY-MM-DD') : '';
-      accuracy = accuracy ? '/' + accuracy : '';
 
-      var endPoint = ServerUrl + '/groups/' + groupId + '/locations/' + fromDate + toDate + accuracy;
+      var endPoint = ServerUrl + '/groups/' + groupId + '/locations/' + fromDate + toDate;
       $http
         .get(endPoint)
         .success(function(data) {

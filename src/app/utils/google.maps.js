@@ -13,11 +13,27 @@
       userId: user.id,
       position: latLngPoints[0],
       icon: {
-        url: user.profilePicture,
+        url: '/assets/images/pins/user_online.png',
+        // url: user.profilePicture,
         //url: 'assets/images/head_icon_black.png',
-        scaledSize: new window.google.maps.Size(24, 24)
+        scaledSize: new window.google.maps.Size(24, 43)
       }
     });
+  };
+
+  GoogleMaps.createAccuracyCircle = function createMarker(user, location) {
+    var latLngPoints = GoogleMaps.transformLocationsToLatLngPoints([ location ]);
+    var circleOptions = {
+      strokeColor: '#4068ff',
+      strokeOpacity: 0.5,
+      strokeWeight: 1,
+      fillColor: '#66bfe0',
+      fillOpacity: 0.35,
+      // map: scope.myMap,
+      center: latLngPoints[0],
+      radius: location.accuracy
+    };
+    return new window.google.maps.Circle(circleOptions);
   };
 
   GoogleMaps.transformLocationsToLatLngPoints = function transformLocationsToLatLngPoints(locations) {

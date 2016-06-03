@@ -50,7 +50,7 @@
              data-placement="{{ isMobile ? 'top' : 'left'}}"
              data-trigger="click"
              title="Roles explanation"
-             data-content='<b>Level 1 users have permission to:</b> <ol style="list-style-type: upper-roman;"> <li>Register new devices in the system;</li> <li>View realtime locations of officers;</li> <li>View history locations of officers and heatmaps;</li> <li>View realtime footage (no audio, only video);</li> </ol> <b>Level 2 users have permission to all of the above, plus:</b> <ol style="list-style-type: upper-roman;"> <li>View history footage (no audio, only video);</li> <li>Export redacted footage (no audio, only video; faces and vehicle licence plates are automatically blurred);</li> <li>Access to the CopCast Log Report;</li> <li>Create Level 1 users;</li> </ol> <b>Level 3 users also have permission to all of the above, plus:</b> <ol style="list-style-type: upper-roman;"> <li>Export of raw video footage;</li> <li>Create Level 2 users;</li> <li>Change data retention periods.</li> </ol>'></i>
+             data-content="{{ 'ROLE_TIP' | translate }}"></i>
         </label>
         <select class="form-control" ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin"></select>
       </div>

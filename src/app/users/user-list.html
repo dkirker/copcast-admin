@@ -38,8 +38,7 @@
         <th style="min-width: 80px;" translate>Group</th>
         <th style="min-width: 80px;" translate>Created At</th>
         <th style="min-width: 80px;" translate>Status</th>
-        <th style="width:20px;" > </th>
-        <th style="width:20px;" > </th>
+        <th style="width: 130px;" ></th>
       </tr>
     </thead>
     <tbody>
@@ -49,8 +48,10 @@
         <td>{{ user.createdAt | date:'yyyy/MM/dd' }}</td>
         <td translate ng-show="user.isEnabled">Enabled</td>
         <td translate ng-hide="user.isEnabled">Disabled</td>
-        <td><a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a></td>
-        <td><a ng-click="deleteUser(user.id, user.name )" class="btn btn-small btn-danger" translate>delete</a></td>
+        <td>
+          <a ng-click="editUser(user.id)" class="btn btn-small btn-primary"  translate>edit</a>
+          <a ng-click="deleteUser(user.id, user.name )" class="btn btn-small btn-danger" translate>delete</a>
+        </td>
       </tr>
     </tbody>
   </table>
