@@ -39,7 +39,7 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
     if (!$rootScope.globals){
       $rootScope.globals = $cookies.getObject('globals');
     }
-    if ($rootScope.globals && $rootScope.globals.currentUser &&
+    if ($rootScope.globals && $rootScope.globals.currentUser && $rootScope.globals.currentUser.language &&
       gettextCatalog.getCurrentLanguage() != $rootScope.globals.currentUser.language) {
       //change the flag
       gettextCatalog.setCurrentLanguage($rootScope.globals.currentUser.language);
