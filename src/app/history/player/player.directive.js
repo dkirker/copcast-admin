@@ -268,23 +268,51 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
        */
       scope.$watchCollection('collection', function() {
 
-        $window.console.log('');
-        $window.console.warn('======================');
-        $window.console.info('Scope: ', scope);
-        $window.console.info('Current users: ', scope.users);
-        $window.console.info('Collection: ', scope.collection);
-        $window.console.warn('======================');
-        $window.console.log('');
+        // $window.console.log('');
+        // $window.console.warn('======================');
+        // $window.console.info('Scope: ', scope);
+        // $window.console.info('Current users: ', scope.users);
+        // $window.console.info('Collection: ', scope.collection);
+        // $window.console.info('Incidents: ', scope.incidents);
+        // $window.console.warn('======================');
+        // $window.console.log('');
 
         scope.isNone = typeof scope.collection === 'undefined';
         scope.isGroup = scope.collection && scope.collection.isGroup && !scope.collection.username ? true : false;
-        var user = scope.isGroup && scope.collection.users.length > 0 ? scope.collection.users[0] : null;
+
+        scope.totalIncidents = 0;
+
+        var user = null;
+        if (scope.isGroup && (scope.collection.users && scope.collection.users.length > 0)) {
+          user =  scope.collection.users[0];
+
+          $window.$.each(scope.incidents, function(index, item){
+            scope.totalIncidents += item.length;
+
+            $window.$.each(scope.collection.users, function(uindex, user){
+              if (user.id === index) { user.incidents = item.length; }
+            });
+          });
+        }
 
         angular.element('.officersList').perfectScrollbar();
 
         scope.setUser(user);
         scope.playing = false;
         video.src = undefined;
+
+        $window.setTimeout(function(){
+          var largest = 0;
+          angular.element('.officerChest').each(function(index, item){
+            var width = 0;
+
+            angular.element(item).children().each(function(cindex, citem){
+              width += angular.element(citem).outerWidth(true);
+            });
+
+            largest = (width > largest) ? width : largest;
+          }).css({ width: largest + 10 });
+        }, 100);
       });
 
       scope.$watchCollection('users', function() {
