@@ -1,32 +1,68 @@
-<section class="history player window" ng-class="{'nousers': !selectedUser, 'novideo': !selectedUser || !src}">
-  <section class="users group">
-    <div class="avatar" ng-repeat="user in users">
-      <img
-        src="{{user.profilePicture}}"
-        class="img-circle"
-        ng-class="{'active': selectedUser.id === user.id}"
-        title="{{user.name}}"
-        ng-if="user.profilePicture"
-        ng-click="setUser(user)">
+<section class="copcastHistoryVideoPlayer" ng-class="{'isClosed': !selectedUser && !src}">
+  <header>
+    <div class="activeFeed">
+      <p ng-if="isNone">Select a group or user</p>
+      <p ng-if="!isNone">
+        Seen by <strong>{{ collection.name }}</strong>
+        <span class="groupOfficers" ng-if="isGroup">{{ collection.users.length }} Officers</span>
+        <span class="groupIncidents" ng-if="isGroup">10 Incidents</span>
+      </p>
     </div>
-  </section>
-  <section class="scene">
-    <div class="no video" ng-if="!src" translate>No video found</div>
-    <video width="400" height="260" controls>
-      <translate>Your browser does not support videos.</translate>
-    </video>
-  </section>
-  <section class="controls">
-    <div>
-      <div class="previous" ng-click="previousVideo()" ng-class="{'enabled': hasPreviousVideo}" ng-click="playVideo()">
-      </div>
-      <div class="middle">
-        <span ng-if="!selectedUser"><translate>Select a user of group</translate></span>
-        <span ng-if="selectedUser" translate>Selected user:</span>
-        <strong ng-if="selectedUser">{{selectedUser.name}}</strong>
-      </div>
-      <div class="next" ng-click="nextVideo()" ng-class="{'enabled': hasNextVideo}">
+
+    <ul class="officersList" ng-if="isGroup">
+      <li ng-repeat="(key, user) in collection.users"
+          ng-class="{'active': user.id === selectedUser.id}"
+          ng-click="setUser(user)">
+        <span class="officerKey">{{ key + 1 }}</span>
+        <span class="officerName">{{ user.name }}</span>
+        <span class="officerIncidents">4</span>
+      </li>
+    </ul>
+  </header>
+
+  <div class="videoContainer">
+    <div class="noVideo" ng-show="!src"><i class="glyphicon glyphicon-facetime-video"></i></div>
+
+    <div class="muteAlert" ng-show="src">
+      Audio is automatically disabled and available only on export.
+      <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i class="glyphicon glyphicon-remove"></i></a>
+    </div>
+
+    <div class="scene">
+      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="src">
+        <translate>Your browser does not support videos.</translate>
+      </video>
+
+      <div class="controls" ng-show="src">
+        <!--<div class="btnPlay btn" title="Play/Pause video"><span class="icon-play"></span></div>-->
+
+        <span class="clock"></span>
+
+        <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>
+
+        <div class="player-progress-bar">
+          <div class="play-pause"><i class="glyphicon glyphicon-play"></i></div>
+          <div class="player-progress">
+            <span class="bufferBar"></span>
+            <span class="timeBar">
+              <span class="dragger">
+                <span class="dragger-timer">0:00</span>
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <footer>
+    <div class="button previous" ng-click="previousVideo()" ng-class="{'disabled': !hasPreviousVideo}">
+      <i class="glyphicon glyphicon-triangle-left"></i>
+      Previous
+    </div>
+    <div class="button next" ng-click="nextVideo()" ng-class="{'disabled': !hasNextVideo}">
+      Next
+      <i class="glyphicon glyphicon-triangle-right"></i>
+    </div>
+  </footer>
 </section>
