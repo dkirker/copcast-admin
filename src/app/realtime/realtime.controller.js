@@ -433,10 +433,17 @@ angular.module('copcastAdminApp').
         $scope.getCurrentUsers().reset();
 
         // start dismiss livestream modal
-        $scope.$uibModalInstance.close();
-        $rootScope.deregFrame();
-        $rootScope.deregStoppedStream();
-        socket.emit('unwatch');
+        if ($rootScope.isAuthenticated()) {
+          if ($scope.$uibModalInstance && $rootScope.deregFrame && $rootScope.deregStoppedStream) {
+            $scope.$uibModalInstance.close();
+            $rootScope.deregFrame();
+            $rootScope.deregStoppedStream();
+          }
+
+          if (socket) {
+            socket.emit('unwatch');
+          }
+        }
         // end dismiss livestream modal
 
         $window.console.log('Got disconnect!');
