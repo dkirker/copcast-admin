@@ -28,6 +28,9 @@ var options = {
           './skins/square/blue.png',
           './skins/square/blue@2x.png'
         ]
+      },
+      'bootstrap-maxlength': {
+        main: './src/bootstrap-maxlength.js'
       }
     }
   }

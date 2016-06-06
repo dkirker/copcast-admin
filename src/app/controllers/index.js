@@ -49,7 +49,7 @@ app.controller('IndexCtrl', function ($scope, $window, userService, $uibModalSta
         }
       }
 
-      if (socket) {
+      if (socket && socket.isConnected()) {
         socket.emit('unwatch');
       }
     }
