@@ -63,12 +63,15 @@
           <div class="col-md-4" ng-show="user.isAdmin">
             <label for="inputName" translate>
               Role:
-              <i class="glyphicon glyphicon-question-sign"
+              <a class="glyphicon glyphicon-question-sign"
                  data-toggle="popover"
                  data-placement="{{ isMobile ? 'top' : 'left'}}"
-                 data-trigger="click"
+                 data-trigger="focus"
+                 role="button"
+                 tabindex="0"
                  title="Roles explanation"
-                 data-content="{{ 'ROLE_TIP' | translate }}"></i>
+                 data-content="{{ 'ROLE_TIP' | translate }}"
+                 style="text-decoration: none"></a>
             </label>
             <select class="form-control" ng-options="role  for role in roles" ng-model="user.role" ng-required="user.isAdmin" ng-disabled="!canUpdate()"></select>
           </div>
