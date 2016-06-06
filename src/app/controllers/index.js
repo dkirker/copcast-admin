@@ -35,9 +35,9 @@ app.controller('IndexCtrl', function ($scope, $window, userService, $uibModalSta
 
   function locationHashChanged() {
     if (location.hash !== null) {
-      console.log('closing modals');
-      $uibModalStack.dismissAll();
-
+      if ($rootScope.isAuthenticated()) {
+        $uibModalStack.dismissAll();
+      }
 
       if (location.hash !== '#/') {
         if($rootScope.deregFrame) {
@@ -49,7 +49,9 @@ app.controller('IndexCtrl', function ($scope, $window, userService, $uibModalSta
         }
       }
 
-      socket.emit('unwatch');
+      if (socket) {
+        socket.emit('unwatch');
+      }
     }
   }
 
