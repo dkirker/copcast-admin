@@ -1,0 +1,46 @@
+@media print {
+  #usageReportContainer {
+    hr {
+      display: none;
+    }
+
+    .usageFilter {
+      display: none;
+    }
+
+    .panel {
+      border: none;
+      border-radius: 0;
+    }
+
+    table {
+      page-break-inside: auto;
+      border: 0;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+      border: 0;
+    }
+
+    td {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+
+    thead {
+      display: table-header-group;
+      border: 0;
+    }
+
+    tfoot {
+      display: table-footer-group;
+      border: 0;
+    }
+
+    ul {
+      page-break-inside: avoid;
+    }
+  }
+}
