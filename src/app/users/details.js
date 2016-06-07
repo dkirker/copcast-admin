@@ -31,9 +31,9 @@ angular.module('copcastAdminApp')
     };
 
     //load the picture
-    $scope.$watch('files', function () {
-      $scope.upload($scope.files);
-    });
+    // $scope.$watch('files', function () {
+    //   $scope.upload($scope.files);
+    // });
 
     // $scope.upload = function (files) {
     //   function doUpload(files){
