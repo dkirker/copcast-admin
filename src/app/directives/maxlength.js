@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name copcastAdminApp.directive:iCheck
+ * @name copcastAdminApp.directive:maxLength
  * @description
  * # maxLength
  */
