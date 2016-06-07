@@ -106,9 +106,11 @@ angular.module('copcastAdminApp')
 
     service.fitBounds = function(scope, activeUsers){
       var bounds = new $window.google.maps.LatLngBounds();
+
       for (var key in activeUsers){
         if (activeUsers[key].state === 1) {
           bounds.extend(activeUsers[key].marker.getPosition());
+
           if (activeUsers[key].cityCircle) {
             var circleBounds = activeUsers[key].cityCircle.getBounds();
             bounds.extend(circleBounds.getNorthEast());
@@ -116,6 +118,7 @@ angular.module('copcastAdminApp')
           }
         }
       }
+      
       scope.myMap.fitBounds(bounds);
     };
 

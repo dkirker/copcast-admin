@@ -118,12 +118,16 @@ angular.module('copcastAdminApp').
           return;
         }
 
-        if (data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)) {
-          changeMapPos(data.lastPos.lat, data.lastPos.lng);
-        } else if (data.group.lat && data.group.lng && !isNaN(data.group.lat) && !isNaN(data.group.lat)) {
-          changeMapPos(data.group.lat, data.group.lng);
+        if (Object.keys($scope.getCurrentUsers().userDict).length === 0 && $scope.getCurrentUsers().userDict.constructor === Object) {
+          if (data.lastPos && !isNaN(data.lastPos.lat) && !isNaN(data.lastPos.lng)) {
+            changeMapPos(data.lastPos.lat, data.lastPos.lng);
+          } else if (data.group.lat && data.group.lng && !isNaN(data.group.lat) && !isNaN(data.group.lat)) {
+            changeMapPos(data.group.lat, data.group.lng);
+          } else {
+            changeMapPos(0, 0);
+          }
         } else {
-          changeMapPos(0, 0);
+          mapService.fitBounds($scope, $scope.getCurrentUsers().userDict);
         }
       });
     }
