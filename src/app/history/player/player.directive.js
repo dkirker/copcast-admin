@@ -30,6 +30,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
       var video = $video[0];
 
       scope.wantSee =  false;
+      scope.speed =  1.0;
 
       var lastSrc;
 
@@ -336,6 +337,18 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
        */
       scope.wantSeeAction = function wantSee(){
         scope.wantSee = true;
+      };
+
+      scope.changeSpeed = function changeSpeed($event) {
+        var speed = parseFloat(angular.element($event.currentTarget).text());
+
+        $window.console.group('Video speed change');
+        $window.console.log('Previous speed: ', scope.speed);
+        $window.console.log('New speed: ', speed);
+        $window.console.groupEnd();
+
+        scope.speed = speed;
+        $video[0].playbackRate = speed;
       };
 
       scope.closeMuteAlert = function closeMuteAlert() {

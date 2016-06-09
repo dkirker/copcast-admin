@@ -47,6 +47,14 @@
 
         <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>
 
+        <div class="speeds">
+          <div class="speed" ng-class="{'active': speed === 8.0}" ng-click="changeSpeed($event)">8.0</div>
+          <div class="speed" ng-class="{'active': speed === 4.0}" ng-click="changeSpeed($event)">4.0</div>
+          <div class="speed" ng-class="{'active': speed === 2.0}" ng-click="changeSpeed($event)">2.0</div>
+          <div class="speed" ng-class="{'active': speed === 1.0}" ng-click="changeSpeed($event)">1.0</div>
+          <div class="speed" ng-class="{'active': speed === 0.5}" ng-click="changeSpeed($event)">0.5</div>
+        </div>
+
         <div class="player-progress-bar">
           <div class="play-pause"><i class="glyphicon glyphicon-play"></i></div>
           <div class="player-progress">
@@ -67,6 +75,7 @@
       <i class="glyphicon glyphicon-triangle-left"></i>
       Previous
     </div>
+
     <div class="button next" ng-click="nextVideo()" ng-class="{'disabled': !hasNextVideo}" translate>
       Next
       <i class="glyphicon glyphicon-triangle-right"></i>
