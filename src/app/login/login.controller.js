@@ -68,8 +68,26 @@ angular.module('copcastAdminApp')
         });
         historyService.registerLoggedIn();
 
-      }).error(function (/*data, status, headers, config*/) {
-        $scope.errorMessage = gettext('The email and password you entered don\'t match.');
+      }).error(function (data, status, headers, config) {
+
+        console.group('Login Error');
+        console.log('Data: ', data);
+        console.log('Status: ', status);
+        console.log('Headers: ', headers);
+        console.log('Config: ', config);
+        console.groupEnd();
+
+        switch (status) {
+          case 400:
+            $scope.errorMessage = gettext('The email or password you entered don\'t match.');
+            break;
+          case 401:
+            $scope.errorMessage = gettext('You do not have permission to access Copcast Admin');
+            break;
+          default:
+            $scope.errorMessage = gettext('Something went wrong, please try again.');
+        }
+
         $scope.emailMessage = '';
       });
     };
