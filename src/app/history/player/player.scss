@@ -204,13 +204,13 @@
           cursor: pointer;
 
           &.fullscreen {
-            top: 13px;
-            right: 10px;
-            font-size: 17px;
+            top: 14px;
+            right: 11px;
+            font-size: 19px;
           }
         }
 
-        $speeds-width: 21px;
+        $speeds-width: 25px;
 
         .speeds {
           width: $speeds-width;
@@ -219,7 +219,7 @@
           right: 8px;
 
           .speed {
-            font-size: 10px;
+            font-size: 9px;
             text-align: center;
             line-height: $speeds-width;
             width: $speeds-width;
