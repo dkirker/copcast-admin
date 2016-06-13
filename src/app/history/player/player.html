@@ -23,53 +23,59 @@
   </header>
 
   <div class="videoContainer">
-    <div class="noVideo" ng-show="nowVideo.isDeleted"><i class="glyphicon glyphicon-warning-sign"></i></div>
-    <div ng-show="!nowVideo.isDeleted">
-    <div class="noVideo" ng-show="!src"><i class="glyphicon glyphicon-facetime-video"></i></div>
 
-    <div class="cover" ng-show="!wantSee && src" ng-click="wantSeeAction()">
-      <div class="wantSee">
-        <i class="glyphicon glyphicon-play"></i>
-      </div>
-      <!--<img src="/assets/images/policia.png" alt="scope.nowVideo.id">-->
+    <div class="noVideo" ng-show="!src || !nowVideo"><i class="glyphicon glyphicon-facetime-video"></i></div>
+
+    <div class="noVideo" ng-show="nowVideo && (nowVideo.isDeleted || !nowVideo.isValid)">
+      <i class="glyphicon glyphicon-warning-sign"></i>
+      <span translate style="font-size: 18px">This video has been deleted, or is unavailable.</span>
     </div>
 
-    <div class="muteAlert" ng-show="wantSee && src" translate>
-      Audio is automatically disabled and available only on export.
-      <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i class="glyphicon glyphicon-remove"></i></a>
-    </div>
-
-    <div class="scene">
-      <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="wantSee && src">
-        <translate>Your browser does not support videos.</translate>
-      </video>
-
-      <div class="controls" ng-show="wantSee && src">
-        <span class="clock"></span>
-
-        <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>
-
-        <div class="speeds">
-          <div class="speed" ng-class="{'active': speed === 8.0}" ng-click="changeSpeed($event)">8.0</div>
-          <div class="speed" ng-class="{'active': speed === 4.0}" ng-click="changeSpeed($event)">4.0</div>
-          <div class="speed" ng-class="{'active': speed === 2.0}" ng-click="changeSpeed($event)">2.0</div>
-          <div class="speed" ng-class="{'active': speed === 1.0}" ng-click="changeSpeed($event)">1.0</div>
-          <div class="speed" ng-class="{'active': speed === 0.5}" ng-click="changeSpeed($event)">0.5</div>
+    <div ng-show="nowVideo && (!nowVideo.isDeleted && nowVideo.isValid)">
+      <div class="cover" ng-show="!wantSee && src" ng-click="wantSeeAction()">
+        <div class="wantSee">
+          <i class="glyphicon glyphicon-play"></i>
         </div>
+        <!--<img src="/assets/images/policia.png" alt="scope.nowVideo.id">-->
+      </div>
 
-        <div class="player-progress-bar">
-          <div class="play-pause"><i class="glyphicon glyphicon-play"></i></div>
-          <div class="player-progress">
-            <span class="bufferBar"></span>
+      <div class="muteAlert" ng-show="wantSee && src" translate>
+        Audio is automatically disabled and available only on export.
+        <a href="javascript:;" class="closeMe" ng-click="closeMuteAlert()"><i
+          class="glyphicon glyphicon-remove"></i></a>
+      </div>
+
+      <div class="scene">
+        <video id="copcastVideo" width="400" height="300" controls preload="auto" ng-show="wantSee && src">
+          <translate>Your browser does not support videos.</translate>
+        </video>
+
+        <div class="controls" ng-show="wantSee && src">
+          <span class="clock"></span>
+
+          <i class="icons fullscreen glyphicon glyphicon-fullscreen" title="Switch to full screen"></i>
+
+          <div class="speeds">
+            <div class="speed" ng-class="{'active': speed === 8.0}" ng-click="changeSpeed($event)">8.0</div>
+            <div class="speed" ng-class="{'active': speed === 4.0}" ng-click="changeSpeed($event)">4.0</div>
+            <div class="speed" ng-class="{'active': speed === 2.0}" ng-click="changeSpeed($event)">2.0</div>
+            <div class="speed" ng-class="{'active': speed === 1.0}" ng-click="changeSpeed($event)">1.0</div>
+            <div class="speed" ng-class="{'active': speed === 0.5}" ng-click="changeSpeed($event)">0.5</div>
+          </div>
+
+          <div class="player-progress-bar">
+            <div class="play-pause"><i class="glyphicon glyphicon-play"></i></div>
+            <div class="player-progress">
+              <span class="bufferBar"></span>
             <span class="timeBar">
               <span class="dragger">
                 <span class="dragger-timer">0:00</span>
               </span>
             </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 
