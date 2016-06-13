@@ -27,8 +27,8 @@
     <div class="noVideo" ng-show="!src || !nowVideo"><i class="glyphicon glyphicon-facetime-video"></i></div>
 
     <div class="noVideo" ng-show="nowVideo && (nowVideo.isDeleted || !nowVideo.isValid)">
-      <i class="glyphicon glyphicon-warning-sign"></i>
-      <span translate style="font-size: 18px">This video has been deleted, or is unavailable.</span>
+      <div class="warning"></div>
+      <div translate class="warning-description">This video has been deleted, or is unavailable.</div>
     </div>
 
     <div ng-show="nowVideo && (!nowVideo.isDeleted && nowVideo.isValid)">
