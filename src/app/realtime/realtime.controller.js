@@ -44,19 +44,21 @@ angular.module('copcastAdminApp').
     };
 
     function filterUsers() {
+      var activeUserMap = $scope.getCurrentUsers().userDict;
       if (!$scope.searchString) {
         //show all users
-        angular.forEach($scope.activeUsers, function (user) {
+        for (var id in activeUserMap) {
+          var user = activeUserMap[id];
           //TODO add group so we can search for specific groups
           user.marker.setMap($scope.myMap);
           if (user.cityCircle) {
             user.cityCircle.setMap($scope.myMap);
           }
-
-        });
+        };
       } else {
         //allows filter by regex
-        angular.forEach($scope.activeUsers, function (user) {
+        for (var id in activeUserMap) {
+          var user = activeUserMap[id];
           //TODO add group so we can search for specific groups
           var lUserName = user.userName;
           var lUserLogin = user.login;
@@ -73,7 +75,7 @@ angular.module('copcastAdminApp').
               user.cityCircle.setMap(null);
             }
           }
-        });
+        };
       }
     }
 
