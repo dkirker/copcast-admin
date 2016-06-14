@@ -112,7 +112,9 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
     }
 
     socket.disconnect();
-    loginService.show();
+    loginService.isOpen = true;
+    $window.location.reload(false);
+    // loginService.show();
   };
 
   return loginService;
