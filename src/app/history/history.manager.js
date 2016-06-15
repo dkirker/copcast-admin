@@ -374,7 +374,8 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         var locationsByDay = this.groupData[userId].locationsByDay;
         var locationsByHour = locationsByDay.get(date);
         if(locationsByHour) {
-          var location = this._getClosestLocation(locationsByHour.get(hour) || []);
+          // var location = this._getClosestLocation(locationsByHour.get(hour) || []);
+          var location = this._newGetClosestLocation(locationsByHour.get(hour) || []);
           this.groupData[userId].currentLocation = location;
           if(this.currentUser && this.currentUser.id === userId) {
             this.currentUserLocationChanged.emit(this.groupData[userId]);
@@ -407,6 +408,61 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
           minute: locationMinute
         };
       }
+    },
+
+    _newGetClosestLocation: function _newGetClosestLocation(locations) {
+      var now = new Date(this.currentDate.format());
+      var before = [];
+      var after = [];
+      var max = locations.length;
+
+      for(var i = 0; i < max; i++) {
+        var tar = locations[i];
+        var arrDate = new Date(tar.date.format());
+        var diff = (arrDate - now) / (3600 * 24 * 1000); // 3600 * 24 * 1000 = calculating milliseconds to days, for clarity.
+
+        if(diff > 0) {
+          before.push({diff: diff, index: i});
+        } else {
+          after.push({diff: diff, index: i});
+        }
+      }
+
+      before.sort(function(a, b) {
+        if(a.diff < b.diff) { return -1; }
+        if(a.diff > b.diff) { return 1; }
+        return 0;
+      });
+
+      var closestBefore = before[0];
+
+      for(var i = 0; i < before.length; i++) {
+        if(before[i].diff >= 0 && before[i].diff < closestBefore.diff) closestBefore = before[i];
+      }
+
+      after.sort(function(a, b) {
+        if(a.diff > b.diff) { return -1; }
+        if(a.diff < b.diff) { return 1; }
+        return 0;
+      });
+
+      var closestAfter = after[0];
+
+      for(var i = 0; i < after.length; i++) {
+        if(after[i].diff >= 0 && after[i].diff < closestAfter.diff) closestAfter = after[i];
+      }
+
+      var closest;
+
+      if(closestBefore && closestAfter) {
+        closest = (Math.abs(closestBefore) < Math.abs(closestAfter)) ? closestBefore : closestAfter;
+      } else if(closestBefore) {
+        closest = closestBefore;
+      } else {
+        closest = closestAfter;
+      }
+
+      return locations[closest.index];
     },
 
     _update: function _update() {
