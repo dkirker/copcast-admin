@@ -43,37 +43,47 @@ angular.module('copcastAdminApp').
       streetViewControl: false
     };
 
-    function filterUsers() {
+    function getFilteredUsers() {
+      var activeUserMap = $scope.getCurrentUsers().userDict;
       if (!$scope.searchString) {
-        //show all users
-        angular.forEach($scope.activeUsers, function (user) {
-          //TODO add group so we can search for specific groups
-          user.marker.setMap($scope.myMap);
-          if (user.cityCircle) {
-            user.cityCircle.setMap($scope.myMap);
-          }
-
-        });
+        return activeUserMap;
       } else {
         //allows filter by regex
-        angular.forEach($scope.activeUsers, function (user) {
+        var filteredUserMap = {}
+        for (var id in activeUserMap) {
+          var user = activeUserMap[id];
           //TODO add group so we can search for specific groups
           var lUserName = user.userName;
           var lUserLogin = user.login;
           var reMatch = new RegExp($scope.searchString, 'gi');
-
           if (lUserName.match(reMatch) || lUserLogin.match(reMatch)) {
-            user.marker.setMap($scope.myMap);
-            if (user.cityCircle) {
-              user.cityCircle.setMap($scope.myMap);
-            }
-          } else {
-            user.marker.setMap(null);
-            if (user.cityCircle) {
-              user.cityCircle.setMap(null);
-            }
+            filteredUserMap[id] = user;
           }
-        });
+        }
+        return filteredUserMap;
+      }
+    }
+
+    function filterUsers() {
+      var allActiveUsers = $scope.getCurrentUsers().userDict;
+      var filteredUsers = getFilteredUsers();
+
+      // Only show markers for filteredUsers
+      for (var id in allActiveUsers) {
+        var user = allActiveUsers[id];
+        var map = filteredUsers[id] ? $scope.myMap : null;
+        user.marker.setMap(map);
+        if (user.cityCircle) {
+          user.cityCircle.setMap(map);
+        }
+      }
+
+      if (Object.keys(filteredUsers).length > 0) {
+        // Show only filtered users.
+        mapService.fitBounds($scope, filteredUsers);
+      } else {
+        // No users found, show map that will fit all users when they are back
+        mapService.fitBounds($scope, allActiveUsers);
       }
     }
 
@@ -127,7 +137,7 @@ angular.module('copcastAdminApp').
             changeMapPos(0, 0);
           }
         } else {
-          mapService.fitBounds($scope, $scope.getCurrentUsers().userDict);
+          mapService.fitBounds($scope, getFilteredUsers());
         }
       });
     }
