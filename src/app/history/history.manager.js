@@ -51,6 +51,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         for(var i = 0, len = userKeys.length; i < len; i++) {
           var userId = userKeys[i];
           var userData = groupData[userId];
+
           if(userData.currentLocation) {
             var marker = $window.utils.GoogleMaps.createMarker(userData.user, userData.currentLocation.location);
             markers.push(marker);
@@ -60,6 +61,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
             }
           }
         }
+
         self.groupLocationsMarkers = markers;
         if (self.groupLocationsMarkers.length > 0) {
           self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
@@ -306,12 +308,14 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     },
 
     setCurrentDate: function setCurrentDate(date) {
+      $window.console.info('Setting currentDate: ', date);
       this.currentDate = typeof date === 'string' ? $window.moment(date) : date;
       this._calculateClosestGroupLocations();
       this._updateCurrentDateVideo();
     },
 
     setCurrentVideo: function setCurrentVideo(video) {
+      $window.console.info('Video setted currentDate (from): ', video);
       this.currentDate = $window.moment(video.from);
       this._calculateClosestGroupLocations();
       this._setVideoData(video.index);
@@ -360,7 +364,6 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
           next: userData.nextVideo
         });
       }
-
     },
 
     _calculateClosestGroupLocations: function _calculateClosestGroupLocations() {
@@ -376,6 +379,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         if(locationsByHour) {
           // var location = this._getClosestLocation(locationsByHour.get(hour) || []);
           var location = this._newGetClosestLocation(locationsByHour.get(hour) || []);
+          self.store.hasLocation = (location) ? true : false;
           this.groupData[userId].currentLocation = location;
           if(this.currentUser && this.currentUser.id === userId) {
             this.currentUserLocationChanged.emit(this.groupData[userId]);
@@ -411,22 +415,44 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     },
 
     _newGetClosestLocation: function _newGetClosestLocation(locations) {
-      var now = new Date(this.currentDate.format());
+      var now = new Date(this.currentDate.format()).getTime();
       var before = [];
       var after = [];
       var max = locations.length;
+      var threshold = 30000;
+      var limitDate = now - threshold;
+      var limitDiff = (limitDate - now) / (3600 * 24 * 1000);
 
+      $window.console.group('Closest location');
+
+      $window.console.groupCollapsed('Now');
+      $window.console.info('Timestamp: ', now);
+      $window.console.log('Date: ', new Date(now));
+      $window.console.groupEnd();
+
+      $window.console.log('Threshold: %s (milliseconds)', threshold);
+
+      $window.console.groupCollapsed('Limit');
+      $window.console.info('Timestamp: ', limitDate);
+      $window.console.log('Date: ', new Date(limitDate));
+      $window.console.warn('Diff: ', limitDiff);
+      $window.console.groupEnd();
+
+      $window.console.groupCollapsed('Locations');
       for(var i = 0; i < max; i++) {
         var tar = locations[i];
-        var arrDate = new Date(tar.date.format());
+        var arrDate = new Date(tar.date.format()).getTime();
         var diff = (arrDate - now) / (3600 * 24 * 1000); // 3600 * 24 * 1000 = calculating milliseconds to days, for clarity.
 
+        $window.console.log(locations[i]);
+
         if(diff > 0) {
-          before.push({diff: diff, index: i});
-        } else {
           after.push({diff: diff, index: i});
+        } else {
+          before.push({diff: diff, index: i});
         }
       }
+      $window.console.groupEnd();
 
       before.sort(function(a, b) {
         if(a.diff < b.diff) { return -1; }
@@ -436,8 +462,8 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
 
       var closestBefore = before[0];
 
-      for(var i = 0; i < before.length; i++) {
-        if(before[i].diff >= 0 && before[i].diff < closestBefore.diff) closestBefore = before[i];
+      for(var j = 0; j < before.length; j++) {
+        if(before[j].diff >= 0 && before[j].diff < closestBefore.diff) { closestBefore = before[j]; }
       }
 
       after.sort(function(a, b) {
@@ -448,8 +474,8 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
 
       var closestAfter = after[0];
 
-      for(var i = 0; i < after.length; i++) {
-        if(after[i].diff >= 0 && after[i].diff < closestAfter.diff) closestAfter = after[i];
+      for(var k = 0; k < after.length; k++) {
+        if(after[k].diff >= 0 && after[k].diff < closestAfter.diff) { closestAfter = after[k]; }
       }
 
       var closest;
@@ -462,7 +488,23 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         closest = closestAfter;
       }
 
-      return locations[closest.index];
+      var thresholdAllow = Math.abs(closest.diff) <= Math.abs(limitDiff) && Math.abs(closest.diff) >= 0;
+
+      $window.console.groupCollapsed('Locations grouped');
+      $window.console.log('Before: ', before);
+      $window.console.log('After: ', after);
+      $window.console.groupEnd();
+
+      $window.console.groupCollapsed('Closest');
+      $window.console.info('Before: ', closestBefore);
+      $window.console.info('After: ', closestAfter);
+      $window.console.warn('Best: ', closest);
+      $window.console.groupEnd();
+
+      $window.console.log('Threshold allow: ', thresholdAllow);
+      $window.console.groupEnd();
+
+      return (thresholdAllow) ? locations[closest.index] : null;
     },
 
     _update: function _update() {
@@ -700,6 +742,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
 
   // Manager API
   this.loadUsersAndGroups = groups.load.bind(groups);
+  this.store.hasLocation = true;
 
   this.setCurrentGroup = groupsDataManager.setCurrentGroup.bind(groupsDataManager);
   this.setCurrentUser = groupsDataManager.setCurrentUser.bind(groupsDataManager);
