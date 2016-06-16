@@ -55,8 +55,11 @@ angular.module('copcastAdminApp').
           //TODO add group so we can search for specific groups
           var lUserName = user.userName;
           var lUserLogin = user.login;
+          var lGroupName = user.group || '';
           var reMatch = new RegExp($scope.searchString, 'gi');
-          if (lUserName.match(reMatch) || lUserLogin.match(reMatch)) {
+          if (lUserName.match(reMatch) ||
+              lUserLogin.match(reMatch) ||
+              lGroupName.match(reMatch)) {
             filteredUserMap[id] = user;
           }
         }
@@ -224,7 +227,7 @@ angular.module('copcastAdminApp').
           id: data.id,
           userName: data.name,
           login: data.username,
-          group: data.group,
+          group: data.groupName,
           marker: mapService.createMarker($scope, pos, data),
           groupId: data.groupId,
           accuracy: data.location.accuracy,
