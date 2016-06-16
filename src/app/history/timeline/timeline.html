@@ -1,4 +1,8 @@
 <section class="nav timeline {{showVideo ? 'timeline-fix' : ''}}">
+  <div class="hasNoLocation {{!hasLocation ? 'active' : ''}}">
+    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+    <span translate>The video you are trying to view does not have a valid location.</span>
+  </div>
   <div class="container">
     <div class="main line"></div>
     <timeline-segments

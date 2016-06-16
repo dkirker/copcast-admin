@@ -22,6 +22,7 @@
       scope: {
         userData: '=',
         showVideo: '=',
+        hasLocation: '=',
         onSelectDate: '&'
       }
     };
