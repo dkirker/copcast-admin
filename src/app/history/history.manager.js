@@ -415,6 +415,9 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       var limitDate = now - threshold;
       var limitDiff = (limitDate - now) / (3600 * 24 * 1000);
 
+      if (max == 0){
+        return false;
+      }
       $window.console.group('Closest location');
 
       $window.console.groupCollapsed('Now');
