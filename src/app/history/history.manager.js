@@ -48,6 +48,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       this.$timeout(function() {
         var userKeys = getObjectKeys(groupData);
         var markers = [];
+
         for(var i = 0, len = userKeys.length; i < len; i++) {
           var userId = userKeys[i];
           var userData = groupData[userId];
@@ -63,16 +64,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         }
 
         self.groupLocationsMarkers = markers;
-        if (self.groupLocationsMarkers.length > 0) {
-          self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
-        }
-        //else {
-        //  notify({
-        //    templateUrl: 'app/views/notifications/errorNotification.html',
-        //    message: gettextCatalog.getString('Warning: video with missing location information.'),
-        //    position: "right"
-        //  });
-        //}
+        self.groupLocationsMarkersChanged.emit(self.groupLocationsMarkers);
       }, 600);
     }
   };

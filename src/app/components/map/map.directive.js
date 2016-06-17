@@ -6,6 +6,7 @@
     return {
       restrict: 'EA',
       scope: {
+        userData: '=?',
         markerLocations: '=?',
         heatmapLocations: '=?'
       },
@@ -108,7 +109,9 @@
 
             fitBounds(positions);
           } else {
-            resetMapPosition();
+            var lat = (scope.userData && scope.userData.user) ? scope.userData.user.lat : 0;
+            var lng = (scope.userData && scope.userData.user) ? scope.userData.user.lng : 0;
+            setMapPosition(new $window.google.maps.LatLng(lat,lng), 12);
           }
         });
       }
