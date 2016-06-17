@@ -223,6 +223,10 @@ header > .navbar ul.navbar-nav > li > a {
   margin-left: 22px !important;
 }
 
+.bootstrap-maxlength {
+  color: #66afe9;
+}
+
 @media print {
   * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:link, a:visited { text-decoration: underline; color: #781351; }
