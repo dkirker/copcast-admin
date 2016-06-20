@@ -78,10 +78,10 @@ angular.module('copcastAdminApp')
         console.groupEnd();
 
         switch (status) {
-          case 400:
+          case 401:
             $scope.errorMessage = gettext('The email or password you entered don\'t match.');
             break;
-          case 401:
+          case 403:
             $scope.errorMessage = gettext('You do not have permission to access Copcast Admin');
             break;
           default:
