@@ -33,7 +33,7 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
   };
 
   loginService.getUser = function() {
-    console.log('getting user', $rootScope.globals, $cookies.getObject('globals') )
+    console.log('getting user', $rootScope.globals, $cookies.getObject('globals'), $rootScope.cookieDomain )
     if (!$rootScope.globals && !$cookies.getObject('globals')){
       return null;
     }
@@ -116,7 +116,7 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
       socket.disconnect();
     }
     loginService.isOpen = true;
-    console.log("Info after logout: ", $rootScope["globals"], $cookies.getObject('globals'));
+    console.log("Info after logout: ", $rootScope["globals"], $cookies.getObject('globals'), $rootScope.cookieDomain);
     $window.location.reload(false);
     // loginService.show();
   };
