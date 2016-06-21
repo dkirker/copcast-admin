@@ -103,16 +103,17 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
   };
 
   loginService.logout = function(){
-    $rootScope.globals = null;
+    delete $rootScope["globals"];
 
     try {
       $cookies.remove('globals', {domain: $rootScope.cookieDomain});
     } catch (err) {
+      console.error(err);
       $cookies.remove('globals');
     }
-
     socket.disconnect();
     loginService.isOpen = true;
+    console.log("Info after logout: ", $rootScope, $cookies);
     $window.location.reload(false);
     // loginService.show();
   };
