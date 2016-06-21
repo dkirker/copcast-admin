@@ -22,7 +22,16 @@ describe('Controller:RealtimeCtrl', function () {
       getGreyMarker: function (name) {
         return "anyURL";
       },
+      getBlueMarker: function (name) {
+        return "anyURL";
+      },
       getRedMarker: function (name) {
+        return "anyURL";
+      },
+      getYellowMarker: function (name) {
+        return "anyURL";
+      },
+      getGreenMarker: function (name) {
         return "anyURL";
       },
 

@@ -49,9 +49,22 @@ angular.module('copcastAdminApp')
       }
     };
 
-    service.getRedMarker = function(user){
+    service.getGreyMarker = function(user){
+      // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
+      return '/assets/images/pins/user.png';
+    };
+
+    service.getBlueMarker = function(user){
       // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
       return '/assets/images/pins/user_online.png';
+    };
+
+    service.getRedMarker = function(user){
+      return '/assets/images/pins/user_incident.png';
+    };
+
+    service.getYellowMarker = function(user){
+      return '/assets/images/pins/user_live_requesting.png';
     };
 
     service.getGreenMarker = function(user){
@@ -59,10 +72,6 @@ angular.module('copcastAdminApp')
       return '/assets/images/pins/user_live_streaming.png';
     };
 
-    service.getGreyMarker = function(user){
-      // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
-      return '/assets/images/pins/user.png';
-    };
 
     service.applyCircle = function(scope, user){
       if (user.accuracy > 20) {
@@ -93,7 +102,7 @@ angular.module('copcastAdminApp')
       var marker = new $window.google.maps.Marker({
         map: scope.myMap,
         position: pos,
-        icon: service.getRedMarker(user.name)
+        icon: service.getBlueMarker(user.name)
       });
 
       $window.google.maps.event.addListener(marker, 'click', function() {
@@ -118,7 +127,7 @@ angular.module('copcastAdminApp')
           }
         }
       }
-      
+
       scope.myMap.fitBounds(bounds);
     };
 
