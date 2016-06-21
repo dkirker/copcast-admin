@@ -33,7 +33,6 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
   };
 
   loginService.getUser = function() {
-    console.log('getting user', $rootScope.globals, $cookies.getObject('globals') )
     if (!$rootScope.globals && !$cookies.getObject('globals')){
       return null;
     }
@@ -89,7 +88,6 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
   loginService._getCookieDomain = function(){
     var apiserver = $window.document.createElement('a');
     apiserver.href = ServerUrl;
-    console.log('CHECK the location', $window.location.hostname, apiserver.hostname )
     if (apiserver.hostname === $window.location.hostname) {
       return null;
     }
@@ -122,7 +120,6 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
       socket.disconnect();
     }
     loginService.isOpen = true;
-    console.log("Info after logout: ", $rootScope["globals"], $cookies.getObject('globals'), cookieDomain);
     $window.location.reload(false);
     // loginService.show();
   };
