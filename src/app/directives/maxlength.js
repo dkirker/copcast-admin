@@ -19,8 +19,17 @@ angular.module('copcastAdminApp')
           .maxlength({
             // alwaysShow: true,
             threshold: length,
-            warningClass: "label label-success",
-            limitReachedClass: "label label-danger"
+            placement: function(element, counter, objPosition){
+              var input = angular.element(element[0]);
+              var alert = angular.element(counter[0]);
+
+              alert.css({
+                top: objPosition.top + input.outerHeight(true) + 5,
+                left: objPosition.left + input.outerWidth(true) - alert.outerWidth(true)
+              });
+            },
+            warningClass: "label",
+            limitReachedClass: "label"
           });
         });
       }
