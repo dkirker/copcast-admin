@@ -50,7 +50,7 @@ angular.module('copcastAdminApp').
         return activeUserMap;
       } else {
         //allows filter by regex
-        var filteredUserMap = {}
+        var filteredUserMap = {};
         for (var id in activeUserMap) {
           var user = activeUserMap[id];
           //TODO add group so we can search for specific groups
@@ -206,14 +206,9 @@ angular.module('copcastAdminApp').
     var user = $scope.getCurrentUsers().getUser(data.id);
 
     if (user === null) { //user not in list
-      console.group('LOAD USER > USER === NULL');
-      console.log('user: ', user);
-      console.log('data.id: ', data.id);
-      console.groupEnd();
-
       // user not connected via socket. Ignoring
-      $window.console.log('User not active yet. Registering now.');
-      $scope.getCurrentUsers().enterUser(data.id);
+      $window.console.warn('User not active yet.');
+      // $scope.getCurrentUsers().enterUser(data.id);
     } else {
 
       user = angular.extend({}, user);
