@@ -111,9 +111,11 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
       console.error(err);
       $cookies.remove('globals');
     }
-    socket.disconnect();
+    if (socket) {
+      socket.disconnect();
+    }
     loginService.isOpen = true;
-    console.log("Info after logout: ", $rootScope, $cookies);
+    console.log("Info after logout: ", JSON.stringify($rootScope), JSON.stringify($cookies));
     $window.location.reload(false);
     // loginService.show();
   };
