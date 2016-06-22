@@ -8,7 +8,7 @@
  * Controller of the copcastAdminApp
  */
 angular.module('copcastAdminApp')
-  .controller('ModalVideoCtrl', function ($scope, $window, $rootScope, $sce, $uibModalInstance, user, socket) {
+  .controller('ModalVideoCtrl', function ($scope, $window, $rootScope, $sce, $uibModalInstance, user, socket, mapService) {
     $scope.user = user;
 
     $scope.options = {
@@ -26,6 +26,9 @@ angular.module('copcastAdminApp')
 
       $window.console.log(user.userName+ ' is leaving watch list');
       socket.emit('unwatch');
+
+      // var user = $scope.getCurrentUsers().getUser(data.id);
+      user.marker.setIcon(mapService.getBlueMarker(user.userName));
     };
 
   }).directive('h264canvas', function($rootScope, $window) {

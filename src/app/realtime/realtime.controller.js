@@ -10,7 +10,7 @@
  */
 
 angular.module('copcastAdminApp').
-  controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify, $window, $rootScope, mapService,
+  controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify, $window, $timeout, $rootScope, mapService,
                                       userService, $location, HistoryManager, gettextCatalog) {
 
     $scope.windowHeight = $window.innerHeight;
@@ -21,6 +21,7 @@ angular.module('copcastAdminApp').
     $scope.searchString = '';
     $scope.alerts = [];
     $scope.$uibModalInstance = null;
+    $scope.isStreamingFlag = false;
 
     $scope.mapOptions = {
       zoom: 12,
@@ -49,7 +50,7 @@ angular.module('copcastAdminApp').
         return activeUserMap;
       } else {
         //allows filter by regex
-        var filteredUserMap = {}
+        var filteredUserMap = {};
         for (var id in activeUserMap) {
           var user = activeUserMap[id];
           //TODO add group so we can search for specific groups
@@ -105,8 +106,9 @@ angular.module('copcastAdminApp').
 
     function requestStream(user) {
       socket.emit('watch', user.id);
-
       $scope.popModal(user);
+      $scope.isStreamingFlag = true;
+      user.marker.setIcon(mapService.getGreenMarker(user.userName));
       $window.console.log('watch: '+user.id);
 
       //$scope.waitingStreaming = true;
@@ -204,10 +206,9 @@ angular.module('copcastAdminApp').
     var user = $scope.getCurrentUsers().getUser(data.id);
 
     if (user === null) { //user not in list
-
       // user not connected via socket. Ignoring
-      $window.console.log('User not active yet. Registering now.');
-      $scope.getCurrentUsers().enterUser(data.id);
+      $window.console.warn('User not active yet.');
+      // $scope.getCurrentUsers().enterUser(data.id);
     } else {
 
       user = angular.extend({}, user);
@@ -398,6 +399,10 @@ angular.module('copcastAdminApp').
 
       socket.on('streamStopped', function(){
         $rootScope.$emit('streamStopped');
+        $scope.isStreamingFlag = false;
+
+        var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
+        user.marker.setIcon(mapService.getBlueMarker(user.userName));
       });
 
       socket.on('streamDenied', function(data){
@@ -408,6 +413,10 @@ angular.module('copcastAdminApp').
             $scope.$uibModalInstance = null;
           }
           $scope.popStreamingDenied(data.name);
+          $scope.isStreamingFlag = false;
+
+          var user = $scope.getCurrentUsers().getUser(data.id);
+          user.marker.setIcon(mapService.getBlueMarker(user.userName));
         }
       });
 
@@ -434,7 +443,7 @@ angular.module('copcastAdminApp').
           position: 'right',
           duration: 5000
         });
-
+        $scope.isStreamingFlag = false;
         $scope.getCurrentUsers().exitUser(data.userId);
       });
 
@@ -449,6 +458,17 @@ angular.module('copcastAdminApp').
         $window.console.log('incident!!');
         $window.console.log(data);
         $scope.popIncidentFlag(data.username);
+
+        var user = $scope.getCurrentUsers().getUser(data.id);
+        user.marker.setIcon(mapService.getRedMarker(user.userName));
+
+        $timeout(function(){
+          if($scope.isStreamingFlag) {
+            user.marker.setIcon(mapService.getGreenMarker(user.userName));
+          } else {
+            user.marker.setIcon(mapService.getBlueMarker(user.userName));
+          }
+        }, 15000);
       });
 
       socket.on('users:heartbeat', function(data) {
@@ -472,6 +492,7 @@ angular.module('copcastAdminApp').
         }
         // end dismiss livestream modal
 
+        $scope.isStreamingFlag = false;
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
       });
