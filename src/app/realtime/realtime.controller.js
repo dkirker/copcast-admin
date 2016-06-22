@@ -414,7 +414,9 @@ angular.module('copcastAdminApp').
       socket.on('userLeft', function(data) {
         $window.console.log('user left: '+data.userId);
 
-        if (! $scope.getCurrentUsers().exitUser(data.userId)) {
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        if (! user) {
           $window.console.log('out of sync event. Ignoring');
           return;
         }
@@ -425,6 +427,13 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance.close();
           $scope.$uibModalInstance = null;
         }
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('is no longer connected'),
+          position: 'right',
+          duration: 5000
+        });
 
         $scope.getCurrentUsers().exitUser(data.userId);
       });
