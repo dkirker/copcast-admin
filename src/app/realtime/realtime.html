@@ -36,7 +36,7 @@
 
       <p class="battery-info">
         <span ng-show="currentUser.batteryPercentage">
-          {{currentUser.batteryPercentage}}% <span translate>Battery</span>
+          {{ currentUser.batteryPercentage.toFixed() }}% <span translate>Battery</span>
         </span>
         <span ng-hide="currentUser.batteryPercentage">
           <span translate>No battery information</span>
