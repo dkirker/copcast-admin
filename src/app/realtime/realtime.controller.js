@@ -406,16 +406,16 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
+        var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: gettextCatalog.getString('Live streaming disabled by officer'),
+          message: user.name + ' ' + gettextCatalog.getString('disabled live streaming.'),
           position: 'right',
           duration: 5000
         });
 
         $scope.isStreamingFlag = false;
 
-        var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
         user.marker.setIcon(mapService.getBlueMarker(user.userName));
       });
 
