@@ -399,6 +399,13 @@ angular.module('copcastAdminApp').
 
       socket.on('streamStopped', function(){
         $rootScope.$emit('streamStopped');
+
+        mapService.closeBalloon();
+        if ($scope.$uibModalInstance !== null) {
+          $scope.$uibModalInstance.close();
+          $scope.$uibModalInstance = null;
+        }
+
         $scope.isStreamingFlag = false;
 
         var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
@@ -412,6 +419,7 @@ angular.module('copcastAdminApp').
             $scope.$uibModalInstance.close();
             $scope.$uibModalInstance = null;
           }
+
           $scope.popStreamingDenied(data.name);
           $scope.isStreamingFlag = false;
 
@@ -443,6 +451,7 @@ angular.module('copcastAdminApp').
           position: 'right',
           duration: 5000
         });
+
         $scope.isStreamingFlag = false;
         $scope.getCurrentUsers().exitUser(data.userId);
       });
