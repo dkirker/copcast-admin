@@ -409,7 +409,7 @@ angular.module('copcastAdminApp').
         var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.name + ' ' + gettextCatalog.getString('disabled live streaming.'),
+          message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
           position: 'right',
           duration: 5000
         });
@@ -454,7 +454,7 @@ angular.module('copcastAdminApp').
 
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.name + ' ' + gettextCatalog.getString('is no longer connected'),
+          message: user.userName + ' ' + gettextCatalog.getString('is no longer connected'),
           position: 'right',
           duration: 5000
         });
