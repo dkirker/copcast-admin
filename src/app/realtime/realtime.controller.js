@@ -454,7 +454,7 @@ angular.module('copcastAdminApp').
 
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('is no longer connected'),
+          message: user.name + ' ' + gettextCatalog.getString('is no longer connected'),
           position: 'right',
           duration: 5000
         });
@@ -473,7 +473,7 @@ angular.module('copcastAdminApp').
       socket.on('users:incidentFlag', function(data){
         $window.console.log('incident!!');
         $window.console.log(data);
-        $scope.popIncidentFlag(data.username);
+        $scope.popIncidentFlag(data.name);
 
         var user = $scope.getCurrentUsers().getUser(data.id);
         user.marker.setIcon(mapService.getRedMarker(user.userName));
