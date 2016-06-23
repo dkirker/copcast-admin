@@ -397,6 +397,58 @@ angular.module('copcastAdminApp').
         $rootScope.$emit('h264Frame', imgArray);
       });
 
+
+      socket.on('missionPaused', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Mission paused by: ', user.userName);
+
+        mapService.closeBalloon();
+        if ($scope.$uibModalInstance !== null) {
+          $scope.$uibModalInstance.close();
+          $scope.$uibModalInstance = null;
+        }
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
+          position: 'right',
+          duration: 5000
+        });
+
+        user.marker.setIcon(mapService.getGreyMarker(user.userName));
+      });
+
+      socket.on('missionResumed', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Mission resumed by: ', user.userName);
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
+          position: 'right',
+          duration: 5000
+        });
+
+        user.marker.setIcon(mapService.getBlueMarker(user.userName));
+      });
+
+      socket.on('startStreamingRequest', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Streaming requested by: ', user.userName);
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('is requesting livestream'),
+          position: 'right',
+          duration: 5000
+        });
+
+        user.marker.setIcon(mapService.getYellowMarker(user.userName));
+      });
+
       socket.on('streamStopped', function(){
         $rootScope.$emit('streamStopped');
 
