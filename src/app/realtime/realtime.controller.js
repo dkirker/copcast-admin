@@ -406,6 +406,13 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: gettextCatalog.getString('Live streaming disabled by officer'),
+          position: 'right',
+          duration: 5000
+        });
+
         $scope.isStreamingFlag = false;
 
         var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
