@@ -449,7 +449,12 @@ angular.module('copcastAdminApp').
         user.marker.setIcon(mapService.getYellowMarker(user.userName));
       });
 
-      socket.on('streamStopped', function(){
+      socket.on('streamStarted', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+        user.marker.setIcon(mapService.getGreenMarker(user.userName));
+      });
+
+      socket.on('streamStopped', function(data){
         $rootScope.$emit('streamStopped');
 
         mapService.closeBalloon();
@@ -458,7 +463,7 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
-        var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
+        var user = $scope.getCurrentUsers().getUser(data.userId);
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
           message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
