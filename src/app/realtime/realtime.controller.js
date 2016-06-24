@@ -426,7 +426,7 @@ angular.module('copcastAdminApp').
 
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
+          message: user.userName + ' ' + gettextCatalog.getString('has resumed the mission.'),
           position: 'right',
           duration: 5000
         });

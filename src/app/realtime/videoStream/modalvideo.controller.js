@@ -28,7 +28,7 @@ angular.module('copcastAdminApp')
       socket.emit('unwatch');
 
       // var user = $scope.getCurrentUsers().getUser(data.id);
-      user.marker.setIcon(mapService.getBlueMarker(user.userName));
+      // user.marker.setIcon(mapService.getBlueMarker(user.userName));
     };
 
   }).directive('h264canvas', function($rootScope, $window) {
