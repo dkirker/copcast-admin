@@ -25,7 +25,7 @@ angular.module('copcastAdminApp')
       $http.get(ServerUrl + '/groups-paginated', {
         params: params
       }).success(function(data) {
-        $scope.groups = data.rows;
+        $scope.groups = (data.rows) ? data.rows : data;
         $scope.totalGroups = data.count;
       }).error(function(data) {
         $window.console.error(data);
