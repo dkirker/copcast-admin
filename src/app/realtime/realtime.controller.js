@@ -454,6 +454,15 @@ angular.module('copcastAdminApp').
         user.marker.setIcon(mapService.getYellowMarker(user.userName));
       });
 
+      socket.off('stopStreamingRequest');
+      socket.on('stopStreamingRequest', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Streaming request cancelled by: ', user.userName);
+
+        user.marker.setIcon(mapService.getBlueMarker(user.userName));
+      });
+
       socket.off('streamStarted');
       socket.on('streamStarted', function(data){
         var user = $scope.getCurrentUsers().getUser(data.userId);
