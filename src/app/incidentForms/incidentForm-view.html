@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="page-header hrDarker" translate>Incident Form</h2>
+  <h2 class="page-header hrDarker" translate>Incident Report</h2>
 
   <div class="row">
     <div class="col-md-2">
@@ -13,12 +13,12 @@
     </div>
 
     <div class="col-md-2">
-      <p><strong translate>Lat:</strong></p>
+      <p><strong translate>Latitude:</strong></p>
       <p>{{incidentForm.lat }}</p>
     </div>
 
     <div class="col-md-2">
-      <p><strong translate>Long:</strong></p>
+      <p><strong translate>Longitude:</strong></p>
       <p>{{incidentForm.lng}}</p>
     </div>
 
@@ -37,7 +37,7 @@
     </div>
 
     <div class="col-md-2" ng-show="incidentForm.accident">
-      <p><strong translate>Gravity</strong></p>
+      <p><strong translate>Severity</strong></p>
       <p>{{incidentForm.gravity }}</p>
     </div>
 
@@ -51,12 +51,12 @@
 
   <div class="row">
     <div class="col-md-2">
-      <p><strong translate>Fine?</strong></p>
+      <p><strong translate>Citation?</strong></p>
       <p><span class="glyphicon {{ incidentForm.fine ? 'glyphicon-ok' : 'glyphicon-remove' }}"></span></p>
     </div>
 
     <div class="col-md-2" ng-show="incidentForm.fine">
-      <p><strong translate>Type of Fine</strong></p>
+      <p><strong translate>Type of citation</strong></p>
       <p>{{ incidentForm.fineType }}</p>
     </div>
   </div>

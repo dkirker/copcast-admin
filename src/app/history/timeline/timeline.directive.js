@@ -14,9 +14,20 @@
       replace: true,
       templateUrl: 'app/history/timeline/timeline.html',
 
-      controller: function($scope) {
+      controller: function($scope, $window) {
         var onSelectDate = $scope.onSelectDate(); // Unwrap
         this.setSelectedDate = onSelectDate;
+
+        setTimeout(function(){
+          var window = $($window);
+          var copcastPlayer = $('.copcastHistoryVideoPlayer');
+          var noLocationAlert = $('.hasNoLocation');
+
+          noLocationAlert.css({width: window.width() - copcastPlayer.width()});
+          window.resize(function() {
+            noLocationAlert.css({width: window.width() - copcastPlayer.width()});
+          });
+        }, 100);
       },
 
       scope: {
