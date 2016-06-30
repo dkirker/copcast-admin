@@ -60,17 +60,7 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
       }
     };
 
-    // hack to let the browser parse the ServerUrl.
-
-    var cookieDomain = loginService._getCookieDomain();
-    if (cookieDomain) {
-      $window.console.log('Cookie domain: '+cookieDomain);
-      $cookies.putObject('globals', $rootScope.globals, {domain: cookieDomain});
-    } else {
-      $window.console.log('cookies not mangled');
-      $rootScope.cookieDomain = null;
-      $cookies.putObject('globals', $rootScope.globals);
-    }
+    $cookies.putObject('globals', $rootScope.globals);
 
     authService.loginConfirmed();
     socket.connect(user.token);
@@ -84,44 +74,16 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
   loginService.getUserName = function(){
     return $rootScope.globals ? $rootScope.globals.currentUser.username : '';
   };
-
-  loginService._getCookieDomain = function(){
-    var apiserver = $window.document.createElement('a');
-    apiserver.href = ServerUrl;
-    if (apiserver.hostname === $window.location.hostname) {
-      return null;
-    }
-    var commonDomain = [];
-    var adminTokens = $window.location.hostname.split('.');
-    var apiTokens = apiserver.hostname.split('.');
-    adminTokens.reverse();
-    apiTokens.reverse();
-
-    $window.console.log(adminTokens);
-    $window.console.log(apiTokens);
-
-    for(var i=0; apiTokens[i] === adminTokens[i]; i++) {
-      commonDomain.push(apiTokens[i]);
-    }
-
-    commonDomain.reverse();
-    return '.'+commonDomain.join('.');
-  };
-
+  
   loginService.logout = function(){
     delete $rootScope["globals"];
-    var cookieDomain = loginService._getCookieDomain();
-    if (cookieDomain) {
-      $cookies.remove('globals', {domain: cookieDomain});
-    } else {
-      $cookies.remove('globals');
-    }
+    $cookies.remove('globals');
+
     if (socket) {
       socket.disconnect();
     }
     loginService.isOpen = true;
     $window.location.reload(false);
-    // loginService.show();
   };
 
   return loginService;

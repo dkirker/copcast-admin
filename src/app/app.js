@@ -24,7 +24,7 @@ angular
     'gettext',
     'angularUtils.directives.dirPagination'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $cookiesProvider, $windowProvider, ServerUrl) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/realtime/realtime.html',
@@ -113,6 +113,28 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    var $window = $windowProvider.$get();
+    var apiserver = $window.document.createElement('a');
+    apiserver.href = ServerUrl;
+    if (apiserver.hostname === $window.location.hostname) {
+      return null;
+    }
+    var commonDomain = [];
+    var adminTokens = $window.location.hostname.split('.');
+    var apiTokens = apiserver.hostname.split('.');
+    adminTokens.reverse();
+    apiTokens.reverse();
+
+    for(var i=0; apiTokens[i] === adminTokens[i]; i++) {
+      commonDomain.push(apiTokens[i]);
+    }
+
+    commonDomain.reverse();
+
+    $cookiesProvider.defaults.domain = '.'+commonDomain.join('.');
+    $window.console.log("domain: "+$cookiesProvider.defaults.domain);
+
   }).run(function($rootScope, $location, loginService ) {
     $rootScope.$on('event:auth-loginRequired', function() {
       loginService.show();
