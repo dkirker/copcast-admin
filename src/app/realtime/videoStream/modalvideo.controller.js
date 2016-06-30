@@ -18,17 +18,21 @@ angular.module('copcastAdminApp')
 
     };
 
-    $scope.dismiss = function () {
-      $window.console.log(user);
+    $scope.close = function () {
       $uibModalInstance.close();
       $rootScope.deregFrame();
       $rootScope.deregStoppedStream();
+      mapService.closeBalloon();
 
-      $window.console.log(user.userName+ ' is leaving watch list');
-      socket.emit('unwatch');
 
       // var user = $scope.getCurrentUsers().getUser(data.id);
-      user.marker.setIcon(mapService.getBlueMarker(user.userName));
+      // user.marker.setIcon(mapService.getBlueMarker(user.userName));
+    };
+
+    $scope.dismiss = function () {
+      $scope.close();
+      socket.emit('unwatch');
+      $window.console.log(user.userName+ ' is leaving watch list');
     };
 
   }).directive('h264canvas', function($rootScope, $window) {
@@ -51,7 +55,7 @@ angular.module('copcastAdminApp')
 
         $rootScope.deregStoppedStream = $rootScope.$on('streamStopped', function(/*event*/) {
           $window.console.log('no stream');
-          scope.dismiss();
+          scope.close();
         });
       }
     };

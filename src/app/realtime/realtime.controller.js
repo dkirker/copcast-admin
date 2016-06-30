@@ -21,7 +21,7 @@ angular.module('copcastAdminApp').
     $scope.searchString = '';
     $scope.alerts = [];
     $scope.$uibModalInstance = null;
-    $scope.isStreamingFlag = false;
+    $scope.watchingUserId = -1;
 
     $scope.mapOptions = {
       zoom: 12,
@@ -107,7 +107,7 @@ angular.module('copcastAdminApp').
     function requestStream(user) {
       socket.emit('watch', user.id);
       $scope.popModal(user);
-      $scope.isStreamingFlag = true;
+      $scope.watchingUserId = user.id;
       user.marker.setIcon(mapService.getGreenMarker(user.userName));
       $window.console.log('watch: '+user.id);
 
@@ -184,6 +184,7 @@ angular.module('copcastAdminApp').
     function showModal(user) {
       mapService.closeBalloon();
       $window.console.log('showModal with user=[' + user.id + ']');
+      $scope.watchingUserId = user.id;
       //showStream(user);
       $scope.$uibModalInstance = $uibModal.open({
         templateUrl: 'app/realtime/videoStream/player.html',
@@ -391,14 +392,19 @@ angular.module('copcastAdminApp').
 
       socket.emit('getBroadcasters', receiveBroadcastersList);
 
+      socket.off('frame');
       socket.on('frame', function(frame){
         var imgArray = new $window.Uint8Array(frame.frame);
         //$window.console.log(imgArray.length);
         $rootScope.$emit('h264Frame', imgArray);
       });
 
-      socket.on('streamStopped', function(){
-        $rootScope.$emit('streamStopped');
+
+      socket.off('missionPaused');
+      socket.on('missionPaused', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Mission paused by: ', user.userName);
 
         mapService.closeBalloon();
         if ($scope.$uibModalInstance !== null) {
@@ -406,19 +412,90 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
-        var user = $scope.getCurrentUsers().getUser($scope.currentUser.id);
         notify({
           templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
+          message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
           position: 'right',
           duration: 5000
         });
 
-        $scope.isStreamingFlag = false;
+        user.marker.setIcon(mapService.getGreyMarker(user.userName));
+      });
+
+      socket.off('missionResumed');
+      socket.on('missionResumed', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Mission resumed by: ', user.userName);
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('has resumed the mission.'),
+          position: 'right',
+          duration: 5000
+        });
 
         user.marker.setIcon(mapService.getBlueMarker(user.userName));
       });
 
+      socket.off('startStreamingRequest');
+      socket.on('startStreamingRequest', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Streaming requested by: ', user.userName);
+
+        notify({
+          templateUrl: 'app/views/notifications/warningNotification.html',
+          message: user.userName + ' ' + gettextCatalog.getString('is requesting livestream'),
+          position: 'right',
+          duration: 5000
+        });
+
+        user.marker.setIcon(mapService.getYellowMarker(user.userName));
+      });
+
+      socket.off('stopStreamingRequest');
+      socket.on('stopStreamingRequest', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+
+        console.warn('Streaming request cancelled by: ', user.userName);
+
+        user.marker.setIcon(mapService.getBlueMarker(user.userName));
+      });
+
+      socket.off('streamStarted');
+      socket.on('streamStarted', function(data){
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+        user.marker.setIcon(mapService.getGreenMarker(user.userName));
+      });
+
+      socket.off('streamStopped');
+      socket.on('streamStopped', function(data){
+
+        var user = $scope.getCurrentUsers().getUser(data.userId);
+        user.marker.setIcon(mapService.getBlueMarker(user.userName));
+
+        if (data.userId == $scope.watchingUserId) {
+          $rootScope.$emit('streamStopped');
+          mapService.closeBalloon();
+          if ($scope.$uibModalInstance !== null) {
+            $scope.$uibModalInstance.close();
+            $scope.$uibModalInstance = null;
+          }
+
+
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
+            position: 'right',
+            duration: 5000
+          });
+          $scope.watchingUserId = -1;
+        }
+
+      });
+
+      socket.off('streamDenied');
       socket.on('streamDenied', function(data){
         if ($scope.currentUser && $scope.currentUser.id == data.id) {
           mapService.closeBalloon();
@@ -428,13 +505,14 @@ angular.module('copcastAdminApp').
           }
 
           $scope.popStreamingDenied(data.name);
-          $scope.isStreamingFlag = false;
+          $scope.watchingUserId = -1;
 
           var user = $scope.getCurrentUsers().getUser(data.id);
           user.marker.setIcon(mapService.getBlueMarker(user.userName));
         }
       });
 
+      socket.off('userLeft');
       socket.on('userLeft', function(data) {
         $window.console.log('user left: '+data.userId);
 
@@ -459,10 +537,11 @@ angular.module('copcastAdminApp').
           duration: 5000
         });
 
-        $scope.isStreamingFlag = false;
+        $scope.watchingUserId = -1;
         $scope.getCurrentUsers().exitUser(data.userId);
       });
 
+      socket.off('userEntered');
       socket.on('userEntered', function(data) {
         $window.console.log('userEntered');
         $window.console.log(data);
@@ -470,6 +549,7 @@ angular.module('copcastAdminApp').
         $scope.getCurrentUsers().enterUser(data.userId);
       });
 
+      socket.off('users:incidentFlag');
       socket.on('users:incidentFlag', function(data){
         $window.console.log('incident!!');
         $window.console.log(data);
@@ -479,7 +559,7 @@ angular.module('copcastAdminApp').
         user.marker.setIcon(mapService.getRedMarker(user.userName));
 
         $timeout(function(){
-          if($scope.isStreamingFlag) {
+          if($scope.watchingUserId > 0) {
             user.marker.setIcon(mapService.getGreenMarker(user.userName));
           } else {
             user.marker.setIcon(mapService.getBlueMarker(user.userName));
@@ -487,10 +567,12 @@ angular.module('copcastAdminApp').
         }, 15000);
       });
 
+      socket.off('users:heartbeat');
       socket.on('users:heartbeat', function(data) {
         loadUser(data);
       });
 
+      socket.off('disconnect');
       socket.on('disconnect', function (/*socket*/) {
         $scope.getCurrentUsers().reset();
 
@@ -508,16 +590,19 @@ angular.module('copcastAdminApp').
         }
         // end dismiss livestream modal
 
-        $scope.isStreamingFlag = false;
+        $scope.watchingUserId = -1;
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
       });
 
+      socket.off('reconnect');
       socket.on('reconnect', function (/*socket*/) {
         $window.console.log('Got reconnected!');
+        socket.emit('getBroadcasters', receiveBroadcastersList);
         angular.element('#realtimeMapConnectionBar').fadeOut();
       });
 
+      socket.off('reconnect_attempt');
       socket.on('reconnect_attempt', function (err) {
         angular.element('#realtimeMapConnectionBarAttempts').text(err);
         $window.console.log('attempt!', err, new Date());
