@@ -1,5 +1,5 @@
 <div id="usageReportContainer" class="container">
-  <h2 translate>Usage Report</h2>
+  <h2 translate>Copcast Data Log</h2>
   <hr class="hrDarker"/>
 
   <div class="alert alert-danger" role="alert" ng-show="errorMessage">
@@ -81,8 +81,8 @@
   <div ng-show="hasData()">
     <div class="page-header" style="border-color: #DDDDDD;">
       <h2 translate>
-        Use of Copcast
-        <small translate>Report from {{filter.fromDate  | date:"dd/MM/yyyy"}} to {{filter.toDate  | date:"dd/MM/yyyy"}}</small>
+        Report
+        <small translate>from {{filter.fromDate  | date:"dd/MM/yyyy"}} to {{filter.toDate  | date:"dd/MM/yyyy"}}</small>
       </h2>
     </div>
 
@@ -92,7 +92,7 @@
           <div class="panel-heading" translate>Overview</div>
           <ul class="list-group">
             <li class="list-group-item">
-              <span translate>Active officers users</span>
+              <span translate>Active officers</span>
               <span class="badge">{{reportData.activeOfficers}}</span>
             </li>
 
@@ -102,12 +102,12 @@
             </li>
 
             <li class="list-group-item">
-              <span translate>Number of hours of recorded footage</span>
+              <span translate>Number of hours of recorded footage (hh:mm)</span>
               <span class="badge">{{reportData.recordedTime | minutesToHours}}</span>
             </li>
 
             <li class="list-group-item">
-              <span translate>Number of hours of streamed footage</span>
+              <span translate>Number of hours of streamed footage (hh:mm)</span>
               <span class="badge">{{reportData.streamedTime | minutesToHours }}</span>
             </li>
             <li class="list-group-item">
@@ -116,7 +116,7 @@
             </li>
 
             <li class="list-group-item">
-              <span translate>Number of personnel accessing the admin system</span>
+              <span translate>Number of personnel who accessed the system</span>
               <span class="badge">{{reportData.adminAccess}}</span>
             </li>
           </ul>
@@ -125,12 +125,12 @@
 
       <div class="col-md-6">
         <div class="panel panel-default">
-          <div class="panel-heading" translate>Number of traffic incidents reported</div>
+          <div class="panel-heading" translate>Traffic incidents reported</div>
           <table class="table table-hover">
             <thead>
             <tr>
-              <th translate>Gravity</th>
-              <th translate>Quantity</th>
+              <th translate>Severity of incident</th>
+              <th translate>Number of incidents</th>
             </tr>
             </thead>
             <tbody>
@@ -164,7 +164,7 @@
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading" translate>
-            Information by user
+            Usage log
             <span class="label label-default" translate>grouped by day</span>
           </div>
           <div class="panel-body">
@@ -189,14 +189,14 @@
                   <table class="table table-hover">
                     <thead>
                     <tr>
-                      <th translate>Day</th>
+                      <th translate>Date</th>
                       <th><span translate>Total recording time</span><br/>(HH:MM)</th>
                       <th><span translate>Total streaming time</span><br/>(HH:MM)</th>
-                      <th><span translate>Total paused time</span><br/>(HH:MM)</th>
+                      <th><span translate>Total time paused</span><br/>(HH:MM)</th>
                       <th><span translate>Total Mission Time</span><br/>(HH:MM)</th>
                       <th translate>Number of times mission was stopped</th>
                       <th translate>Total uploaded data<br/><small>(compressed)</small></th>
-                      <th translate>Data Remaining on Device<br/><small>(last register)</small></th>
+                      <th translate>Data remaining to be uploaded from device</th>
                       <th translate>Incidents Flagged</th>
                     </tr>
                     </thead>
@@ -227,16 +227,16 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="panel panel-default">
-          <div class="panel-heading" translate>Exported videos</div>
+          <div class="panel-heading" translate>Videos exported</div>
           <table class="table table-hover table-word-wrap">
             <thead>
             <tr>
               <th translate>User</th>
               <th translate>Export date</th>
               <th translate>Recording Date</th>
-              <th translate>Exporter</th>
+              <th translate>Exported by</th>
               <th translate>Status</th>
             </tr>
             </thead>
@@ -256,18 +256,19 @@
           </table>
         </div>
       </div>
-
-      <div class="col-md-6">
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading" translate>Videos viewed</div>
           <table class="table table-hover dataTable">
             <thead>
             <tr>
               <th translate>Video URL</th>
-              <th translate>Played at</th>
-              <th translate>Started Time</th>
-              <th translate>Who watched it</th>
-              <th translate>Who recorded it</th>
+              <th translate>Viewing timestamp</th>
+              <th translate>Start time</th>
+              <th translate>Viewed by</th>
+              <th translate>Recorded by</th>
             </tr>
             </thead>
             <tbody>
@@ -298,7 +299,7 @@
   </div>
 
   <div ng-hide="hasData()" class="jumbotron text-center">
-    <h3 translate>No data selected</h3>
-    <p translate>select a period to present related data.</p>
+    <h3 translate>No data selected.</h3>
+    <p translate>Select a date range to present related data.</p>
   </div>
 </div>

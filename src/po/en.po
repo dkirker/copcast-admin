@@ -504,37 +504,37 @@ msgid "NOT_LOGGED"
 msgstr "Not logged"
 
 msgid "PAUSED"
-msgstr "Paused mission"
+msgstr "Mission paused"
 
 msgid "RECORDING_OFFLINE"
-msgstr "In mission - Recording videos"
+msgstr "Mission in progress - Recording video"
 
 msgid "RECORDING_ONLINE"
-msgstr "In mission - Recording videos"
+msgstr "Mission in progress - Recording video"
 
 msgid "RECORDING"
-msgstr "In mission - Recording videos"
+msgstr "Mission in progress - Recording video"
 
 msgid "STREAMING"
-msgstr "In mission - Live streaming"
+msgstr "Mission in progress - Streaming video"
 
 msgid "UPLOADING"
 msgstr "Uploading data to the server"
 
 msgid "LOGGED"
-msgstr "Logged in the Copcast app"
+msgstr "Logged in to the Copcast app"
 
 msgid "IDLE"
-msgstr "Logged in the Copcast app"
+msgstr "Logged in to the Copcast app"
 
 msgid "SEEN_VIDEO"
-msgstr "Playing recorded videos"
+msgstr "Playing recorded video"
 
 msgid "LOGGED_ADMIN"
-msgstr "User logged to the admin system"
+msgstr "User logged in to the admin dashboard"
 
 msgid "PLAYING_VIDEO"
 msgstr "Playing video in the History tab"
 
 msgid "ROLE_TIP"
-msgstr "<b>Level 1 users have permission to:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Register new devices in the system;</li> <li>View realtime locations of officers;</li> <li>View history locations of officers and heatmaps;</li> <li>View realtime footage (no audio, only video);</li> </ol> <b>Level 2 users have permission to all of the above, plus:</b> <ol style=\"list-style-type: upper-roman;\"> <li>View history footage (no audio, only video);</li> <li>Access to the CopCast Log Report;</li> <li>Create Level 1 users;</li> </ol> <b>Level 3 users also have permission to all of the above, plus:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Export of raw video footage;</li> <li>Create Level 2 users;</li></ol>"
+msgstr "<b>Level 1 users have permission to:</b><ol style=\"list-style-type: upper-roman;\"><li>Register new devices in the system;</li><li>View realtime locations of officers;</li><li>View officer locations history and heatmaps;</li><li>View real-time footage (video only, no audio).</li></ol><b>Level 2 users have all of the above permissions, plus:</b><ol style=\"list-style-type: upper-roman;\"><li>View footage history (video only, no audio);</li><li>Access to the CopCast Log Report;</li><li>Permission to create a Level 1 user.</li></ol><b>Level 3 users have all of the above permissions, plus:</b><ol style=\"list-style-type: upper-roman;\"><li>Export raw video footage;</li><li>Permission to create Level 2 users.</li></ol>"

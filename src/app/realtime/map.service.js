@@ -51,25 +51,25 @@ angular.module('copcastAdminApp')
 
     service.getGreyMarker = function(/*user*/){
       // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|9a9a9a|000000';
-      return '/assets/images/pins/user.png';
+      return '/assets/images/pins/user.svg';
     };
 
     service.getBlueMarker = function(/*user*/){
       // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|db0909|000000';
-      return '/assets/images/pins/user_online.png';
+      return '/assets/images/pins/user_online.svg';
     };
 
     service.getRedMarker = function(/*user*/){
-      return '/assets/images/pins/user_incident.png';
+      return '/assets/images/pins/user_incident.svg';
     };
 
     service.getYellowMarker = function(/*user*/){
-      return '/assets/images/pins/user_live_requesting.png';
+      return '/assets/images/pins/user_live_requesting.svg';
     };
 
     service.getGreenMarker = function(/*user*/){
       // return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+user[0]+'|009c00|000000';
-      return '/assets/images/pins/user_live_streaming.png';
+      return '/assets/images/pins/user_live_streaming.svg';
     };
 
 
