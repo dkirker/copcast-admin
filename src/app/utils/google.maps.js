@@ -13,7 +13,7 @@
       userId: user.id,
       position: latLngPoints[0],
       icon: {
-        url: '/assets/images/pins/user_online.png',
+        url: '/assets/images/pins/user_online.svg',
         // url: user.profilePicture,
         //url: 'assets/images/head_icon_black.png',
         scaledSize: new window.google.maps.Size(24, 43)

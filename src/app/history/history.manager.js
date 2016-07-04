@@ -371,7 +371,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         if(locationsByHour) {
           // var location = this._getClosestLocation(locationsByHour.get(hour) || []);
           var location = this._newGetClosestLocation(locationsByHour.get(hour) || []);
-          console.error(location);
+          console.log(location);
           self.store.hasLocation = (location) ? true : false;
           this.groupData[userId].currentLocation = location;
           if(this.currentUser && this.currentUser.id === userId) {
