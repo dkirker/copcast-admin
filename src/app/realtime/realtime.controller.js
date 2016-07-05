@@ -22,6 +22,7 @@ angular.module('copcastAdminApp').
     $scope.alerts = [];
     $scope.$uibModalInstance = null;
     $scope.watchingUserId = -1;
+    $scope.isPaused = {};
 
     $scope.mapOptions = {
       zoom: 12,
@@ -106,10 +107,13 @@ angular.module('copcastAdminApp').
 
     function requestStream(user) {
       socket.emit('watch', user.id);
-      $scope.popModal(user);
-      $scope.watchingUserId = user.id;
-      user.marker.setIcon(mapService.getGreenMarker(user.userName));
-      $window.console.log('watch: '+user.id);
+
+      if (!(user.id in $scope.isPaused)) {
+        $scope.popModal(user);
+        $scope.watchingUserId = user.id;
+        user.marker.setIcon(mapService.getGreenMarker(user.userName));
+        $window.console.log('watch: ' + user.id);
+      }
 
       //$scope.waitingStreaming = true;
       //if ($scope.isStreaming(user)){
@@ -235,6 +239,10 @@ angular.module('copcastAdminApp').
           accuracy: data.location.accuracy,
           picture: userPicture
         };
+
+        if (data.state == 'PAUSED') {
+          $scope.isPaused[user.id] = user;
+        }
       }
 
       user.marker.setPosition(pos);
@@ -419,6 +427,8 @@ angular.module('copcastAdminApp').
           duration: 5000
         });
 
+        $scope.isPaused[user.id] = user;
+
         user.marker.setIcon(mapService.getGreyMarker(user.userName));
       });
 
@@ -434,6 +444,8 @@ angular.module('copcastAdminApp').
           position: 'right',
           duration: 5000
         });
+
+        delete $scope.isPaused[user.id];
 
         user.marker.setIcon(mapService.getBlueMarker(user.userName));
       });
@@ -471,7 +483,6 @@ angular.module('copcastAdminApp').
 
       socket.off('streamStopped');
       socket.on('streamStopped', function(data){
-
         var user = $scope.getCurrentUsers().getUser(data.userId);
         user.marker.setIcon(mapService.getBlueMarker(user.userName));
 
@@ -492,7 +503,6 @@ angular.module('copcastAdminApp').
           });
           $scope.watchingUserId = -1;
         }
-
       });
 
       socket.off('streamDenied');
@@ -508,7 +518,10 @@ angular.module('copcastAdminApp').
           $scope.watchingUserId = -1;
 
           var user = $scope.getCurrentUsers().getUser(data.id);
-          user.marker.setIcon(mapService.getBlueMarker(user.userName));
+
+          if (!(user.id in $scope.isPaused)) {
+            user.marker.setIcon(mapService.getBlueMarker(user.userName));
+          }
         }
       });
 
@@ -538,6 +551,7 @@ angular.module('copcastAdminApp').
         });
 
         $scope.watchingUserId = -1;
+        delete $scope.isPaused[user.id];
         $scope.getCurrentUsers().exitUser(data.userId);
       });
 
@@ -591,6 +605,7 @@ angular.module('copcastAdminApp').
         // end dismiss livestream modal
 
         $scope.watchingUserId = -1;
+        $scope.isPaused = {};
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
       });
