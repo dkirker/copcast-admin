@@ -1,22 +1,32 @@
+<div class="container">
+  <h2 class="page-header hrDarker" translate>Reset Password</h2>
 
-<div class="container container-reset">
-
-  <div class="col-md-8">
-    <h3 translate>Reset Password</h3>
-    <hr/>
-    <div class="alert alert-danger" role="alert" ng-show="errorMessage">
-      {{errorMessage}}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+        {{errorMessage}}
+      </div>
     </div>
-    <form ng-show="confirmed">
-      <div class="form-group">
-        <label translate>New Password</label>
-        <input type="password" class="form-control" ng-model="user.password"/>
-      </div>
-      <div class="form-group">
-        <label translate>Confirm New Password</label>
-        <input type="password" class="form-control" ng-model="user.passwordConfirmation"/>
-      </div>
-      <button type="submit" class="btn btn-primary" translate ng-click="resetPassword()">Reset Password</button>
-    </form>
   </div>
+
+  <form novalidate ng-submit="submittted = true" ng-show="confirmed" name="frm">
+    <div class="row">
+      <div class="col-md-6">
+        <password-meter ng-model="user.password"></password-meter>
+      </div>
+
+      <div class="col-md-6">
+        <label for="passwordConfirmation" translate>Confirm New Password:</label>
+        <input type="password" id="passwordConfirmation" class="form-control" ng-model="user.passwordConfirmation" ng-minlength="8" required/>
+      </div>
+    </div>
+
+    <hr class="hrDarker" />
+
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary" ng-click="resetPassword()" ng-disabled="frm.$invalid" translate>Reset Password</button>
+      </div>
+    </div>
+  </form>
 </div>

@@ -60,16 +60,8 @@
 
     <div class="row">
       <div class="col-md-4">
-        <label for="inputPassword" translate>Password:</label>
-        <input type="password" class="form-control" id="inputPassword" ng-model="user.password" required ng-minlength="8"/>
-        <meter max="5" id="password-strength-meter"></meter>
-        <small translate>- Minimum 8 digits.</small>
-        <span id="password-strength-text" class="pwdStrong"></span>
+        <password-meter label-text="Password:" ng-model="user.password"></password-meter>
       </div>
-
-      <!--<div class="col-md-4">-->
-        <!--<p id="password-strength-text"></p>-->
-      <!--</div>-->
 
       <div class="col-md-4">
         <label translate>Preferred language:</label>
@@ -104,34 +96,5 @@
         .popover({ container: 'body', html: true })
         .on('show.bs.popover', function(){ $(this).data('bs.popover').tip().css('max-width', '600px'); });
     }, 100);
-  });
-
-  var strength = {
-    1: "Worst",
-    2: "Bad",
-    3: "Weak",
-    4: "Good",
-    5: "Strong"
-  };
-
-  var meter = $('#password-strength-meter');
-  var text = $('#password-strength-text');
-  text.hide();
-
-  $('#inputPassword').keyup(function(){
-    var $self = $(this);
-    var password = $self.val();
-    var result = zxcvbn(password);
-
-    if (password !== "") {
-      meter.val(result.score + 1);
-      text.text(strength[result.score + 1]).fadeIn();
-    } else {
-      meter.val(0);
-      text.fadeOut();
-      setTimeout(function(){
-        text.text("");
-      }, 500);
-    }
   });
 </script>
