@@ -477,12 +477,14 @@ angular.module('copcastAdminApp').
 
       socket.off('streamStarted');
       socket.on('streamStarted', function(data){
+        console.info('STREAM STARTED ', data);
         var user = $scope.getCurrentUsers().getUser(data.userId);
         user.marker.setIcon(mapService.getGreenMarker(user.userName));
       });
 
       socket.off('streamStopped');
       socket.on('streamStopped', function(data){
+        console.info('STREAM STOPPED ', data);
         var user = $scope.getCurrentUsers().getUser(data.userId);
         user.marker.setIcon(mapService.getBlueMarker(user.userName));
 
