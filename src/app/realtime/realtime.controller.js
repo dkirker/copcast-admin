@@ -23,6 +23,7 @@ angular.module('copcastAdminApp').
     $scope.$uibModalInstance = null;
     $scope.watchingUserId = -1;
     $scope.isPaused = {};
+    $rootScope.isWatching = false;
 
     $scope.mapOptions = {
       zoom: 12,
@@ -108,8 +109,9 @@ angular.module('copcastAdminApp').
     function requestStream(user) {
       socket.emit('watch', user.id);
 
-      if (!(user.id in $scope.isPaused)) {
+      if (!(user.id in $scope.isPaused) && !$rootScope.isWatching) {
         $scope.popModal(user);
+        $rootScope.isWatching = true;
         $scope.watchingUserId = user.id;
         user.marker.setIcon(mapService.getGreenMarker(user.userName));
         $window.console.log('watch: ' + user.id);
