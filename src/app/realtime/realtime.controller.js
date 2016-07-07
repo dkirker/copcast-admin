@@ -348,18 +348,22 @@ angular.module('copcastAdminApp').
     $scope.refreshUsers = refreshUsers;
 
     $scope.popIncidentFlag = function (username) {
-      notify({
-        templateUrl: 'app/views/notifications/errorNotification.html',
-        message: username + ' ' + gettextCatalog.getString('has flagged an incident'),
-        position: 'right'
-      });
+      if (username) {
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: username + ' ' + gettextCatalog.getString('has flagged an incident'),
+          position: 'right'
+        });
+      }
     };
     $scope.popStreamingDenied = function (username) {
-      notify({
-        templateUrl: 'app/views/notifications/errorNotification.html',
-        message: username + ' ' + gettextCatalog.getString('can not stream right now.'),
-        position: 'right'
-      });
+      if (username) {
+        notify({
+          templateUrl: 'app/views/notifications/errorNotification.html',
+          message: username + ' ' + gettextCatalog.getString('can not stream right now.'),
+          position: 'right'
+        });
+      }
     };
 
     $scope.popModal = function (user) {
@@ -422,12 +426,14 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
-        notify({
-          templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
-          position: 'right',
-          duration: 5000
-        });
+        if (user.userName) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: user.userName + ' ' + gettextCatalog.getString('has paused the mission.'),
+            position: 'right',
+            duration: 5000
+          });
+        }
 
         $scope.isPaused[user.id] = user;
 
@@ -440,12 +446,14 @@ angular.module('copcastAdminApp').
 
         console.warn('Mission resumed by: ', user.userName);
 
-        notify({
-          templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('has resumed the mission.'),
-          position: 'right',
-          duration: 5000
-        });
+        if (user.userName) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: user.userName + ' ' + gettextCatalog.getString('has resumed the mission.'),
+            position: 'right',
+            duration: 5000
+          });
+        }
 
         delete $scope.isPaused[user.id];
 
@@ -458,12 +466,14 @@ angular.module('copcastAdminApp').
 
         console.warn('Streaming requested by: ', user.userName);
 
-        notify({
-          templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('is requesting livestream'),
-          position: 'right',
-          duration: 5000
-        });
+        if (user.userName) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: user.userName + ' ' + gettextCatalog.getString('is requesting livestream'),
+            position: 'right',
+            duration: 5000
+          });
+        }
 
         user.marker.setIcon(mapService.getYellowMarker(user.userName));
       });
@@ -499,12 +509,14 @@ angular.module('copcastAdminApp').
           }
 
 
-          notify({
-            templateUrl: 'app/views/notifications/warningNotification.html',
-            message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
-            position: 'right',
-            duration: 5000
-          });
+          if (user.userName) {
+            notify({
+              templateUrl: 'app/views/notifications/warningNotification.html',
+              message: user.userName + ' ' + gettextCatalog.getString('disabled live streaming.'),
+              position: 'right',
+              duration: 5000
+            });
+          }
           $scope.watchingUserId = -1;
         }
       });
@@ -547,12 +559,14 @@ angular.module('copcastAdminApp').
           $scope.$uibModalInstance = null;
         }
 
-        notify({
-          templateUrl: 'app/views/notifications/warningNotification.html',
-          message: user.userName + ' ' + gettextCatalog.getString('is no longer connected'),
-          position: 'right',
-          duration: 5000
-        });
+        if (user.userName) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: user.userName + ' ' + gettextCatalog.getString('is no longer connected'),
+            position: 'right',
+            duration: 5000
+          });
+        }
 
         $scope.watchingUserId = -1;
         delete $scope.isPaused[user.id];
