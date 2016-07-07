@@ -54,10 +54,10 @@ angular.module('copcastAdminApp')
       socketIo = $window.io.connect(ServerUrl, { query : 'token=' + token +'&clientType=admin&userId='+$rootScope.globals.currentUser.userId,
         forceNew: true,
         reconnection: true,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 1000,
+        reconnectionDelay: 5000,
+        reconnectionDelayMax: 10000,
         transports : ['websocket'],
-        timeout: 4000
+        timeout: 20000
       }); // OBS: the time between successive connection attemps will be DelayMax + timeout = 5s (1000ms + 4000ms)
 
       socketIo.once('connect', function() {
