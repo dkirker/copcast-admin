@@ -326,16 +326,35 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       var videos = this.userData.videos || [];
       var videoIndex;
       var cDate = this.currentDate;
+
+      $window.console.group('_updateCurrentDateVideo');
+      $window.console.log('Videos: ', videos);
+      $window.console.log('cDate: ', cDate.toDate());
+
       for(var i = 0, len = videos.length; i < len; i++) {
         var video = videos[i];
         var fromDate = $window.moment(video.from);
         var toDate = $window.moment(video.to);
-        if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') ||
-          (cDate.isBetween(fromDate, toDate, 'minute'))) {
+        
+        // if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') || (cDate.isBetween(fromDate, toDate, 'minute'))) {
+        if(cDate.isSame(fromDate)  || cDate.isSame(toDate) || (cDate.isBetween(fromDate, toDate))) {
+          $window.console.warn('Video %s entered in if', i);
           videoIndex = i;
           break;
+        } else {
+          $window.console.groupCollapsed('Video - ', i);
+          $window.console.log('Video: ', video);
+          $window.console.log('fromDate: ', fromDate.toDate());
+          $window.console.log('toDate: ', toDate.toDate());
+          $window.console.info('cDate isSame fromDate: %s', cDate.isSame(fromDate));
+          $window.console.info('cDate isSame toDate: %s',cDate.isSame(toDate));
+          $window.console.info('cDate isBetween fromDate-toDate: %s', cDate.isBetween(fromDate, toDate));
+          $window.console.groupEnd();
         }
       }
+
+      $window.console.groupEnd();
+
       this._setVideoData(videoIndex);
     },
 
