@@ -22,6 +22,7 @@ angular.module('copcastAdminApp')
       $uibModalInstance.close();
       $rootScope.deregFrame();
       $rootScope.deregStoppedStream();
+      $rootScope.isWatching = false;
       mapService.closeBalloon();
 
 

@@ -49,6 +49,11 @@
 
   div.btn-group{
     width: 95%;
+
+    .btn.disabled {
+      background-color: #9d9d9d;
+      cursor: not-allowed;
+    }
   }
 
   .gm-style-iw{
