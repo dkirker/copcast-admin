@@ -12,31 +12,61 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/users/user-creation.html:58 app/users/user-detail.html:124
-msgid "- Minimum 8 digits."
+#: app/history/timeline/timeline.html:3
+msgid ""
+"<b>WARNING</b>\n"
+"      &nbsp;&nbsp;|&nbsp;&nbsp;\n"
+"      This video does not have a location stamp, user was out of range when "
+"recording."
 msgstr ""
+"<b>AVISO</b>\n"
+"      &nbsp;&nbsp;|&nbsp;&nbsp;\n"
+"      Este vídeo não possui uma localização, o usuário estava fora do "
+"alcance no momento."
+
+#: app/history/player/player.html:84
+msgid ""
+"<i class=\"glyphicon glyphicon-triangle-left\"></i>\n"
+"      Previous"
+msgstr ""
+"<i class=\"glyphicon glyphicon-triangle-left\"></i>\n"
+"      Anterior"
 
 #: app/groups/group-creation.html:30 app/groups/group-detail.html:30
-msgid "<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> Is Admin?"
-msgstr "<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> É administrador?"
+msgid ""
+"<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> Is Admin?"
+msgstr ""
+"<input type=\"checkbox\" ng-model=\"group.isAdmin\" i-check=\"\"> É "
+"administrador?"
+
+#: app/history/date_filter/date.filter.html:4
+msgid ""
+"<input type=\"checkbox\" ng-model=\"period\" i-check=\"\">\n"
+"        Period?"
+msgstr ""
+"<input type=\"checkbox\" ng-model=\"period\" i-check=\"\">\n"
+"        Período?"
 
 #: app/users/user-creation.html:39
-msgid "<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> Is Admin?"
-msgstr "<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> É Administrador?"
+msgid ""
+"<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> Is Admin?"
+msgstr ""
+"<input type=\"checkbox\" ng-model=\"user.isAdmin\" i-check=\"\"> É "
+"Administrador?"
 
 #: app/incidentForms/incidentForm-view.html:35
 msgid "Accident?"
 msgstr "Acidente?"
 
 #: app/report/report.html:95
-msgid "Active officers users"
-msgstr "Oficiais ativos"
+msgid "Active officers"
+msgstr "Usuário ativos"
 
 #: app/incidentForms/incidentForm-view.html:26
 msgid "Address:"
 msgstr "Endereço"
 
-#: app/groups/group-list.html:24 app/views/appheader.html:20
+#: app/groups/group-list.html:23 app/views/appheader.html:20
 msgid "Admin"
 msgstr "Admin"
 
@@ -44,7 +74,7 @@ msgstr "Admin"
 msgid "All Officers"
 msgstr "Exibir Todos"
 
-#: app/resetPasswords/reset.controller.js:32
+#: app/resetPasswords/reset.controller.js:29
 msgid "All fields are required."
 msgstr "Todos os campos são obrigatórios."
 
@@ -64,15 +94,30 @@ msgstr "Discussão?"
 msgid "Arrest?"
 msgstr "Voz de Prisão?"
 
+#: app/history/player/player.html:42
+msgid ""
+"Audio is automatically disabled and available only on export.\n"
+"        <a href=\"javascript:;\" class=\"closeMe\" ng-click="
+"\"closeMuteAlert()\"><i class=\"glyphicon glyphicon-remove\"></i></a>"
+msgstr ""
+"O áudio é desabilitado automaticamente e está disponível somente na "
+"exportação.\n"
+"        <a href=\"javascript:;\" class=\"closeMe\" ng-click="
+"\"closeMuteAlert()\"><i class=\"glyphicon glyphicon-remove\"></i></a>"
+
+#: app/logreport/logreport-list.html:2
+msgid "Audit Log"
+msgstr "Relatório de Auditoria"
+
 #: app/views/appheader.html:25
 msgid "Audit Report"
 msgstr "Relatório de Auditoria"
 
-#: app/exports/creation.html:42
+#: app/exports/creation.html:91
 msgid "Back"
 msgstr "Voltar"
 
-#: app/realtime/realtime.html:40
+#: app/realtime/realtime.html:39
 msgid "Battery"
 msgstr "Bateria"
 
@@ -80,74 +125,98 @@ msgstr "Bateria"
 msgid "Brand"
 msgstr "Marca"
 
-#: app/resetPasswords/reset.html:16
-msgid "Confirm New Password"
-msgstr "Confirme a Nova Senha"
+#: app/incidentForms/incidentForm-view.html:54
+msgid "Citation?"
+msgstr "Multa?"
+
+#: app/resetPasswords/reset.html:19
+msgid "Confirm New Password:"
+msgstr "Confirme Nova Senha:"
 
 #: app/logreport/logreport-list.html:107
 msgid "Connection:"
 msgstr "Tipo de Conexão:"
 
+#: app/report/report.html:2 app/views/appheader.html:26
+msgid "Copcast Data Log"
+msgstr "Relatório de Uso"
+
 #: app/users/user-creation.html:2
 msgid "Create User"
 msgstr "Criar Usuário"
 
-#: app/groups/group-list.html:16 app/users/user-list.html:39
+#: app/groups/group-list.html:16
 msgid "Created At"
 msgstr "Criado Em"
 
-#: app/users/user-detail.html:116
+#: app/users/user-detail.html:128
 msgid "Current Password:"
 msgstr "Senha Corrente:"
 
-#: app/users/details.js:66
+#: app/users/details.js:69
 msgid "Current password filed is empty."
 msgstr "Senha atual está vazia"
-
-#: app/report/report.html:199
-msgid "Data Remaining on Device<br><small>(last register)</small>"
-msgstr "Dados Restantes no Device <br><small>(último registro)</small>"
 
 #: app/logreport/logreport-list.html:108
 msgid "Data in the device:"
 msgstr "Dados no celular:"
 
-#: app/history/date_filter/date.filter.html:12
+#: app/report/report.html:199
+msgid "Data remaining to be uploaded from device"
+msgstr "Dados ainda armazenados no celular"
+
+#: app/report/report.html:192
 msgid "Date"
 msgstr "Data"
 
-#: app/exports/creation.controller.js:39
+#: app/users/user-list.html:39
+msgid "Date created"
+msgstr "Data de Criação"
+
+#: app/exports/creation.controller.js:75
+msgid "Date is not valid"
+msgstr "Data não é válida"
+
+#: app/exports/creation.controller.js:55
 msgid "Date is required"
 msgstr "Data é obrigatória"
+
+#: app/exports/creation.html:24
+msgid "Date range"
+msgstr "Período"
 
 #: app/incidentForms/incidentForm-view.html:11
 msgid "Date/Time:"
 msgstr "Data/Hora:"
 
-#: app/exports/creation.html:20
+#: app/exports/creation.html:38
 msgid "Date:"
 msgstr "Data:"
 
-#: app/report/report.html:192
-msgid "Day"
-msgstr "Dia"
-
-#: app/users/user-list.html:51
+#: app/users/user-list.html:50
 msgid "Disabled"
 msgstr "Desabilitado"
 
-#: app/login/login.controller.js:36
+#: app/login/login.controller.js:42
 msgid "Email sent successfully"
 msgstr "Email enviado com sucesso"
 
 #: app/users/user-creation.html:23 app/users/user-destroy.html:32
-#: app/users/user-detail.html:39
+#: app/users/user-detail.html:40
 msgid "Email:"
 msgstr "Email:"
 
-#: app/users/user-list.html:50
+#: app/users/user-list.html:49
 msgid "Enabled"
 msgstr "Habilitado"
+
+#: app/exports/creation.html:72
+msgid "End Time:"
+msgstr "Horário Final:"
+
+#: app/exports/creation.controller.js:79
+msgid "End date is not valid"
+msgstr "Data fina não é válida"
 
 #: app/exports/list.html:15 app/report/report.html:237
 msgid "Export date"
@@ -161,15 +230,11 @@ msgstr "Data de Exportação:"
 msgid "Exported Videos"
 msgstr "Vídeos Exportados"
 
-#: app/report/report.html:232
-msgid "Exported videos"
-msgstr "Vídeos Exportados"
-
 #: app/exports/list.html:17 app/report/report.html:239
-msgid "Exporter"
-msgstr "Exportado Por"
+msgid "Exported by"
+msgstr "Exportado por"
 
-#: app/exports/detail.html:25
+#: app/exports/detail.html:26
 msgid "Exporter:"
 msgstr "Usuário que Exportou:"
 
@@ -183,22 +248,23 @@ msgstr "Informações Adicionais"
 msgid "Filter"
 msgstr "Filtro"
 
-#: app/incidentForms/incidentForm-view.html:54
-msgid "Fine?"
-msgstr "Multa?"
+#: app/realtime/realtime.html:7
+msgid "Filter by user or group..."
+msgstr "Filtrar por usuário ou grupo…"
 
+#: app/login/login.html:11
+msgid "Forgot Password?"
+msgstr "Esqueceu a senha?"
+
+#: app/exports/creation.html:39 app/history/date_filter/date.filter.html:12
 #: app/incidentForms/incidentForm-list.html:16
 #: app/logreport/logreport-list.html:16 app/report/report.html:16
 msgid "From:"
 msgstr "De:"
 
-#: app/exports/creation.html:37
-msgid "Go back to the export list"
-msgstr "Voltar para a lista de exportações"
-
-#: app/incidentForms/incidentForm-view.html:40 app/report/report.html:132
-msgid "Gravity"
-msgstr "Gravidade"
+#: app/login/login.html:20
+msgid "Go Back"
+msgstr "Voltar"
 
 #: app/logreport/logreport-list.html:88 app/users/user-list.html:38
 msgid "Group"
@@ -215,7 +281,7 @@ msgstr "Detalhes do Grupo"
 #: app/incidentForms/incidentForm-list.html:63
 #: app/logreport/logreport-list.html:63 app/report/report.html:63
 #: app/users/user-creation.html:32 app/users/user-destroy.html:20
-#: app/users/user-detail.html:48
+#: app/users/user-detail.html:49
 msgid "Group:"
 msgstr "Grupo:"
 
@@ -228,60 +294,52 @@ msgid "History"
 msgstr "Histórico"
 
 #: app/incidentForms/incidentForm-view.html:2
-msgid "Incident Form"
-msgstr "Formulário de Incidentes"
+msgid "Incident Report"
+msgstr "Relatório de Incidentes"
 
 #: app/incidentForms/incidentForm-list.html:2 app/views/appheader.html:24
-msgid "Incident Forms"
-msgstr "Formulários de Incidentes"
+msgid "Incident Reports"
+msgstr "Relatórios de Incidentes"
 
 #: app/report/report.html:200
 msgid "Incidents Flagged"
 msgstr "Incidentes Marcados"
 
-#: app/report/report.html:166
-msgid ""
-"Information by user\n"
-"            <span class=\"label label-default\" translate=\"\">grouped by day</span>"
-msgstr ""
-"Informações de usuários\n"
-"            <span class=\"label label-default\" translate=\"\">agrupadas por dia</span>"
+#: app/exports/creation.html:63
+msgid "Initial Time:"
+msgstr "Horário Inicial:"
 
-#: app/incidentForms/list.js:66
+#: app/incidentForms/list.js:93
 msgid "Invalid data range."
 msgstr "Período Inválido"
 
-#: app/logreport/list.controller.js:62
+#: app/logreport/list.controller.js:76
 msgid "Invalid date range."
 msgstr "Período Inválido."
 
-#: app/report/report.controller.js:98
+#: app/report/report.controller.js:47
 msgid "Invalid date."
 msgstr "Data inválida."
 
-#: app/report/report.controller.js:95
+#: app/report/report.controller.js:44
 msgid "Invalid interval. Please check the date range."
 msgstr "Período inválido. Verifique as datas selecionadas."
 
 #: app/groups/group-destroy.html:31 app/users/user-destroy.html:38
-#: app/users/user-detail.html:57
+#: app/users/user-detail.html:58
 msgid "Is Admin?"
 msgstr "É Admin?"
 
-#: app/users/user-detail.html:75
+#: app/users/user-detail.html:87
 msgid "Is Enabled?"
 msgstr "Habilitado?"
 
-#: app/incidentForms/incidentForm-view.html:16
-msgid "Lat:"
-msgstr "Lat:"
-
 #: app/groups/group-creation.html:18 app/groups/group-destroy.html:17
-#: app/groups/group-detail.html:18
+#: app/groups/group-detail.html:18 app/incidentForms/incidentForm-view.html:16
 msgid "Latitude:"
 msgstr "Latitude:"
 
-#: app/realtime/realtime.controller.js:22
+#: app/realtime/realtime.controller.js:19
 msgid "Livestream"
 msgstr "Transmissão ao vivo"
 
@@ -289,20 +347,12 @@ msgstr "Transmissão ao vivo"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: app/logreport/logreport-list.html:2
-msgid "Log Report"
-msgstr "Relatório de Auditoria"
-
-#: app/views/appheader.html:32
+#: app/views/appheader.html:34
 msgid "Logout"
 msgstr "Sair"
 
-#: app/incidentForms/incidentForm-view.html:21
-msgid "Long:"
-msgstr "Long:"
-
 #: app/groups/group-creation.html:23 app/groups/group-destroy.html:24
-#: app/groups/group-detail.html:23
+#: app/groups/group-detail.html:23 app/incidentForms/incidentForm-view.html:21
 msgid "Longitude:"
 msgstr "Longitude:"
 
@@ -313,7 +363,7 @@ msgstr "Nome"
 #: app/exports/creation.html:13 app/groups/group-creation.html:13
 #: app/groups/group-destroy.html:10 app/groups/group-detail.html:13
 #: app/incidentForms/incidentForm-list.html:49 app/users/user-creation.html:13
-#: app/users/user-destroy.html:13 app/users/user-detail.html:29
+#: app/users/user-destroy.html:13 app/users/user-detail.html:30
 msgid "Name:"
 msgstr "Nome:"
 
@@ -321,62 +371,59 @@ msgstr "Nome:"
 msgid "New Export"
 msgstr "Nova Exportação"
 
-#: app/resetPasswords/reset.html:12
-msgid "New Password"
-msgstr "Nova Senha"
-
-#: app/users/user-detail.html:121
-msgid "New Password:"
-msgstr "Nova Senha:"
-
 #: app/exports/creation.html:2
-msgid "New Videos Export"
-msgstr "Nova Exportação de Vídeos"
+msgid "New Video Export"
+msgstr "Nova Exportação"
 
 #: app/groups/group-creation.html:2
 msgid "New group"
 msgstr "Novo grupo"
 
-#: app/realtime/realtime.html:43
+#: app/history/player/player.html:89
+msgid ""
+"Next\n"
+"      <i class=\"glyphicon glyphicon-triangle-right\"></i>"
+msgstr ""
+"Próximo\n"
+"      <i class=\"glyphicon glyphicon-triangle-right\"></i>"
+
+#: app/realtime/realtime.html:42
 msgid "No battery information"
 msgstr "Sem dados da bateria"
 
 #: app/report/report.html:217 app/report/report.html:253
-#: app/report/report.html:283
+#: app/report/report.html:284
 msgid "No data found..."
 msgstr "Nenhuma informação encontrada…"
 
-#: app/report/report.html:301
-msgid "No data selected"
-msgstr "Nenhuma informação selecionada"
+#: app/report/report.html:302
+msgid "No data selected."
+msgstr "Nenhuma informação selecionada."
 
-#: app/exports/detail.html:36
+#: app/exports/detail.html:37
 msgid "No export found."
 msgstr "Nenhuma exportação encontrada"
 
-#: app/history/history.manager.js:452
+#: app/history/history.manager.js:624
 msgid "No location data available for the selected interval"
 msgstr "Não há dados de localização para o intervalo selecionado"
 
-#: app/history/history.manager.js:450
+#: app/history/history.manager.js:622
 msgid "No location data or videos available for the selected interval"
 msgstr "Não há dados de localização ou vídeos para o intervalo selecionado"
 
-#: app/history/history.manager.js:454
+#: app/history/history.manager.js:626
 msgid "No video available for the selected interval"
 msgstr "Não há vídeos para o intervalo selecionado"
 
-#: app/history/player/player.html:14
-msgid "No video found"
-msgstr "Nenhum vídeo encontrado"
-
-#: app/groups/group-list.html:25
+#: app/groups/group-list.html:24
 msgid "Normal"
 msgstr "Normal"
 
 #: app/realtime/map.service.js:42
 msgid "Not able to start streaming now. Try again later."
-msgstr "Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
+msgstr ""
+"Não foi possível iniciar a transmissão agora. Tente novamente mais tarde."
 
 #: app/incidentForms/incidentForm-view.html:45
 msgid "Number of Injured"
@@ -387,28 +434,28 @@ msgid "Number of flagged incidents"
 msgstr "Número de incidentes registrados"
 
 #: app/report/report.html:105
-msgid "Number of hours of recorded footage"
-msgstr "Horas de gravações"
+msgid "Number of hours of recorded footage (hh:mm)"
+msgstr "Número de horas de gravação (hh:mm)"
 
 #: app/report/report.html:110
-msgid "Number of hours of streamed footage"
-msgstr "Horas de transmissões ao vivo"
+msgid "Number of hours of streamed footage (hh:mm)"
+msgstr "Número de horas de transmissão (hh:mm)"
+
+#: app/report/report.html:133
+msgid "Number of incidents"
+msgstr "Número de incidentes"
 
 #: app/report/report.html:100
 msgid "Number of missions initiated"
 msgstr "Número de missões iniciadas"
 
 #: app/report/report.html:119
-msgid "Number of personnel accessing the admin system"
-msgstr "Número de oficiais acessando o sistema administrativo"
+msgid "Number of personnel who accessed the system"
+msgstr "Número de pessoas que acessaram o sistema"
 
 #: app/report/report.html:197
 msgid "Number of times mission was stopped"
 msgstr "Número de vezes que a missão foi interrompida"
-
-#: app/report/report.html:128
-msgid "Number of traffic incidents reported"
-msgstr "Número de incidentes rodoviários registrados"
 
 #: app/report/report.html:92
 msgid "Overview"
@@ -418,27 +465,11 @@ msgstr "Visão Geral"
 msgid "Password"
 msgstr "Senha"
 
-#: app/users/details.js:70
+#: app/users/details.js:73
 msgid "Password or password confirmation are empty."
 msgstr "Senha ou nova senha estão vazias."
 
-#: app/users/user-creation.html:55
-msgid "Password:"
-msgstr "Senha:"
-
-#: app/history/date_filter/date.filter.html:4
-msgid ""
-"Period\n"
-"        <input type=\"checkbox\" ng-model=\"period\" i-check=\"\">"
-msgstr ""
-"Período\n"
-"        <input type=\"checkbox\" ng-model=\"period\" i-check=\"\">"
-
-#: app/report/report.html:267
-msgid "Played at"
-msgstr "Reproduzido em"
-
-#: app/users/user-creation.html:67 app/users/user-detail.html:82
+#: app/users/user-creation.html:67 app/users/user-detail.html:94
 msgid "Preferred language:"
 msgstr "Língua preferencial:"
 
@@ -446,17 +477,32 @@ msgstr "Língua preferencial:"
 msgid "Profile picture"
 msgstr "Foto do perfil"
 
-#: app/report/report.html:133
-msgid "Quantity"
-msgstr "Quantidade"
+#: app/users/user-creation.html:53 app/users/user-detail.html:73
+msgid "ROLE_TIP"
+msgstr ""
+"<b>Usuários nível 1 possuem permissão para:</b> <ol style=\"list-style-type: "
+"upper-roman;\"> <li>Registrar novos aparelhos no sistema;</li> <li>Ver "
+"localizações em tempo real;</li> <li>Ver localizações e mapas de calor no "
+"histórico;</li> <li>Ver transmissões de vídeos em tempo real (sem áudio, "
+"somente vídeo);</li> </ol> <b>Usuários nível 2 possuem também permissão para:"
+"</b> <ol style=\"list-style-type: upper-roman;\"> <li>Ver gravações no "
+"histórico (sem áudio, somente vídeo);</li>  <li>Acessar o relatório de "
+"auditoria;</li> <li>Criar usuários nível 1;</li> </ol> <b> Usuários nível 3 "
+"possuem também permissão para:</b> <ol style=\"list-style-type: upper-roman;"
+"\"> <li>Exportar gravações originais;</li> <li> Criar usuários nível 2;</li> "
+"</ol>"
 
 #: app/views/appheader.html:17
-msgid "Realtime"
-msgstr "Tempo real"
+msgid "Real-time"
+msgstr "Tempo Real"
 
 #: app/logreport/logreport-list.html:112
 msgid "Recorded By:"
 msgstr "Gravado por:"
+
+#: app/report/report.html:271
+msgid "Recorded by"
+msgstr "Gravado em"
 
 #: app/exports/list.html:16 app/report/report.html:238
 msgid "Recording Date"
@@ -466,16 +512,22 @@ msgstr "Data de Gravação"
 msgid "Recording Date:"
 msgstr "Data de Gravação:"
 
-#: app/users/user-detail.html:129
+#: app/users/user-detail.html:137
 msgid "Repeat your password:"
 msgstr "Repita sua senha:"
 
-#: app/report/report.html:85
-msgid "Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
-msgstr "Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}"
+#: app/report/report.html:83
+msgid ""
+"Report\n"
+"        <small translate=\"\">from {{filter.fromDate  | date:\"dd/MM/yyyy"
+"\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
+msgstr ""
+"Relatório\n"
+"        <small translate=\"\">de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} "
+"até {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
 
-#: app/login/login.html:18 app/resetPasswords/reset.html:19
-#: app/resetPasswords/reset.html:5
+#: app/login/login.html:18 app/resetPasswords/reset.html:2
+#: app/resetPasswords/reset.html:28
 msgid "Reset Password"
 msgstr "Redefinir senha"
 
@@ -483,11 +535,39 @@ msgstr "Redefinir senha"
 msgid "Resistance?"
 msgstr "Houve Resistência"
 
-#: app/users/user-creation.html:46 app/users/user-detail.html:63
-msgid "Role:"
-msgstr "Papel:"
+#: app/exports/creation.html:86
+msgid "Return to video export list."
+msgstr "Voltar para a lista de exportações"
 
-#: app/login/login.html:12
+#: app/users/user-detail.html:64
+msgid ""
+"Role:\n"
+"              <a class=\"glyphicon glyphicon-question-sign\" data-toggle="
+"\"popover\" data-placement=\"{{ isMobile ? 'top' : 'left'}}\" data-trigger="
+"\"focus\" role=\"button\" tabindex=\"0\" title=\"Roles explanation\" data-"
+"content=\"{{ 'ROLE_TIP' | translate }}\" style=\"text-decoration: none\"></a>"
+msgstr ""
+"Perfil:\n"
+"              <a class=\"glyphicon glyphicon-question-sign\" data-toggle="
+"\"popover\" data-placement=\"{{ isMobile ? 'top' : 'left'}}\" data-trigger="
+"\"focus\" role=\"button\" tabindex=\"0\" title=\"Roles explanation\" data-"
+"content=\"{{ 'ROLE_TIP' | translate }}\" style=\"text-decoration: none\"></a>"
+
+#: app/users/user-creation.html:46
+msgid ""
+"Role:\n"
+"          <i class=\"glyphicon glyphicon-question-sign\" data-toggle="
+"\"popover\" data-placement=\"{{ isMobile ? 'top' : 'left'}}\" data-trigger="
+"\"click\" title=\"Roles explanation\" data-content=\"{{ 'ROLE_TIP' | "
+"translate }}\"></i>"
+msgstr ""
+"Perfil:\n"
+"          <i class=\"glyphicon glyphicon-question-sign\" data-toggle="
+"\"popover\" data-placement=\"{{ isMobile ? 'top' : 'left'}}\" data-trigger="
+"\"click\" title=\"Roles explanation\" data-content=\"{{ 'ROLE_TIP' | "
+"translate }}\"></i>"
+
+#: app/login/login.html:9
 msgid "SIGN IN"
 msgstr "LOGAR"
 
@@ -499,52 +579,68 @@ msgstr "Buscar:"
 msgid "Seen at:"
 msgstr "Visualizado em:"
 
-#: app/history/player/player.html:24
-msgid "Select a user of group"
-msgstr "Selecione um usuário"
+#: app/report/report.html:303
+msgid "Select a date range to present related data."
+msgstr "Selecione um período para apresentar dados relacionados."
+
+#: app/history/player/player.html:4
+msgid "Select a group or user"
+msgstr "Selecione um grupo ou usuário"
 
 #: app/components/user_dropdown/user.dropdown.html:2
 msgid "Select a user or group"
 msgstr "Selecione um grupo ou usuário"
 
-#: app/history/player/player.html:25
-msgid "Selected user:"
-msgstr "Usuário selecionado:"
+#: app/incidentForms/incidentForm-view.html:40
+msgid "Severity"
+msgstr "Severidade"
 
-#: app/views/appheader.html:31
+#: app/report/report.html:132
+msgid "Severity of incident"
+msgstr "Severidade do incidente"
+
+#: app/views/appheader.html:32
 msgid "Signed in as"
 msgstr "Logado como"
 
-#: app/report/report.html:268
-msgid "Started Time"
-msgstr "Tempo de Início"
+#: app/login/login.controller.js:88
+msgid "Something went wrong, please try again."
+msgstr "Algo ocorreu errado. Por favor, tente de novo."
+
+#: app/report/report.html:269
+msgid "Start time"
+msgstr "Horário de Início"
 
 #: app/exports/list.html:18 app/report/report.html:240
 #: app/users/user-list.html:40
 msgid "Status"
 msgstr "Status"
 
-#: app/exports/detail.html:30
+#: app/exports/detail.html:31
 msgid "Status:"
 msgstr "Status:"
 
-#: app/login/login.controller.js:66
-msgid "The email and password you entered don't match."
-msgstr "Email ou senha inválidos."
+#: app/login/login.controller.js:82
+msgid "The email or password you entered doesn't match."
+msgstr "O usuário ou a senha não são válidos."
 
-#: app/resetPasswords/reset.controller.js:36
+#: app/resetPasswords/reset.controller.js:34
 msgid "The password and its confirmation don't match"
 msgstr "A senha e a confirmação não são iguais"
 
-#: app/exports/creation.html:36
-msgid "The videos are being generated. We will send you an e-mail when we are done!"
-msgstr "Os vídeos estão sendo gerado. Enviaremos um email quando finalizarmos."
-
-#: app/exports/creation.html:34
+#: app/exports/creation.html:83
 msgid "There are no videos for the user and period chosen."
 msgstr "Não existem vídeos para o usuário e período escolhidos."
 
-#: app/incidentForms/incidentForm-list.html:31
+#: app/history/player/player.html:31
+msgid "This video has been deleted, or is unavailable."
+msgstr "O vídeo foi excluído ou é inválido."
+
+#: app/exports/creation.html:28
+msgid "Time range"
+msgstr "Período:"
+
+#: app/exports/creation.html:51 app/incidentForms/incidentForm-list.html:31
 #: app/logreport/logreport-list.html:32 app/report/report.html:32
 msgid "To:"
 msgstr "Até:"
@@ -552,10 +648,6 @@ msgstr "Até:"
 #: app/report/report.html:196
 msgid "Total Mission Time"
 msgstr "Tempo Total de Missões"
-
-#: app/report/report.html:195
-msgid "Total paused time"
-msgstr "Tempo total pausado"
 
 #: app/report/report.html:193
 msgid "Total recording time"
@@ -565,25 +657,29 @@ msgstr "Tempo total em gravação"
 msgid "Total streaming time"
 msgstr "Tempo total em transmissão ao vivo"
 
-#: app/report/report.html:198
-msgid "Total uploaded data"
-msgstr "Total de dados enviados"
+#: app/report/report.html:195
+msgid "Total time paused"
+msgstr "Tempo total pausado"
 
-#: app/login/login.controller.js:32
+#: app/report/report.html:198
+msgid "Total uploaded data<br><small>(compressed)</small>"
+msgstr "Total de dados transmitidos<br><small>(comprimidos)</small>"
+
+#: app/report/report.html:128
+msgid "Traffic incidents reported"
+msgstr "Incidentes de tráfego reportados"
+
+#: app/login/login.controller.js:38
 msgid "Trying to send email..."
 msgstr "Tentando enviar email…"
 
-#: app/login/login.controller.js:29
+#: app/login/login.controller.js:35
 msgid "Type an valid email address"
 msgstr "Digite um endereço de email válido"
 
 #: app/incidentForms/incidentForm-view.html:59
-msgid "Type of Fine"
-msgstr "Tipo de Multa"
-
-#: app/realtime/realtime.html:7
-msgid "Type to filter the users in the map"
-msgstr "Digite para filtrar o mapa"
+msgid "Type of citation"
+msgstr "Tipo de multa"
 
 #: app/login/login.html:17
 msgid "Type your email"
@@ -595,21 +691,19 @@ msgstr "Digite seu email"
 msgid "Update"
 msgstr "Atualizar"
 
-#: app/report/report.html:2 app/views/appheader.html:26
-msgid "Usage Report"
-msgstr "Relatório de Utilização"
+#: app/report/report.html:166
+msgid ""
+"Usage log\n"
+"            <span class=\"label label-default\" translate=\"\">grouped by "
+"day</span>"
+msgstr ""
+"Log de Uso\n"
+"            <span class=\"label label-default\" translate=\"\">Agrupado por "
+"dia</span>"
 
 #: app/incidentForms/incidentForm-view.html:88
 msgid "Use Lethal Force?"
 msgstr "Uso de Força Letal?"
-
-#: app/report/report.html:83
-msgid ""
-"Use of Copcast\n"
-"        <small translate=\"\">Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
-msgstr ""
-"Uso do Copcast\n"
-"        <small translate=\"\">Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
 
 #: app/incidentForms/incidentForm-view.html:83
 msgid "Use of Force?"
@@ -620,11 +714,15 @@ msgstr "Uso da Força?"
 msgid "User"
 msgstr "Usuário"
 
+#: app/users/user-list.html:3
+msgid "User Management"
+msgstr "Gerenciamento de Usuários"
+
 #: app/users/user-detail.html:2
 msgid "User details"
 msgstr "Detalhes do Usuário"
 
-#: app/exports/creation.controller.js:35
+#: app/exports/creation.controller.js:51
 msgid "User is required"
 msgstr "Usuário é obrigatório"
 
@@ -642,15 +740,19 @@ msgid "Username"
 msgstr "Nome de usuário"
 
 #: app/users/user-creation.html:18 app/users/user-destroy.html:26
-#: app/users/user-detail.html:34
+#: app/users/user-detail.html:35
 msgid "Username:"
 msgstr "Nome de usuário:"
 
-#: app/users/user-list.html:3 app/views/appheader.html:22
+#: app/views/appheader.html:22
 msgid "Users"
 msgstr "Usuários"
 
-#: app/report/report.html:266
+#: app/views/appheader.html:27
+msgid "Video Export"
+msgstr "Exportação de Vídeos"
+
+#: app/report/report.html:267
 msgid "Video URL"
 msgstr "Endereço do Vídeo"
 
@@ -658,57 +760,73 @@ msgstr "Endereço do Vídeo"
 msgid "Video Watched:"
 msgstr "Vídeo Assistido:"
 
-#: app/views/appheader.html:27
-msgid "Videos Export"
-msgstr "Exportação de Vídeos"
-
 #: app/exports/list.html:3
 msgid "Videos Exported"
 msgstr "Videos Exportados"
 
-#: app/report/report.html:262
+#: app/report/report.html:232
+msgid "Videos exported"
+msgstr "Vídeos exportados"
+
+#: app/report/report.html:263
 msgid "Videos viewed"
 msgstr "Vídeos visualizados"
 
-#: app/realtime/realtime.html:48
+#: app/realtime/realtime.html:47
 msgid "View history"
 msgstr "Ver histórico"
 
-#: app/exports/detail.html:37
+#: app/report/report.html:270
+msgid "Viewed by"
+msgstr "Visualizado por"
+
+#: app/report/report.html:268
+msgid "Viewing timestamp"
+msgstr "Início da visualização"
+
+#: app/exports/detail.html:38
 msgid "We found no files for this export."
 msgstr "Não encontramos arquivos para realizar esta exportação"
 
-#: app/report/report.html:270
-msgid "Who recorded it"
-msgstr "Quem gravou"
-
-#: app/report/report.html:269
-msgid "Who watched it"
-msgstr "Quem assistiu"
-
-#: app/users/details.js:74
+#: app/users/details.js:77
 msgid "Wrong password combination"
 msgstr "Combinação de senha errada"
 
-#: app/history/player/player.html:16
+#: app/login/login.controller.js:85
+msgid "You do not have permission to access Copcast Admin"
+msgstr "Você não possui permissão para acessar o Copcast."
+
+#: app/history/player/player.html:50
 msgid "Your browser does not support videos."
 msgstr "Seu browser não suporta vídeos"
+
+#: app/exports/creation.html:85
+msgid ""
+"Your video(s) is being generated. You will receive an e-mail notification "
+"once the export is complete!"
+msgstr ""
+"Seu(s) vídeo(s) estão sendo gerados. Você receberá um e-mail notificando "
+"quando o processo finalizar!"
 
 #: app/logreport/logreport-list.html:90
 msgid "action"
 msgstr "atividade"
 
-#: app/exports/detail.html:44 app/groups/group-creation.html:41
+#: app/exports/detail.html:45 app/groups/group-creation.html:41
 #: app/groups/group-detail.html:41 app/incidentForms/incidentForm-view.html:97
-#: app/users/user-creation.html:85 app/users/user-detail.html:150
+#: app/users/user-creation.html:85 app/users/user-detail.html:158
 msgid "back"
 msgstr "voltar"
+
+#: app/realtime/realtime.controller.js:363
+msgid "can not stream right now."
+msgstr "não é possível transmitir neste momento."
 
 #: app/groups/group-destroy.html:41 app/users/user-destroy.html:48
 msgid "cancel"
 msgstr "cancelar"
 
-#: app/users/user-detail.html:140
+#: app/users/user-detail.html:148
 msgid "change password"
 msgstr "alterar senha"
 
@@ -737,7 +855,11 @@ msgstr "excluir grupo"
 msgid "delete user"
 msgstr "excluir usuário"
 
-#: app/exports/detail.html:45
+#: app/realtime/realtime.controller.js:515
+msgid "disabled live streaming."
+msgstr "desabilitar transmissão."
+
+#: app/exports/detail.html:46
 msgid "download exported files"
 msgstr "download dos vídeos exportados"
 
@@ -745,9 +867,13 @@ msgstr "download dos vídeos exportados"
 msgid "edit"
 msgstr "editar"
 
-#: app/login/login.html:10
-msgid "forgot password"
-msgstr "esqueci minha senha"
+#: app/report/report.html:85
+msgid ""
+"from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter.toDate  | date:"
+"\"dd/MM/yyyy\"}}"
+msgstr ""
+"de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter.toDate  | date:"
+"\"dd/MM/yyyy\"}}"
 
 #: app/incidentForms/incidentForm-list.html:100
 msgid "group name"
@@ -757,19 +883,35 @@ msgstr "nome do grupo"
 msgid "grouped by day"
 msgstr "agrupado por dia"
 
-#: app/realtime/realtime.controller.js:134
+#: app/realtime/realtime.controller.js:354
 msgid "has flagged an incident"
 msgstr "reportou um incidente"
 
-#: app/report/report.html:302
-msgid "select a period to present related data."
-msgstr "selecione um período para apresentar as informações"
+#: app/realtime/realtime.controller.js:432
+msgid "has paused the mission."
+msgstr "pausou a missão."
+
+#: app/realtime/realtime.controller.js:452
+msgid "has resumed the mission."
+msgstr "iniciou a missão."
+
+#: app/realtime/realtime.controller.js:565
+msgid "is no longer connected"
+msgstr "não está mais conectado"
+
+#: app/realtime/realtime.controller.js:472
+msgid "is requesting livestream"
+msgstr "solicitou a transmissão"
+
+#: app/exports/detail.html:17 app/exports/detail.html:18
+msgid "to"
+msgstr "até"
 
 #: app/groups/group-detail.html:42
 msgid "update group"
 msgstr "atualizar grupo"
 
-#: app/users/user-detail.html:100
+#: app/users/user-detail.html:112
 msgid "update user"
 msgstr "atualizar usuário"
 
@@ -777,66 +919,223 @@ msgstr "atualizar usuário"
 msgid "username"
 msgstr "nome do usuário"
 
-#: app/incidentForms/incidentForm-list.html:117
+#: app/incidentForms/incidentForm-list.html:116
 msgid "view"
 msgstr "visão"
 
-#: app/groups/group-list.html:26
-msgid "{{ group.createdAt | date:'medium' }}"
-msgstr ""
+#: app/history/player/player.html:7
+msgid "{{ collection.users.length }} Officers"
+msgstr "{{ collection.users.length }} Oficiais"
 
-#: app/users/user-list.html:49
-msgid "{{ user.createdAt | date:'medium' }}"
-msgstr ""
+#: app/history/player/player.html:8
+msgid "{{ totalIncidents }} Incidents"
+msgstr "{{ totalIncidents }} Incidentes"
 
-#: app/exports/list.html:28
-msgid "{{export.status}}"
-msgstr ""
+#~ msgid "NOT_LOGGED"
+#~ msgstr "Não conectado"
 
-msgid "NOT_LOGGED"
-msgstr "Não conectado"
+#~ msgid "PAUSED"
+#~ msgstr "Gravação interrompida"
 
-msgid "PAUSED"
-msgstr "Gravação interrompida"
+#~ msgid "RECORDING_OFFLINE"
+#~ msgstr "Missão iniciada - gravando vídeos localmente"
 
-msgid "RECORDING_OFFLINE"
-msgstr "Missão iniciada - gravando vídeos localmente"
+#~ msgid "RECORDING_ONLINE"
+#~ msgstr "Missão iniciada - gravando vídeos localmente"
 
-msgid "RECORDING_ONLINE"
-msgstr "Missão iniciada - gravando vídeos localmente"
+#~ msgid "RECORDING"
+#~ msgstr "Missão iniciada - gravando vídeos localmente"
 
-msgid "RECORDING"
-msgstr "Missão iniciada - gravando vídeos localmente"
+#~ msgid "STREAMING"
+#~ msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
 
-msgid "STREAMING"
-msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
+#~ msgid "UPLOADING"
+#~ msgstr "Enviando dados para o servidor"
 
-msgid "UPLOADING"
-msgstr "Enviando dados para o servidor"
+#~ msgid "LOGGED"
+#~ msgstr "Conectado"
 
-msgid "LOGGED"
-msgstr "Conectado"
+#~ msgid "IDLE"
+#~ msgstr "Conectado"
 
-msgid "IDLE"
-msgstr "Conectado"
+#~ msgid "SEEN_VIDEO"
+#~ msgstr "Usuário viu um vídeo do próprio celular."
 
-msgid "SEEN_VIDEO"
-msgstr "Usuário viu um vídeo do próprio celular."
+#~ msgid "LOGGED_ADMIN"
+#~ msgstr "Usuário se conectou na interface administrativa"
 
-msgid "LOGGED_ADMIN"
-msgstr "Usuário se conectou na interface administrativa"
+#~ msgid "PLAYING_VIDEO"
+#~ msgstr "Usuário viu um vídeo pela interface administrativa"
 
-msgid "PLAYING_VIDEO"
-msgstr "Usuário viu um vídeo pela interface administrativa"
+#~ msgid "AVAILABLE"
+#~ msgstr "DISPONÍVEL"
 
-msgid "AVAILABLE"
-msgstr "DISPONÍVEL"
+#~ msgid "EXPIRED"
+#~ msgstr "EXPIRADO"
 
-msgid "EXPIRED"
-msgstr "EXPIRADO"
+#~ msgid "PENDING"
+#~ msgstr "PENDENTE"
 
-msgid "PENDING"
-msgstr "PENDENTE"
+#~ msgid "Active officers users"
+#~ msgstr "Oficiais ativos"
 
-msgid "ROLE_TIP"
-msgstr "<b>Usuários nível 1 possuem permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Registrar novos aparelhos no sistema;</li> <li>Ver localizações em tempo real;</li> <li>Ver localizações e mapas de calor no histórico;</li> <li>Ver transmissões de vídeos em tempo real (sem áudio, somente vídeo);</li> </ol> <b>Usuários nível 2 possuem também permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Ver gravações no histórico (sem áudio, somente vídeo);</li>  <li>Acessar o relatório de auditoria;</li> <li>Criar usuários nível 1;</li> </ol> <b> Usuários nível 3 possuem também permissão para:</b> <ol style=\"list-style-type: upper-roman;\"> <li>Exportar gravações originais;</li> <li> Criar usuários nível 2;</li> </ol>"
+#~ msgid "Confirm New Password"
+#~ msgstr "Confirme a Nova Senha"
+
+#~ msgid "Data Remaining on Device<br><small>(last register)</small>"
+#~ msgstr "Dados Restantes no Device <br><small>(último registro)</small>"
+
+#~ msgid "Day"
+#~ msgstr "Dia"
+
+#~ msgid "Exported videos"
+#~ msgstr "Vídeos Exportados"
+
+#~ msgid "Exporter"
+#~ msgstr "Exportado Por"
+
+#~ msgid "Fine?"
+#~ msgstr "Multa?"
+
+#~ msgid "Go back to the export list"
+#~ msgstr "Voltar para a lista de exportações"
+
+#~ msgid "Gravity"
+#~ msgstr "Gravidade"
+
+#~ msgid "Incident Form"
+#~ msgstr "Formulário de Incidentes"
+
+#~ msgid "Incident Forms"
+#~ msgstr "Formulários de Incidentes"
+
+#~ msgid ""
+#~ "Information by user\n"
+#~ "            <span class=\"label label-default\" translate=\"\">grouped by "
+#~ "day</span>"
+#~ msgstr ""
+#~ "Informações de usuários\n"
+#~ "            <span class=\"label label-default\" translate=\"\">agrupadas "
+#~ "por dia</span>"
+
+#~ msgid "Lat:"
+#~ msgstr "Lat:"
+
+#~ msgid "Log Report"
+#~ msgstr "Relatório de Auditoria"
+
+#~ msgid "Long:"
+#~ msgstr "Long:"
+
+#~ msgid "New Password"
+#~ msgstr "Nova Senha"
+
+#~ msgid "New Password:"
+#~ msgstr "Nova Senha:"
+
+#~ msgid "New Videos Export"
+#~ msgstr "Nova Exportação de Vídeos"
+
+#~ msgid "No data selected"
+#~ msgstr "Nenhuma informação selecionada"
+
+#~ msgid "No video found"
+#~ msgstr "Nenhum vídeo encontrado"
+
+#~ msgid "Number of hours of recorded footage"
+#~ msgstr "Horas de gravações"
+
+#~ msgid "Number of hours of streamed footage"
+#~ msgstr "Horas de transmissões ao vivo"
+
+#~ msgid "Number of personnel accessing the admin system"
+#~ msgstr "Número de oficiais acessando o sistema administrativo"
+
+#~ msgid "Number of traffic incidents reported"
+#~ msgstr "Número de incidentes rodoviários registrados"
+
+#~ msgid "Password:"
+#~ msgstr "Senha:"
+
+#~ msgid ""
+#~ "Period\n"
+#~ "        <input type=\"checkbox\" ng-model=\"period\" i-check=\"\">"
+#~ msgstr ""
+#~ "Período\n"
+#~ "        <input type=\"checkbox\" ng-model=\"period\" i-check=\"\">"
+
+#~ msgid "Played at"
+#~ msgstr "Reproduzido em"
+
+#~ msgid "Quantity"
+#~ msgstr "Quantidade"
+
+#~ msgid "Realtime"
+#~ msgstr "Tempo real"
+
+#~ msgid ""
+#~ "Report from {{filter.fromDate  | date:\"dd/MM/yyyy\"}} to {{filter."
+#~ "toDate  | date:\"dd/MM/yyyy\"}}"
+#~ msgstr ""
+#~ "Relatório de {{filter.fromDate  | date:\"dd/MM/yyyy\"}} até {{filter."
+#~ "toDate  | date:\"dd/MM/yyyy\"}}"
+
+#~ msgid "Role:"
+#~ msgstr "Papel:"
+
+#~ msgid "Select a user of group"
+#~ msgstr "Selecione um usuário"
+
+#~ msgid "Selected user:"
+#~ msgstr "Usuário selecionado:"
+
+#~ msgid "Started Time"
+#~ msgstr "Tempo de Início"
+
+#~ msgid "The email and password you entered don't match."
+#~ msgstr "Email ou senha inválidos."
+
+#~ msgid ""
+#~ "The videos are being generated. We will send you an e-mail when we are "
+#~ "done!"
+#~ msgstr ""
+#~ "Os vídeos estão sendo gerado. Enviaremos um email quando finalizarmos."
+
+#~ msgid "Total paused time"
+#~ msgstr "Tempo total pausado"
+
+#~ msgid "Total uploaded data"
+#~ msgstr "Total de dados enviados"
+
+#~ msgid "Type of Fine"
+#~ msgstr "Tipo de Multa"
+
+#~ msgid "Type to filter the users in the map"
+#~ msgstr "Digite para filtrar o mapa"
+
+#~ msgid "Usage Report"
+#~ msgstr "Relatório de Utilização"
+
+#~ msgid ""
+#~ "Use of Copcast\n"
+#~ "        <small translate=\"\">Report from {{filter.fromDate  | date:\"dd/"
+#~ "MM/yyyy\"}} to {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
+#~ msgstr ""
+#~ "Uso do Copcast\n"
+#~ "        <small translate=\"\">Relatório de {{filter.fromDate  | date:\"dd/"
+#~ "MM/yyyy\"}} até {{filter.toDate  | date:\"dd/MM/yyyy\"}}</small>"
+
+#~ msgid "Videos Export"
+#~ msgstr "Exportação de Vídeos"
+
+#~ msgid "Who recorded it"
+#~ msgstr "Quem gravou"
+
+#~ msgid "Who watched it"
+#~ msgstr "Quem assistiu"
+
+#~ msgid "forgot password"
+#~ msgstr "esqueci minha senha"
+
+#~ msgid "select a period to present related data."
+#~ msgstr "selecione um período para apresentar as informações"

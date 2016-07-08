@@ -38,11 +38,12 @@ app.directive('passwordMeter', function($window, $timeout) {
     link: function(scope, el/*, attrs*/) {
       /* Instantiate attributes */
       if (!scope.idHash)    scope.idHash    = Date.now();
-      if (!scope.labelText) scope.labelText = 'New Password:';
+      if (!scope.labelText) scope.labelText = 'New Password';
       if (!scope.minLength) scope.minLength = 8;
       if (!scope.disabled)  scope.disabled  = function(){ return true };
       if (!scope.tip)       scope.tip       = '- Minimum 8 digits.';
 
+      console.log(scope.labelText);
       /* Password level */
       var strength = {
         1: "Worst",

@@ -4,11 +4,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/users/user-creation.html:66
-#: app/users/user-detail.html:136
-msgid "- Minimum 8 digits."
-msgstr ""
-
 #: app/history/timeline/timeline.html:3
 msgid ""
 "<b>WARNING</b>\n"
@@ -108,8 +103,8 @@ msgstr ""
 msgid "Citation?"
 msgstr ""
 
-#: app/resetPasswords/reset.html:16
-msgid "Confirm New Password"
+#: app/resetPasswords/reset.html:19
+msgid "Confirm New Password:"
 msgstr ""
 
 #: app/logreport/logreport-list.html:107
@@ -372,14 +367,6 @@ msgstr ""
 msgid "New Export"
 msgstr ""
 
-#: app/resetPasswords/reset.html:12
-msgid "New Password"
-msgstr ""
-
-#: app/users/user-detail.html:133
-msgid "New Password:"
-msgstr ""
-
 #: app/exports/creation.html:2
 msgid "New Video Export"
 msgstr ""
@@ -476,11 +463,7 @@ msgstr ""
 msgid "Password or password confirmation are empty."
 msgstr ""
 
-#: app/users/user-creation.html:63
-msgid "Password:"
-msgstr ""
-
-#: app/users/user-creation.html:75
+#: app/users/user-creation.html:67
 #: app/users/user-detail.html:94
 msgid "Preferred language:"
 msgstr ""
@@ -515,7 +498,7 @@ msgstr ""
 msgid "Recording Date:"
 msgstr ""
 
-#: app/users/user-detail.html:141
+#: app/users/user-detail.html:137
 msgid "Repeat your password:"
 msgstr ""
 
@@ -526,8 +509,8 @@ msgid ""
 msgstr ""
 
 #: app/login/login.html:18
-#: app/resetPasswords/reset.html:19
-#: app/resetPasswords/reset.html:5
+#: app/resetPasswords/reset.html:2
+#: app/resetPasswords/reset.html:28
 msgid "Reset Password"
 msgstr ""
 
@@ -799,12 +782,12 @@ msgstr ""
 #: app/groups/group-creation.html:41
 #: app/groups/group-detail.html:41
 #: app/incidentForms/incidentForm-view.html:97
-#: app/users/user-creation.html:93
-#: app/users/user-detail.html:162
+#: app/users/user-creation.html:85
+#: app/users/user-detail.html:158
 msgid "back"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:350
+#: app/realtime/realtime.controller.js:363
 msgid "can not stream right now."
 msgstr ""
 
@@ -813,7 +796,7 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: app/users/user-detail.html:152
+#: app/users/user-detail.html:148
 msgid "change password"
 msgstr ""
 
@@ -822,7 +805,7 @@ msgstr ""
 msgid "create new group"
 msgstr ""
 
-#: app/users/user-creation.html:94
+#: app/users/user-creation.html:86
 #: app/users/user-list.html:4
 msgid "create new user"
 msgstr ""
@@ -845,7 +828,7 @@ msgstr ""
 msgid "delete user"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:489
+#: app/realtime/realtime.controller.js:515
 msgid "disabled live streaming."
 msgstr ""
 
@@ -870,23 +853,23 @@ msgstr ""
 msgid "grouped by day"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:343
+#: app/realtime/realtime.controller.js:354
 msgid "has flagged an incident"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:417
+#: app/realtime/realtime.controller.js:432
 msgid "has paused the mission."
 msgstr ""
 
-#: app/realtime/realtime.controller.js:433
+#: app/realtime/realtime.controller.js:452
 msgid "has resumed the mission."
 msgstr ""
 
-#: app/realtime/realtime.controller.js:535
+#: app/realtime/realtime.controller.js:565
 msgid "is no longer connected"
 msgstr ""
 
-#: app/realtime/realtime.controller.js:449
+#: app/realtime/realtime.controller.js:472
 msgid "is requesting livestream"
 msgstr ""
 
