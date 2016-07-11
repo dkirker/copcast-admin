@@ -188,44 +188,41 @@
                   <!--</div>-->
                   <table class="table table-hover">
                     <thead>
-                    <tr>
-                      <th translate>Date</th>
-                      <th><span translate>Total recording time</span><br/>(HH:MM)</th>
-                      <th><span translate>Total streaming time</span><br/>(HH:MM)</th>
-                      <th><span translate>Total time paused</span><br/>(HH:MM)</th>
-                      <th><span translate>Total Mission Time</span><br/>(HH:MM)</th>
-                      <th translate>Number of times mission was stopped</th>
-                      <th translate>Total uploaded data<br/><small>(compressed)</small></th>
-                      <th translate>Data remaining to be uploaded from device</th>
-                      <th translate>Incidents Flagged</th>
-                    </tr>
+                      <tr>
+                        <th translate>Date</th>
+                        <th><span translate>Total recording time</span><br/>(HH:MM)</th>
+                        <th><span translate>Total streaming time</span><br/>(HH:MM)</th>
+                        <th><span translate>Total time paused</span><br/>(HH:MM)</th>
+                        <th><span translate>Total Mission Time</span><br/>(HH:MM)</th>
+                        <th translate>Number of times mission was stopped</th>
+                        <th translate>Total uploaded data<br/><small>(compressed)</small></th>
+                        <th translate>Data remaining to be uploaded from device</th>
+                        <th translate>Incidents Flagged</th>
+                      </tr>
                     </thead>
+
+                    <tfoot ng-show="user.activities.length > 0 ">
+                      <tr>
+                        <td translate colspan="4" class="text-right text-bolder">Total mission time for the period</td>
+                        <td class="text-left text-bolder" colspan="5">{{user.activities | totalForUser}}</td>
+                      </tr>
+                    </tfoot>
+
                     <tbody>
-                    <tr ng-repeat="activity in user.activities">
-                      <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
-                      <td>{{activity.recordingTime | minutesToHours}}</td>
-                      <td>{{activity.streamedTime | minutesToHours}}</td>
-                      <td>{{activity.pausedTime | minutesToHours}}</td>
-                      <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
-                      <td>{{activity.totalMissions}}</td>
-                      <td>{{activity.filesize | bytes}}</td>
-                      <td>{{activity.remainingData | bytes}}</td>
-                      <td>{{activity.incidents}}</td>
-                    </tr>
-                    <tr ng-show="user.activities.length > 0 " class="active">
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>{{user.activities | totalForUser}}</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                    <tr ng-hide="user.activities.length > 0 ">
-                      <td colspan="6" translate>No data found...</td>
-                    </tr>
+                      <tr ng-repeat="activity in user.activities">
+                        <td>{{activity.date |  date:'dd/MM/yyyy'}}</td>
+                        <td>{{activity.recordingTime | minutesToHours}}</td>
+                        <td>{{activity.streamedTime | minutesToHours}}</td>
+                        <td>{{activity.pausedTime | minutesToHours}}</td>
+                        <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
+                        <td>{{activity.totalMissions}}</td>
+                        <td>{{activity.filesize | bytes}}</td>
+                        <td>{{activity.remainingData | bytes}}</td>
+                        <td>{{activity.incidents}}</td>
+                      </tr>
+                      <tr ng-hide="user.activities.length > 0 ">
+                        <td colspan="6" translate>No data found...</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
