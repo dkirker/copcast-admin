@@ -137,16 +137,10 @@ app.directive('timelineSegment', function($timeout, $window, timelineService) {
         var startPosition = getLocationPosition(firstSectionLocation);
         var pos = getClickPosition(event);
         var selectedMinute = ((pos.x + startPosition) / PIXELS_PER_MINUTE) || 0;
+
+        $window.console.log('selectedMinute', selectedMinute);
+
         var currentDate = $window.moment(segmentKey + ':' + selectedMinute, 'YYYY-MM-DD HH:mm');
-
-        $window.console.group('Segment selected');
-        $window.console.log('Start position: ', startPosition);
-        $window.console.log('Position: ', pos);
-        $window.console.log('Segment key: ', segmentKey);
-        $window.console.log('Selected minute: ', selectedMinute);
-        $window.console.log('Current date: ', currentDate);
-        $window.console.groupEnd();
-
         setPositionFromCurrentDate(currentDate);
         timelineSegmentsCtrl.setSelectedDate(currentDate);
       };
