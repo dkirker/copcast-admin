@@ -212,7 +212,17 @@
                       <td>{{activity.remainingData | bytes}}</td>
                       <td>{{activity.incidents}}</td>
                     </tr>
-
+                    <tr ng-show="user.activities.length > 0 " class="active">
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>{{user.activities | totalForUser}}</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
                     <tr ng-hide="user.activities.length > 0 ">
                       <td colspan="6" translate>No data found...</td>
                     </tr>
