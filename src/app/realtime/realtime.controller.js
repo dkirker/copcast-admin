@@ -436,6 +436,7 @@ angular.module('copcastAdminApp').
         }
 
         $scope.isPaused[user.id] = user;
+        $rootScope.isWatching = false;
 
         user.marker.setIcon(mapService.getGreyMarker(user.userName));
       });
@@ -503,11 +504,11 @@ angular.module('copcastAdminApp').
         if (data.userId == $scope.watchingUserId) {
           $rootScope.$emit('streamStopped');
           mapService.closeBalloon();
+
           if ($scope.$uibModalInstance !== null) {
             $scope.$uibModalInstance.close();
             $scope.$uibModalInstance = null;
           }
-
 
           if (user.userName) {
             notify({
@@ -517,7 +518,9 @@ angular.module('copcastAdminApp').
               duration: 5000
             });
           }
+
           $scope.watchingUserId = -1;
+          $rootScope.isWatching = false;
         }
       });
 
@@ -532,6 +535,7 @@ angular.module('copcastAdminApp').
 
           $scope.popStreamingDenied(data.name);
           $scope.watchingUserId = -1;
+          $rootScope.isWatching = false;
 
           var user = $scope.getCurrentUsers().getUser(data.id);
 
@@ -569,6 +573,7 @@ angular.module('copcastAdminApp').
         }
 
         $scope.watchingUserId = -1;
+        $rootScope.isWatching = false;
         delete $scope.isPaused[user.id];
         $scope.getCurrentUsers().exitUser(data.userId);
       });
@@ -623,6 +628,7 @@ angular.module('copcastAdminApp').
         // end dismiss livestream modal
 
         $scope.watchingUserId = -1;
+        $rootScope.isWatching = false;
         $scope.isPaused = {};
         $window.console.log('Got disconnect!');
         angular.element('#realtimeMapConnectionBar').fadeIn();
