@@ -72,7 +72,6 @@ angular.module('copcastAdminApp')
 
       socketIo.on('disconnect', function() {
         $window.console.log('SOCKET.IO CONNECTION LOST!');
-        socket.connect(token);
       });
 
       socketIo.on('error', function(err) {
