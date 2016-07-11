@@ -99,7 +99,7 @@ app.directive('timelineSegment', function($timeout, $window, timelineService) {
           }
         } catch(ex) {
           $window.console.log('Video with empty location.');
-          timelineSegmentsCtrl.resetSelectedPosition();
+          // timelineSegmentsCtrl.resetSelectedPosition();
         }
       });
 
