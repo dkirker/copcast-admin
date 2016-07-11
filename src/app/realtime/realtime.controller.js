@@ -677,11 +677,9 @@ angular.module('copcastAdminApp').
 
     $scope.refreshUsers();
 
-    socket.on('connect', function() { prepareSocket(socket); });
-
-    if (socket.isConnected()) {
-      socket.off('users:heartbeat');
-      socket.on('users:heartbeat', loadUser);
+    socket.on('connect', function() {
+      prepareSocket(socket);
       socket.emit('getBroadcasters', receiveBroadcastersList);
-    }
+    });
+
   }); //end-RealTimeCtrl
