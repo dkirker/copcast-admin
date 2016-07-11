@@ -212,17 +212,13 @@
                       <td>{{activity.remainingData | bytes}}</td>
                       <td>{{activity.incidents}}</td>
                     </tr>
-                    <tr ng-show="user.activities.length > 0 " class="active">
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>{{user.activities | totalForUser}}</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                    </tr>
+                    <tfoot ng-show="user.activities.length > 0 ">
+                      <tr>
+                        <td translate colspan="4" class="text-right bolder">Total mission time for the period</td>
+                        <td class="bolder text-left" colspan="5">{{user.activities | totalForUser}}</td>
+
+                      </tr>
+                    </tfoot>
                     <tr ng-hide="user.activities.length > 0 ">
                       <td colspan="6" translate>No data found...</td>
                     </tr>
