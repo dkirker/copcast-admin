@@ -677,6 +677,12 @@ angular.module('copcastAdminApp').
 
     $scope.refreshUsers();
 
+    if (socket.isConnected()) {
+      console.log('back to realtime');
+      prepareSocket(socket);
+      socket.emit('getBroadcasters', receiveBroadcastersList);
+    }
+
     socket.on('connect', function() {
       prepareSocket(socket);
       socket.emit('getBroadcasters', receiveBroadcastersList);
