@@ -1,3 +1,17 @@
+#usageReportContainer {
+  tfoot {
+    tr {
+      td {
+        border-top-width: 2px;
+
+        &.text-bolder {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
 @media print {
   #usageReportContainer {
     hr {
