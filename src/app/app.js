@@ -110,6 +110,10 @@ angular
         templateUrl: 'app/exports/detail.html',
         controller: 'ExportsDetailCtrl'
       })
+      .when('/debug', {
+        templateUrl: 'app/debug/debug.html',
+        controller: 'DebugCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
