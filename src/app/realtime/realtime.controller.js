@@ -116,14 +116,6 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
       user.marker.setIcon(mapService.getGreenMarker(user.userName));
       $window.console.log('watch: ' + user.id);
     }
-
-    //$scope.waitingStreaming = true;
-    //if ($scope.isStreaming(user)){
-    //  $scope.streamButtonText = 'streaming';
-    //showModal($scope.activeUsers[user.id]);
-    //} else {
-    //  $scope.streamButtonText = 'Sending...';
-    //}
   }
 
   function changeMapPos(lat, lng) {
@@ -164,27 +156,6 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
 
     return null;
 
-    // userService.getOnlineUsers().then(function (data) {
-    //   $window.console.log('getOnlineUsers');
-    //   $window.console.log(data);
-    //
-    //   var bounds = new google.maps.LatLngBounds();
-    //
-    //   angular.forEach(data, function (user) {
-    //     //$scope.loadUser(user);
-    //     var coord = new google.maps.LatLng(user.location.lat, user.location.lng);
-    //     bounds.extend(coord);
-    //   });
-    //
-    //   $scope.myMap.fitBounds(bounds);
-    //
-    //   userService.getStreamingUsers().then(function (data) {
-    //     angular.forEach(data, function (user) {
-    //       showStream($scope.activeUsers[user.id]);
-    //     });
-    //
-    //   });
-    // });
   }
 
   function showModal(user) {
@@ -212,8 +183,7 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
     var isNew = false;
 
     if (!user) {
-      $scope.getCurrentUsers().enterUser(data.id);
-      var user = $scope.getCurrentUsers().getUser(data.id);
+      user = $scope.getCurrentUsers().enterUser(data.id);
       isNew = true;
     }
 
@@ -278,6 +248,8 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
       }
 
       this.userDict[userId] = {state: 0};
+
+      return this.userDict[userId];
     },
 
     exitUser: function(userId) {
@@ -384,17 +356,12 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
   angular.element($window).bind('resize', function () {
     $scope.myStyle.height = $window.innerHeight + 'px';
     google.maps.event.trigger($scope.myMap, 'resize');
-    // $scope.refreshUsers();
   });
 
   var receiveBroadcastersList = function(data) {
-    $window.console.log('listing');
-    $window.console.log($scope.getCurrentUsers().userDict);
-    $scope.getCurrentUsers().reset();
-    $window.console.log(data);
-
-    $window.console.log('=====');
-    $window.console.log($scope.getCurrentUsers().userDict);
+    data['broadcasters'].forEach(function(udata){
+      loadUser(udata);
+    });
   };
 
   var prepareSocket = function(socket) {
@@ -405,7 +372,6 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
     socket.off('frame');
     socket.on('frame', function(frame){
       var imgArray = new $window.Uint8Array(frame.frame);
-      //$window.console.log(imgArray.length);
       $rootScope.$emit('h264Frame', imgArray);
     });
 
@@ -552,7 +518,6 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
         return;
       }
 
-      //timeoutUser($scope.activeUsers[data.userLeft]);
       mapService.closeBalloon();
       if ($scope.$uibModalInstance !== null) {
         $scope.$uibModalInstance.close();
@@ -637,31 +602,6 @@ controller('RealtimeCtrl', function($scope, $uibModal, socket, ServerUrl, notify
   };
 
   $scope.requestStream = requestStream;
-
-  // function stopStream(user) {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   if ($scope.activeStreams[user.id] && $scope.activeStreams[user.id].modal !== null) {
-  //     $scope.activeStreams[user.id].modal.close();
-  //   }
-  //   delete $scope.activeStreams[user.id];
-  //   user.marker.setIcon(mapService.getRedMarker(user.userName));
-  // }
-  //
-
-  // function showStream(user) {
-  //   $scope.activeStreams[user.id] = {
-  //     status: 'streaming',
-  //     streamId: user.id,
-  //     userName: user.userName,
-  //     groupId: user.groupId,
-  //     streamUrl: user.streamUrl,
-  //     modal: null
-  //   };
-  //
-  //   user.marker.setIcon(mapService.getGreenMarker(user.userName));
-  // }
 
   $scope.refreshUsers();
 
