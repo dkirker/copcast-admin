@@ -9,7 +9,7 @@ angular.module('copcastAdminApp').filter('bytes', function() {
     if (isNaN(parseFloat(bytes)) || !isFinite(bytes) || parseFloat(bytes) === 0) { return '-'; }
     if (typeof precision === 'undefined') { precision = 1; }
 
-    var k = 1000; // or 1024 for binary
+    var k = 1024;
     var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
     var number = Math.floor(Math.log(bytes) / Math.log(k));
     var humanReadable = (bytes / Math.pow(k, number)).toFixed(precision) +  ' ' + units[number];
