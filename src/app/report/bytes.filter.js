@@ -8,8 +8,20 @@ angular.module('copcastAdminApp').filter('bytes', function() {
   return function(bytes, precision) {
     if (isNaN(parseFloat(bytes)) || !isFinite(bytes) || parseFloat(bytes) === 0) { return '-'; }
     if (typeof precision === 'undefined') { precision = 1; }
-    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB']
-      , number = Math.floor(Math.log(bytes) / Math.log(1024));
-    return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+
+    var k = 1000; // or 1024 for binary
+    var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
+    var number = Math.floor(Math.log(bytes) / Math.log(k));
+    var humanReadable = (bytes / Math.pow(k, number)).toFixed(precision) +  ' ' + units[number];
+
+    console.group('BYTES FILTER');
+    console.log('bytes: ', bytes);
+    console.log('precision: ', precision);
+    console.log('units: ', units);
+    console.log('number: ', number);
+    console.log('return: ', humanReadable);
+    console.groupEnd();
+
+    return humanReadable;
   };
 });
