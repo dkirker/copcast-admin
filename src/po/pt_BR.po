@@ -931,50 +931,50 @@ msgstr "{{ collection.users.length }} Oficiais"
 msgid "{{ totalIncidents }} Incidents"
 msgstr "{{ totalIncidents }} Incidentes"
 
-#~ msgid "NOT_LOGGED"
-#~ msgstr "Não conectado"
+msgid "NOT_LOGGED"
+msgstr "Não conectado"
 
-#~ msgid "PAUSED"
-#~ msgstr "Gravação interrompida"
+msgid "PAUSED"
+msgstr "Gravação interrompida"
 
-#~ msgid "RECORDING_OFFLINE"
-#~ msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING_OFFLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
-#~ msgid "RECORDING_ONLINE"
-#~ msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING_ONLINE"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
-#~ msgid "RECORDING"
-#~ msgstr "Missão iniciada - gravando vídeos localmente"
+msgid "RECORDING"
+msgstr "Missão iniciada - gravando vídeos localmente"
 
-#~ msgid "STREAMING"
-#~ msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
+msgid "STREAMING"
+msgstr "Missão iniciada - Transmitindo vídeos em tempo real"
 
-#~ msgid "UPLOADING"
-#~ msgstr "Enviando dados para o servidor"
+msgid "UPLOADING"
+msgstr "Enviando dados para o servidor"
 
-#~ msgid "LOGGED"
-#~ msgstr "Conectado"
+msgid "LOGGED"
+msgstr "Conectado"
 
-#~ msgid "IDLE"
-#~ msgstr "Conectado"
+msgid "IDLE"
+msgstr "Conectado"
 
-#~ msgid "SEEN_VIDEO"
-#~ msgstr "Usuário viu um vídeo do próprio celular."
+msgid "SEEN_VIDEO"
+msgstr "Usuário viu um vídeo do próprio celular."
 
-#~ msgid "LOGGED_ADMIN"
-#~ msgstr "Usuário se conectou na interface administrativa"
+msgid "LOGGED_ADMIN"
+msgstr "Usuário se conectou na interface administrativa"
 
-#~ msgid "PLAYING_VIDEO"
-#~ msgstr "Usuário viu um vídeo pela interface administrativa"
+msgid "PLAYING_VIDEO"
+msgstr "Usuário viu um vídeo pela interface administrativa"
 
-#~ msgid "AVAILABLE"
-#~ msgstr "DISPONÍVEL"
+msgid "AVAILABLE"
+msgstr "DISPONÍVEL"
 
-#~ msgid "EXPIRED"
-#~ msgstr "EXPIRADO"
+msgid "EXPIRED"
+msgstr "EXPIRADO"
 
-#~ msgid "PENDING"
-#~ msgstr "PENDENTE"
+msgid "PENDING"
+msgstr "PENDENTE"
 
 #~ msgid "Active officers users"
 #~ msgstr "Oficiais ativos"
