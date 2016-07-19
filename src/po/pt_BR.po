@@ -955,6 +955,9 @@ msgstr "Enviando dados para o servidor"
 msgid "LOGGED"
 msgstr "Conectado"
 
+msgid "LOGGED_OFF"
+msgstr "Saiu da aplicação"
+
 msgid "IDLE"
 msgstr "Conectado"
 

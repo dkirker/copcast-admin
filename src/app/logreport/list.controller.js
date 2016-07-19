@@ -22,7 +22,11 @@ angular.module('copcastAdminApp')
         $scope.logreports = data.rows;
         for (var i = 0; i < $scope.logreports.length; i++){
           var logReport = $scope.logreports[i];
-          logReport.extraJson = JSON.parse(logReport.extras);
+          if (logReport.extras) {
+
+            logReport.extraJson = JSON.parse(logReport.extras);
+            console.log('convert Json extra: ', logReport.extras, logReport.extraJson );
+          }
         }
         $scope.totalHistories = data.count;
       }, function(error){

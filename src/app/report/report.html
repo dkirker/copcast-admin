@@ -213,7 +213,7 @@
                         <th><span translate>Total Mission Time</span><br/>(HH:MM)</th>
                         <th translate>Number of times mission was stopped</th>
                         <th translate>Total uploaded data<br/><small>(compressed)</small></th>
-                        <th translate>Data remaining to be uploaded from device</th>
+                        <th translate>Data remaining to be uploaded from device<br/><small>(last register)</small></th>
                         <th translate>Incidents Flagged</th>
                       </tr>
                     </thead>
@@ -233,8 +233,8 @@
                         <td>{{activity.pausedTime | minutesToHours}}</td>
                         <td><strong>{{activity | totalAndMinutesToHours}}</strong></td>
                         <td>{{activity.totalMissions}}</td>
-                        <td>{{activity.filesize | bytes}}</td>
-                        <td>{{activity.remainingData | bytes}}</td>
+                        <td>{{activity.filesize | kbytes}}</td>
+                        <td>{{activity.remainingData | kbytes}}</td>
                         <td>{{activity.incidents}}</td>
                       </tr>
                       <tr ng-hide="user.activities.length > 0 ">

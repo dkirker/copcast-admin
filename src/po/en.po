@@ -524,6 +524,9 @@ msgstr "Uploading data to the server"
 msgid "LOGGED"
 msgstr "Logged in to the Copcast app"
 
+msgid "LOGGED_OFF"
+msgstr "Logged out of the Copcast app"
+
 msgid "IDLE"
 msgstr "Logged in to the Copcast app"
 
