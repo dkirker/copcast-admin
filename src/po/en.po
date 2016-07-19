@@ -534,7 +534,7 @@ msgid "SEEN_VIDEO"
 msgstr "Playing recorded video"
 
 msgid "LOGGED_ADMIN"
-msgstr "User logged in to the admin dashboard"
+msgstr "User logged in the admin dashboard"
 
 msgid "PLAYING_VIDEO"
 msgstr "Playing video in the History tab"
