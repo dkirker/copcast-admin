@@ -524,6 +524,9 @@ msgstr "Uploading data to the server"
 msgid "LOGGED"
 msgstr "Logged in to the Copcast app"
 
+msgid "LOGGED_OFF"
+msgstr "Logged out of the Copcast app"
+
 msgid "IDLE"
 msgstr "Logged in to the Copcast app"
 
@@ -531,7 +534,7 @@ msgid "SEEN_VIDEO"
 msgstr "Playing recorded video"
 
 msgid "LOGGED_ADMIN"
-msgstr "User logged in to the admin dashboard"
+msgstr "User logged in the admin dashboard"
 
 msgid "PLAYING_VIDEO"
 msgstr "Playing video in the History tab"

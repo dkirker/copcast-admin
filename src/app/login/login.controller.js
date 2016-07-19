@@ -66,7 +66,6 @@ angular.module('copcastAdminApp')
           //change the flag
           TranslateService.setLanguage();
         });
-        historyService.registerLoggedIn();
 
       }).error(function (data, status, headers, config) {
 

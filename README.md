@@ -1,4 +1,4 @@
-<a href="https://zenhub.io"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+<a href="https://zenhub.com"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
 
 [![Build Status](https://travis-ci.org/igarape/copcast-admin.svg?branch=develop)](https://travis-ci.org/igarape/copcast-admin)
 [![Code Climate](https://codeclimate.com/github/igarape/copcast-admin/badges/gpa.svg)](https://codeclimate.com/github/igarape/mogi-server)

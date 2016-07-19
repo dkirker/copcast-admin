@@ -19,6 +19,10 @@ angular.module('copcastAdminApp')
       }
     };
 
+    $scope.isLoading = false;
+    $scope.hasError = false;
+    $scope.hasErrorMessage = '';
+
     function updateFilter(){
       var fromDate = $window.moment($scope.filter.fromDate);
       var toDate = $window.moment($scope.filter.toDate);
@@ -37,8 +41,17 @@ angular.module('copcastAdminApp')
             url += '&groupId=' + $scope.filter.group;
           }
 
+          /* LOADING LOGIC */
+          $scope.isLoading = true;
+          $scope.hasError = false;
+          $scope.hasErrorMessage = '';
+
           $http.get(url).success(function (data) {
+            $scope.isLoading = false;
             $scope.reportData = data;
+          }).catch(function (err) {
+            $scope.hasError = true;
+            $scope.hasErrorMessage = err;
           });
         } else {
           $scope.errorMessage = gettextCatalog.getString('Invalid interval. Please check the date range.');

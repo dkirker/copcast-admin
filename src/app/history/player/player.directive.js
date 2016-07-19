@@ -249,12 +249,6 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
 
       videoPlayer($video);
 
-      $video.on('play',function(){
-        historyService.registerVideoPlay($video[0].src, $video[0].currentTime, scope.selectedUser).then(function(){
-          $window.console.log('registered video watching');
-        });
-      });
-
       /*
        * Watchers
        */

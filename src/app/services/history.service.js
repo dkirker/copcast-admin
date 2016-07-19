@@ -7,44 +7,6 @@ angular.module('copcastAdminApp')
   .factory('historyService', function($q, $http, $window, ServerUrl) {
     var service = {};
 
-    service.registerLoggedIn = function(){
-
-      var defer = $q.defer();
-      $http
-        .post(ServerUrl + '/histories', {
-          previousState: 'NOT_LOGGED',
-          nextState: 'LOGGED_ADMIN',
-          date: $window.moment().toDate()
-        })
-        .success(function(data) {
-          defer.resolve(data);
-        })
-        .error(function(data, status) {
-          defer.reject(data, status);
-        });
-      return defer.promise;
-    };
-
-    service.registerVideoPlay = function(videoName, startTime, user){
-      var defer = $q.defer();
-
-      $http
-        .post(ServerUrl + '/histories', {
-          previousState: 'LOGGED_ADMIN',
-          nextState: 'PLAYING_VIDEO',
-          extras: JSON.stringify({videoName: videoName, startTime: startTime, userId: user.id, userName: user.name}),
-          date: $window.moment().toDate()
-        })
-        .success(function(data) {
-          defer.resolve(data);
-        })
-        .error(function(data, status) {
-          defer.reject(data, status);
-        });
-
-      return defer.promise;
-    };
-
     service.listHistories = function(user, group, page, perPage){
       var defer = $q.defer();
       $http.get(ServerUrl + '/logreports',
