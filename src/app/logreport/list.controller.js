@@ -25,7 +25,6 @@ angular.module('copcastAdminApp')
           if (logReport.extras) {
 
             logReport.extraJson = JSON.parse(logReport.extras);
-            console.log('convert Json extra: ', logReport.extras, logReport.extraJson );
           }
         }
         $scope.totalHistories = data.count;
