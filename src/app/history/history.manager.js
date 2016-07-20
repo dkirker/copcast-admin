@@ -354,7 +354,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       }
 
       $window.console.groupEnd();
-      
+
       this._setVideoData(videoIndex);
     },
 
@@ -382,144 +382,46 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       var date = this.currentDate.format('YYYY-MM-DD');
       var hour = this.currentDate.format('HH');
       var userIds = getObjectKeys(this.locationsByUser);
-
+      self.store.hasLocation = false;
       for(var i = 0, len = userIds.length; i < len; i++) {
         var userId = userIds[i];
         var locationsByDay = this.groupData[userId].locationsByDay;
         var locationsByHour = locationsByDay.get(date);
         if(locationsByHour) {
-          // var location = this._getClosestLocation(locationsByHour.get(hour) || []);
-          var location = this._newGetClosestLocation(locationsByHour.get(hour) || []);
+          var location = this._getClosestLocation(locationsByHour.get(hour) || []);
           console.log(location);
-          self.store.hasLocation = (location) ? true : false;
+          if (!self.store.hasLocation) {
+            self.store.hasLocation = (location) ? true : false;
+          }
           this.groupData[userId].currentLocation = location;
           if(this.currentUser && this.currentUser.id === userId) {
             this.currentUserLocationChanged.emit(this.groupData[userId]);
           }
+        } else {
+
         }
       }
       this.currentGroupLocationsChanged.emit(this.groupData);
     },
 
-    _getClosestLocation: function _getClosestLocation(locations) {
-      var last;
-      var selectedMinute = parseInt(this.currentDate.format('mm'));
-      for(var i = 0, len = locations.length; i < len; i++) {
+    _getClosestLocation: function _newGetClosestLocation(locations) {
+      var now = moment(this.currentDate);
+      var threshold = 30;
+      var closeLocation = null;
+      var closeTime = null;
+      if (locations.length == 0){
+        return  false;
+      }
+      for (var i=0; i<locations.length; i++){
         var location = locations[i];
-        var locationMinute = parseInt(location.getDate().format('mm'));
-
-        if(locationMinute > selectedMinute || i + 1 === len) {
-          if(last && selectedMinute - this.MAX_MINUTES_TO_CLOSEST_LOCATION <= last.minute) {
-            return last.location;
-          }
-
-          if(selectedMinute + this.MAX_MINUTES_TO_CLOSEST_LOCATION >= locationMinute) {
-            return location;
-          }
-          break;
-        }
-
-        last = {
-          location: location,
-          minute: locationMinute
-        };
-      }
-    },
-
-    _newGetClosestLocation: function _newGetClosestLocation(locations) {
-      var now = new Date(this.currentDate.format()).getTime();
-      var before = [];
-      var after = [];
-      var max = locations.length;
-      var threshold = 30000;
-      var limitDate = now - threshold;
-      var limitDiff = (limitDate - now) / (3600 * 24 * 1000);
-
-      if (max == 0){
-        return false;
-      }
-      $window.console.group('Closest location');
-
-      $window.console.groupCollapsed('Now');
-      $window.console.info('Timestamp: ', now);
-      $window.console.log('Date: ', new Date(now));
-      $window.console.groupEnd();
-
-      $window.console.log('Threshold: %s (milliseconds)', threshold);
-
-      $window.console.groupCollapsed('Limit');
-      $window.console.info('Timestamp: ', limitDate);
-      $window.console.log('Date: ', new Date(limitDate));
-      $window.console.warn('Diff: ', limitDiff);
-      $window.console.groupEnd();
-
-      $window.console.groupCollapsed('Locations');
-      for(var i = 0; i < max; i++) {
-        var tar = locations[i];
-        var arrDate = new Date(tar.date.format()).getTime();
-        var diff = (arrDate - now) / (3600 * 24 * 1000); // 3600 * 24 * 1000 = calculating milliseconds to days, for clarity.
-
-        $window.console.log(locations[i]);
-
-        if(diff > 0) {
-          after.push({diff: diff, index: i});
-        } else {
-          before.push({diff: diff, index: i});
+        var time = moment(location.date)
+        if (Math.abs(time.diff(now, 'seconds')) <=threshold &&
+          (!closeTime || Math.abs(closeTime.diff(now)) > Math.abs(time.diff(now, 'seconds')))){
+          closeLocation = location;
+          closeTime = moment(location)
         }
       }
-      $window.console.groupEnd();
-
-      before.sort(function(a, b) {
-        if(a.diff < b.diff) { return -1; }
-        if(a.diff > b.diff) { return 1; }
-        return 0;
-      });
-
-      var closestBefore = before[0];
-
-      for(var j = 0; j < before.length; j++) {
-        if(before[j].diff >= 0 && before[j].diff < closestBefore.diff) { closestBefore = before[j]; }
-      }
-
-      after.sort(function(a, b) {
-        if(a.diff > b.diff) { return -1; }
-        if(a.diff < b.diff) { return 1; }
-        return 0;
-      });
-
-      var closestAfter = after[0];
-
-      for(var k = 0; k < after.length; k++) {
-        if(after[k].diff >= 0 && after[k].diff < closestAfter.diff) { closestAfter = after[k]; }
-      }
-
-      var closest;
-
-      if(closestBefore && closestAfter) {
-        closest = (Math.abs(closestBefore) < Math.abs(closestAfter)) ? closestBefore : closestAfter;
-      } else if(closestBefore) {
-        closest = closestBefore;
-      } else {
-        closest = closestAfter;
-      }
-
-      var thresholdAllow = Math.abs(closest.diff) <= Math.abs(limitDiff) && Math.abs(closest.diff) >= 0;
-
-      $window.console.groupCollapsed('Locations grouped');
-      $window.console.log('Before: ', before);
-      $window.console.log('After: ', after);
-      $window.console.groupEnd();
-
-      $window.console.groupCollapsed('Closest');
-      $window.console.info('Before: ', closestBefore);
-      $window.console.info('After: ', closestAfter);
-      $window.console.warn('Best: ', closest);
-      $window.console.groupEnd();
-
-      $window.console.log('Threshold allow: ', thresholdAllow);
-      $window.console.groupEnd();
-
-      return (thresholdAllow) ? locations[closest.index] : null;
+      return closeLocation;
     },
 
     _update: function _update() {
