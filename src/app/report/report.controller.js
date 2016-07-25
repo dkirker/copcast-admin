@@ -22,6 +22,7 @@ angular.module('copcastAdminApp')
     $scope.isLoading = false;
     $scope.hasError = false;
     $scope.hasErrorMessage = '';
+    $scope.maxDate = new Date();
 
     function updateFilter(){
       var fromDate = $window.moment($scope.filter.fromDate);

@@ -36,7 +36,7 @@
                   <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
                          ng-model="filter.toDate" ng-model-options="{ debounce: 500 }"
                          uib-datepicker-popup is-open="filter.toDateVisible"
-                         ng-required="true" show-button-bar="false" show-weeks="false"
+                         ng-required="true" show-button-bar="false" show-weeks="false" max-date="maxDate"
                          ng-click="filter.toDateShow()"/>
                 </div>
               </div>
