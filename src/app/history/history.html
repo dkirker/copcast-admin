@@ -40,7 +40,7 @@
       on-select-date="manager.setCurrentDate"
       user-data="manager.store.userData"
       has-location="manager.store.hasLocation"
-      current-video="manager.store.userData.currentVideo"
+      current-video="manager.getCurrentVideo()"
       show-video="showVideo()">
     </timeline>
 
@@ -48,9 +48,9 @@
             collection="manager.store.currentGroup"
             users="manager.store.currentGroup.users"
             incidents="manager.store.incidentsByUser"
-            now-video="manager.store.userData.currentVideo"
-            cover="manager.store.userData.currentVideo.id"
-            src="manager.store.userData.currentVideo.src"
+            now-video="manager.getCurrentVideo()"
+            cover="manager.getCurrentVideo().id"
+            src="manager.getCurrentVideo().src"
             on-change-user="manager.setCurrentUser"
             on-previous-video="manager.previousVideo"
             on-next-video="manager.nextVideo"
