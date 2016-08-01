@@ -290,7 +290,6 @@
             <tr>
               <th translate>Video URL</th>
               <th translate>Viewing timestamp</th>
-              <th translate>Start time</th>
               <th translate>Viewed by</th>
               <th translate>Recorded by</th>
             </tr>
@@ -299,7 +298,6 @@
             <tr ng-repeat="videoData in reportData.playedVideos">
               <td><i class="glyphicon glyphicon-film" custom-tooltip="{{videoData.url}}"></i></td>
               <td>{{videoData.date | date:'dd/MM/yyyy HH:mm'}}</td>
-              <td>{{videoData.startTime}} s</td>
               <td>{{videoData.userName}}</td>
               <td>{{videoData.userRecorderName}}</td>
             </tr>
