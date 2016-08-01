@@ -262,6 +262,15 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     this.nextPosition = null;
   }
   VideoManager.prototype = {
+    reset: function(){
+      this.previousPosition = null;
+      this.currentPosition = null;
+      if (this.videos.length > 0){
+        this.nextPosition = 0;
+      } else {
+        this.nextPosition = null;
+      }
+    },
     getPreviousVideo: function(){
       var video = this.videos[this.previousPosition];
       if (this.currentPosition){
@@ -300,9 +309,6 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     },
     hasNextVideo: function(){
       return (this.nextPosition != null) ? this.videos[this.nextPosition] : null;
-    },
-    hasCurrentVideo: function(){
-      return (this.currentPosition != null && videos.length>0) ? this.videos[this.currentPosition] : null;
     },
     addVideo: function(video){
       if (this.videos.length == 0 ){
@@ -345,6 +351,7 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
           } else {
             this.nextPosition = null;
           }
+          return;
         }
       }
     }
@@ -811,6 +818,9 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     $window.console.log('userData', userData);
     self.store.userData = userData;
     googleMapsHelper.updateUserLocations(userData);
+    if (userData.videoManager){
+      userData.videoManager.reset();
+    }
   });
 
   groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
