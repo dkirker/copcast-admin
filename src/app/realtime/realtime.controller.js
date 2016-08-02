@@ -441,6 +441,30 @@ angular.module('copcastAdminApp').
         user.marker.setIcon(mapService.getGreyMarker(user.userName));
       });
 
+      socket.off('userDisconnected');
+      socket.on('userDisconnected', function(data){
+        if ($scope.watchingUserId == data.userId) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: data.name + ' ' + gettextCatalog.getString('has been disconnected.'),
+            position: 'right',
+            duration: 5000
+          });
+        }
+      });
+
+      socket.off('userReconnected');
+      socket.on('userReconnected', function(data){
+        if ($scope.watchingUserId == data.userId) {
+          notify({
+            templateUrl: 'app/views/notifications/warningNotification.html',
+            message: data.name + ' ' + gettextCatalog.getString('has been reconnected.'),
+            position: 'right',
+            duration: 5000
+          });
+        }
+      });
+
       socket.off('missionResumed');
       socket.on('missionResumed', function(data){
         var user = $scope.getCurrentUsers().getUser(data.userId);
