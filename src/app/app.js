@@ -151,4 +151,8 @@ angular
     $rootScope.isAuthenticated = function () {
       return loginService.isAuthenticated();
     };
+
+    $rootScope.showFeedback = function () {
+      return loginService.showFeedback();
+    };
   });

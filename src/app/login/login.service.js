@@ -53,6 +53,7 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
       currentUser: {
         username: user.userName,
         role: user.role,
+        showFeedback: user.showFeedback,
         userId: user.userId,
         token: user.token,
         language: user.language,
@@ -71,10 +72,14 @@ app.service('loginService', function($rootScope, $window, $cookies,gettextCatalo
     return loginService.getToken() && loginService.getToken().length > 0;
   };
 
+  loginService.showFeedback = function() {
+    return $rootScope.globals && $rootScope.globals.currentUser ? $rootScope.globals.currentUser.showFeedback : false;
+  };
+
   loginService.getUserName = function(){
     return $rootScope.globals ? $rootScope.globals.currentUser.username : '';
   };
-  
+
   loginService.logout = function(){
     delete $rootScope["globals"];
     $cookies.remove('globals');
