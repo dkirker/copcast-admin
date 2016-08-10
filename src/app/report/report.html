@@ -220,8 +220,11 @@
 
                     <tfoot ng-show="user.activities.length > 0 ">
                       <tr>
-                        <td translate colspan="4" class="text-right text-bolder">Total mission time for the period</td>
-                        <td class="text-left text-bolder" colspan="5">{{user.activities | totalForUser}}</td>
+                        <td translate  class="text-bolder">Total:</td>
+                        <td translate colspan="3" class="text-right text-bolder">Mission time for the period</td>
+                        <td class="text-left text-bolder" >{{user.activities | totalForUser}}</td>
+                        <td translate class="text-right text-bolder">Data for the period</td>
+                        <td class="text-left text-bolder" colspan="5">{{user.activities | totalDataForUser | kbytes}}</td>
                       </tr>
                     </tfoot>
 
