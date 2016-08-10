@@ -861,6 +861,14 @@ msgstr ""
 msgid "has paused the mission."
 msgstr ""
 
+#: app/realtime/realtime.controller.js:449
+msgid "has been disconnected."
+msgstr ""
+
+#: app/realtime/realtime.controller.js:461
+msgid "has been reconnected."
+msgstr ""
+
 #: app/realtime/realtime.controller.js:452
 msgid "has resumed the mission."
 msgstr ""
