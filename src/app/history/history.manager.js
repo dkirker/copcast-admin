@@ -251,6 +251,112 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       return this.data;
     }
   };
+  /****************************************************************
+   * VideoManager
+   ****************************************************************/
+  function VideoManager(moment) {
+    this.moment = moment;
+    this.videos = [];
+    this.currentPosition = null;
+    this.previousPosition = null;
+    this.nextPosition = null;
+  }
+  VideoManager.prototype = {
+    reset: function(){
+      this.previousPosition = null;
+      this.currentPosition = null;
+      if (this.videos.length > 0){
+        this.nextPosition = 0;
+      } else {
+        this.nextPosition = null;
+      }
+    },
+    getPreviousVideo: function(){
+      var video = this.videos[this.previousPosition];
+      if (this.currentPosition){
+        this.nextPosition = this.currentPosition;
+      } else {
+        this.nextPosition = this.previousPosition +1 ;
+      }
+      this.currentPosition = this.previousPosition;
+      if (this.previousPosition == 0){
+        this.previousPosition = null;
+      } else {
+        this.previousPosition = this.previousPosition -1;
+      }
+      return video;
+    },
+    getNextVideo: function(){
+      var video = this.videos[this.nextPosition];
+      if (this.currentPosition){
+        this.previousPosition = this.currentPosition;
+      } else {
+        this.previousPosition = this.nextPosition - 1 ;
+      }
+      this.currentPosition = this.nextPosition;
+      if (this.nextPosition < this.videos.length){
+        this.nextPosition = this.nextPosition +1;
+      } else {
+        this.nextPosition = null;
+      }
+      return video;
+    },
+    getCurrentVideo: function(){
+      return (this.currentPosition != null) ? this.videos[this.currentPosition] : null;
+    },
+    hasPreviousVideo: function(){
+      return (this.previousPosition != null) ? this.videos[this.previousPosition] : null;
+    },
+    hasNextVideo: function(){
+      return (this.nextPosition != null) ? this.videos[this.nextPosition] : null;
+    },
+    addVideo: function(video){
+      if (this.videos.length == 0 ){
+        this.nextPosition = 0;
+      }
+      this.videos.push(video);
+    },
+    changeByDate: function(date){
+      for(var i = 0; i < this.videos.length;i++) {
+        var video = this.videos[i];
+        var fromDate = moment(video.from);
+        var toDate = moment(video.to);
+
+        if (date.isBefore(fromDate)){
+          this.currentPosition = null;
+          this.nextPosition = i;
+          if (i > 0){
+            this.previousPosition = i-1;
+          } else {
+            this.previousPosition = null;
+          }
+          return;
+        }
+        if (date.isAfter(toDate) && i == (this.videos.length -1)){
+          this.currentPosition = null;
+          this.nextPosition = null;
+          this.previousPosition = i;
+          return;
+        }
+
+        if (date.isSame(fromDate)  || date.isSame(toDate) || (date.isBetween(fromDate, toDate))) {
+          this.currentPosition = i;
+          if (i > 0){
+            this.previousPosition = i-1;
+          } else {
+            this.previousPosition = null;
+          }
+          if (i < (this.videos.length -1)){
+            this.nextPosition = i+1;
+          } else {
+            this.nextPosition = null;
+          }
+          return;
+        }
+      }
+    }
+
+  };
 
   /****************************************************************
    * GroupLocations
@@ -305,13 +411,13 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
       this._calculateClosestGroupLocations();
       this._updateCurrentDateVideo();
     },
-
-    setCurrentVideo: function setCurrentVideo(video) {
-      $window.console.info('Video setted currentDate (from): ', video);
-      this.currentDate = $window.moment(video.from);
-      this._calculateClosestGroupLocations();
-      this._setVideoData(video.index);
-    },
+    //TODO
+    // setCurrentVideo: function setCurrentVideo(video) {
+    //   $window.console.info('Video setted currentDate (from): ', video);
+    //   this.currentDate = $window.moment(video.from);
+    //   this._calculateClosestGroupLocations();
+    //   this._setVideoData(video.index);
+    // },
 
     reset: function reset() {
       this.locationsByUser = {};
@@ -323,203 +429,75 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
 
     /* Private */
     _updateCurrentDateVideo: function _updateCurrentDateVideo() {
-      var videos = this.userData.videos || [];
-      var videoIndex;
-      var cDate = this.currentDate;
+      var videoManager = this.userData.videoManager;
 
-      $window.console.group('_updateCurrentDateVideo');
-      $window.console.log('Videos: ', videos);
-      $window.console.log('cDate: ', cDate.toDate());
-
-      for(var i = 0, len = videos.length; i < len; i++) {
-        var video = videos[i];
-        var fromDate = $window.moment(video.from);
-        var toDate = $window.moment(video.to);
-
-        // if(cDate.isSame(fromDate, 'minute')  || cDate.isSame(toDate, 'minute') || (cDate.isBetween(fromDate, toDate, 'minute'))) {
-        if(cDate.isSame(fromDate)  || cDate.isSame(toDate) || (cDate.isBetween(fromDate, toDate))) {
-          $window.console.warn('Video %s entered in if', i);
-          videoIndex = i;
-          break;
-        } else {
-          $window.console.groupCollapsed('Video - ', i);
-          $window.console.log('Video: ', video);
-          $window.console.log('fromDate: ', fromDate.toDate());
-          $window.console.log('toDate: ', toDate.toDate());
-          $window.console.info('cDate isSame fromDate: %s', cDate.isSame(fromDate));
-          $window.console.info('cDate isSame toDate: %s',cDate.isSame(toDate));
-          $window.console.info('cDate isBetween fromDate-toDate: %s', cDate.isBetween(fromDate, toDate));
-          $window.console.groupEnd();
-        }
-      }
-
-      $window.console.groupEnd();
-      
-      this._setVideoData(videoIndex);
+      videoManager.changeByDate(this.currentDate)
     },
-
-    _setVideoData: function _setVideoData(videoIndex) {
-      var videos = this.userData.videos || [];
-      if(videos.length > 0) {
-        var userData = this.userData;
-        userData.previousVideo = videoIndex > 0 ? videos[videoIndex - 1] : undefined;
-        userData.currentVideo = videos[videoIndex];
-        if(videoIndex >= 0) {
-          userData.nextVideo = videos.length > videoIndex + 1 ? videos[videoIndex + 1] : undefined;
-        } else {
-          userData.nextVideo = videos[0];
-        }
-        this.currentVideoChanged.emit({
-          current: userData.currentVideo,
-          previous: userData.previousVideo,
-          next: userData.nextVideo
-        });
-      }
-    },
+    // //TODO
+    // _setVideoData: function _setVideoData(videoIndex) {
+    //   var videos = this.userData.videos || [];
+    //   if(videos.length > 0) {
+    //     var userData = this.userData;
+    //     userData.previousVideo = videoIndex > 0 ? videos[videoIndex - 1] : undefined;
+    //     userData.currentVideo = videos[videoIndex];
+    //     if(videoIndex >= 0) {
+    //       userData.nextVideo = videos.length > videoIndex + 1 ? videos[videoIndex + 1] : undefined;
+    //     } else {
+    //       userData.nextVideo = videos[0];
+    //     }
+    //     this.currentVideoChanged.emit({
+    //       current: userData.currentVideo,
+    //       previous: userData.previousVideo,
+    //       next: userData.nextVideo
+    //     });
+    //   }
+    // },
 
     _calculateClosestGroupLocations: function _calculateClosestGroupLocations() {
       // var currentGroupLocations = new $window.utils.Map();
       var date = this.currentDate.format('YYYY-MM-DD');
       var hour = this.currentDate.format('HH');
       var userIds = getObjectKeys(this.locationsByUser);
-
+      self.store.hasLocation = false;
       for(var i = 0, len = userIds.length; i < len; i++) {
         var userId = userIds[i];
         var locationsByDay = this.groupData[userId].locationsByDay;
         var locationsByHour = locationsByDay.get(date);
         if(locationsByHour) {
-          // var location = this._getClosestLocation(locationsByHour.get(hour) || []);
-          var location = this._newGetClosestLocation(locationsByHour.get(hour) || []);
+          var location = this._getClosestLocation(locationsByHour.get(hour) || []);
           console.log(location);
-          self.store.hasLocation = (location) ? true : false;
+          if (!self.store.hasLocation) {
+            self.store.hasLocation = (location) ? true : false;
+          }
           this.groupData[userId].currentLocation = location;
           if(this.currentUser && this.currentUser.id === userId) {
             this.currentUserLocationChanged.emit(this.groupData[userId]);
           }
+        } else {
+
         }
       }
       this.currentGroupLocationsChanged.emit(this.groupData);
     },
 
-    _getClosestLocation: function _getClosestLocation(locations) {
-      var last;
-      var selectedMinute = parseInt(this.currentDate.format('mm'));
-      for(var i = 0, len = locations.length; i < len; i++) {
+    _getClosestLocation: function _newGetClosestLocation(locations) {
+      var now = $window.moment(this.currentDate);
+      var threshold = 30;
+      var closeLocation = null;
+      var closeTime = null;
+      if (locations.length == 0){
+        return  false;
+      }
+      for (var i=0; i<locations.length; i++){
         var location = locations[i];
-        var locationMinute = parseInt(location.getDate().format('mm'));
-
-        if(locationMinute > selectedMinute || i + 1 === len) {
-          if(last && selectedMinute - this.MAX_MINUTES_TO_CLOSEST_LOCATION <= last.minute) {
-            return last.location;
-          }
-
-          if(selectedMinute + this.MAX_MINUTES_TO_CLOSEST_LOCATION >= locationMinute) {
-            return location;
-          }
-          break;
-        }
-
-        last = {
-          location: location,
-          minute: locationMinute
-        };
-      }
-    },
-
-    _newGetClosestLocation: function _newGetClosestLocation(locations) {
-      var now = new Date(this.currentDate.format()).getTime();
-      var before = [];
-      var after = [];
-      var max = locations.length;
-      var threshold = 30000;
-      var limitDate = now - threshold;
-      var limitDiff = (limitDate - now) / (3600 * 24 * 1000);
-
-      if (max == 0){
-        return false;
-      }
-      $window.console.group('Closest location');
-
-      $window.console.groupCollapsed('Now');
-      $window.console.info('Timestamp: ', now);
-      $window.console.log('Date: ', new Date(now));
-      $window.console.groupEnd();
-
-      $window.console.log('Threshold: %s (milliseconds)', threshold);
-
-      $window.console.groupCollapsed('Limit');
-      $window.console.info('Timestamp: ', limitDate);
-      $window.console.log('Date: ', new Date(limitDate));
-      $window.console.warn('Diff: ', limitDiff);
-      $window.console.groupEnd();
-
-      $window.console.groupCollapsed('Locations');
-      for(var i = 0; i < max; i++) {
-        var tar = locations[i];
-        var arrDate = new Date(tar.date.format()).getTime();
-        var diff = (arrDate - now) / (3600 * 24 * 1000); // 3600 * 24 * 1000 = calculating milliseconds to days, for clarity.
-
-        $window.console.log(locations[i]);
-
-        if(diff > 0) {
-          after.push({diff: diff, index: i});
-        } else {
-          before.push({diff: diff, index: i});
+        var time = $window.moment(location.date)
+        if (Math.abs(time.diff(now, 'seconds')) <=threshold &&
+          (!closeTime || Math.abs(closeTime.diff(now)) > Math.abs(time.diff(now, 'seconds')))){
+          closeLocation = location;
+          closeTime = $window.moment(location)
         }
       }
-      $window.console.groupEnd();
-
-      before.sort(function(a, b) {
-        if(a.diff < b.diff) { return -1; }
-        if(a.diff > b.diff) { return 1; }
-        return 0;
-      });
-
-      var closestBefore = before[0];
-
-      for(var j = 0; j < before.length; j++) {
-        if(before[j].diff >= 0 && before[j].diff < closestBefore.diff) { closestBefore = before[j]; }
-      }
-
-      after.sort(function(a, b) {
-        if(a.diff > b.diff) { return -1; }
-        if(a.diff < b.diff) { return 1; }
-        return 0;
-      });
-
-      var closestAfter = after[0];
-
-      for(var k = 0; k < after.length; k++) {
-        if(after[k].diff >= 0 && after[k].diff < closestAfter.diff) { closestAfter = after[k]; }
-      }
-
-      var closest;
-
-      if(closestBefore && closestAfter) {
-        closest = (Math.abs(closestBefore) < Math.abs(closestAfter)) ? closestBefore : closestAfter;
-      } else if(closestBefore) {
-        closest = closestBefore;
-      } else {
-        closest = closestAfter;
-      }
-
-      var thresholdAllow = Math.abs(closest.diff) <= Math.abs(limitDiff) && Math.abs(closest.diff) >= 0;
-
-      $window.console.groupCollapsed('Locations grouped');
-      $window.console.log('Before: ', before);
-      $window.console.log('After: ', after);
-      $window.console.groupEnd();
-
-      $window.console.groupCollapsed('Closest');
-      $window.console.info('Before: ', closestBefore);
-      $window.console.info('After: ', closestAfter);
-      $window.console.warn('Best: ', closest);
-      $window.console.groupEnd();
-
-      $window.console.log('Threshold allow: ', thresholdAllow);
-      $window.console.groupEnd();
-
-      return (thresholdAllow) ? locations[closest.index] : null;
+      return closeLocation;
     },
 
     _update: function _update() {
@@ -593,13 +571,10 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
         var video = this.videos[i];
         var userData = this.groupData[video.userId];
         if(userData) {
-          var userVideos = userData.videos || [];
-          video.index = userVideos.length;
-          userVideos.push(video);
-          userData.videos = userVideos;
-          if(userVideos.length > 0) {
-            userData.nextVideo = userVideos[0];
+          if (!userData.videoManager){
+            userData.videoManager = new VideoManager($window.moment);
           }
+          userData.videoManager.addVideo(video);
         }
       }
     },
@@ -769,23 +744,31 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
 
   this.previousVideo = function previousVideo() {
     var userData = self.store.userData;
-    if(userData && userData.previousVideo) {
-      groupsDataManager.setCurrentVideo(userData.previousVideo);
+    if(userData && userData.videoManager) {
+      // groupsDataManager.setCurrentVideo(userData.videoManager.getPreviousVideo());
+      var video = userData.videoManager.getPreviousVideo();
+      groupsDataManager.setCurrentDate($window.moment(video.from));
     }
   };
   this.nextVideo = function nextVideo() {
     var userData = self.store.userData;
-    if(userData && userData.nextVideo) {
-      groupsDataManager.setCurrentVideo(userData.nextVideo);
+    if(userData && userData.videoManager) {
+      //groupsDataManager.setCurrentVideo(userData.videoManager.getNextVideo());
+      var video = userData.videoManager.getNextVideo();
+      groupsDataManager.setCurrentDate($window.moment(video.from));
     }
   };
   this.hasPreviousVideo = function hasPreviousVideo() {
     var userData = self.store.userData;
-    return userData && userData.previousVideo;
+    return userData && userData.videoManager && userData.videoManager.hasPreviousVideo();
   };
   this.hasNextVideo = function hasNextVideo() {
     var userData = self.store.userData;
-    return userData && userData.nextVideo;
+    return userData && userData.videoManager && userData.videoManager.hasNextVideo();
+  };
+  this.getCurrentVideo = function hasNextVideo() {
+    var userData = self.store.userData;
+    return userData && userData.videoManager && userData.videoManager.getCurrentVideo();
   };
 
   // User and Groups Events
@@ -835,6 +818,9 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
     $window.console.log('userData', userData);
     self.store.userData = userData;
     googleMapsHelper.updateUserLocations(userData);
+    if (userData.videoManager){
+      userData.videoManager.reset();
+    }
   });
 
   groupsDataManager.currentGroupLocationsChanged.addListener(function(groupData) {
@@ -845,9 +831,6 @@ app.service('HistoryManager', function($q, $window, $timeout, userService, group
   groupsDataManager.currentUserLocationChanged.addListener(function(userData) {
     $window.console.log('currentUserLocationChanged changed', userData);
     timelineService.setCurrentLocation(userData.currentLocation);
-  });
-  groupsDataManager.currentVideoChanged.addListener(function(videoData) {
-    $window.console.log('currentVideoChanged', videoData);
   });
 
   /* Google Maps Data */

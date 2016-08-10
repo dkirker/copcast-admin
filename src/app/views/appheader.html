@@ -28,10 +28,17 @@
             </ul>
           </li>
         </ul>
-        <p class="navbar-text navbar-right" ng-show="isAuthenticated()" style="margin-right: 17px;">
+        <p class="navbar-text navbar-right logout-menu" ng-show="isAuthenticated()" >
           <translate>Signed in as</translate>&nbsp;<user-name></user-name>
           &nbsp|&nbsp
           <a ng-href="#/logout" class="nav-clickable" translate>Logout</a>
+          <span ng-show="showFeedback()">
+            &nbsp|&nbsp
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7CEoqSxKXu5_6OYt1QuYXBK53GKy3UcKdGA5r3zUKenAQ/viewform"
+               target="_blank">
+              {{'Feedback' | translate}}
+            </a>
+          </span>
         </p>
       </div>
     </div>

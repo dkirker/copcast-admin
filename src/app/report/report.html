@@ -36,7 +36,7 @@
                   <input type="date" datepicker-options="{customClass: 'datepicker-filter'}" class="form-control"
                          ng-model="filter.toDate" ng-model-options="{ debounce: 500 }"
                          uib-datepicker-popup is-open="filter.toDateVisible"
-                         ng-required="true" show-button-bar="false" show-weeks="false"
+                         ng-required="true" show-button-bar="false" show-weeks="false" max-date="maxDate"
                          ng-click="filter.toDateShow()"/>
                 </div>
               </div>
@@ -220,8 +220,11 @@
 
                     <tfoot ng-show="user.activities.length > 0 ">
                       <tr>
-                        <td translate colspan="4" class="text-right text-bolder">Total mission time for the period</td>
-                        <td class="text-left text-bolder" colspan="5">{{user.activities | totalForUser}}</td>
+                        <td translate  class="text-bolder">Total:</td>
+                        <td translate colspan="3" class="text-right text-bolder">Mission time for the period</td>
+                        <td class="text-left text-bolder" >{{user.activities | totalForUser}}</td>
+                        <td translate class="text-right text-bolder">Data for the period</td>
+                        <td class="text-left text-bolder" colspan="5">{{user.activities | totalDataForUser | kbytes}}</td>
                       </tr>
                     </tfoot>
 
@@ -290,7 +293,6 @@
             <tr>
               <th translate>Video URL</th>
               <th translate>Viewing timestamp</th>
-              <th translate>Start time</th>
               <th translate>Viewed by</th>
               <th translate>Recorded by</th>
             </tr>
@@ -299,7 +301,6 @@
             <tr ng-repeat="videoData in reportData.playedVideos">
               <td><i class="glyphicon glyphicon-film" custom-tooltip="{{videoData.url}}"></i></td>
               <td>{{videoData.date | date:'dd/MM/yyyy HH:mm'}}</td>
-              <td>{{videoData.startTime}} s</td>
               <td>{{videoData.userName}}</td>
               <td>{{videoData.userRecorderName}}</td>
             </tr>

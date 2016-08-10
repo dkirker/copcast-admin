@@ -30,5 +30,15 @@ angular.module('copcastAdminApp').filter('totalAndMinutesToHours', function(){
 
     return ('0' + hours).slice(-2) + ':' + ('0' + min).slice(-2);
   };
+}).filter('totalDataForUser', function(){
+  return function(activities){
+    var total = 0;
+    for (var i = 0; i < activities.length; i++) {
+      var activity = activities[i];
+      total += activity.filesize !== undefined ? parseInt(activity.filesize) : 0;
+    }
+
+    return total;
+  };
 });;
 

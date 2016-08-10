@@ -34,6 +34,7 @@
         userData: '=',
         showVideo: '=',
         hasLocation: '=',
+        currentVideo: '=',
         onSelectDate: '&'
       }
     };
