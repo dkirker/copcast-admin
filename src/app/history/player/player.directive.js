@@ -275,7 +275,7 @@ app.directive('player', function($sce, $timeout, $window, historyService) {
           user = hasUsers ? scope.users[0] : null;
         }
 
-        angular.element('.officersList').perfectScrollbar();
+        //angular.element('.officersList').perfectScrollbar();
 
         scope.setUser(user);
         $video[0].removeAttribute('src');

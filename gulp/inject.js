@@ -7,7 +7,10 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
-  gulp.task('inject', ['scripts', 'styles'], function () {
+  require('./scripts.js')(options);
+  require('./styles.js')(options);
+
+  gulp.task('inject_task', function () {
     var injectStyles = gulp.src([
       options.tmp + '/serve/app/**/*.css',
       '!' + options.tmp + '/serve/app/vendor.css'
@@ -32,4 +35,5 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.tmp + '/serve'));
 
   });
+  gulp.task('inject', gulp.series('scripts', 'styles', 'inject_task'));
 };

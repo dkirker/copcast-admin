@@ -6,6 +6,7 @@ var wrench = require('wrench');
 var gettext = require('gulp-angular-gettext');
 var Server = require('karma').Server;
 
+
 var options = {
   src: 'src',
   dist: 'dist',
@@ -52,9 +53,7 @@ gulp.task('copy-fa-fonts', function(){
     .pipe(gulp.dest(options.src + '/fonts/'));
 });
 
-gulp.task('copy-project-fonts', function(){
-  gulp.start('copy-bs-fonts', 'copy-fa-fonts');
-});
+gulp.task('copy-project-fonts', gulp.series('copy-bs-fonts', 'copy-fa-fonts'));
 
 gulp.task('copy-icheck-images', function(){
   return gulp.src(options.wiredep.directory + '/iCheck/skins/square/*.png')
@@ -68,17 +67,19 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
-gulp.task('server', ['copy-project-fonts'], function () {
-  gulp.start('serve');
+gulp.task('server', gulp.series('copy-project-fonts', 'serve'));
+
+gulp.task('builder', gulp.series('clean', 'copy-project-fonts', 'build'));
+
+gulp.task('vendor_js', function() {
+  return gulp.src([
+    'src/vendor/*.js'
+  ], {
+    dot: true
+  }).pipe(gulp.dest(options.dist + '/vendor'));
 });
 
-gulp.task('builder', ['clean', 'copy-project-fonts'], function () {
-    gulp.start('build');
-});
-
-gulp.task('default', ['builder'], function () {
-    gulp.start('vendor_js', 'copy-icheck-images');
-});
+gulp.task('default', gulp.series('builder', 'vendor_js', 'copy-icheck-images'));
 
 //gulp.task('pot', function () {
 //  return gulp.src(['**/*.html'])
@@ -104,10 +105,4 @@ gulp.task('pot', function () {
     .pipe(gulp.dest('src/po/'));
 });
 
-gulp.task('vendor_js', function() {
-  return gulp.src([
-    'src/vendor/*.js'
-  ], {
-    dot: true
-  }).pipe(gulp.dest(options.dist + '/vendor'));
-});
+

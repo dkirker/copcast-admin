@@ -156,3 +156,6 @@ angular
       return loginService.showFeedback();
     };
   });
+
+angular.module('copcastAdminApp').constant('ServerUrl', 'https://copcast-server.server.com');
+

@@ -10,6 +10,9 @@ var concat = require('concat-stream');
 var _ = require('lodash');
 
 module.exports = function(options) {
+  require('./watch.js')(options);
+  require('./scripts.js')(options);
+
   function listFiles(callback) {
     var wiredepOptions = _.extend({}, options.wiredep, {
       dependencies: true,
@@ -53,10 +56,13 @@ module.exports = function(options) {
     });
   }
 
-  gulp.task('test', ['scripts'], function(done) {
+  gulp.task('test_task', function(done) {
     runTests(true, done);
   });
-  gulp.task('test:auto', ['watch'], function(done) {
+  gulp.task('test', gulp.series('scripts', 'test_task'));
+
+  gulp.task('test:auto_task', function(done) {
     runTests(false, done);
   });
+  gulp.task('test:auto', gulp.series('watch', 'test:auto_task'));
 };

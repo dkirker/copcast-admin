@@ -7,6 +7,8 @@ var $ = require('gulp-load-plugins')({
 });
 
 module.exports = function(options) {
+  require('./inject.js')(options);
+
   gulp.task('partials', function () {
     return gulp.src([
       options.src + '/app/**/*.html',
@@ -24,7 +26,7 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.tmp + '/partials/'));
   });
 
-  gulp.task('html', ['inject', 'partials'], function () {
+  gulp.task('html_work', function () {
     var partialsInjectFile = gulp.src(options.tmp + '/partials/templateCacheHtml.js', { read: false });
     var partialsInjectOptions = {
       starttag: '<!-- inject:partials -->',
@@ -39,7 +41,6 @@ module.exports = function(options) {
 
     return gulp.src(options.tmp + '/serve/*.html')
       .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-      .pipe(assets = $.useref.assets())
       .pipe($.rev())
       .pipe(jsFilter)
       .pipe($.ngAnnotate())
@@ -49,10 +50,10 @@ module.exports = function(options) {
       .pipe($.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
       .pipe($.csso())
       .pipe(cssFilter.restore())
-      .pipe(assets.restore())
       .pipe($.useref())
       .pipe($.revReplace())
       .pipe(htmlFilter)
+      .pipe($.replace('../bower_components', '/bower_components'))
       .pipe($.minifyHtml({
         empty: true,
         spare: true,
@@ -63,6 +64,7 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/'))
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
+  gulp.task('html', gulp.series('inject', 'partials', 'html_work'));
 
   // Only applies for fonts from bower dependencies
   // Custom fonts are handled by the "other" task
@@ -81,6 +83,11 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/'));
   });
 
+  gulp.task('bower_components', function () {
+    return gulp.src(['bower_components/*', 'bower_components/*/**'])
+      .pipe(gulp.dest(options.tmp + '/bower_components/'));
+  });
+
   gulp.task('clean', function (done) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
@@ -93,5 +100,5 @@ module.exports = function(options) {
     }).pipe($.flatten()).pipe(gulp.dest(options.dist));
   });
 
-  gulp.task('build', ['html', 'fonts', 'other', 'swf']);
+  gulp.task('build', gulp.series('bower_components', 'html', 'fonts', 'other', 'swf'));
 };

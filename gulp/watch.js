@@ -8,26 +8,32 @@ function isOnlyChange(event) {
 }
 
 module.exports = function(options) {
-  gulp.task('watch', ['inject'], function () {
+  require('./inject.js')(options);
 
-    gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
+  gulp.task('watch_task', function () {
+
+    gulp.watch([options.src + '/*.html', 'bower.json'], gulp.series('inject'));
 
     gulp.watch([
       options.src + '/app/**/*.css',
       options.src + '/app/**/*.scss'
     ], function(event) {
       if(isOnlyChange(event)) {
-        gulp.start('styles');
+        //gulp.start('styles');
+        gulp.series(gulp.task('styles'))();
       } else {
-        gulp.start('inject');
+        //gulp.start('inject');
+        gulp.series(gulp.task('inject'))();
       }
     });
 
     gulp.watch(options.src + '/app/**/*.js', function(event) {
       if(isOnlyChange(event)) {
-        gulp.start('scripts');
+        //gulp.start('scripts');
+        gulp.series(gulp.task('scripts'))();
       } else {
-        gulp.start('inject');
+        //gulp.start('inject');
+        gulp.series(gulp.task('inject'))();
       }
     });
 
@@ -35,4 +41,5 @@ module.exports = function(options) {
       browserSync.reload(event.path);
     });
   });
+  gulp.task('watch', gulp.series('inject', 'watch_task'));
 };
